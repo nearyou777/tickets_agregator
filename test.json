@@ -1,0 +1,2391 @@
+{
+  "items": [
+    {
+      "id": "863d2c6c-168a-45ee-816a-7b5c07a6fd53",
+      "plan": "PREMIUM",
+      "status": "PUBLISHED",
+      "type": "CASH",
+      "destinationType": "DOMESTIC",
+      "cabin": "ECONOMY",
+      "airlineAlliances": [
+        "STAR_ALLIANCE",
+        "SKY_TEAM",
+        "ONE_WORLD"
+      ],
+      "coverImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715852963032-unnamed.jpg",
+      "title": "Lake Tahoe",
+      "summary": "<p>Schedule your summer trip to Lake Tahoe &ndash; just a 45-minute drive from Reno! Best availability through August. Nonstop from several cities.&nbsp;<em>Deals work in reverse if you live in Reno.</em></p>\r\n<p>&nbsp;</p>\r\n<p>United fares are Main Cabin and include a carry-on and seat assignment. Other fares are Basic Economy.&nbsp;</p>",
+      "summaryRaw": "Schedule your summer trip to Lake Tahoe \u2013 just a 45-minute drive from Reno! Best availability through August. Nonstop from several cities.\u00a0Deals work in reverse if you live in Reno.\r\n\r\n\r\n\r\n\r\nUnited fares are Main Cabin and include a carry-on and seat assignment. Other fares are Basic Economy.\u00a0",
+      "tip": "<p>Have the&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11276A18400A2A230259\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11276A18400A2A230259&amp;source=gmail&amp;ust=1715938874469000&amp;usg=AOvVaw2rye2z9kUWPaITz1edR6QA\">Venture X Card?</a>&nbsp;Cover the cost of these flights when you book through the Capital One Travel Portal with&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11276A18400A2A230260\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11276A18400A2A230260&amp;source=gmail&amp;ust=1715938874469000&amp;usg=AOvVaw3GCsiI_o_csWYN0qfS_u07\">your $300 travel credit</a>.</p>",
+      "bookingInstructions": "<p><strong>1</strong>. Click the <em data-stringify-type=\"italic\">Book with Google Flights button</em> to open Google Flights. (<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11276A18400A2A230162\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11276A18400A2A230162&amp;source=gmail&amp;ust=1715938874469000&amp;usg=AOvVaw0a-X0CZ_fGlS2p8ZMug8DF\">Our how-to video</a>)</p>\r\n<p>&nbsp;</p>\r\n<p><strong>2.</strong>&nbsp;Adjust the departure city to your home airport.</p>\r\n<p>&nbsp;</p>\r\n<p><strong>3.</strong>&nbsp;<strong>Click the dates to open the calendar view to find the cheapest dates (lowest prices in green).</strong>&nbsp;Availability may vary depending on your home airport.</p>\r\n<p><br><strong>4.</strong> Follow the links in Google Flights to book directly with the airline.</p>",
+      "airline": "<h3 style=\"text-align: center;\">Alaska, American, Delta, United</h3>",
+      "departureCitiesContent": "<h2>Asheville (AVL) - $247<br>Bismarck (BIS) - $235<br>Buffalo (BUF) - $227<br>Burbank (BUR) - $215<br>Cedar Rapids (CID) - $207<br>Chicago (ORD) - $238*<br>Dayton (DAY) - $227<br>Duluth (DLH) - $245<br>Eugene (EUG) - $237<br>Fayetteville (XNA) - $236<br>Fort Lauderdale (FLL) - $205<br>Fort Wayne (FWA) - $235<br>Green Bay (GRB) - $203<br>Greensboro (GSO) - $247<br>Harrisburg (MDT) - $247<br>Huntsville (HSV) - $203<br>Knoxville (TYS) - $227<br>Las Vegas (LAS) - $155<br>Lexington (LEX) - $227<br>Long Beach (LGB) - $155<br>Los Angeles (LAX) - $116*<br>Madison (MSN) - $203<br>Miami (MIA) - $205</h2>\r\n<hr>\r\n<h2>Minneapolis (MSP) - $196*<br>Minot (MOT) - $227<br>Moline (MLI) - $227<br>New York (LGA) - $237<br>Newark (EWR) - $245<br>Ontario (ONT) - $197<br>Palm Springs (PSP) - $199<br>Portland (PDX) - $196*<br>Rochester (ROC) - $221<br>San Diego (SAN) - $155<br>Santa Ana (SNA) - $247<br>Santa Barbara (SBA) - $237<br>Santa Fe (SAF) - $243<br>Seattle (SEA) - $176*<br>Shreveport (SHV) - $235<br>Sioux Falls (FSD) - $207<br>Spokane (GEG) - $245<br>Springfield (SGF) - $197<br>Traverse City (TVC) - $227<br>Tucson (TUS) - $245<br>West Palm Beach (PBI) - $249<br>Westchester County (HPN) - $249</h2>",
+      "departureCitiesSubheading": "(All fares round-trip, * nonstop)",
+      "sampleFlightImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715853588984-unnamed.webp",
+      "policies": "<p style=\"text-align: center;\">Basic Economy fares can be canceled for a fee (varies by airline). We recommend upgrading to Main Cabin from $70 for free changes/cancellation for a voucher.</p>",
+      "price": 249,
+      "pricePrefix": "Under",
+      "originalPrice": 400,
+      "originalPriceType": "CASH",
+      "priceSubheading": "Schedule your summer trip to Lake Tahoe!",
+      "singleDestination": true,
+      "destinationAirport": "Reno (RNO)",
+      "bookUrl": "https://www.google.com/travel/flights/search?tfs=CBwQAho0EgoyMDI0LTA3LTA5KAE6AkY5OgJHNDoCTks6AlNZagcIARIDTEFYcgcIARIDUk5PkAHoAho0EgoyMDI0LTA3LTE2KAE6AkY5OgJHNDoCTks6AlNZagcIARIDUk5PcgcIARIDTEFYkAHoAkABSAFqBBABGABwAYIBCwj___________8BiAEBmAEB&hl=en-US&gl=US&curr=USD&utm_source=ActiveCampaign&utm_medium=email&utm_content=%F0%9F%8C%B2%20Lake%20Tahoe%20under%20%24249%20%28Peak%20Summer%20-%20Was%3A%20%24400%29&utm_campaign=PREMIUM%20-%20Lake%20Tahoe%20sub-250",
+      "bookButtonText": "Book with Google Flights",
+      "pendingVersionId": null,
+      "publishedVersionId": null,
+      "isShownHowToVideo": true,
+      "createdAt": "2024-05-16T09:59:49.045Z",
+      "updatedAt": "2024-05-16T10:00:40.000Z",
+      "deletedAt": null,
+      "departureCities": [
+        {
+          "id": "0dfdc160-700a-49cf-a21b-945207875e18",
+          "city": "Los Angeles (LAX)",
+          "destination": "",
+          "price": 116
+        },
+        {
+          "id": "17a0a67d-bcc4-421b-a4d9-c29db6141e61",
+          "city": "Chicago (ORD)",
+          "destination": "",
+          "price": 238
+        },
+        {
+          "id": "195d0e39-4bef-420d-a48c-3b04200903e9",
+          "city": "Spokane (GEG)",
+          "destination": "",
+          "price": 245
+        },
+        {
+          "id": "25f0b799-43cb-4f2e-96cb-c55cc7fb391b",
+          "city": "Moline (MLI)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "3096b63e-7f60-470a-9d09-db30bc2df313",
+          "city": "Portland (PDX)",
+          "destination": "",
+          "price": 196
+        },
+        {
+          "id": "3364dcea-0aa4-4017-b1d9-3cfbc86e7ec7",
+          "city": "Lexington (LEX)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "3c6ad1da-e21b-4f9a-92c5-e04a52db9376",
+          "city": "Minot (MOT)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "43c46ca3-54c5-4987-a35d-21fc7939229a",
+          "city": "West Palm Beach (PBI)",
+          "destination": "",
+          "price": 249
+        },
+        {
+          "id": "4474bbe8-7104-4d93-8acf-dd6d46360032",
+          "city": "Las Vegas (LAS)",
+          "destination": "",
+          "price": 155
+        },
+        {
+          "id": "4c3a6889-2205-465c-a622-35b73fbdc5c4",
+          "city": "Eugene (EUG)",
+          "destination": "",
+          "price": 237
+        },
+        {
+          "id": "527e8b51-7437-4fed-b796-dd9d1f3a3b22",
+          "city": "Santa Barbara (SBA)",
+          "destination": "",
+          "price": 237
+        },
+        {
+          "id": "5a4b806e-063b-46cb-ba67-cf896fafece1",
+          "city": "Huntsville (HSV)",
+          "destination": "",
+          "price": 203
+        },
+        {
+          "id": "5a874d8f-9634-4bc0-a40a-2537d33e65db",
+          "city": "Green Bay (GRB)",
+          "destination": "",
+          "price": 203
+        },
+        {
+          "id": "67b11e21-a2ba-4b58-b37e-75891ac234e1",
+          "city": "New York (LGA)",
+          "destination": "",
+          "price": 237
+        },
+        {
+          "id": "6abefca9-09b6-49f8-9b5e-0d9ba7eb7553",
+          "city": "Palm Springs (PSP)",
+          "destination": "",
+          "price": 199
+        },
+        {
+          "id": "6b0c918a-4580-4128-ab01-807682a28f89",
+          "city": "Ontario (ONT)",
+          "destination": "",
+          "price": 197
+        },
+        {
+          "id": "6d838449-a669-42ba-ad41-c091c8b44baa",
+          "city": "Miami (MIA)",
+          "destination": "",
+          "price": 205
+        },
+        {
+          "id": "70691304-327e-424c-859e-dcfc4a446d1e",
+          "city": "Santa Fe (SAF)",
+          "destination": "",
+          "price": 243
+        },
+        {
+          "id": "76ca0acb-ab5d-4ff2-8cb3-0cbcd91b6d21",
+          "city": "Westchester County (HPN)",
+          "destination": "",
+          "price": 249
+        },
+        {
+          "id": "7751ed99-8dfb-43ba-a581-92fd0d1de21b",
+          "city": "Springfield (SGF)",
+          "destination": "",
+          "price": 197
+        },
+        {
+          "id": "7910037f-c59e-4fa4-83f1-a6594949dd61",
+          "city": "Harrisburg (MDT)",
+          "destination": "",
+          "price": 247
+        },
+        {
+          "id": "7c5a1809-3847-441f-b0ea-4f77e69abe10",
+          "city": "San Diego (SAN)",
+          "destination": "",
+          "price": 155
+        },
+        {
+          "id": "86d9776e-b3ab-4daa-bd08-37c117cab334",
+          "city": "Newark (EWR)",
+          "destination": "",
+          "price": 245
+        },
+        {
+          "id": "8bd37f05-1fee-4b8c-b553-2ffcf04f6799",
+          "city": "Bismarck (BIS)",
+          "destination": "",
+          "price": 235
+        },
+        {
+          "id": "98732d34-6c38-47c5-8ab5-7f07e62b6630",
+          "city": "Fort Wayne (FWA)",
+          "destination": "",
+          "price": 235
+        },
+        {
+          "id": "9c4fbc87-47b9-4a6b-9b2d-b61e6a76e9df",
+          "city": "Asheville (AVL)",
+          "destination": "",
+          "price": 247
+        },
+        {
+          "id": "a0fc7356-c32b-4080-868e-47f49e9e3166",
+          "city": "Fort Lauderdale (FLL)",
+          "destination": "",
+          "price": 205
+        },
+        {
+          "id": "a68ca136-1535-48eb-a96b-3a6e47653781",
+          "city": "Knoxville (TYS)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "a79df3f8-59b1-46da-89ba-7df07a2eaf26",
+          "city": "Traverse City (TVC)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "a871a1f9-dd6c-4a8f-b19d-b2c9b8d093d6",
+          "city": "Cedar Rapids (CID)",
+          "destination": "",
+          "price": 207
+        },
+        {
+          "id": "a92bf136-3b75-4a48-8a69-562b5f60370b",
+          "city": "Seattle (SEA)",
+          "destination": "",
+          "price": 176
+        },
+        {
+          "id": "a96bc585-244c-426b-83c0-64b5197b35d0",
+          "city": "Burbank (BUR)",
+          "destination": "",
+          "price": 215
+        },
+        {
+          "id": "b620d830-0a55-4cdd-bb05-f280561ac2a8",
+          "city": "Duluth (DLH)",
+          "destination": "",
+          "price": 245
+        },
+        {
+          "id": "d44e5aac-b850-4c91-bdb2-9c601b9fb439",
+          "city": "Madison (MSN)",
+          "destination": "",
+          "price": 203
+        },
+        {
+          "id": "d59c2da1-8d87-4bf0-952e-6b83980fa1a4",
+          "city": "Greensboro (GSO)",
+          "destination": "",
+          "price": 247
+        },
+        {
+          "id": "da35b849-541f-4bb1-a7c3-7aaa79f9766c",
+          "city": "Dayton (DAY)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "e59ab878-470b-415c-9379-f31e24156db1",
+          "city": "Fayetteville (XNA)",
+          "destination": "",
+          "price": 236
+        },
+        {
+          "id": "e6052872-6337-4572-93ba-5fbb984de38f",
+          "city": "Minneapolis (MSP)",
+          "destination": "",
+          "price": 196
+        },
+        {
+          "id": "eb59ba7c-7667-4b7b-9c09-9b7c4d94f304",
+          "city": "Buffalo (BUF)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "eef99568-4e58-4b20-ba07-05a292c5adb5",
+          "city": "Tucson (TUS)",
+          "destination": "",
+          "price": 245
+        },
+        {
+          "id": "f23d8ae9-cfac-4d55-8301-724a641200cf",
+          "city": "Sioux Falls (FSD)",
+          "destination": "",
+          "price": 207
+        },
+        {
+          "id": "f67ebf66-8da2-42bd-8ca4-00cf7a9aa92b",
+          "city": "Santa Ana (SNA)",
+          "destination": "",
+          "price": 247
+        },
+        {
+          "id": "f6e54451-9559-4146-9165-3fc841e80c1b",
+          "city": "Shreveport (SHV)",
+          "destination": "",
+          "price": 235
+        },
+        {
+          "id": "fc3f08da-08d1-4cd7-b5c1-2668c4e228e5",
+          "city": "Rochester (ROC)",
+          "destination": "",
+          "price": 221
+        },
+        {
+          "id": "fea0df24-3517-4a3c-a8fb-867ed68a4a14",
+          "city": "Long Beach (LGB)",
+          "destination": "",
+          "price": 155
+        }
+      ],
+      "periods": [
+        {
+          "id": "8d23a4a4-0600-4ae1-b5f4-f2bf1fe9d2af",
+          "startDate": "2024-06-15T00:00:00.000Z",
+          "endDate": "2025-04-15T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "3136e5a3-ea96-445f-9f2a-c7338692d66f",
+      "plan": "PREMIUM",
+      "status": "PUBLISHED",
+      "type": "POINTS_AND_MILES",
+      "destinationType": "INTERNATIONAL",
+      "cabin": "BUSINESS_AND_FIRST_CLASS",
+      "airlineAlliances": [
+        "SKY_TEAM"
+      ],
+      "coverImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715791316193-unnamed.jpg",
+      "title": "[BIZ CLASS] LAX to Tahiti",
+      "summary": "<p>Rare availability to fly Air France's new business class suites nonstop from Los Angeles to Tahiti!&nbsp;<strong>Best availability in November &amp; January.</strong>&nbsp;You'll be aboard the A350 equipped with its brand-new suites!</p>\r\n<p>&nbsp;</p>\r\n<p>We recently flew this aircraft and had a great experience. The pod-like seats with sliding doors felt really private, the wireless charging &amp; huge monitor were a nice touch, and the food &amp; drinks were excellent! Read&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11279A18403A2A230245\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11279A18403A2A230245&amp;source=gmail&amp;ust=1715877469585000&amp;usg=AOvVaw1agz2CpzuWiNE9nJZXSZaA\">our review</a>.</p>\r\n<p><br>Includes priority boarding, seat assignment, checked bags, lie-flat seats with closing doors, lounge access, business class food, and champagne.</p>\r\n<p>&nbsp;</p>\r\n<p><strong>Book with Air France/KLM Flying Blue</strong></p>\r\n<p>&nbsp;</p>\r\n<p>Flying Blue charges 70k miles each way. Transfer points from Amex Membership Rewards, Bilt, Capital One, Chase, Citi, or Wells Fargo (usually instant).</p>\r\n<p>&nbsp;</p>\r\n<h2><strong>Dates Available for 2+ Passengers</strong></h2>\r\n<p>&nbsp;</p>\r\n<p><strong>Los Angeles - Tahiti</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>LAX-PPT:</strong>&nbsp;July 8, 24; Nov. 9, 17, 19; Jan. 11, 25; Apr. 15, 27; May 6</p>\r\n</li>\r\n<li>\r\n<p><strong>PPT-LAX:</strong> July 5, 10, 12; Aug. 7, 12; Nov. 6, 22, 27; Dec. 15-16, 18, 20, 25, 27, 29; Jan. 13, 18, 22; Feb. 17; Mar. 12; Apr. 29-30; May 2, 4, 6-7</p>\r\n</li>\r\n</ul>",
+      "summaryRaw": "Rare availability to fly Air France's new business class suites nonstop from Los Angeles to Tahiti!\u00a0Best availability in November & January.\u00a0You'll be aboard the A350 equipped with its brand-new suites!\r\n\r\n\r\n\r\n\r\nWe recently flew this aircraft and had a great experience. The pod-like seats with sliding doors felt really private, the wireless charging & huge monitor were a nice touch, and the food & drinks were excellent! Read\u00a0our review.\r\n\r\n\r\nIncludes priority boarding, seat assignment, checked bags, lie-flat seats with closing doors, lounge access, business class food, and champagne.\r\n\r\n\r\n\r\n\r\nBook with Air France/KLM Flying Blue\r\n\r\n\r\n\r\n\r\nFlying Blue charges 70k miles each way. Transfer points from Amex Membership Rewards, Bilt, Capital One, Chase, Citi, or Wells Fargo (usually instant).\r\n\r\n\r\n\r\nDates Available for 2+ Passengers\r\n\r\n\r\n\r\nLos Angeles - Tahiti\r\n\r\nLAX-PPT:\u00a0July 8, 24; Nov. 9, 17, 19; Jan. 11, 25; Apr. 15, 27; May 6\r\n\r\nPPT-LAX: July 5, 10, 12; Aug. 7, 12; Nov. 6, 22, 27; Dec. 15-16, 18, 20, 25, 27, 29; Jan. 13, 18, 22; Feb. 17; Mar. 12; Apr. 29-30; May 2, 4, 6-7",
+      "tip": "<p>Don't live in LA? Book a cheap&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11279A18403A2A230225\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11279A18403A2A230225&amp;source=gmail&amp;ust=1715877469585000&amp;usg=AOvVaw0Pn0ubc_GfS1DLf4dUl1G4\">positioning flight</a> to Los Angeles to take advantage of this deal to fly biz class to paradise.</p>",
+      "bookingInstructions": "<p><strong>1.</strong>&nbsp;Create a&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11279A18403A2A230226\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11279A18403A2A230226&amp;source=gmail&amp;ust=1715877469585000&amp;usg=AOvVaw1CCKkK0ogIX41xOHtKP1mG\">free Flying Blue account</a>. You must have an account to search.</p>\r\n<p><strong>2.</strong>&nbsp;Log in on&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11279A18403A2A230227\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11279A18403A2A230227&amp;source=gmail&amp;ust=1715877469585000&amp;usg=AOvVaw1DBNgBjXLCBgpfDHmp4HbI\">Air France's site</a>, click tab \"Book with miles\" &amp; \"Continue.\"</p>\r\n<p><strong>3.</strong>&nbsp;We recommend viewing rates on the flexible calendar: Leave the \"passenger\" field as one passenger and the&nbsp;<strong>\"departure date\" field blank</strong>.</p>\r\n<p><strong>4</strong>. Choose the \"Business\" cabin &amp; click \"Search flights.\" It will be easiest to search one-way at a time.</p>\r\n<p><strong>5</strong>. Once you find your desired flights, search those exact dates with the total number of passengers to confirm availability.</p>\r\n<p>&nbsp;</p>\r\n<p><em>Flying Blue's website is not the best. The flexible calendar may not always work. In these cases, try a different browser or&nbsp;<strong>search the exact dates listed above</strong>. Read&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11279A18403A2A230228\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11279A18403A2A230228&amp;source=gmail&amp;ust=1715877469585000&amp;usg=AOvVaw2WB05lVaFrSwI0CfeuTFVl\">our full guide</a>.</em></p>\r\n<p>&nbsp;</p>\r\n<p><em>Transfers are usually instant but in some cases there are delays. If you're just opening a new</em><em>&nbsp;loyalty</em><em>&nbsp;account, transfers may take longer.</em></p>\r\n<p>&nbsp;</p>\r\n<p style=\"text-align: center;\">Taxes &amp; fees are ~$200 one-way or $450 R/T</p>",
+      "airline": "<h3 style=\"text-align: center;\">Air France</h3>",
+      "departureCitiesContent": "<h2>Los Angeles (LAX) - 70k*</h2>",
+      "departureCitiesSubheading": "(All fares one-way, *nonstop) - Pricing is in Flying Blue miles",
+      "sampleFlightImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715792034294-unnamed.webp",
+      "policies": "<p style=\"text-align: center;\">Air France-KLM Flying Blue charges a ~$75 change/cancellation fee.</p>",
+      "price": 70,
+      "pricePrefix": "For",
+      "originalPrice": 150,
+      "originalPriceType": "POINTS_AND_MILES",
+      "priceSubheading": "Rare availability to fly Air France's new business class suites nonstop from Los Angeles to Tahiti!",
+      "singleDestination": true,
+      "destinationAirport": "Tahiti (PPT)",
+      "bookUrl": "https://wwws.airfrance.us/?bookingFlow=REWARD&utm_source=ActiveCampaign&utm_medium=email&utm_content=%F0%9F%A5%82%20%5BBIZ%20CLASS%5D%20LAX%20to%20Tahiti%20for%2070k%20miles%20each%20way%20%28Nonstop%20-%20Was%3A%20150k%2B%29&utm_campaign=Premium%3A%20Air%20France%20LAX-PPT%20biz%20class",
+      "bookButtonText": "Book with Flying Blue",
+      "pendingVersionId": null,
+      "publishedVersionId": null,
+      "isShownHowToVideo": false,
+      "createdAt": "2024-05-15T16:53:54.449Z",
+      "updatedAt": "2024-05-15T16:54:15.000Z",
+      "deletedAt": null,
+      "departureCities": [
+        {
+          "id": "010dceb7-2cd9-411c-b7f9-84db02d9af44",
+          "city": "Los Angeles (LAX)",
+          "destination": "",
+          "price": 70
+        }
+      ],
+      "periods": [
+        {
+          "id": "541aa380-5a7c-448d-93fe-df69d9b698cb",
+          "startDate": "2024-07-15T00:00:00.000Z",
+          "endDate": "2025-04-15T00:00:00.000Z"
+        },
+        {
+          "id": "e30c3a22-57dd-4c2f-8ea8-b652b1118644",
+          "startDate": "2024-11-15T00:00:00.000Z",
+          "endDate": "2025-01-15T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "ee2083f5-c920-4cb2-95a4-c3bcbbf1be07",
+      "plan": "PREMIUM",
+      "status": "PUBLISHED",
+      "type": "CASH",
+      "destinationType": "INTERNATIONAL",
+      "cabin": "BUSINESS_AND_FIRST_CLASS",
+      "airlineAlliances": [
+        "STAR_ALLIANCE"
+      ],
+      "coverImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715789428800-unnamed.jpg",
+      "title": "[PREMIUM ECONOMY] Maldives",
+      "summary": "<p>Travel in comfort flying Premium Economy&nbsp;to the Maldives! You'll be aboard the&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11275A18399A2A230232\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11275A18399A2A230232&amp;source=gmail&amp;ust=1715875575864000&amp;usg=AOvVaw1YBgqi7SGjKJsyktBKhujg\">#1 airline in the world</a>, Singapore Airlines. Availability this fall through winter.</p>\r\n<p>&nbsp;</p>\r\n<p>Singapore Airlines&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11275A18399A2A230148\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11275A18399A2A230148&amp;source=gmail&amp;ust=1715875575864000&amp;usg=AOvVaw25-20neaWWcDoGvS5K4Zzo\">Premium Economy</a>&nbsp;includes 6\" more legroom, wider seats, two free checked bags, seat assignment, and the fancy&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11275A18399A2A230149\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11275A18399A2A230149&amp;source=gmail&amp;ust=1715875575864000&amp;usg=AOvVaw3Z2OzqwpROW5d7k5hHcZzq\">\"Book the Cook\"</a>&nbsp;menu.&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>There are no economy seats on the NYC to Singapore routes, only Premium Economy and Business Class. The cabin will feel much less congested than normal, which is important on&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11275A18399A2A230150\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11275A18399A2A230150&amp;source=gmail&amp;ust=1715875575864000&amp;usg=AOvVaw1gckLRumKIHxDKaLxmpTB8\">the world's two longest flights!</a></p>",
+      "summaryRaw": "Travel in comfort flying Premium Economy\u00a0to the Maldives! You'll be aboard the\u00a0#1 airline in the world, Singapore Airlines. Availability this fall through winter.\r\n\r\n\r\n\r\n\r\nSingapore Airlines\u00a0Premium Economy\u00a0includes 6\" more legroom, wider seats, two free checked bags, seat assignment, and the fancy\u00a0\"Book the Cook\"\u00a0menu.\u00a0\r\n\r\n\r\n\r\n\r\nThere are no economy seats on the NYC to Singapore routes, only Premium Economy and Business Class. The cabin will feel much less congested than normal, which is important on\u00a0the world's two longest flights!",
+      "tip": "<p>Visit both Singapore and the Maldives by booking multi-city fares using&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11275A18399A2A230154\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11275A18399A2A230154&amp;source=gmail&amp;ust=1715875575864000&amp;usg=AOvVaw1Eay7zt319PV9z9d0irWXG\">Singapore's website</a> for ~$100 more. Click \"Multi-city / Stopovers\" on the homepage.</p>",
+      "bookingInstructions": "<p><strong>1</strong>. Click the <em data-stringify-type=\"italic\">Book with Google Flights button</em> to open Google Flights. (<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11275A18399A2A230153\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11275A18399A2A230153&amp;source=gmail&amp;ust=1715875575864000&amp;usg=AOvVaw1UPMXSSj2uPeBrzeZ9kLUI\">Our how-to video</a>)</p>\r\n<p>&nbsp;</p>\r\n<p><strong>2</strong>. Adjust the departure city to your home airport.&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><strong>3</strong>.&nbsp;<strong>Click the dates to open the calendar view to find the cheapest dates (lowest prices in green).</strong>&nbsp;Availability may vary depending on your home airport.&nbsp;</p>\r\n<p><br><strong>4</strong>. Follow the links in Google Flights to book directly with Singapore Airlines.&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><strong>Flights are Premium Economy for the long-haul segment between the U.S. and Singapore, and connecting to the Maldives in&nbsp;Economy.</strong></p>\r\n<p>&nbsp;</p>\r\n<p><em>Note: Singapore fares will appear more expensive and may not load on Google Flights, but they will show the prices listed above on Singapore's website. Follow the&nbsp;\"Visit site for price\" link to book with&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11275A18399A2A230154\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11275A18399A2A230154&amp;source=gmail&amp;ust=1715875575864000&amp;usg=AOvVaw1Eay7zt319PV9z9d0irWXG\">Singapore</a>.&nbsp;</em></p>",
+      "airline": "<h3 style=\"text-align: center;\">Singapore Airlines</h3>",
+      "departureCitiesContent": "<h2><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11275A18399A2A230196\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11275A18399A2A230196&amp;source=gmail&amp;ust=1715875575864000&amp;usg=AOvVaw0m3iFa8kacTef783aO2UbD\">New York (JFK) - $1596</a><br><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11275A18399A2A230197\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11275A18399A2A230197&amp;source=gmail&amp;ust=1715875575864000&amp;usg=AOvVaw0hct38xdENAwkpgg13MZGG\">Newark (EWR) - $1596</a><br><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11275A18399A2A230198\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11275A18399A2A230198&amp;source=gmail&amp;ust=1715875575864000&amp;usg=AOvVaw1avGlcOrxFYjOdXetVAe-E\">San Francisco (SFO) - $1496</a></h2>",
+      "departureCitiesSubheading": "(All fares round-trip, * nonstop)",
+      "sampleFlightImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715789717545-unnamed.webp",
+      "policies": "<p style=\"text-align: center;\">These Premium Economy Lite fares allow ticket changes for $100.</p>",
+      "price": 1597,
+      "pricePrefix": "Under",
+      "originalPrice": 2800,
+      "originalPriceType": "CASH",
+      "priceSubheading": "Travel in comfort flying Premium Economy to the Maldives!",
+      "singleDestination": true,
+      "destinationAirport": "Mal\u00e9 (MLE)",
+      "bookUrl": "https://www.google.com/travel/flights/search?tfs=CBwQAhokEgoyMDI1LTAxLTE1KAFqBwgBEgNTRk9yBwgBEgNNTEWQAeADGiQSCjIwMjUtMDEtMjIoAWoHCAESA01MRXIHCAESA1NGT5AB4ANAAUgCagQQARgAcAGCAQsI____________AZgBAQ&tfu=EgIIASIA&hl=en-US&curr=USD&utm_source=ActiveCampaign&utm_medium=email&utm_content=%F0%9F%8F%9D%EF%B8%8F%20%5BPREMIUM%20ECON%5D%20Maldives%20under%20%241597%20%28Peak%20Season%20%2F%20Singapore%20Stopover%20-%20Was%3A%20%242800%29&utm_campaign=PREMIUM%3A%20Singapore%20Premium%20Economy%20NYC%20to%20Maldives",
+      "bookButtonText": "Book with Google Flights",
+      "pendingVersionId": null,
+      "publishedVersionId": null,
+      "isShownHowToVideo": true,
+      "createdAt": "2024-05-15T16:15:17.688Z",
+      "updatedAt": "2024-05-15T16:16:13.000Z",
+      "deletedAt": null,
+      "departureCities": [
+        {
+          "id": "0d98a6e9-2d63-4978-a4d1-afe3e92a85e9",
+          "city": "San Francisco (SFO)",
+          "destination": "",
+          "price": 1496
+        },
+        {
+          "id": "8e4462a5-8534-4968-b1f1-68e6f1ce1fda",
+          "city": "New York (JFK)",
+          "destination": "",
+          "price": 1596
+        },
+        {
+          "id": "f3c4ce1e-6a63-4289-b46f-181c85fb3663",
+          "city": "Newark (EWR)",
+          "destination": "",
+          "price": 1596
+        }
+      ],
+      "periods": [
+        {
+          "id": "07896cbc-dd93-472b-8a6b-c46658c05cf7",
+          "startDate": "2024-09-15T00:00:00.000Z",
+          "endDate": "2025-03-15T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "8b65f91f-cc3b-4e49-ae7d-06b411f4206e",
+      "plan": "PREMIUM",
+      "status": "PUBLISHED",
+      "type": "CASH",
+      "destinationType": "INTERNATIONAL",
+      "cabin": "ECONOMY",
+      "airlineAlliances": [
+        "ONE_WORLD",
+        "SKY_TEAM",
+        "STAR_ALLIANCE"
+      ],
+      "coverImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715782751998-unnamed.jpg",
+      "title": "Brazil, Germany, & U.K.",
+      "summary": "<p>Support your squad at the&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230188\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230188&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw3GPfV42xf3Q4wK3DV5YICn\">NFL International Games</a>&nbsp;in S&atilde;o Paulo, London, or Munich this fall! Nonstop from several cities.&nbsp;<strong>Book now &ndash; These fares won't last long!</strong></p>\r\n<p>&nbsp;</p>\r\n<p><em>All fares listed are for trips including game day! Best availability for one-week trips.&nbsp;</em></p>\r\n<p>&nbsp;</p>\r\n<p>Fares are Basic Economy and include a carry-on. We recommend upgrading to Main Cabin to get a free checked bag and the ability to cancel for a voucher. U.S. airlines also include free seat assignment on Main Cabin tickets.</p>",
+      "summaryRaw": "Support your squad at the\u00a0NFL International Games\u00a0in S\u00e3o Paulo, London, or Munich this fall! Nonstop from several cities.\u00a0Book now \u2013 These fares won't last long!\r\n\r\n\r\n\r\nAll fares listed are for trips including game day! Best availability for one-week trips.\u00a0\r\n\r\n\r\n\r\nFares are Basic Economy and include a carry-on. We recommend upgrading to Main Cabin to get a free checked bag and the ability to cancel for a voucher. U.S. airlines also include free seat assignment on Main Cabin tickets.",
+      "tip": "<p>To save on some flights, look into nearby cities, too. Search for Frankfurt (FRA) flights for the Munich game, Dublin (DUB) or Amsterdam (AMS) flights for the London game, or Rio (GIG) flights for Brazil.&nbsp;</p>",
+      "bookingInstructions": "<p><strong>1</strong>. Click the <em data-stringify-type=\"italic\">Book with Google Flights button</em> to open Google Flights. (<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230142\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230142&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw27jFANKkV8fn2k57oYauSg\">Our how-to video</a>)</p>\r\n<p>&nbsp;</p>\r\n<p><strong>2</strong>. Adjust the departure city to your home airport.</p>\r\n<p>&nbsp;</p>\r\n<p><strong>3</strong>.&nbsp;<strong>Click the dates to open the calendar view to find the cheapest dates (lowest prices in green).</strong>&nbsp;Availability may vary depending on your home airport.&nbsp;</p>\r\n<p><br><strong>4</strong>. Follow the links in Google Flights to book directly with the airline.&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><em>Use custom links for each game for best results.&nbsp;</em></p>",
+      "airline": "<h3 style=\"text-align: center;\">Aer Lingus, American, British Airways, Delta, JetBlue, Lufthansa, United (and partners)</h3>",
+      "departureCitiesContent": "<h2><strong>S&atilde;o Paulo, Brazil (GRU)</strong></h2>\r\n<h2><strong>Packers vs. Eagles &ndash; Sept. 6</strong></h2>\r\n<h2><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230206\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230206&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw097FQBghl9q8SJIIFMS9o3\">Green Bay (GRB) - $1077</a></h2>\r\n<h2><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230207\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230207&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw2hB1tBVCfBRKmM_4Fc9afp\">Milwaukee (MKE) - $1097</a></h2>\r\n<h2><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230208\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230208&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw3_10mpo-CPLPv5wnCTfx1f\">Newark (EWR) - $822*</a></h2>\r\n<h2><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230209\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230209&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw0f7Ckfn3Q8ZrW11RPXs4cT\">Philadelphia (PHL) - $1047</a></h2>\r\n<p>&nbsp;</p>\r\n<h2><strong>London, England (LHR, LGW)</strong></h2>\r\n<h2><strong>Jets vs. Vikings &ndash; Oct. 6</strong></h2>\r\n<p><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230210\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230210&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw0w4gQ5rUyJHKGgl5y4W1vD\">Minneapolis (MSP) - $775</a></p>\r\n<p><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230211\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230211&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw0Z7l2P5KEDnLvVTSz8ZzBp\">New York (JFK) - $464*</a><br><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230212\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230212&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw2fBdpsvXnj-mOa2CX1L4tB\">Newark (EWR) - $584*</a><br><br><strong>Jaguars vs. Bears &ndash; Oct. 13</strong><br><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230213\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230213&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw3ks3RGtQRo6LckrsQEjo52\">Chicago (ORD) - $593*</a><br><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230219\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230219&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw2NJQ7WjmYf4JEk4dr6nuLk\">Jacksonville (JAX) - $683</a><br><br><strong>Patriots vs. Jaguars &ndash; Oct. 20</strong><br><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230214\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230214&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw3cWBpO4vJ7QzHEVclQlPPB\">Boston (BOS) - $584*</a><br><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230215\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230215&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw3iETsgknlchPBlCI3P7_sK\">Jacksonville (JAX) - $735</a></p>\r\n<p>&nbsp;</p>\r\n<hr>\r\n<h2><strong>Munich, Germany (MUC)</strong></h2>\r\n<h2><strong>Giants vs. Panthers &ndash; Nov. 10</strong></h2>\r\n<h2><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230216\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230216&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw1UMyJV31BmnmRMSrTUK2Aj\">Charlotte (CLT) - $626*</a><br><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230217\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230217&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw2keL-m0qfxWqHNHz77lV1C\">New York (JFK) - $647*</a><br><a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11274A18398A2A230218\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11274A18398A2A230218&amp;source=gmail&amp;ust=1715868879713000&amp;usg=AOvVaw0T-jU-UnH-rEg8zbV_SwwK\">Newark (EWR) - $647*</a></h2>",
+      "departureCitiesSubheading": "(All fares round-trip, * nonstop)",
+      "sampleFlightImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715783482674-unnamed-1.jpg",
+      "policies": "<p style=\"text-align: center;\">Basic Economy fares don&rsquo;t allow changes/cancellations or require a change fee. Upgrade to Main Cabin from $150-$200 for free changes/cancellation for a voucher.</p>",
+      "price": 1097,
+      "pricePrefix": "Under",
+      "originalPrice": 1500,
+      "originalPriceType": "CASH",
+      "priceSubheading": null,
+      "singleDestination": true,
+      "destinationAirport": "London (LHR), Munich (MUC), S\u00e3o Paulo (GRU)",
+      "bookUrl": "https://www.google.com/travel/flights/search?tfs=CBwQAho6EgoyMDI0LTEwLTAyKAE6Ak9HagcIARIDSkZLagcIARIDRVdSagcIARIDTVNQcgcIARIDTEhSkAGkAxo6EgoyMDI0LTEwLTA5KAE6Ak9HagcIARIDTEhScgcIARIDSkZLcgcIARIDRVdScgcIARIDTVNQkAGkA0ABSAFqBBABGABwAYIBCwj___________8BmAEB&tfu=EgIIACIA&utm_source=ActiveCampaign&utm_medium=email&utm_content=%F0%9F%8F%9F%EF%B8%8F%20NFL%20International%20Games%20under%20%241097%20%28London%20%2F%20Munich%20%2F%20S%C3%A3o%20Paulo%29&utm_campaign=PREMIUM%20-%20NFL%20International%20Games%20Schedule",
+      "bookButtonText": "Book with Google Flights",
+      "pendingVersionId": null,
+      "publishedVersionId": null,
+      "isShownHowToVideo": true,
+      "createdAt": "2024-05-15T14:31:22.798Z",
+      "updatedAt": "2024-05-15T14:34:16.000Z",
+      "deletedAt": null,
+      "departureCities": [
+        {
+          "id": "18bc7f47-386b-4b41-972a-f87ce286a4fe",
+          "city": "Minneapolis (MSP)",
+          "destination": "London, England (LHR)",
+          "price": 775
+        },
+        {
+          "id": "1e8ae79a-dae2-4429-a5bd-fd402c5f9768",
+          "city": "Philadelphia (PHL)",
+          "destination": "S\u00e3o Paulo, Brazil (GRU)",
+          "price": 1047
+        },
+        {
+          "id": "2b3c4c2f-624d-498c-8130-3029cb0f282c",
+          "city": "Chicago (ORD)",
+          "destination": "London, England (LGW)",
+          "price": 593
+        },
+        {
+          "id": "2eed0cd4-8a51-4060-8299-4ea8e72af1d9",
+          "city": "Boston (BOS)",
+          "destination": "London, England (LHR)",
+          "price": 584
+        },
+        {
+          "id": "3254c257-aeef-497e-b969-a0f192ba6e17",
+          "city": "Newark (EWR)",
+          "destination": "S\u00e3o Paulo, Brazil (GRU)",
+          "price": 822
+        },
+        {
+          "id": "384515bf-09fb-41db-b308-06ba908d6337",
+          "city": "Jacksonville (JAX)",
+          "destination": "London, England (LHR)",
+          "price": 683
+        },
+        {
+          "id": "3b40be0f-eb0d-42a1-a4ea-b12e595776e5",
+          "city": "Chicago (ORD)",
+          "destination": "London, England (LHR)",
+          "price": 593
+        },
+        {
+          "id": "436c4970-6cb4-40fa-87a9-38554a5fa0b3",
+          "city": "Green Bay (GRB)",
+          "destination": "S\u00e3o Paulo, Brazil (GRU)",
+          "price": 1077
+        },
+        {
+          "id": "4fd7125a-166d-478e-ab33-e4489e65b3d2",
+          "city": "Milwaukee (MKE)",
+          "destination": "S\u00e3o Paulo, Brazil (GRU)",
+          "price": 1097
+        },
+        {
+          "id": "5104c0ef-2dd0-4f47-b073-223ee03f6bb0",
+          "city": "Boston (BOS)",
+          "destination": "London, England (LGW)",
+          "price": 584
+        },
+        {
+          "id": "75343954-d57b-4e38-92a0-74cd69dc02c8",
+          "city": "Newark (EWR)",
+          "destination": "Munich, Germany (MUC)",
+          "price": 647
+        },
+        {
+          "id": "7e993921-18b9-4df7-9a10-9f02b6167f3d",
+          "city": "Minneapolis (MSP)",
+          "destination": "London, England (LGW)",
+          "price": 775
+        },
+        {
+          "id": "952fc28e-bd4d-4634-983a-5c3fa0842e80",
+          "city": "Jacksonville (JAX)",
+          "destination": "London, England (LHR)",
+          "price": 735
+        },
+        {
+          "id": "9b2d0c74-6c5f-4488-adab-39a51d681b38",
+          "city": "New York (JFK)",
+          "destination": "London, England (LHR)",
+          "price": 464
+        },
+        {
+          "id": "a32ea33c-aff1-4756-ab1e-69a774c809c4",
+          "city": "New York (JFK)",
+          "destination": "Munich, Germany (MUC)",
+          "price": 647
+        },
+        {
+          "id": "b3bf38b2-2be2-44ce-8e68-ea8984dfb3e6",
+          "city": "Newark (EWR)",
+          "destination": "London, England (LGW)",
+          "price": 584
+        },
+        {
+          "id": "b4109b24-a9b0-4f3c-9af9-73dc03df1e1d",
+          "city": "Newark (EWR)",
+          "destination": "London, England (LHR)",
+          "price": 584
+        },
+        {
+          "id": "b4dba78c-69c0-443b-b0b4-f5c573c9e27e",
+          "city": "Charlotte (CLT)",
+          "destination": "Munich, Germany (MUC)",
+          "price": 626
+        },
+        {
+          "id": "c20bf019-a6ff-49b5-b81d-ff6cf421fab0",
+          "city": "Jacksonville (JAX)",
+          "destination": "London, England (LGW)",
+          "price": 735
+        },
+        {
+          "id": "d01eda8a-9f43-4a21-a208-e993e329a8c3",
+          "city": "New York (JFK)",
+          "destination": "London, England (LGW)",
+          "price": 464
+        },
+        {
+          "id": "dbdcc1e1-84d7-4a57-b69f-3c1940b1c7bd",
+          "city": "Jacksonville (JAX)",
+          "destination": "London, England (LGW)",
+          "price": 683
+        }
+      ],
+      "periods": [
+        {
+          "id": "352f0cc1-a3a3-4f4b-b94c-3b6fa55ce264",
+          "startDate": "2024-09-15T00:00:00.000Z",
+          "endDate": "2024-11-15T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "38abe3e5-ce01-48fd-a00f-2273fe586fb3",
+      "plan": "PREMIUM",
+      "status": "PUBLISHED",
+      "type": "POINTS_AND_MILES",
+      "destinationType": "INTERNATIONAL",
+      "cabin": "BUSINESS_AND_FIRST_CLASS",
+      "airlineAlliances": [
+        "SKY_TEAM"
+      ],
+      "coverImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715751404974-unnamed.jpg",
+      "title": "[BIZ CLASS] Amsterdam & Paris",
+      "summary": "<h2 style=\"text-align: center;\"><strong>Unicorn Fare</strong></h2>\r\n<p>&nbsp;</p>\r\n<p style=\"text-align: center;\"><strong>We&rsquo;ve never seen this much availability to fly Air France/KLM biz class to Europe for 50k miles each way - especially over peak summer, including Olympics! Book ASAP, it won&rsquo;t last long!</strong></p>\r\n<p style=\"text-align: center;\">&nbsp;</p>\r\n<p style=\"text-align: left;\">&nbsp;</p>\r\n<p>Wide-open peak summer award space to fly&nbsp;lie-flat biz class seats to Europe via Flying Blue! Nonstop to Paris &amp; Amsterdam on Air France or KLM - or connect onward throughout Europe.&nbsp;<strong>Best availability for 2+ passengers in June - August, inc'l the&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230139\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230139&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw0qrKGR6xpN4W-lCNqrhXOO\">Olympics</a></strong>&nbsp;(July 26 - Aug. 11).&nbsp;<em>Some dates for up to 9 passengers.</em></p>\r\n<p><br>Air France&rsquo;s&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230117\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230117&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw2xhzzZ-8G01rJweLBhsKkt\">brand-new suites</a>&nbsp;are on its newer&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230118\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230118&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw3s127GH3fDc4XHZ3Ai_R4A\">777</a>s &amp;&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230119\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230119&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw3KR4AlvPOY2dfYZSTvzyBd\">A350</a>s. To be certain you&rsquo;re flying the suites, look for 14 rows of biz class on the seat map. On other aircraft, you&rsquo;ll still be flying in a great seat - read our review flying the&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230120\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230120&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw1k56oby1Kb1DYusZhEUo1R\">older A350</a>.<br><br>KLM's best seats are flying its&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230121\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230121&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw0AhqRQa4_Uq2a-YicOTauh\">787 Dreamliner</a>&nbsp;and&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230122\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230122&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw2dWMxBfIS1ma0K03csL10Q\">refurbished 777s</a>&nbsp;(with sliding doors). Look for 9 rows of biz class in a 1-2-1 layout to ensure you're flying a newer 777. KLM's older 777s and&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230123\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230123&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw33286QXDOpQvoA_2eQyAoR\">A330</a>s have less comfy 2-2-2 seating.</p>\r\n<p>&nbsp;</p>\r\n<p>Includes priority boarding, seat assignment, checked bags, lie-flat seats, lounge access, business class food, and champagne.</p>\r\n<p>&nbsp;</p>\r\n<p><strong>Book with Air France/KLM Flying Blue</strong></p>\r\n<p>&nbsp;</p>\r\n<p>Flying Blue charges 50k miles each way. Taxes &amp; fees are $200 one-way or ~$500 R/T. Transfer points from Amex Membership Rewards, Bilt, Capital One, Chase, Citi, or Wells Fargo (usually instant).</p>",
+      "summaryRaw": "Unicorn Fare\r\n\r\n\r\n\r\nWe\u2019ve never seen this much availability to fly Air France/KLM biz class to Europe for 50k miles each way - especially over peak summer, including Olympics! Book ASAP, it won\u2019t last long!\r\n\r\n\r\n\r\n\r\n\r\nWide-open peak summer award space to fly\u00a0lie-flat biz class seats to Europe via Flying Blue! Nonstop to Paris & Amsterdam on Air France or KLM - or connect onward throughout Europe.\u00a0Best availability for 2+ passengers in June - August, inc'l the\u00a0Olympics\u00a0(July 26 - Aug. 11).\u00a0Some dates for up to 9 passengers.\r\n\r\n\r\nAir France\u2019s\u00a0brand-new suites\u00a0are on its newer\u00a0777s &\u00a0A350s. To be certain you\u2019re flying the suites, look for 14 rows of biz class on the seat map. On other aircraft, you\u2019ll still be flying in a great seat - read our review flying the\u00a0older A350.\r\n\r\nKLM's best seats are flying its\u00a0787 Dreamliner\u00a0and\u00a0refurbished 777s\u00a0(with sliding doors). Look for 9 rows of biz class in a 1-2-1 layout to ensure you're flying a newer 777. KLM's older 777s and\u00a0A330s have less comfy 2-2-2 seating.\r\n\r\n\r\n\r\n\r\nIncludes priority boarding, seat assignment, checked bags, lie-flat seats, lounge access, business class food, and champagne.\r\n\r\n\r\n\r\n\r\nBook with Air France/KLM Flying Blue\r\n\r\n\r\n\r\n\r\nFlying Blue charges 50k miles each way. Taxes & fees are $200 one-way or ~$500 R/T. Transfer points from Amex Membership Rewards, Bilt, Capital One, Chase, Citi, or Wells Fargo (usually instant).",
+      "tip": "<p>Connect onward to other cities in Europe for the same price. Add a&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230128\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230128&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw3f6AKFn4bVf5Lbngf9zz6-\">free stopover</a> if you book over the phone via Flying Blue.</p>",
+      "bookingInstructions": "<p><strong>Booking with Flying Blue</strong></p>\r\n<p>&nbsp;</p>\r\n<p><strong>1.</strong>&nbsp;Create a&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230129\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230129&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw2mXlA-sOTzqvZnU7PBUpeM\">free Flying Blue account</a>. You must have an account to search.</p>\r\n<p><strong>2.</strong>&nbsp;Log in on&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230130\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230130&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw1vI5YER9RuS3VjGUTWuMM5\">Air France's site</a>, click tab \"Book with miles\" &amp; \"Continue.\"</p>\r\n<p><strong>3.</strong>&nbsp;We recommend viewing rates on the flexible calendar: Leave the \"passenger\" field as one passenger and the&nbsp;<strong>\"departure date\" field blank</strong>.</p>\r\n<p><strong>4</strong>. Choose the \"Business\" cabin &amp; click \"Search flights.\" It will be easiest to search one-way at a time.</p>\r\n<p><strong>5</strong>. Once you find your desired flights, search those exact dates with the total number of passengers to confirm availability.</p>\r\n<p>&nbsp;</p>\r\n<p><em>When choosing flights, click \"flight details\" to know which aircraft you'll be flying and check the seat map to verify the seating layout.</em></p>\r\n<p>&nbsp;</p>\r\n<p><em>Flying Blue's website is not the best. The flexible calendar may not always work. In these cases, try a different browser or&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230131\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230131&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw3ZL7IF3cpKmYxCztY-SnIL\">KLM's website</a>. If you get errors at checkout, call Flying Blue (800-375-8723) to finish booking. Read&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11273A18397A2A230132\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11273A18397A2A230132&amp;source=gmail&amp;ust=1715836592543000&amp;usg=AOvVaw23QmD471mUCEDuVLhf3zQQ\">our full guide</a>.</em></p>",
+      "airline": "<h3 style=\"text-align: center;\">Air France &amp; KLM</h3>",
+      "departureCitiesContent": "<h2><strong>Amsterdam (AMS)</strong></h2>\r\n<h2>Atlanta (ATL) - 50k*<br>Austin (AUS) - 50k*<br>Boston (BOS) - 50k*<br>Calgary (YYC) - 50k*<br>Chicago (ORD) - 50k*<br>Edmonton (YEG) - 50k*<br>Houston (IAH) - 50k*<br>Las Vegas (LAS) - 50k*<br>Los Angeles (LAX) - 50k*<br>Miami (MIA) - 50k*<br>Minneapolis (MSP) - 50k*<br>Montreal (YUL) - 50k*<br>New York (JFK) - 50k*<br>San Francisco (SFO) - 50k*<br>Toronto (YYZ) - 50k*<br>Washington, D.C. (IAD) - 50k*</h2>\r\n<hr>\r\n<h2><strong>Paris (CDG)</strong></h2>\r\n<h2>Atlanta (ATL) - 50k*<br>Boston (BOS) - 50k*<br>Chicago (ORD) - 50k*<br>Dallas (DFW) - 50k*<br>Denver (DEN) - 50k*<br>Detroit (DTW) - 50k*<br>Houston (IAH) - 50k*<br>Las Vegas (LAS) - 50k*<br>Los Angeles (LAX) - 50k*<br>Miami (MIA) - 50k*<br>Minneapolis (MSP) - 50k*<br>Montreal (YUL) - 50k*<br>New York (JFK) - 50k*<br>Newark (EWR) - 50k*<br>Ottawa (YOW) - 50k*<br>Quebec City (YQB) - 50k*<br>Phoenix (PHX) - 50k*<br>Raleigh (RDU) - 50k*<br>San Francisco (SFO) - 50k*<br>Seattle (SEA) - 50k*<br>Toronto (YYZ) - 50k*<br>Vancouver (YVR) - 50k*<br>Washington, D.C. (IAD) - 50k*</h2>",
+      "departureCitiesSubheading": "(All fares one-way, *nonstop) - Pricing via Flying Blue",
+      "sampleFlightImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715751793303-unnamed.webp",
+      "policies": "<p>Air France-KLM Flying Blue charges a ~$75 change/cancellation fee.</p>",
+      "price": 50,
+      "pricePrefix": "For",
+      "originalPrice": 100,
+      "originalPriceType": "POINTS_AND_MILES",
+      "priceSubheading": "Fly nonstop, lie-flat biz class seats to Europe via Flying Blue!",
+      "singleDestination": true,
+      "destinationAirport": "Amsterdam (AMS), Paris (CDG)",
+      "bookUrl": "https://wwws.airfrance.us/?bookingFlow=REWARD&utm_source=ActiveCampaign&utm_medium=email&utm_content=%F0%9F%A6%84%20%5BBIZ%20CLASS%5D%20Amsterdam%20%26%20Paris%20for%2050k%20points%20each%20way%20%28Summer%20%2F%20Olympics%20-%20Was%3A%20100k%2B%29&utm_campaign=Premium%3A%20Air%20France%2FKLM%20biz%20ALL%20GATEWAYS%20SUMMER",
+      "bookButtonText": "Book with Flying Blue",
+      "pendingVersionId": null,
+      "publishedVersionId": null,
+      "isShownHowToVideo": false,
+      "createdAt": "2024-05-15T05:43:13.398Z",
+      "updatedAt": "2024-05-15T05:46:03.000Z",
+      "deletedAt": null,
+      "departureCities": [
+        {
+          "id": "0064af1c-30f0-48c2-a1a3-9f06fe92ec53",
+          "city": "Montreal (YUL)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "06af0f35-ffd9-4bdc-9b30-0e4600babb13",
+          "city": "Atlanta (ATL)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "0f2daeb2-ef45-4ada-b976-a3c7e948afd5",
+          "city": "Calgary (YYC)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "213baa2f-2be9-42a5-9bb1-56a9526df67d",
+          "city": "Phoenix (PHX)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "2594a53e-e479-4464-a40d-7249f1218f59",
+          "city": "Los Angeles (LAX)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "283a37f7-bbcc-4d1f-a2a4-1480fe51ca34",
+          "city": "San Francisco (SFO)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "337d5b04-8ae4-4c18-808c-19f502b17630",
+          "city": "Dallas (DFW)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "364f73c8-b513-42f4-8961-b250028cbde7",
+          "city": "Miami (MIA)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "3e1b554d-4258-411c-8a6b-fc9c9c9df155",
+          "city": "Atlanta (ATL)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "40c8d661-1653-410c-ac3a-6059a54d2160",
+          "city": "Edmonton (YEG)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "423b22e7-7dff-4804-a5ad-b75f9e36cd8a",
+          "city": "Chicago (ORD)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "55635eca-59bc-4542-bc73-ffcfdb2a8082",
+          "city": "Seattle (SEA)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "58aafcaf-a349-4591-93a2-68efb4a187d6",
+          "city": "Minneapolis (MSP)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "58bdc248-0ed5-4f2b-9e61-ca16d879fe4a",
+          "city": "Newark (EWR)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "5a56095b-4397-4090-9651-38f50bddb961",
+          "city": "Chicago (ORD)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "5c1663d1-1c64-4e10-bb04-c8c2063130b6",
+          "city": "Las Vegas (LAS)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "5cef91e3-7dfd-41f1-a0f3-fa3e04469d77",
+          "city": "Quebec City (YQB)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "60e6f6f8-dc27-4e5e-b262-c19de70a204d",
+          "city": "Austin (AUS)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "62bf6a0b-37a9-4ec9-ac02-93f9f5901b90",
+          "city": "Las Vegas (LAS)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "6346290a-7eae-4a72-964a-a20cf5dd016d",
+          "city": "Montreal (YUL)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "64058ecb-39ed-4198-81ad-ff93a8ebd1b9",
+          "city": "Detroit (DTW)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "69ae3cde-d25c-423b-95a9-0a76b61f4c5b",
+          "city": "Houston (IAH)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "7135efa3-2ec4-4eac-bd7f-47904a631e3b",
+          "city": "Ottawa (YOW)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "774e73bf-1149-494e-860b-7b3fcfab8bce",
+          "city": "Boston (BOS)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "833b98ff-e234-431a-b1d9-f15f1c9a5c09",
+          "city": "Washington, D.C. (IAD)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "836b5061-1915-4469-8a3c-64b1f5b44348",
+          "city": "New York (JFK)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "8e0eba70-4d6b-421c-a338-db2b7375b6cd",
+          "city": "Vancouver (YVR)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "93d20ebd-a13f-47fa-b281-aed62af9132d",
+          "city": "Denver (DEN)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "9402eb87-fc75-4410-a7d4-dd7483809b34",
+          "city": "Houston (IAH)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "a1b1a40d-c927-408e-afd3-b9e0a7bc1525",
+          "city": "Miami (MIA)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "a64f31ca-a093-45dd-8ba4-5f6e158f4a85",
+          "city": "Toronto (YYZ)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "b2587934-eec0-40a4-8650-89f927651f19",
+          "city": "Los Angeles (LAX)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "c2cbced0-9ea3-4190-bfb7-32661e0d2bc8",
+          "city": "Boston (BOS)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "c7a176a2-4e52-4146-9fde-ab1ec3b9cfd5",
+          "city": "Washington, D.C. (IAD)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "ce02303c-5b6e-464e-adfe-4c2d6c6c989d",
+          "city": "New York (JFK)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        },
+        {
+          "id": "de595e93-8a4d-40ed-a031-ca4ddf29746b",
+          "city": "Raleigh (RDU)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "e5d13d48-ca7c-4161-bce6-092e705ef36b",
+          "city": "San Francisco (SFO)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "e85a21e0-f03d-42eb-a572-cdfea5af85e2",
+          "city": "Toronto (YYZ)",
+          "destination": "Paris (CDG)",
+          "price": 50
+        },
+        {
+          "id": "fb9c1e17-bce7-4d3c-be27-22d41aeef00d",
+          "city": "Minneapolis (MSP)",
+          "destination": "Amsterdam (AMS)",
+          "price": 50
+        }
+      ],
+      "periods": [
+        {
+          "id": "037a0d51-9076-4e41-95e8-c487f5f1d0c3",
+          "startDate": "2024-06-15T00:00:00.000Z",
+          "endDate": "2025-03-15T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "3efca17d-62bf-4aad-b4ba-e2a533101a54",
+      "plan": "FREEMIUM",
+      "status": "PUBLISHED",
+      "type": "POINTS_AND_MILES",
+      "destinationType": "INTERNATIONAL",
+      "cabin": "ECONOMY",
+      "airlineAlliances": [
+        "SKY_TEAM"
+      ],
+      "coverImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715750234058-unnamed.jpg",
+      "title": "[Delta SkyMiles] Banff Nat'l Park ",
+      "summary": "<p>Explore the Canadian Rockies using your SkyMiles! Flying Delta and its partner WestJet with the best availability through summer. Nonstop from several cities.&nbsp;<em>Deals work in reverse if you live in Calgary.</em><br><br>Fares are&nbsp;<strong>Main Cabin</strong>, which includes a carry-on and free online cancellation. Seat selection starts from $11 on WestJet flights.</p>",
+      "summaryRaw": "Explore the Canadian Rockies using your SkyMiles! Flying Delta and its partner WestJet with the best availability through summer. Nonstop from several cities.\u00a0Deals work in reverse if you live in Calgary.\r\n\r\nFares are\u00a0Main Cabin, which includes a carry-on and free online cancellation. Seat selection starts from $11 on WestJet flights.",
+      "tip": "<p>We were just in Banff! Check out the&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11268A18392A2A230063\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11268A18392A2A230063&amp;source=gmail&amp;ust=1715836592698000&amp;usg=AOvVaw3nPMwzuAVUC5YWdMDarYJU\">Rundle Bar</a>&nbsp;at the Fairmont Banff Springs for happy hour and&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11268A18392A2A230064\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11268A18392A2A230064&amp;source=gmail&amp;ust=1715836592698000&amp;usg=AOvVaw2YsZWQEyvKtNLzoLZS-02J\">Three Bears Brewery</a> for local beer and great pizza.</p>",
+      "bookingInstructions": "<p><strong>1.</strong>&nbsp;Search on Delta's website by selecting \"Shop with Miles.\"</p>\r\n<p><strong>2.</strong>&nbsp;After searching, choose \"Price Calendar\" to maximize the dates viewable.</p>\r\n<p><strong>3.</strong>&nbsp;Filter for \"Nonstop\" when searching the nonstop routes listed.</p>\r\n<p>&nbsp;</p>\r\n<p>Read&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11268A18392A2A230048\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11268A18392A2A230048&amp;source=gmail&amp;ust=1715836592699000&amp;usg=AOvVaw2FFd8XY7I6kBr0cSlcO1N9\">our guide</a>&nbsp;to booking Delta SkyMiles deals.&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><em>For seat assignment on WestJet, you&rsquo;ll need to contact Delta (we prefer&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11268A18392A2A230060\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11268A18392A2A230060&amp;source=gmail&amp;ust=1715836592699000&amp;usg=AOvVaw1rQuRS991BjJci9fqVQhXD\">messaging</a>) to get the WestJet confirmation code. Then, enter that code on&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11268A18392A2A230061\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11268A18392A2A230061&amp;source=gmail&amp;ust=1715836592699000&amp;usg=AOvVaw07orRzxdLB3nkQTs1_Ryjh\">WestJet&rsquo;s website</a>&nbsp;to pick seats for a fee. Or, choose seats for free at check-in.</em></p>\r\n<p>&nbsp;</p>\r\n<p style=\"text-align: center;\">Taxes and fees are ~$65 R/T</p>",
+      "airline": "<h3 style=\"text-align: center;\">Delta, WestJet</h3>",
+      "departureCitiesContent": "<h2>Aberdeen (ABR) - 25k<br>Albuquerque (ABQ) - 25k<br>Anchorage (ANC) - 25k<br>Asheville (AVL) - 25k</h2>\r\n<h2>Atlanta (ATL) - 25k*<br>Augusta (AGS) - 25k<br>Austin (AUS) - 25k*<br>Baltimore (BWI) - 25k<br>Baton Rouge (BTR) - 25k<br>Birmingham (BHM) - 25k<br>Boise (BOI) - 25k<br>Boston (BOS) - 25k<br>Bristol (TRI) - 25k</h2>\r\n<h2>Buffalo (BUF) - 25k<br>Charleston (CHS) - 25k<br>Charleston (CRW) - 25k<br>Charlotte (CLT) - 25k<br>Charlottesville (CHO) - 25k<br>Chattanooga (CHA) - 25k<br>Chicago (ORD) - 25k*<br>Cincinnati (CVG) - 25k<br>Cleveland (CLE) - 25k<br>Columbia (CAE) - 25k<br>Columbus (CMH) - 25k<br>Dallas (DAL) - 25k<br>Dallas (DFW) - 25k<br>Dayton (DAY) - 25k<br>Denver (DEN) - 25k*<br>Des Moines (DSM) - 25k<br>Destin (VPS) - 25k<br>Detroit (DTW) - 25k*<br>Edmonton (YEG) - 25k*<br>Eugene (EUG) - 25k<br>Evansville (EVV) - 25k<br>Fairbanks (FAI) - 25k<br>Fayetteville (XNA) - 25k<br>Fort Lauderdale (FLL) - 25k<br>Fort Myers (RSW) - 25k<br>Gainesville (GNV) - 25k<br>Greenville (GSP) - 25k<br>Harrisburg (MDT) - 25k<br>Houston (IAH) - 25k*<br>Huntsville (HSV) - 25k<br>Indianapolis (IND) - 25k</h2>\r\n<h2>Jackson (JAN) - 25k<br>Jacksonville (JAX) - 25k<br>Kalamazoo (AZO) - 25k<br>Kansas City (MCI) - 25k<br>Key West (EYW) - 25k<br>Knoxville (TYS) - 25k<br>Lafayette (LFT) - 25k<br>Las Vegas (LAS) - 25k*<br>Lexington (LEX) - 25k<br>Little Rock (LIT) - 25k<br>Los Angeles (LAX) - 25k*<br>Louisville (SDF) - 25k<br>Madison (MSN) - 25k<br>Medford (MFR) - 25k<br>Melbourne (MLB) - 25k<br>Memphis (MEM) - 25k</h2>\r\n<h2>Miami (MIA) - 25k</h2>\r\n<hr>\r\n<h2>Milwaukee (MKE) - 25k</h2>\r\n<h2>Minneapolis (MSP) - 25k<br>Minot (MOT) - 25k&nbsp;<br>Mobile (MOB) - 25k&nbsp;<br>Moline (MLI) - 25k&nbsp;<br>Montgomery (MGM) - 25k<br>Montreal (YUL) - 25k*<br>Myrtle Beach (MYR) - 25k<br>Nashville (BNA) - 25k*<br>New Orleans (MSY) - 25k<br>New York (JFK) - 25k*&nbsp;&nbsp;<br>Norfolk (ORF) - 25k<br>Oklahoma City (OKC) - 25k<br>Omaha (OMA) - 25k<br>Ontario (ONT) - 25k<br>Orlando (MCO) - 25k*<br>Ottawa (YOW) - 25k*<br>Palm Springs (PSP) - 25k*<br>Panama City (ECP) - 25k<br>Pasco (PSC) - 25k<br>Pensacola (PNS) - 25k<br>Peoria (PIA) - 25k&nbsp;<br>Philadelphia (PHL) - 25k<br>Phoenix (PHX) - 25k*<br>Pittsburgh (PIT) - 25k<br>Pocatello (PIH) - 25k&nbsp;<br>Portland (PDX) - 25k*<br>Providence (PVD) - 25k<br>Quebec City (YQB) - 25k*<br>Raleigh (RDU) - 25k<br>Redmond (RDM) - 25k<br>Regina (YQR) - 25k*<br>Rhinelander (RHI) - 25k<br>Richmond (RIC) - 25k<br>Roanoke (ROA) - 25k&nbsp;<br>Rochester (ROC) - 25k<br>Sacramento (SMF) - 25k<br>Salt Lake City (SLC) - 25k<br>San Antonio (SAT) - 25k<br>San Diego (SAN) - 25k*<br>San Francisco (SFO) - 25k*<br>San Jose (SJC) - 25k<br>Santa Ana (SNA) - 25k*<br>Sarasota (SRQ) - 25k<br>Saskatoon (YXE) - 25k*<br>Savannah (SAV) - 25k<br>Seattle (SEA) - 25k*<br>Shreveport (SHV) - 25k</h2>\r\n<h2>Spokane (GEG) - 25k&nbsp;<br>Springfield (SGF) - 25k&nbsp;<br>St. Louis (STL) - 25k<br>Tallahassee (TLH) - 25k<br>Tampa (TPA) - 25k<br>Toronto (YYZ) - 25k*<br>Tucson (TUS) - 25k<br>Tulsa (TUL) - 25k<br>Vancouver (YVR) - 25k*<br>Victoria (YYJ) - 25k*<br>Washington, D.C. (DCA) - 25k<br>Washington, D.C. (IAD) - 25k</h2>",
+      "departureCitiesSubheading": "(All fares round-trip, *nonstop) - Pricing is in Delta SkyMiles",
+      "sampleFlightImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715751257104-unnamed.webp",
+      "policies": "<p style=\"text-align: center;\">These Main Cabin allow free changes and are fully refundable&nbsp;</p>",
+      "price": 25,
+      "pricePrefix": "For",
+      "originalPrice": 600,
+      "originalPriceType": "CASH",
+      "priceSubheading": "Explore the Canadian Rockies using your SkyMiles!",
+      "singleDestination": true,
+      "destinationAirport": "Calgary (YYC)",
+      "bookUrl": "https://www.delta.com/?utm_source=ActiveCampaign&utm_medium=email&utm_content=%F0%9F%A5%BE%20%5BDelta%20SkyMiles%5D%20Banff%20Nat%20l%20Park%20for%2025k%20R%2FT%20(Summer%20%2F%20Main%20Cabin%20-%20Was:%20$600)&utm_campaign=PREMIUM%20-%20Delta%20SkyMiles%20Banff",
+      "bookButtonText": "Book with Delta",
+      "pendingVersionId": null,
+      "publishedVersionId": null,
+      "isShownHowToVideo": false,
+      "createdAt": "2024-05-15T05:34:17.193Z",
+      "updatedAt": "2024-05-15T17:18:33.000Z",
+      "deletedAt": null,
+      "departureCities": [
+        {
+          "id": "00e481a9-c8cb-4717-8c36-1d4f84639ae5",
+          "city": "Evansville (EVV)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "01f12f28-66c4-4515-bb52-f17d18de2c68",
+          "city": "Columbus (CMH)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "02d9131e-cc77-4096-b928-7d3ca952d761",
+          "city": "Washington, D.C. (IAD)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "05f39ad6-0172-46a8-8505-0f756a654560",
+          "city": "Eugene (EUG)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "0798c816-6245-4103-b78f-10b1ebb29670",
+          "city": "Harrisburg (MDT)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "096af668-e4dc-4d0c-a3fe-23c6d48e353c",
+          "city": "Tallahassee (TLH)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "099d49b6-a052-405c-8f81-a51a6fc3134f",
+          "city": "Norfolk (ORF)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "0e5fda04-075a-43a8-b9c8-adc24b891ea2",
+          "city": "Mobile (MOB)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "1ca4fffb-3cde-4ece-8325-117430bbd1db",
+          "city": "Edmonton (YEG)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "2022be38-f82a-49f7-8ecf-8ba223c9200b",
+          "city": "Memphis (MEM)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "231b9e2a-07aa-4dda-a322-e16318097479",
+          "city": "Raleigh (RDU)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "2337d834-824f-4587-84b4-0803a77ad8ac",
+          "city": "Charlottesville (CHO)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "245ae9c7-77bc-4d2f-9f9f-a319f51e0a9e",
+          "city": "Orlando (MCO)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "2699a2ff-1b03-4eeb-8208-a5b307e360a3",
+          "city": "Peoria (PIA)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "272196d6-3c28-4d0b-a1a9-7943e17c4b7d",
+          "city": "Kansas City (MCI)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "2745f263-28a0-4494-9b85-c71cb7d4b251",
+          "city": "Pensacola (PNS)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "27960d4f-4779-4425-847c-0c3877764911",
+          "city": "Montreal (YUL)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "28142c54-12f2-4ce7-8cef-18c2e88cef0e",
+          "city": "Detroit (DTW)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "29a8f047-6638-4a62-9e8f-3231ab08e474",
+          "city": "Omaha (OMA)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "29e1e4de-e745-4010-9a6f-03ddb2244c02",
+          "city": "Knoxville (TYS)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "2a8da692-a177-44f6-a599-6b453555f007",
+          "city": "Key West (EYW)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "2cf69fea-22b0-4657-994b-25cbb76c612d",
+          "city": "Fort Lauderdale (FLL)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "2f746f0a-b35d-406f-ad82-b2831a0821e9",
+          "city": "Shreveport (SHV)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "31bc9d47-906c-46f4-abf1-6c6eaedd84fe",
+          "city": "Las Vegas (LAS)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "323e4da5-2bfb-4c1a-a7a2-c839f0f6c0d0",
+          "city": "Louisville (SDF)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "33268312-cd59-472c-860d-da5b3941cfce",
+          "city": "Santa Ana (SNA)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "338d85fc-1218-4348-aec3-b4167e3a4fc0",
+          "city": "Montgomery (MGM)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "3684df6b-ed41-459b-aa91-357eaeba07d9",
+          "city": "Baton Rouge (BTR)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "3727cdc9-6929-4a21-b876-9233ac5b5875",
+          "city": "Pocatello (PIH)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "38258139-52a0-4a6d-8d51-850bc78c93b1",
+          "city": "Gainesville (GNV)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "389d9747-d72a-49c4-82b0-21cafb24c05e",
+          "city": "Pittsburgh (PIT)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "3a12a7ff-a289-4eaa-8834-41409d122ea0",
+          "city": "Salt Lake City (SLC)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "3a581adc-8f63-4682-8653-2ac61f0f6d45",
+          "city": "Indianapolis (IND)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "3b798af6-0a42-4012-bb76-47210f161501",
+          "city": "Redmond (RDM)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "3c5aff6c-2c30-40d6-a320-324d1cee8e38",
+          "city": "Roanoke (ROA)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "3d8cfa02-8a01-4c9c-a759-73b91232e674",
+          "city": "Rochester (ROC)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "3fc835f2-a87a-4e0b-913a-7acb9ac46216",
+          "city": "Asheville (AVL)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "4055e405-b783-4940-b905-3df91bb639ad",
+          "city": "Melbourne (MLB)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "40b56aaa-a8e8-4f42-ad73-0395a75caf57",
+          "city": "Dallas (DFW)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "418ddefc-ea62-4a7c-968c-a6f8af1eadaf",
+          "city": "Minot (MOT)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "41986a28-7eca-4efa-bd58-685b7caede67",
+          "city": "Toronto (YYZ)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "46c08bd6-4bf7-4a86-8258-decca1d03aa0",
+          "city": "Spokane (GEG)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "46d940c4-eac1-4187-9258-3fa78ac6701d",
+          "city": "Vancouver (YVR)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "46f56696-7053-452e-9dec-1deceb22d8ba",
+          "city": "Fort Myers (RSW)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "47e24c58-8048-4584-af81-1af8ffee55d3",
+          "city": "Milwaukee (MKE)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "483d86ef-6de3-44bc-895e-577535f74045",
+          "city": "Anchorage (ANC)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "4a903563-8cb5-47b0-9c3f-0c6b2c70a7d5",
+          "city": "Albuquerque (ABQ)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "4b7474e8-6875-4410-b3cf-fb7c5a99e583",
+          "city": "Portland (PDX)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "4bd91645-5204-49ea-ab07-a01e7525ce45",
+          "city": "Sarasota (SRQ)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "4cb5c3bc-9122-42be-823e-f3e95d916596",
+          "city": "San Antonio (SAT)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "4da9d9b2-3cee-4a07-b83d-04110152917b",
+          "city": "Panama City (ECP)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "5296bf8a-70b8-4506-a256-3fa837b1e9b9",
+          "city": "Baltimore (BWI)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "52b13400-235a-4939-ae1b-661bac536cdf",
+          "city": "Tampa (TPA)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "5367aa0c-5f56-4460-a3ff-463b77a06af9",
+          "city": "Des Moines (DSM)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "563078db-4647-41b6-a056-1e3654a0d19a",
+          "city": "Rhinelander (RHI)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "56b463dd-5616-432d-95e8-47b9aa6087f8",
+          "city": "Cleveland (CLE)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "56d74a74-2000-40b5-8502-dd5c78fbbe4c",
+          "city": "Regina (YQR)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "619d7b42-cab3-4b3e-9754-78e439edffc8",
+          "city": "New York (JFK)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "61f483ab-0e9a-44cc-b5bd-346ce92866e7",
+          "city": "Charleston (CRW)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "6338bf33-15b0-42b4-93ed-be4f0e429878",
+          "city": "Oklahoma City (OKC)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "66072fb3-5ef5-4107-8a9b-a361ffa01812",
+          "city": "Dayton (DAY)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "6aca542d-1926-422d-993d-b8adc0c2009a",
+          "city": "Destin (VPS)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "6ad9bea4-3b97-4680-b62d-e25b77294500",
+          "city": "Aberdeen (ABR)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "6d2dc9b0-c0db-49bb-b9c4-003a5e77e69f",
+          "city": "Moline (MLI)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "703589fd-9a79-4bd9-bd0c-4fb70738b92f",
+          "city": "Minneapolis (MSP)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "71b8acb3-64b8-4c42-9d9b-d4267ab43c6f",
+          "city": "Sacramento (SMF)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "78a25c20-83fc-4143-9496-31ac01f4767d",
+          "city": "Little Rock (LIT)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "7d8ccad5-b1b4-4e1a-96dd-af5a7c2a7b82",
+          "city": "Nashville (BNA)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "7fb3e9b4-4eb3-4e6f-a643-6a7292beb770",
+          "city": "Saskatoon (YXE)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "85830f64-225c-4361-81be-3f29331886ee",
+          "city": "Atlanta (ATL)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "8681dd73-b9d8-43f5-b4f6-decbe80b06e1",
+          "city": "Tulsa (TUL)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "87e30c2e-dcd0-4ad8-960e-7d3d0e1cadb5",
+          "city": "Los Angeles (LAX)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "8d7753f0-fb6d-4f4e-b13c-a2cbe9b85b82",
+          "city": "Boston (BOS)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "949f8d10-c6b2-4b4b-a534-dd83d74bed0e",
+          "city": "Myrtle Beach (MYR)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "9c4e4906-640a-43a2-a3c8-fc0ffc33ada9",
+          "city": "Buffalo (BUF)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "9d2081dc-ce1c-4a18-80d2-ad6013613fcd",
+          "city": "Chattanooga (CHA)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "9da5964c-e82e-46a0-8749-6b8fd820b9fa",
+          "city": "Charleston (CHS)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "9e083282-b9d1-4f0d-8318-51f6e673d594",
+          "city": "Springfield (SGF)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "9eb73e78-facd-461c-8adc-fdd46c6f994e",
+          "city": "Lexington (LEX)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "9ebc02c1-5db1-4107-97d8-775bc8dab210",
+          "city": "Kalamazoo (AZO)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "9fcb8ec5-fbac-4313-ad50-1c1406218363",
+          "city": "Washington, D.C. (DCA)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "a1143be5-2cb2-4f57-97bb-3a41a0984b44",
+          "city": "Denver (DEN)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "aa10017f-45d8-44ed-8c5b-12b89101d527",
+          "city": "Philadelphia (PHL)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "aa407050-426e-4f19-9fe5-75572538bba8",
+          "city": "Madison (MSN)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "ac3b6687-8da4-4e10-a470-f20db8fae2f7",
+          "city": "Fayetteville (XNA)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "b0364732-432f-4155-8a0c-e712ee3795f5",
+          "city": "Savannah (SAV)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "b1213cf4-3a4d-46e1-89be-2b36dd10dc18",
+          "city": "Huntsville (HSV)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "b263c4a7-a6a5-4d3b-ad05-201f540f8ab2",
+          "city": "St. Louis (STL)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "b373b303-9802-4e39-b020-372719e1fc08",
+          "city": "Pasco (PSC)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "b68f42dd-74b2-4bc8-84a9-bbd85dceafa3",
+          "city": "Providence (PVD)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "bd2ee02b-1ec9-4bee-9359-1e8ced7e85e4",
+          "city": "Austin (AUS)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "bfadf8ea-01af-4655-a793-ca6fbcd9140e",
+          "city": "San Diego (SAN)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "c3f02ad2-3aec-43fb-a6c4-b7d4be1623c4",
+          "city": "Augusta (AGS)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "ca57018b-0e9f-4810-b83e-e93b0f4f1463",
+          "city": "Charlotte (CLT)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "ccaaeeea-3543-43c9-a8df-c36fa993922b",
+          "city": "Phoenix (PHX)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "ccef0388-fc9e-4221-ac2d-50e11fc577a3",
+          "city": "San Francisco (SFO)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "cd5746cc-1670-4449-8f98-1810dde6ab56",
+          "city": "Bristol (TRI)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "cdd38546-b7e6-45b4-b4bd-903e0a386764",
+          "city": "Boise (BOI)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "ced80d97-8664-4dba-bdee-ba64696275ad",
+          "city": "Jackson (JAN)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "cf37f714-e4fe-4b9c-bd40-934aad284649",
+          "city": "Lafayette (LFT)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "d158aee4-ede3-438f-80d9-d9874bb6525e",
+          "city": "Ontario (ONT)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "d1b7ae77-1a25-4799-9a71-a56e0bfe0121",
+          "city": "Palm Springs (PSP)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "d1c2e0f9-7214-4c75-890b-124c5d86fcba",
+          "city": "Chicago (ORD)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "d24fe8b7-40c5-4f41-8167-a5f4dfaeaa33",
+          "city": "Jacksonville (JAX)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "d3f98e2f-2365-4924-917b-2c167ad52495",
+          "city": "New Orleans (MSY)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "d5a36b68-855a-4c51-922e-ca18449011a4",
+          "city": "Tucson (TUS)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "d9e2d767-b4df-40b6-af7b-b6a7ac35259d",
+          "city": "Seattle (SEA)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "dc91d1ef-892f-469a-b7a5-c3b3426aae66",
+          "city": "Fairbanks (FAI)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "dff8c537-26bf-4dad-be63-fe9ab5ca5e69",
+          "city": "Quebec City (YQB)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "e589afbe-f742-4263-9031-b29aebe7f816",
+          "city": "Dallas (DAL)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "e8e8c35a-dc3d-420e-9e60-3e9d591844b6",
+          "city": "Houston (IAH)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "e9f7105e-3ecf-40ee-ad50-6168fc060b1c",
+          "city": "San Jose (SJC)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "ed26d11c-4aee-4d82-8013-ed6c18509a32",
+          "city": "Birmingham (BHM)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "f37b4725-4cf3-45eb-b946-a7fdad374a2e",
+          "city": "Victoria (YYJ)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "f512e280-c1d1-41c0-ad23-b085d6e35205",
+          "city": "Cincinnati (CVG)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "f6489847-dba4-49c3-a5bf-328769606ee4",
+          "city": "Columbia (CAE)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "f787adb6-d7df-4902-8e97-fdacba460ad1",
+          "city": "Richmond (RIC)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "fc33c409-0d9a-4cf1-b2eb-6e27275ff4d3",
+          "city": "Medford (MFR)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "fd29869a-e8c0-4a63-a02f-cb48351178a9",
+          "city": "Greenville (GSP)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "fe3f6a32-016f-44e7-b257-d8f95368b7ef",
+          "city": "Ottawa (YOW)",
+          "destination": "",
+          "price": 25
+        },
+        {
+          "id": "fef5682c-8984-4282-aa2e-a04e4dc824c6",
+          "city": "Miami (MIA)",
+          "destination": "",
+          "price": 25
+        }
+      ],
+      "periods": [
+        {
+          "id": "80a28af6-b3c0-4368-9c08-2c1126275b3d",
+          "startDate": "2024-07-15T00:00:00.000Z",
+          "endDate": "2025-03-15T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "ce6eb38c-a99b-4877-b46c-11b8fdd84d19",
+      "plan": "PREMIUM",
+      "status": "PUBLISHED",
+      "type": "CASH",
+      "destinationType": "INTERNATIONAL",
+      "cabin": "BUSINESS_AND_FIRST_CLASS",
+      "airlineAlliances": [
+        "STAR_ALLIANCE"
+      ],
+      "coverImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715702869291-unnamed.jpg",
+      "title": "[BIZ CLASS] Portugal & Cape Verde",
+      "summary": "<p>Book these incredibly cheap lie-flat seats to Portugal, the Portuguese Islands, and Cape Verde! Best availability this fall, including&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11266A18390A2A230040\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11266A18390A2A230040&amp;source=gmail&amp;ust=1715789238765000&amp;usg=AOvVaw2yUsi8ShiJ5HxAQ_Zvp5Hf\">Canadian</a>&nbsp;and&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11266A18390A2A230041\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11266A18390A2A230041&amp;source=gmail&amp;ust=1715789238765000&amp;usg=AOvVaw33eXez0i6AjeARzLbhDcHc\">American Thanksgiving</a>&nbsp;from Toronto and Boston respectively.&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p>You'll be flying TAP's A321neo with staggered 2-2 and 1-1 seating layout on the transatlantic flights. We recommend booking the \"throne seats\" in rows 2 and 4. Check out this&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11266A18390A2A230042\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11266A18390A2A230042&amp;source=gmail&amp;ust=1715789238765000&amp;usg=AOvVaw1NHTL7jIUxf0DoIZ3ofknA\">seat map</a>.</p>\r\n<p>&nbsp;</p>\r\n<p>Includes lie-flat seats, priority boarding, checked bags, seat assignment, and tasty meals/drinks.</p>",
+      "summaryRaw": "Book these incredibly cheap lie-flat seats to Portugal, the Portuguese Islands, and Cape Verde! Best availability this fall, including\u00a0Canadian\u00a0and\u00a0American Thanksgiving\u00a0from Toronto and Boston respectively.\u00a0\r\n\r\n\r\n\r\n\r\nYou'll be flying TAP's A321neo with staggered 2-2 and 1-1 seating layout on the transatlantic flights. We recommend booking the \"throne seats\" in rows 2 and 4. Check out this\u00a0seat map.\r\n\r\n\r\n\r\n\r\nIncludes lie-flat seats, priority boarding, checked bags, seat assignment, and tasty meals/drinks.",
+      "tip": "<p>Add a Lisbon stopover for almost exactly the same price as the roundtrip! Take your desired dates to&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11266A18390A2A230043\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11266A18390A2A230043&amp;source=gmail&amp;ust=1715789238765000&amp;usg=AOvVaw1bfAaXWMQajOMrY8ejHgmd\">TAP's Stopover site</a> to book.&nbsp;&nbsp;</p>",
+      "bookingInstructions": "<p><strong>1.</strong> Click the <em data-stringify-type=\"italic\">Book with Google Flights button</em>&nbsp;to open Google Flights. (<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11266A18390A2A230027\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11266A18390A2A230027&amp;source=gmail&amp;ust=1715789238765000&amp;usg=AOvVaw0HDVm5gL0JCmJ7mTTZc5_J\">Our how-to video</a>)</p>\r\n<p>&nbsp;</p>\r\n<p><strong>2.</strong>&nbsp;Adjust the departure city to your home airport.</p>\r\n<p>&nbsp;</p>\r\n<p><strong>3.</strong>&nbsp;<strong>Click the dates to open the calendar view to find the cheapest dates (lowest prices in green).</strong>&nbsp;Availability may vary depending on your home airport.</p>\r\n<p><br><strong>4</strong>. Follow the links in Google Flights to book directly with TAP Air Portugal.&nbsp;</p>",
+      "airline": "<h3 style=\"text-align: center;\">TAP Air Portugal</h3>",
+      "departureCitiesContent": "<h2><strong>Boston (BOS)</strong></h2>\r\n<h2>Cape Verde (RAI) - $1492</h2>\r\n<h2>Faro (FAO) - $1747</h2>\r\n<h2>Lisbon (LIS) - $1748*</h2>\r\n<h2>Madeira (FNC) - $1748</h2>\r\n<h2>Ponta Delgada (PDL) - $1748</h2>\r\n<h2>Porto (OPO) - $1748</h2>\r\n<h2>Terceira Island (TER) - $1742</h2>\r\n<hr>\r\n<h2><strong>Toronto (YYZ)</strong><br>Faro (FAO) - $1464</h2>\r\n<h2>Lisbon (LIS) - $1464*</h2>\r\n<h2>Madeira (FNC) - $1464</h2>\r\n<h2>Ponta Delgada (PDL) - $1317<br>Porto (OPO) - $1465</h2>\r\n<h2>Terceira Island (TER) - $1317</h2>",
+      "departureCitiesSubheading": "(All fares round-trip, * nonstop)",
+      "sampleFlightImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715703228914-unnamed-1.jpg",
+      "policies": "<p style=\"text-align: center;\">Changes to these TAP Executive fares are $300. Cancellation fees are $250.</p>",
+      "price": 1748,
+      "pricePrefix": "Under",
+      "originalPrice": 4000,
+      "originalPriceType": "CASH",
+      "priceSubheading": "Book these incredibly cheap lie-flat seats to Portugal!",
+      "singleDestination": false,
+      "destinationAirport": "Multiple Destinations",
+      "bookUrl": "https://www.google.com/travel/flights/search?tfs=CBwQAhpVEgoyMDI0LTEwLTExKAEyAlRQagcIARIDWVlacgcIARIDUERMcgcIARIDVEVScgcIARIDTElTcgcIARIDRkFPcgcIARIDRk5DcgcIARIDT1BPkAHoAhpVEgoyMDI0LTEwLTE4KAEyAlRQagcIARIDUERMagcIARIDVEVSagcIARIDTElTagcIARIDRkFPagcIARIDRk5DagcIARIDT1BPcgcIARIDWVlakAHoAkABSANqBBABGABwAYIBCwj___________8BmAEB&tfu=EgIIACIA&hl=en-US&curr=USD&utm_source=ActiveCampaign&utm_medium=email&utm_content=%F0%9F%8D%B7%20%5BBIZ%20CLASS%5D%20Portugal%20%26%20Cape%20Verde%20under%20%241748%20%28TAP%20Air%20Portugal%20-%20Was%3A%20%244k%29&utm_campaign=PREMIUM%20-%20TAP%20Biz%20to%20Portugal%20and%20Cape%20Verde",
+      "bookButtonText": "Book with Google Flights",
+      "pendingVersionId": null,
+      "publishedVersionId": null,
+      "isShownHowToVideo": true,
+      "createdAt": "2024-05-14T16:13:49.034Z",
+      "updatedAt": "2024-05-14T16:14:01.000Z",
+      "deletedAt": null,
+      "departureCities": [
+        {
+          "id": "02fc1eaa-1f93-4dba-a661-d81095ad8500",
+          "city": "Toronto (YYZ)",
+          "destination": "Madeira (FNC)",
+          "price": 1464
+        },
+        {
+          "id": "038faff3-5c55-4a60-b40c-9c6b3562d3dd",
+          "city": "Toronto (YYZ)",
+          "destination": "Faro (FAO)",
+          "price": 1464
+        },
+        {
+          "id": "406d3de0-219d-4b07-ac2d-38772db03f94",
+          "city": "Toronto (YYZ)",
+          "destination": "Ponta Delgada (PDL)",
+          "price": 1317
+        },
+        {
+          "id": "5a85db6a-8a07-4e5a-bf2b-77f1e08155bd",
+          "city": "Boston (BOS)",
+          "destination": "Terceira Island (TER)",
+          "price": 1742
+        },
+        {
+          "id": "7a5425ec-b0a7-4e87-a604-6c2e355aec05",
+          "city": "Boston (BOS)",
+          "destination": "Cape Verde (RAI)",
+          "price": 1492
+        },
+        {
+          "id": "824131d0-11fc-441f-a029-52cf2b345c69",
+          "city": "Toronto (YYZ)",
+          "destination": "Porto (OPO)",
+          "price": 1465
+        },
+        {
+          "id": "a04ad5d3-d318-4ee9-bb1f-abe89e74196f",
+          "city": "Boston (BOS)",
+          "destination": "Porto (OPO)",
+          "price": 1748
+        },
+        {
+          "id": "a9781cb1-91cc-4fe4-89b1-eb3e006363c5",
+          "city": "Toronto (YYZ)",
+          "destination": "Lisbon (LIS)",
+          "price": 1464
+        },
+        {
+          "id": "b1eda56c-447d-4f44-bfa3-f2356baff2ab",
+          "city": "Boston (BOS)",
+          "destination": "Lisbon (LIS)",
+          "price": 1748
+        },
+        {
+          "id": "ced08713-4c90-4dd0-b4b6-19d2948fe216",
+          "city": "Boston (BOS)",
+          "destination": "Madeira (FNC)",
+          "price": 1748
+        },
+        {
+          "id": "d214a2e7-2bcf-486a-be93-d0889b537359",
+          "city": "Boston (BOS)",
+          "destination": "Faro (FAO)",
+          "price": 1747
+        },
+        {
+          "id": "e3ee12c9-d0cf-48cf-9485-d7c7815f08f5",
+          "city": "Boston (BOS)",
+          "destination": "Ponta Delgada (PDL)",
+          "price": 1748
+        },
+        {
+          "id": "f5a6f016-647b-43f5-a665-d8e1738848b1",
+          "city": "Toronto (YYZ)",
+          "destination": "Terceira Island (TER)",
+          "price": 1317
+        }
+      ],
+      "periods": [
+        {
+          "id": "37c6a3c2-3df9-41be-894b-b6b3fe90e690",
+          "startDate": "2024-09-15T00:00:00.000Z",
+          "endDate": "2025-03-15T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "13b71f64-ad05-4568-b071-5c7e8ef2426b",
+      "plan": "PREMIUM",
+      "status": "PUBLISHED",
+      "type": "CASH",
+      "destinationType": "DOMESTIC",
+      "cabin": "ECONOMY",
+      "airlineAlliances": [
+        "SKY_TEAM",
+        "ONE_WORLD"
+      ],
+      "coverImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715679762347-unnamed.jpg",
+      "title": "Tucson, AZ",
+      "summary": "<p>Up for a trip to the Arizona desert? Best availability this fall &ndash; including&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11260A18384A2A229971\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11260A18384A2A229971&amp;source=gmail&amp;ust=1715727386943000&amp;usg=AOvVaw3Yd-Y_kAnL1QIuIlZI1qWK\">Labor Day</a>&nbsp;from several cities. Nonstop from L.A. and Seattle.&nbsp;<em>Deals work in reverse if you live in Tucson.</em></p>\r\n<p>&nbsp;</p>\r\n<p>Fares are Basic Economy and include a carry-on. We recommend upgrading to Main Cabin to get a seat assignment and the ability to cancel for a voucher.</p>",
+      "summaryRaw": "Up for a trip to the Arizona desert? Best availability this fall \u2013 including\u00a0Labor Day\u00a0from several cities. Nonstop from L.A. and Seattle.\u00a0Deals work in reverse if you live in Tucson.\r\n\r\n\r\n\r\n\r\nFares are Basic Economy and include a carry-on. We recommend upgrading to Main Cabin to get a seat assignment and the ability to cancel for a voucher.",
+      "tip": "<p>Take a scenic drive through&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11260A18384A2A229972\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11260A18384A2A229972&amp;source=gmail&amp;ust=1715727386943000&amp;usg=AOvVaw2Tfz2PKrybpVpB6aJ3AGf1\">Saguaro National Park</a> and see the famous Saguaro cacti (pictured) up close!&nbsp;</p>",
+      "bookingInstructions": "<p><strong>1</strong>. Click the <em data-stringify-type=\"italic\">Book with Google Flights button</em> to open Google Flights. (<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11260A18384A2A229944\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11260A18384A2A229944&amp;source=gmail&amp;ust=1715727386943000&amp;usg=AOvVaw3aEZnSSp0ibMXb7qpnC6bg\">Our how-to video</a>)</p>\r\n<p>&nbsp;</p>\r\n<p><strong>2.</strong>&nbsp;Adjust the departure city to your home airport.</p>\r\n<p>&nbsp;</p>\r\n<p><strong>3.</strong>&nbsp;<strong>Click the dates to open the calendar view to find the cheapest dates (lowest prices in green).</strong>&nbsp;Availability may vary depending on your home airport.</p>\r\n<p><br><strong>4.</strong> Follow the links in Google Flights to book directly with the airline.</p>",
+      "airline": "<h3 style=\"text-align: center;\">American &amp; Delta</h3>",
+      "departureCitiesContent": "<h2>Appleton (ATW) - $207<br>Asheville (AVL) - $227<br>Baton Rouge (BTR) - $197<br>Bismarck (BIS) - $197<br>Burlington (BTV) - $221<br>Cedar Rapids (CID) - $236<br>Colorado Springs (COS) - $209<br>Dayton (DAY) - $203<br>Denver (DEN) - $209<br>Fargo (FAR) - $197<br>Fayetteville (XNA) - $197<br>Fresno (FAT) - $245<br>Green Bay (GRB) - $207<br>Greensboro (GSO) - $203<br>Gulfport (GPT) - $197<br>Harrisburg (MDT) - $203<br>Huntsville (HSV) - $207<br>Key West (EYW) - $227<br>Knoxville (TYS) - $227<br>Lafayette (LFT) - $197<br>Lexington (LEX) - $227<br>Long Beach (LGB) - $227</h2>\r\n<hr>\r\n<h2>Los Angeles (LAX) - $208*<br>Lubbock (LBB) - $245<br>Madison (MSN) - $197<br>McAllen (MFE) - $197<br>Midland (MAF) - $245<br>Minneapolis (MSP) - $167<br>Mobile (MOB) - $207<br>Moline (MLI) - $197<br>Peoria (PIA) - $245<br>Portland (PDX) - $223<br>Reno (RNO) - $245<br>Rochester (RST) - $195<br>San Francisco (SFO) - $237<br>San Jose (SJC) - $245<br>Santa Ana (SNA) - $185<br>Seattle (SEA) - $216*<br>Shreveport (SHV) - $227<br>Sioux Falls (FSD) - $197<br>Springfield (SGF) - $245<br>Traverse City (TVC) - $227<br>Vancouver (YVR) - $249</h2>",
+      "departureCitiesSubheading": "(All fares round-trip, * nonstop)",
+      "sampleFlightImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715680068520-unnamed.webp",
+      "policies": "<p style=\"text-align: center;\">Basic Economy fares can be canceled for a fee (varies by airline). We recommend upgrading to Main Cabin from $70 for free changes/cancellation for a voucher.</p>",
+      "price": 249,
+      "pricePrefix": "Under",
+      "originalPrice": 400,
+      "originalPriceType": "CASH",
+      "priceSubheading": "Up for a trip to the Arizona desert?",
+      "singleDestination": true,
+      "destinationAirport": "Tucson (TUS)",
+      "bookUrl": "https://www.google.com/travel/flights/search?tfs=CBwQAho_EgoyMDI0LTA4LTI4KAE6AkY5OgJHNDoCTks6AlNZag0IAhIJL20vMGZwendmcgwIAhIIL20vMGZyMHSQAegCGj8SCjIwMjQtMDktMDQoAToCRjk6Akc0OgJOSzoCU1lqDAgCEggvbS8wZnIwdHINCAISCS9tLzBmcHp3ZpAB6AJAAUgBagQQARgAcAGCAQsI____________AYgBAZgBAQ&hl=en-US&gl=US&curr=USD&utm_source=ActiveCampaign&utm_medium=email&utm_content=%F0%9F%98%8E%20Tucson%2C%20AZ%20under%20%24249%20%28Thru%20Winter%20-%20Was%3A%20%24400%29&utm_campaign=PREMIUM%20-%20Tucson%2C%20AZ%20sub-250",
+      "bookButtonText": "Book with Google Flights",
+      "pendingVersionId": null,
+      "publishedVersionId": null,
+      "isShownHowToVideo": true,
+      "createdAt": "2024-05-14T09:47:48.583Z",
+      "updatedAt": "2024-05-14T09:49:22.000Z",
+      "deletedAt": null,
+      "departureCities": [
+        {
+          "id": "0224ab7c-992f-416e-8566-71307abb2893",
+          "city": "Seattle (SEA)",
+          "destination": "",
+          "price": 216
+        },
+        {
+          "id": "042ae379-c3c6-46ef-84cd-cb1462c7d368",
+          "city": "Fresno (FAT)",
+          "destination": "",
+          "price": 245
+        },
+        {
+          "id": "05a668fb-7ed3-4fc1-9251-83b92544079c",
+          "city": "McAllen (MFE)",
+          "destination": "",
+          "price": 197
+        },
+        {
+          "id": "0af9c16d-3441-4a06-a992-53ad8cb576b3",
+          "city": "Burlington (BTV)",
+          "destination": "",
+          "price": 221
+        },
+        {
+          "id": "0ffa06ee-1df2-4eba-b802-0115dbc6464e",
+          "city": "Green Bay (GRB)",
+          "destination": "",
+          "price": 207
+        },
+        {
+          "id": "14035dbe-e10d-4d66-bf19-e14c18be8274",
+          "city": "Greensboro (GSO)",
+          "destination": "",
+          "price": 203
+        },
+        {
+          "id": "14f6045b-2a7f-4335-a52c-803106b631b9",
+          "city": "Denver (DEN)",
+          "destination": "",
+          "price": 209
+        },
+        {
+          "id": "1be30dcd-ad37-45db-838a-d3f68afa7931",
+          "city": "Peoria (PIA)",
+          "destination": "",
+          "price": 245
+        },
+        {
+          "id": "1d787543-8e20-44c8-83c4-c99636e5fde8",
+          "city": "Fargo (FAR)",
+          "destination": "",
+          "price": 197
+        },
+        {
+          "id": "25125bb8-5265-472d-9f8f-17daffb5989f",
+          "city": "Reno (RNO)",
+          "destination": "",
+          "price": 245
+        },
+        {
+          "id": "2e546b76-d2e3-48c9-8ce9-7abc87d107fc",
+          "city": "Lexington (LEX)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "3796e7f2-0c91-4b0e-b460-d321c512eea9",
+          "city": "Baton Rouge (BTR)",
+          "destination": "",
+          "price": 197
+        },
+        {
+          "id": "3f69b010-2c09-4ab7-831d-d20f1f858ed7",
+          "city": "Harrisburg (MDT)",
+          "destination": "",
+          "price": 203
+        },
+        {
+          "id": "4df7ab57-9145-424c-899d-2248d8c4aa65",
+          "city": "Fayetteville (XNA)",
+          "destination": "",
+          "price": 197
+        },
+        {
+          "id": "579b6960-fc7e-498c-9417-44c9a3c9cd4c",
+          "city": "Madison (MSN)",
+          "destination": "",
+          "price": 197
+        },
+        {
+          "id": "58e9f118-6be4-4d18-97a7-f912a2e1abbe",
+          "city": "Traverse City (TVC)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "59f8c4ca-98af-4d9e-896b-a1f775b0d7fb",
+          "city": "Bismarck (BIS)",
+          "destination": "",
+          "price": 197
+        },
+        {
+          "id": "5e22e859-b6d0-48ed-84ca-a9c90779cf3f",
+          "city": "Huntsville (HSV)",
+          "destination": "",
+          "price": 207
+        },
+        {
+          "id": "62bbc05b-ead7-4d9e-9497-50cbb18329da",
+          "city": "San Francisco (SFO)",
+          "destination": "",
+          "price": 237
+        },
+        {
+          "id": "659cfb7c-ace7-438f-932f-678275f0c8e1",
+          "city": "Knoxville (TYS)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "71fe5c7b-28ee-4d33-bd2c-e61abd9d8e46",
+          "city": "Asheville (AVL)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "80010ab1-86fa-4f0b-971b-b4811a474553",
+          "city": "Lafayette (LFT)",
+          "destination": "",
+          "price": 197
+        },
+        {
+          "id": "813ddd37-15d4-4a59-bf32-122ac84604ae",
+          "city": "Vancouver (YVR)",
+          "destination": "",
+          "price": 249
+        },
+        {
+          "id": "81c6f70c-9521-49d6-aa78-3cd4100f026f",
+          "city": "Minneapolis (MSP)",
+          "destination": "",
+          "price": 167
+        },
+        {
+          "id": "8430ff05-c51b-4408-b101-14f403135ea8",
+          "city": "Portland (PDX)",
+          "destination": "",
+          "price": 223
+        },
+        {
+          "id": "8d9e22d8-9849-4140-93b3-9369ff77e6d1",
+          "city": "Los Angeles (LAX)",
+          "destination": "",
+          "price": 208
+        },
+        {
+          "id": "909e557c-e317-45d6-b834-48fdb3ad60be",
+          "city": "Lubbock (LBB)",
+          "destination": "",
+          "price": 245
+        },
+        {
+          "id": "9d75879b-d0d0-4f5b-943b-5b8eac6d0c69",
+          "city": "Key West (EYW)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "9d8aa521-0eec-4f0f-b439-5ff02a74d8a7",
+          "city": "Springfield (SGF)",
+          "destination": "",
+          "price": 245
+        },
+        {
+          "id": "9ec90dfc-3580-45e0-82cf-65cda4d80d3f",
+          "city": "Shreveport (SHV)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "9f1201e6-3d49-42c2-a0dd-1bcee54aecc9",
+          "city": "Appleton (ATW)",
+          "destination": "",
+          "price": 207
+        },
+        {
+          "id": "b1780ec4-f642-4060-96c3-23f4d8baf23f",
+          "city": "Mobile (MOB)",
+          "destination": "",
+          "price": 207
+        },
+        {
+          "id": "b85de44c-5e3d-43c7-9eff-61677d50f4c4",
+          "city": "Cedar Rapids (CID)",
+          "destination": "",
+          "price": 236
+        },
+        {
+          "id": "bdbd0efc-57c7-4252-b903-c2de0eba38ed",
+          "city": "Sioux Falls (FSD)",
+          "destination": "",
+          "price": 197
+        },
+        {
+          "id": "c3d404a3-a222-4361-9059-2ddd99b135eb",
+          "city": "Rochester (RST)",
+          "destination": "",
+          "price": 195
+        },
+        {
+          "id": "c4918ea3-b97c-4eb7-bd75-30c64b3cb603",
+          "city": "Colorado Springs (COS)",
+          "destination": "",
+          "price": 209
+        },
+        {
+          "id": "c76b1a90-1194-43ad-8c4c-65fadeba558d",
+          "city": "Midland (MAF)",
+          "destination": "",
+          "price": 245
+        },
+        {
+          "id": "c783b733-e965-4feb-abcd-32bfd011044e",
+          "city": "San Jose (SJC)",
+          "destination": "",
+          "price": 245
+        },
+        {
+          "id": "d8047ea9-d846-44e8-8a0e-2b6c11c667df",
+          "city": "Long Beach (LGB)",
+          "destination": "",
+          "price": 227
+        },
+        {
+          "id": "db15f3f1-7765-4b8f-835e-24732219b792",
+          "city": "Gulfport (GPT)",
+          "destination": "",
+          "price": 197
+        },
+        {
+          "id": "e123116d-040c-4197-8b49-eba43273a917",
+          "city": "Santa Ana (SNA)",
+          "destination": "",
+          "price": 185
+        },
+        {
+          "id": "ed993844-fc26-443c-84ac-45d75f64546c",
+          "city": "Moline (MLI)",
+          "destination": "",
+          "price": 197
+        },
+        {
+          "id": "faa51320-8921-4f10-bbee-7e3fd2ff19ab",
+          "city": "Dayton (DAY)",
+          "destination": "",
+          "price": 203
+        }
+      ],
+      "periods": [
+        {
+          "id": "a85ecbae-471c-4a8c-8984-afb582c26a11",
+          "startDate": "2024-06-15T00:00:00.000Z",
+          "endDate": "2025-04-15T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "ae431628-ec45-47c2-a90d-be79a0332d72",
+      "plan": "PREMIUM",
+      "status": "PUBLISHED",
+      "type": "POINTS_AND_MILES",
+      "destinationType": "INTERNATIONAL",
+      "cabin": "BUSINESS_AND_FIRST_CLASS",
+      "airlineAlliances": [
+        "ONE_WORLD",
+        "STAR_ALLIANCE"
+      ],
+      "coverImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715619277465-unnamed.jpg",
+      "title": "[BIZ CLASS] Ireland & England",
+      "summary": "<p>Tons of summer availability to fly Aer Lingus biz class nonstop to Ireland or England!&nbsp;<strong>Best availability in July - August.</strong><em>&nbsp;Wide-open availability to Manchester and from Boston to Dublin through April, including Christmas &amp; NYE!</em></p>\r\n<p><br>You'll be aboard an A330 or A321neo (<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229954\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229954&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw0jKB6JROyjZpHZAkZRxI9E\">review</a>). Both aircraft have similar seats. Choose the \"throne\" seat (pictured) for more space. We just flew Aer Lingus biz class and think it's the best way&nbsp;to fly to Ireland - the service &amp; food were great!</p>\r\n<p>&nbsp;</p>\r\n<p>Includes priority boarding, checked bags, lie-flat seats, lounge access, business class food, and champagne.&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><strong>Book with Aer Lingus Avios</strong></p>\r\n<p>&nbsp;</p>\r\n<p>Aer Lingus charges 50k to 75k Avios each way depending on the distance and travel dates. Taxes &amp; fees are ~$150 each way to Ireland. Transfer points from Amex Membership Rewards, Bilt,, Chase, or Wells Fargo (usually instant). You can also&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229955\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229955&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw0tVQkJTNtffVJGPWNjzy5w\">combine your BA &amp; Aer Lingus Avios</a>&nbsp;to book.</p>\r\n<p>&nbsp;</p>\r\n<p><strong>Book with British Airways Avios</strong><br><br>British Airways charges the same rates &amp; fees as Aer Lingus for most routes.&nbsp;<em>Oddly, summer &amp; holiday flights from DEN &amp; MCO are cheaper - just 48k BA Avios each way</em>. Transfer points from Amex MR, Bilt, Capital One, Chase, or Wells Fargo (usually instant). You can also&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229956\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229956&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw3NRW3Tx7MZUSzIttigUxao\">combine BA &amp; Qatar Avios</a>&nbsp;- transfer Citi points to Qatar (1-2 days).</p>\r\n<p><br><strong>Book with Alaska Miles</strong><br><br>Alaska charges&nbsp;<strong>45k to 70k miles each way</strong>. Taxes &amp; fees are low at $19 one-way or $70 R/T to Ireland. Transfer points from Bilt (<em>usually takes 10 min</em>).<br><br><strong>Book with United Miles</strong><br><br>United charges 88k miles each way. Taxes &amp; fees total $6 one-way or $48 R/T to Ireland. Transfer Bilt or Chase points to United (usually instant).</p>\r\n<p>&nbsp;</p>\r\n<h2><strong>Dates Available for 2+ passengers</strong></h2>\r\n<p>&nbsp;</p>\r\n<p><strong>Boston - Dublin</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>BOS-DUB:</strong>&nbsp;July 4, 7, 9-10, 13-17, 20-23, 28-30;&nbsp;<em>Wide-open avail Aug - early Jan &amp; Mar - Apr</em></p>\r\n</li>\r\n<li>\r\n<p><strong>DUB-BOS:</strong>&nbsp;June 7, 12-13, 17, 25; July 19, 21, 27, 29;&nbsp;<em>Wide-open avail Aug - early Jan &amp; Mar - Apr</em></p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>Chicago - Dublin</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>ORD-DUB:</strong>&nbsp;July 7-8, 15-16, 22, 30-31; Aug. 4-5, 11, 13, 26</p>\r\n</li>\r\n<li>\r\n<p><strong>DUB-ORD:</strong>&nbsp;June 5, 7, 12, 18-19; July 5; Aug. 13, 15-16, 20-21, 23, 28-30</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>Cleveland - Dublin</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>CLE-DUB:</strong>&nbsp;July&nbsp;&nbsp;29; Aug. 2, 5, 9, 11-12, 18, 23</p>\r\n</li>\r\n<li>\r\n<p><strong>DUB-CLE:</strong>&nbsp;June 3, 9, 24; July 10, 15, 21, 26 29; Aug. 4-5, 7, 11, 14, 16, 23, 25, 28, 30</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>Denver - Dublin</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>DEN-DUB:</strong>&nbsp;July 7, 12, 14, 15, 21, 26, 28-29, 31</p>\r\n</li>\r\n<li>\r\n<p><strong>DUB-DEN:</strong>&nbsp;July 26, 29, 31</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>Hartford - Dublin</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>BDL-DUB:</strong>&nbsp;June 18-19, 22, 29;&nbsp;<em>Wide-open avail July - Aug &amp; Oct</em></p>\r\n</li>\r\n<li>\r\n<p><strong>DUB-BDL:</strong>&nbsp;June 4-5, 11-12, 17-20, 25, 27-29;&nbsp;<em>Wide-open avail July - Aug &amp; Oct</em></p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>Minneapolis - Dublin</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>MSP-DUB:</strong>&nbsp;July 6, 8, 10, 12, 17, 20, 22, 24, 27, 29, 31; Aug. 3, 5, 7, 9-10, 12, 14, 17, 19; Sep. 2, 16, 21, 28, 30; Oct. 2, 4-5, 7, 9, 11-12, 14</p>\r\n</li>\r\n<li>\r\n<p><strong>DUB-MSP:</strong>&nbsp;June 1, 5, 7-8, 12, 19, 21; July 3, 12-13, 17, 29, 31; Aug. 2-3, 7, 9-10, 12, 14, 16-17, 21, 23-24, 28, 30-31; Sep. 4, 7, 9, 11, 14, 18, 25, 27-28, 30; Oct. 2, 4-5, 7, 11-12, 14</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>New York - Dublin</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>JFK-DUB:</strong>&nbsp;June 30; July 4-18, 20-24, 26-31</p>\r\n</li>\r\n<li>\r\n<p><strong>DUB-JFK:</strong>&nbsp;June 5-7, 12-13, 17-21, 25-28; July 2-4, 10-13, 16-20, 23-28, 30-31; Aug. 1</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>Newark - Dublin</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>EWR-DUB:</strong>&nbsp;July 6-8, 13-15, 19-24, 26-31</p>\r\n</li>\r\n<li>\r\n<p><strong>DUB-EWR:</strong>&nbsp;June 6, 8, 11-13, 19, 27; July 2-3, 5, 12-18, 20, 23-25, 27-31; Aug. 1</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>Philadelphia - Dublin</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>PHL-DUB:</strong>&nbsp;July 1-2, 7-10, 16-19, 22, 26-31; Aug. 4-6, 10-14, 18, 25-27; Oct. 1-2, 4-14</p>\r\n</li>\r\n<li>\r\n<p><strong>DUB-PHL:</strong>&nbsp;June 4, 6, 13, 19-20, 26; July 1, 3-4, 9-11, 19, 23-25; Aug. 1-2, 5, 9-12, 14-16, 19-23, 26-30; Oct. 1-15</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>Toronto - Dublin</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>YYZ-DUB:</strong>&nbsp;June 30; July 4, 7-8, 14-15, 23-26, 30-31;&nbsp;<em>Wide-open avail Aug - Oct</em></p>\r\n</li>\r\n<li>\r\n<p><strong>DUB-YYZ:</strong>&nbsp;July 5-6, 8, 10-12, 15-16, 25, 28-30;&nbsp;<em>Wide-open avail Aug - Oct</em></p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>Washington, D.C. - Dublin</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>IAD-DUB:</strong>&nbsp;July 14-15, 22-23, 29-31; Aug 1, 4-5, 8, 10-15, 26</p>\r\n</li>\r\n<li>\r\n<p><strong>DUB-IAD:</strong>&nbsp;June 18-19; July 1, 4, 8, 19; Aug 1, 5-9, 12, 14-16, 18, 20-23</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>New York - Manchester</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>JFK-MAN:</strong>&nbsp;June 24; July 1, 3, 5-6, 9-13, 15-17, 22, 28-30;&nbsp;<em>Wide-open avail Aug-Apr</em></p>\r\n</li>\r\n<li>\r\n<p><strong>MAN-JFK:</strong>&nbsp;June 1-2, 5-6, 8-9, 11-13, 18-22, 25-26, 30; July 1-6, 8-13, 25, 28;&nbsp;<em>Wide-open avail Aug-Apr</em></p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>Orlando - Manchester</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>MCO-MAN:</strong>&nbsp;June 13; July 2, 4, 7-12, 15-16, 18-22, 24-25, 27, 29-30; Aug. 1-2, 8, 12;&nbsp;<em>Wide-open avail Sep - Oct</em>; Nov. 9, 16, 18; Dec. 7, 18-19, 23, 25-26, 30; Jan. 1, 8-9; Feb. 3, 8, 10, 13, 15, 17, 20, 24;&nbsp;<em>Several dates Mar - Apr</em></p>\r\n</li>\r\n<li>\r\n<p><strong>MAN-MCO:</strong>&nbsp;June 2, 4-8, 14, 16-17, 20, 22-24, 26-30; July 10-12, 19, 24;&nbsp;<em>Wide-open avail Aug - Oct</em>; Nov. 4, 7, 9, 16, 25, 28; Dec. 5, 7, 9, 12, 14, 16, 25-26, 30; Jan. 1, 4, 6, 8, 11;&nbsp;<em>Several dates Feb - Apr</em></p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>Boston - Shannon</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>BOS-SNN:</strong>&nbsp;July 9-10, 14, 22, 24, 28-30; Sept. 1-14</p>\r\n</li>\r\n<li>\r\n<p><strong>SNN-BOS:</strong>&nbsp;July 3-4, 19, 24-26, 30-31; Oct. 1-12, 14-15</p>\r\n</li>\r\n</ul>\r\n<p>&nbsp;</p>\r\n<p><strong>New York - Shannon</strong></p>\r\n<ul>\r\n<li>\r\n<p><strong>JFK-SNN:</strong>&nbsp;June 4, 11, 30; July 1-4, 6-10, 12-16, 18-25, 28, 31</p>\r\n</li>\r\n<li>\r\n<p><strong>SNN-JFK:</strong> June 4-5, 11-13, 16-20, 24-27; July 1-5, 9-11, 13-14, 18, 21-29, 31; Aug. 1</p>\r\n</li>\r\n</ul>",
+      "summaryRaw": "Tons of summer availability to fly Aer Lingus biz class nonstop to Ireland or England!\u00a0Best availability in July - August.\u00a0Wide-open availability to Manchester and from Boston to Dublin through April, including Christmas & NYE!\r\n\r\n\r\nYou'll be aboard an A330 or A321neo (review). Both aircraft have similar seats. Choose the \"throne\" seat (pictured) for more space. We just flew Aer Lingus biz class and think it's the best way\u00a0to fly to Ireland - the service & food were great!\r\n\r\n\r\n\r\n\r\nIncludes priority boarding, checked bags, lie-flat seats, lounge access, business class food, and champagne.\u00a0\r\n\r\n\r\n\r\n\r\nBook with Aer Lingus Avios\r\n\r\n\r\n\r\n\r\nAer Lingus charges 50k to 75k Avios each way depending on the distance and travel dates. Taxes & fees are ~$150 each way to Ireland. Transfer points from Amex Membership Rewards, Bilt,, Chase, or Wells Fargo (usually instant). You can also\u00a0combine your BA & Aer Lingus Avios\u00a0to book.\r\n\r\n\r\n\r\n\r\nBook with British Airways Avios\r\n\r\nBritish Airways charges the same rates & fees as Aer Lingus for most routes.\u00a0Oddly, summer & holiday flights from DEN & MCO are cheaper - just 48k BA Avios each way. Transfer points from Amex MR, Bilt, Capital One, Chase, or Wells Fargo (usually instant). You can also\u00a0combine BA & Qatar Avios\u00a0- transfer Citi points to Qatar (1-2 days).\r\n\r\n\r\nBook with Alaska Miles\r\n\r\nAlaska charges\u00a045k to 70k miles each way. Taxes & fees are low at $19 one-way or $70 R/T to Ireland. Transfer points from Bilt (usually takes 10 min).\r\n\r\nBook with United Miles\r\n\r\nUnited charges 88k miles each way. Taxes & fees total $6 one-way or $48 R/T to Ireland. Transfer Bilt or Chase points to United (usually instant).\r\n\r\n\r\n\r\nDates Available for 2+ passengers\r\n\r\n\r\n\r\nBoston - Dublin\r\n\r\nBOS-DUB:\u00a0July 4, 7, 9-10, 13-17, 20-23, 28-30;\u00a0Wide-open avail Aug - early Jan & Mar - Apr\r\n\r\nDUB-BOS:\u00a0June 7, 12-13, 17, 25; July 19, 21, 27, 29;\u00a0Wide-open avail Aug - early Jan & Mar - Apr\r\n\r\n\r\n\r\nChicago - Dublin\r\n\r\nORD-DUB:\u00a0July 7-8, 15-16, 22, 30-31; Aug. 4-5, 11, 13, 26\r\n\r\nDUB-ORD:\u00a0June 5, 7, 12, 18-19; July 5; Aug. 13, 15-16, 20-21, 23, 28-30\r\n\r\n\r\n\r\nCleveland - Dublin\r\n\r\nCLE-DUB:\u00a0July\u00a0\u00a029; Aug. 2, 5, 9, 11-12, 18, 23\r\n\r\nDUB-CLE:\u00a0June 3, 9, 24; July 10, 15, 21, 26 29; Aug. 4-5, 7, 11, 14, 16, 23, 25, 28, 30\r\n\r\n\r\n\r\nDenver - Dublin\r\n\r\nDEN-DUB:\u00a0July 7, 12, 14, 15, 21, 26, 28-29, 31\r\n\r\nDUB-DEN:\u00a0July 26, 29, 31\r\n\r\n\r\n\r\nHartford - Dublin\r\n\r\nBDL-DUB:\u00a0June 18-19, 22, 29;\u00a0Wide-open avail July - Aug & Oct\r\n\r\nDUB-BDL:\u00a0June 4-5, 11-12, 17-20, 25, 27-29;\u00a0Wide-open avail July - Aug & Oct\r\n\r\n\r\n\r\nMinneapolis - Dublin\r\n\r\nMSP-DUB:\u00a0July 6, 8, 10, 12, 17, 20, 22, 24, 27, 29, 31; Aug. 3, 5, 7, 9-10, 12, 14, 17, 19; Sep. 2, 16, 21, 28, 30; Oct. 2, 4-5, 7, 9, 11-12, 14\r\n\r\nDUB-MSP:\u00a0June 1, 5, 7-8, 12, 19, 21; July 3, 12-13, 17, 29, 31; Aug. 2-3, 7, 9-10, 12, 14, 16-17, 21, 23-24, 28, 30-31; Sep. 4, 7, 9, 11, 14, 18, 25, 27-28, 30; Oct. 2, 4-5, 7, 11-12, 14\r\n\r\n\r\n\r\nNew York - Dublin\r\n\r\nJFK-DUB:\u00a0June 30; July 4-18, 20-24, 26-31\r\n\r\nDUB-JFK:\u00a0June 5-7, 12-13, 17-21, 25-28; July 2-4, 10-13, 16-20, 23-28, 30-31; Aug. 1\r\n\r\n\r\n\r\nNewark - Dublin\r\n\r\nEWR-DUB:\u00a0July 6-8, 13-15, 19-24, 26-31\r\n\r\nDUB-EWR:\u00a0June 6, 8, 11-13, 19, 27; July 2-3, 5, 12-18, 20, 23-25, 27-31; Aug. 1\r\n\r\n\r\n\r\nPhiladelphia - Dublin\r\n\r\nPHL-DUB:\u00a0July 1-2, 7-10, 16-19, 22, 26-31; Aug. 4-6, 10-14, 18, 25-27; Oct. 1-2, 4-14\r\n\r\nDUB-PHL:\u00a0June 4, 6, 13, 19-20, 26; July 1, 3-4, 9-11, 19, 23-25; Aug. 1-2, 5, 9-12, 14-16, 19-23, 26-30; Oct. 1-15\r\n\r\n\r\n\r\nToronto - Dublin\r\n\r\nYYZ-DUB:\u00a0June 30; July 4, 7-8, 14-15, 23-26, 30-31;\u00a0Wide-open avail Aug - Oct\r\n\r\nDUB-YYZ:\u00a0July 5-6, 8, 10-12, 15-16, 25, 28-30;\u00a0Wide-open avail Aug - Oct\r\n\r\n\r\n\r\nWashington, D.C. - Dublin\r\n\r\nIAD-DUB:\u00a0July 14-15, 22-23, 29-31; Aug 1, 4-5, 8, 10-15, 26\r\n\r\nDUB-IAD:\u00a0June 18-19; July 1, 4, 8, 19; Aug 1, 5-9, 12, 14-16, 18, 20-23\r\n\r\n\r\n\r\nNew York - Manchester\r\n\r\nJFK-MAN:\u00a0June 24; July 1, 3, 5-6, 9-13, 15-17, 22, 28-30;\u00a0Wide-open avail Aug-Apr\r\n\r\nMAN-JFK:\u00a0June 1-2, 5-6, 8-9, 11-13, 18-22, 25-26, 30; July 1-6, 8-13, 25, 28;\u00a0Wide-open avail Aug-Apr\r\n\r\n\r\n\r\nOrlando - Manchester\r\n\r\nMCO-MAN:\u00a0June 13; July 2, 4, 7-12, 15-16, 18-22, 24-25, 27, 29-30; Aug. 1-2, 8, 12;\u00a0Wide-open avail Sep - Oct; Nov. 9, 16, 18; Dec. 7, 18-19, 23, 25-26, 30; Jan. 1, 8-9; Feb. 3, 8, 10, 13, 15, 17, 20, 24;\u00a0Several dates Mar - Apr\r\n\r\nMAN-MCO:\u00a0June 2, 4-8, 14, 16-17, 20, 22-24, 26-30; July 10-12, 19, 24;\u00a0Wide-open avail Aug - Oct; Nov. 4, 7, 9, 16, 25, 28; Dec. 5, 7, 9, 12, 14, 16, 25-26, 30; Jan. 1, 4, 6, 8, 11;\u00a0Several dates Feb - Apr\r\n\r\n\r\n\r\nBoston - Shannon\r\n\r\nBOS-SNN:\u00a0July 9-10, 14, 22, 24, 28-30; Sept. 1-14\r\n\r\nSNN-BOS:\u00a0July 3-4, 19, 24-26, 30-31; Oct. 1-12, 14-15\r\n\r\n\r\n\r\nNew York - Shannon\r\n\r\nJFK-SNN:\u00a0June 4, 11, 30; July 1-4, 6-10, 12-16, 18-25, 28, 31\r\n\r\nSNN-JFK: June 4-5, 11-13, 16-20, 24-27; July 1-5, 9-11, 13-14, 18, 21-29, 31; Aug. 1",
+      "tip": "<p>You may be able to fly to other cities in Europe with a connection in Dublin but it may cost more miles. This is easiest when booking via Alaska miles, which also includes free stopovers.</p>",
+      "bookingInstructions": "<p><strong>Search with United</strong></p>\r\n<p>&nbsp;</p>\r\n<p><strong>1.</strong>&nbsp;Search on&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229957\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229957&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw2bnBvKwE1G8lENpFXVugyI\">United.com</a>. It will be easiest to search one-way at at time.</p>\r\n<p><strong>2.</strong>&nbsp;Select \"Book with miles\" and \"Flexible dates.\"</p>\r\n<p><strong>3.</strong>&nbsp;Choose the exact number of passengers traveling and \"Business\" class.</p>\r\n<p><strong>4.</strong>&nbsp;Look for dates at 88k each way and then sort and filter to find your flights.</p>\r\n<p>&nbsp;</p>\r\n<p><em>United's new calendar view will not update when you filter for \"Nonstop.\"&nbsp;<strong>Search the exact dates listed above.</strong>&nbsp;Read&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229958\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229958&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw1O-IWqriASKQW4KfQ0fS-R\">our guide</a>&nbsp;for instructions on how to use United's older (&amp; better) search tool.</em></p>\r\n<p>&nbsp;</p>\r\n<p><strong>Booking with Alaska</strong></p>\r\n<p>&nbsp;</p>\r\n<p><strong>1.</strong>&nbsp;Search and book on&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229959\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229959&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw2-7s869qWotZQkAaO4j04I\">Alaskaair.com</a>&nbsp;by selecting \"Use miles.\"</p>\r\n<p><strong>2.</strong>&nbsp;After searching, click \"View by calendar\" to maximize the dates viewable.</p>\r\n<p><strong>3.</strong>&nbsp;Filter results for \"Business\" class.</p>\r\n<p><strong>4.</strong>&nbsp;Use the \"multi-city\" search to book free stopovers in Dublin if you wish to connect elsewhere in Europe.</p>\r\n<p>&nbsp;</p>\r\n<p><strong>Booking with Aer Lingus or British Airways Avios</strong></p>\r\n<p>&nbsp;</p>\r\n<p><strong>1.</strong>&nbsp;Create a free&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229960\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229960&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw0ytHA3-G_NriHNsAh799Uw\">Aer Lingus</a>&nbsp;or&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229961\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229961&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw3qMXdqQ2Tl-A2fH4yCx6tL\">British Airways account</a>. You must have an account to search.</p>\r\n<p><strong>2.</strong>&nbsp;Log in with&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229962\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229962&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw1pTFSqakQJq02z-FhCB-5K\">Aer Lingus</a>&nbsp;or&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229963\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229963&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw2k85gqEfGdi7w1XYApG41Z\">British Airways</a>&nbsp;and search the exact dates listed above or where you found availability via United or Alaska.&nbsp;<em>It may take some trial &amp; error in months listed as \"wide-open\" but should be easy to find.</em></p>\r\n<p>&nbsp;</p>\r\n<p>Peak&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229967\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229967&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw2EoStIc2BNsO1UxWqvhAli\">rates</a>&nbsp;apply (<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229969\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229969&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw1f-Xdttfaaexz8SyNiWhXg\">2024</a>&nbsp;&amp;&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11261A18385A2A229970\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11261A18385A2A229970&amp;source=gmail&amp;ust=1715705291740000&amp;usg=AOvVaw1BsGRALW1FiCNYFGKDK8bY\">2025</a>) for summer &amp; holidays when booking with Avios.&nbsp;<strong>Taxes &amp; fees are ~$250 higher returning from Manchester.</strong></p>\r\n<p>&nbsp;</p>\r\n<p><em>Transfers are usually instant but in some cases there are delays. If you're just opening a new</em><em>&nbsp;loyalty</em><em>&nbsp;account, transfers may take longer.</em></p>",
+      "airline": "<h3 style=\"text-align: center;\">Aer Lingus</h3>",
+      "departureCitiesContent": "<h2><strong>Dublin (DUB)</strong></h2>\r\n<h2>Boston (BOS) - 45k*</h2>\r\n<h2>Chicago (ORD) - 55k*<br>Cleveland (CLE) - 55k*<br>Denver (DEN) - 55k*<br>Hartford (BDL) - 45k*</h2>\r\n<h2>Minneapolis (MSP) - 55k*<br>New York (JFK) - 45k*<br>Newark (EWR) - 45k*</h2>\r\n<h2>Philadelphia (PHL) - 45k*</h2>\r\n<h2>Toronto (YYZ) - 45k*<br>Washington, D.C. (IAD) - 45k*</h2>\r\n<hr>\r\n<h2><strong>Manchester (MAN)</strong></h2>\r\n<h2>New York (JFK) - 45k*</h2>\r\n<h2>Orlando (MCO) - 55k*</h2>\r\n<p>&nbsp;</p>\r\n<h2><strong>Shannon (SNN)</strong></h2>\r\n<h2>Boston (BOS) - 45k*</h2>\r\n<h2>New York (JFK) - 45k*</h2>",
+      "departureCitiesSubheading": "(All fares one-way, *nonstop) - Prices are in Alaska miles",
+      "sampleFlightImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715619682391-unnamed.webp",
+      "policies": "<p style=\"text-align: center;\">Aer Lingus &amp; British Airways charge a $55 change/cancellation fee for award tickets.</p>\r\n<p style=\"text-align: center;\">&nbsp;</p>\r\n<p style=\"text-align: center;\">Alaska bookings are fully refundable - simply cancel your flight online and Alaska will redeposit your miles (and taxes/fees) at no cost.<br><br>United is waiving redeposit fees for award flights. You can cancel &amp; get a full refund.</p>",
+      "price": 45,
+      "pricePrefix": "From",
+      "originalPrice": 2000,
+      "originalPriceType": "CASH",
+      "priceSubheading": "Fly Aer Lingus biz class nonstop to Ireland or England!",
+      "singleDestination": true,
+      "destinationAirport": "Dublin (DUB), Manchester (MAN), Shannon (SNN)",
+      "bookUrl": "https://www.united.com/en/us?utm_source=ActiveCampaign&utm_medium=email&utm_content=%F0%9F%98%8E%20%5BBIZ%20CLASS%5D%20Ireland%20%26%20England%20from%2045k%20miles%20each%20way%20%28Nonstop%20%2F%20Summer%20-%20Was%3A%20%242k%2B%29&utm_campaign=PREMIUM%20-%20Aer%20Lingus%20biz%20class",
+      "bookButtonText": "Book with United",
+      "pendingVersionId": null,
+      "publishedVersionId": null,
+      "isShownHowToVideo": false,
+      "createdAt": "2024-05-13T17:01:22.466Z",
+      "updatedAt": "2024-05-13T17:03:28.000Z",
+      "deletedAt": null,
+      "departureCities": [
+        {
+          "id": "05643831-1bff-4e93-ab9e-d06d98e788eb",
+          "city": "Washington, D.C. (IAD)",
+          "destination": "Dublin (DUB)",
+          "price": 45
+        },
+        {
+          "id": "2de4b411-0d0f-4cc6-932f-4c58b443a649",
+          "city": "Minneapolis (MSP)",
+          "destination": "Dublin (DUB)",
+          "price": 55
+        },
+        {
+          "id": "2f6f35b4-cf2a-44b6-82fc-9669f0876915",
+          "city": "Cleveland (CLE)",
+          "destination": "Dublin (DUB)",
+          "price": 55
+        },
+        {
+          "id": "4da2064d-15d6-48d4-9fd5-6231d03b021d",
+          "city": "Toronto (YYZ)",
+          "destination": "Dublin (DUB)",
+          "price": 45
+        },
+        {
+          "id": "5534a9d3-879c-41c2-b73b-318ffc9619ea",
+          "city": "New York (JFK)",
+          "destination": "Shannon (SNN)",
+          "price": 45
+        },
+        {
+          "id": "6b06056e-130a-409f-9041-673b333a0754",
+          "city": "Chicago (ORD)",
+          "destination": "Dublin (DUB)",
+          "price": 55
+        },
+        {
+          "id": "7d9ab125-190d-4cf8-b44a-799175c0d8bd",
+          "city": "New York (JFK)",
+          "destination": "Manchester (MAN)",
+          "price": 45
+        },
+        {
+          "id": "869086e7-467f-4196-a74d-8c0d20fe734d",
+          "city": "Hartford (BDL)",
+          "destination": "Dublin (DUB)",
+          "price": 45
+        },
+        {
+          "id": "99fa7ee2-d522-4ff8-be71-32377120cd8b",
+          "city": "Boston (BOS)",
+          "destination": "Shannon (SNN)",
+          "price": 45
+        },
+        {
+          "id": "a7566774-6438-4dea-892c-007aebb44162",
+          "city": "Boston (BOS)",
+          "destination": "Dublin (DUB)",
+          "price": 45
+        },
+        {
+          "id": "b3ec24d5-bbc9-41f5-9682-c7968e9ff54d",
+          "city": "New York (JFK)",
+          "destination": "Dublin (DUB)",
+          "price": 45
+        },
+        {
+          "id": "c2fe645b-3357-4c97-b8aa-60097bf03ba9",
+          "city": "Orlando (MCO)",
+          "destination": "Manchester (MAN)",
+          "price": 55
+        },
+        {
+          "id": "d61052ec-f3bf-47fb-8b4e-b73f08c09bb3",
+          "city": "Newark (EWR)",
+          "destination": "Dublin (DUB)",
+          "price": 45
+        },
+        {
+          "id": "dc464384-33f7-47a3-b393-df6cda68ede1",
+          "city": "Denver (DEN)",
+          "destination": "Dublin (DUB)",
+          "price": 55
+        },
+        {
+          "id": "ea61033f-f211-4ce9-8ee0-469c76e0f2bb",
+          "city": "Philadelphia (PHL)",
+          "destination": "Dublin (DUB)",
+          "price": 45
+        }
+      ],
+      "periods": [
+        {
+          "id": "49a4cdbe-d2b3-4a7b-b423-83845b4080e9",
+          "startDate": "2024-06-15T00:00:00.000Z",
+          "endDate": "2025-04-15T00:00:00.000Z"
+        }
+      ]
+    },
+    {
+      "id": "6a2d89f6-de8e-40de-ab17-8c1a72e1415f",
+      "plan": "PREMIUM",
+      "status": "PUBLISHED",
+      "type": "CASH",
+      "destinationType": "INTERNATIONAL",
+      "cabin": "ECONOMY",
+      "airlineAlliances": [
+        "STAR_ALLIANCE",
+        "ONE_WORLD"
+      ],
+      "coverImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715609574153-unnamed.jpg",
+      "title": "Nairobi, Kenya",
+      "summary": "<p>Experience a safari in Kenya with these fares to Nairobi! Quick connections with availability through winter.</p>\r\n<p>&nbsp;</p>\r\n<p><strong>Fares are Main Cabin&nbsp;</strong>and include a carry-on, checked bags, and meals. Seat selection for a fee on all airlines.</p>",
+      "summaryRaw": "Experience a safari in Kenya with these fares to Nairobi! Quick connections with availability through winter.\r\n\r\n\r\n\r\n\r\nFares are Main Cabin\u00a0and include a carry-on, checked bags, and meals. Seat selection for a fee on all airlines.",
+      "tip": "<p>See Kenya's wildlife up close at&nbsp;<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11259A18383A2A229950\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11259A18383A2A229950&amp;source=gmail&amp;ust=1715695719213000&amp;usg=AOvVaw3VFOep7XBJVref3J_btBJI\">Nairobi National Park</a>, just minutes from downtown and the airport.</p>",
+      "bookingInstructions": "<p>1. Click the <em data-stringify-type=\"italic\">Book with Google Flights button</em> to open Google Flights. (<a href=\"https://thriftytraveler.emlnk1.com/lt.php?s=ce917b488b32f6cebad5b1b2144c3e52&amp;i=11259A18383A2A229937\" target=\"_blank\" rel=\"noopener\" data-saferedirecturl=\"https://www.google.com/url?q=https://thriftytraveler.emlnk1.com/lt.php?s%3Dce917b488b32f6cebad5b1b2144c3e52%26i%3D11259A18383A2A229937&amp;source=gmail&amp;ust=1715695719213000&amp;usg=AOvVaw2EtZ0KGOqXTd4MGOoMBa33\">Our how-to video</a>)</p>\r\n<p>&nbsp;</p>\r\n<p>2. Adjust the departure city to your home airport.</p>\r\n<p>&nbsp;</p>\r\n<p>3.&nbsp;<strong>Click the dates to open the calendar view to find the cheapest dates (lowest prices in green).</strong>&nbsp;Availability may vary depending on your home airport.&nbsp;</p>\r\n<p><br>4. Follow the links in Google Flights to book directly with the airline.&nbsp;</p>\r\n<p>&nbsp;</p>\r\n<p><em>For better availability from some cities, search for 8-9 day trips.</em></p>",
+      "airline": "<h3 style=\"text-align: center;\">Air Canada, American, Ethiopian, Qatar Airways, Turkish, United (and partners)</h3>",
+      "departureCitiesContent": "<h2>Atlanta (ATL) - $891<br>Baltimore (BWI) - $855<br>Boston (BOS) - $858<br>Chicago (ORD) - $817</h2>\r\n<h2>Denver (DEN) - $896</h2>\r\n<h2>Detroit (DTW) - $895&nbsp;<br>Houston (IAH) - $851<br>Minneapolis (MSP) - $795</h2>\r\n<hr>\r\n<h2>New York (JFK) - $865&nbsp;</h2>\r\n<h2>New York (LGA) - $865<br>Newark (EWR) - $870<br>San Francisco (SFO) - $821&nbsp;<br>San Jose (SJC) - $888</h2>\r\n<h2>Seattle (SEA) - $889&nbsp;<br>Washington, D.C. (DCA) - $876<br>Washington, D.C. (IAD) - $815&nbsp;</h2>",
+      "departureCitiesSubheading": "(All fares round-trip, * nonstop)",
+      "sampleFlightImage": "https://thrifty-traveler.s3.us-east-1.amazonaws.com/1715609809337-unnamed-1.jpg",
+      "policies": "<p style=\"text-align: center;\">Main Cabin fares include free changes and cancellation for a voucher.</p>\r\n<p style=\"text-align: center;\">&nbsp;</p>\r\n<p style=\"text-align: center;\">Changes to Turkish fares are allowed for a fee of $135.</p>\r\n<p style=\"text-align: center;\">&nbsp;</p>\r\n<p style=\"text-align: center;\">Changes to Ethiopian fares are allowed for a fee of $300.&nbsp;</p>",
+      "price": 897,
+      "pricePrefix": "Under",
+      "originalPrice": 1300,
+      "originalPriceType": "CASH",
+      "priceSubheading": "Experience a safari in Kenya with these fares to Nairobi!",
+      "singleDestination": true,
+      "destinationAirport": "Nairobi (NBO)",
+      "bookUrl": "https://www.google.com/travel/flights/search?tfs=CBwQAho4EgoyMDI1LTAyLTEwKAI6AkY5OgJHNDoCTks6AlNZOgJTVmoHCAESA01TUHIHCAESA05CT5AB6AIaOBIKMjAyNS0wMi0xOCgCOgJGOToCRzQ6Ak5LOgJTWToCU1ZqBwgBEgNOQk9yBwgBEgNNU1CQAegCQAFIAWoEEAEYAHABggELCP___________wGIAQGYAQE&tfu=EgIIACIDEgEw&hl=en-US&curr=USD&utm_source=ActiveCampaign&utm_medium=email&utm_content=%F0%9F%A6%81%20Nairobi%2C%20Kenya%20under%20%24897%20%28Thru%20Winter%2F%20Main%20Cabin%20-%20Was%3A%20%241300%29&utm_campaign=PREMIUM%20-%20Nairobi%20sub%20900",
+      "bookButtonText": "Book with Google Flights",
+      "pendingVersionId": null,
+      "publishedVersionId": null,
+      "isShownHowToVideo": true,
+      "createdAt": "2024-05-13T14:16:49.572Z",
+      "updatedAt": "2024-05-13T14:17:03.000Z",
+      "deletedAt": null,
+      "departureCities": [
+        {
+          "id": "03efbd37-5dcc-4309-b19e-51fce34d4def",
+          "city": "Newark (EWR)",
+          "destination": "",
+          "price": 870
+        },
+        {
+          "id": "07e94208-72e1-4ab2-9ebc-f559b62d2354",
+          "city": "Detroit (DTW)",
+          "destination": "",
+          "price": 895
+        },
+        {
+          "id": "29329ebb-66a8-4d96-a712-f03c27b6906f",
+          "city": "Atlanta (ATL)",
+          "destination": "",
+          "price": 891
+        },
+        {
+          "id": "3454156b-4ca3-4429-b055-59841783b37e",
+          "city": "Baltimore (BWI)",
+          "destination": "",
+          "price": 855
+        },
+        {
+          "id": "40b44ffc-df7c-41ed-b0b8-b6a7d2a2f79c",
+          "city": "New York (LGA)",
+          "destination": "",
+          "price": 865
+        },
+        {
+          "id": "4901a70c-09b9-4811-9e1d-7e4e37f56901",
+          "city": "Minneapolis (MSP)",
+          "destination": "",
+          "price": 795
+        },
+        {
+          "id": "4cfcb455-3c89-4044-9f8c-e6f49e48f06f",
+          "city": "Washington, D.C. (IAD)",
+          "destination": "",
+          "price": 815
+        },
+        {
+          "id": "4dd62c75-66e2-44a5-83be-278d8a8090d9",
+          "city": "San Jose (SJC)",
+          "destination": "",
+          "price": 888
+        },
+        {
+          "id": "6c90b695-1178-4f50-86d0-a44e12a6d115",
+          "city": "Boston (BOS)",
+          "destination": "",
+          "price": 858
+        },
+        {
+          "id": "965d77a2-d79f-4de5-81df-001634926129",
+          "city": "San Francisco (SFO)",
+          "destination": "",
+          "price": 821
+        },
+        {
+          "id": "9ef43093-4f6e-415a-bd2b-16027a077d76",
+          "city": "Washington, D.C. (DCA)",
+          "destination": "",
+          "price": 876
+        },
+        {
+          "id": "c8cc58c0-c665-4bc9-8980-4e0657dc6585",
+          "city": "Chicago (ORD)",
+          "destination": "",
+          "price": 817
+        },
+        {
+          "id": "c9179810-28d0-46f5-92b8-d834dd361f43",
+          "city": "New York (JFK)",
+          "destination": "",
+          "price": 865
+        },
+        {
+          "id": "e950fd5a-85e6-4b72-ae3f-f598c66f33ef",
+          "city": "Houston (IAH)",
+          "destination": "",
+          "price": 851
+        },
+        {
+          "id": "f143f95b-daba-4869-b04a-08c1a62ed47e",
+          "city": "Seattle (SEA)",
+          "destination": "",
+          "price": 889
+        },
+        {
+          "id": "fc7ca492-a9bb-4566-9e62-23971d6c831d",
+          "city": "Denver (DEN)",
+          "destination": "",
+          "price": 896
+        }
+      ],
+      "periods": [
+        {
+          "id": "6ce0bc5b-00d2-4f8b-be76-34bdcc5a7652",
+          "startDate": "2024-09-15T00:00:00.000Z",
+          "endDate": "2025-03-15T00:00:00.000Z"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "currentPage": 1,
+    "itemCount": 10,
+    "itemsPerPage": 10,
+    "totalItems": 23,
+    "totalPages": 3
+  },
+  "links": {
+    "first": "/deals?page=1&limit=10",
+    "previous": "",
+    "next": "/deals?page=2&limit=10",
+    "last": "/deals?page=3&limit=10"
+  }
+}
