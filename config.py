@@ -1,7 +1,63 @@
-from sqlalchemy import create_engine
+from dotenv import load_dotenv
+import os
+from sqlalchemy import create_engine, Column, Integer, ForeignKey, String
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker, relationship
+load_dotenv()
+engine = create_engine(os.getenv('connection_string'), echo=True)
 
-connection_string = 'postgresql://postgres:PostBase@localhost:5432/tickets_db'
-engine = create_engine(connection_string, echo=True)
+
+Base = declarative_base()
+
+class Tickets(Base):
+    __tablename__ = f'tickets'
+    Primary_Key  = Column(Integer, primary_key=True)
+    ID = Column(String(100))
+    Title  = Column(String(500))
+    Type = Column(String(200))
+    Cabin = Column(String(500))
+    Price = Column(String(50))
+    Book = Column(String(1000))
+    DepartureCities = Column(String(10000))
+    DepartureAirports = Column(String(10000))
+
+
+class NewTickets(Base):
+    __tablename__ = f'new_tickets'
+    Primary_Key  = Column(Integer, primary_key=True)
+    ID = Column(String(100))
+    Title  = Column(String(500))
+    Type = Column(String(200))
+    Cabin = Column(String(500))
+    Price = Column(String(50))
+    Book = Column(String(1000))
+    DepartureCities = Column(String(10000))
+    DepartureAirports = Column(String(10000))
+
+class SentMessage(Base):
+    __tablename__ = 'sent_messages'
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey('users.ID'))
+    message_id = Column(String(200))
+    user = relationship("Users", back_populates="sent_messages")
+
+class Users(Base):
+    __tablename__ = 'users'
+    ID = Column(Integer, primary_key=True)
+    Name = Column(String(200))
+    Airports = Column(String(10000))
+    sent_messages = relationship("SentMessage", back_populates="user")
+Base.metadata.create_all(engine)
+
+Session = sessionmaker(bind=engine)
+session = Session()
+
+session.query(NewTickets).delete()
+session.commit()
+session.close()
+
+
+
 all_airports = [
     "Aberdeen (ABR)",
     "Abilene (ABI)",
@@ -227,26 +283,4 @@ all_airports = [
     "West Palm Beach (PBI)"
 ]
 
-
-# Создаем словарь, используя генератор словаря
-# Создаем пустой словарь
-airport_dict = {}
-count = 0
-# Проходим по каждому элементу в списке all_airports
-for airport in all_airports:
-    # Разделяем название города и название аэропорта по скобкам
-    city, airport_name = airport.split(" (")
-    # Удаляем закрывающую скобку из названия аэропорта
-    airport_name = airport_name[:-1]
-    # Если город уже есть в словаре, добавляем аэропорт к списку аэропортов этого города
-    if city in airport_dict:
-        airport_dict[city].append(airport_name)
-    # Если города нет в словаре, создаем новую запись с городом и списком из одного аэропорта
-    else:
-        count += 1
-        airport_dict[city] = [airport_name]
-import json
 print(len(all_airports))
-print(count)
-with open('airports.json', 'w') as f:
-    json.dump(airport_dict, f,indent=2)

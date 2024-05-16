@@ -10,7 +10,7 @@ from thriftytraveler import get_data, add_db
 from save_bd import Tickets, NewTickets, Users, SentMessage
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from config import engine
+from save_bd import engine
 import os
 from dotenv import load_dotenv
 load_dotenv()

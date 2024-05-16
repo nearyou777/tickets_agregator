@@ -5,7 +5,9 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from save_bd import Tickets, NewTickets
 from bs4 import BeautifulSoup
-from config import engine
+from save_bd import engine
+
+
 def login() -> tls_client.Session: 
     s = tls_client.Session(client_identifier='chrome_105')
 
@@ -16,6 +18,8 @@ def login() -> tls_client.Session:
     }
     s.post('https://apiv2.thriftytraveler.com/auth/login', json=json_data)
     return s
+
+
 def get_data():
     s = login()
     data = []
@@ -123,8 +127,8 @@ def get_data():
                 'DepartureAirports' : departure_airports})
     return data
 
+
 def add_db() -> bool:
-    # current_datetime = datetime.datetime.now().strftime('%Y-%m-%d-%H-%M')
     data = get_data()
 
     Session = sessionmaker(bind=engine)
