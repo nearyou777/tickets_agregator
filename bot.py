@@ -12,8 +12,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import math
 from config import all_airports, engine
-token = '6985026926:AAGmdugf_OueWb-jkgKlOMVAOpyj5T_CA4Q'
-bot = telebot.TeleBot('6985026926:AAGmdugf_OueWb-jkgKlOMVAOpyj5T_CA4Q')
+from dotenv import load_dotenv
+import os
+load_dotenv()
+bot = telebot.TeleBot(os.getenv('token'))
 # engine = create_engine('sqlite:///tickets.db', echo=True)
 
 # Создайте engine для работы с базой данных PostgreSQL
@@ -85,9 +87,11 @@ def start_message(message):
     session.close()
     if not user_data:
         bot.send_message(message.chat.id,"Hi let's register you. Please enter your name")
+        sleep(0.5)
         bot.register_next_step_handler(message, get_name)
     else:
         bot.send_message(message.chat.id,"Hi let's update your personal data. Please enter your name")
+        sleep(0.5)
         bot.register_next_step_handler(message, get_name)
     session.close()
     
@@ -108,6 +112,7 @@ def get_name(message):
     btn3 = types.KeyboardButton('My profile')
     markup.row(btn1, btn2, btn3)
     bot.send_message(message.chat.id, f"Let's choose airports, that you would like to see: ", reply_markup=markup)
+    sleep(0.5)
     if not session.query(Users).filter_by(ID = user_id).first():
         bot.send_message(message.chat.id, text='Choose airport to add', reply_markup=airport_buttons('add', all_airports))
 
@@ -225,9 +230,11 @@ def callback_query(call):
     session = Session()
     user = session.query(Users).filter_by(ID = call.message.chat.id).first()
     if user:
-        airports = user.Airports.split('\n')
+        airports = user.Airports.strip()
         if len(airports) == 0:
             airports = []
+        else:
+            airports = airports.split('\n')
     else:
         airports = []
     session.close()

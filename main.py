@@ -11,6 +11,10 @@ from save_bd import Tickets, NewTickets, Users, SentMessage
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from config import engine
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 app = Flask(__name__)
 
 WEBHOOK_URL_PATH = "/webhook"
@@ -24,7 +28,7 @@ def webhook():
 def set_webhook():
     bot.remove_webhook()
 
-    public_url = 'https://27ae-178-212-111-84.ngrok-free.app'
+    public_url = os.getenv('webhook_url')
     bot.set_webhook(url=public_url + WEBHOOK_URL_PATH)
     print("Webhook is set:", public_url)
 
