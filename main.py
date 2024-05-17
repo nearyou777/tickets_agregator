@@ -4,13 +4,11 @@ from bot import bot
 from thriftytraveler import add_db
 from time import sleep
 from threading import Thread
-import pandas as pd
 from telebot import types
 from thriftytraveler import get_data, add_db
-from save_bd import Tickets, NewTickets, Users, SentMessage
-from sqlalchemy import create_engine
+from config import Tickets, NewTickets, Users, SentMessage
 from sqlalchemy.orm import sessionmaker
-from save_bd import engine
+from config import engine
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -61,9 +59,7 @@ ORDER BY: {row.Type}'''
                         markup = types.InlineKeyboardMarkup()
                         btn_cities = types.InlineKeyboardButton('Departure cities', callback_data=f'departure {row.ID}')
                         markup.row(btn_cities)
-                        # Отправляем сообщение
                         bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
-                        # Сохраняем информацию о сообщении в базе данных
                         sent_message = SentMessage(user_id=user_id, message_id=f"new_{row.ID}")
                         session.add(sent_message)
                         session.commit()

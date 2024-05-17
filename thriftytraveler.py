@@ -3,9 +3,8 @@ import json
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from save_bd import Tickets, NewTickets
+from config import Tickets, NewTickets, engine
 from bs4 import BeautifulSoup
-from save_bd import engine
 
 
 def login() -> tls_client.Session: 
@@ -82,8 +81,6 @@ def get_data():
 
     r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
     page_count = r.json()['meta']['totalPages']
-    with open('test.json', 'w') as f:
-        json.dump(r.json(),f,indent=2)
     for page in range(1, int(page_count) + 1):
         params['page'] = page
         r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
@@ -101,22 +98,18 @@ def get_data():
             symbol = '$' if 'CASH' in type else ' Points'
             departure_cities = '\n'.join([f"{i['destination']}: {i['price']}{symbol}" for i in item["departureCities"]])
             soup = BeautifulSoup(item["departureCitiesContent"].replace('<br>', '\n'), 'lxml')
-            # departure_cities = soup.text.strip()
             departure_cities = []
             for i in soup.find_all('h2'):
                 if i.find('strong'):
                     strong = i.find("strong").text.strip()
-                    # print(strong)
                     normal = i.text.replace(f"{strong}", "").replace("<br>", "\n").replace('\r', '').strip()
                     msg = f'\n<b>{strong}</b>\n{normal}'
                     departure_cities.append(msg)
                 else:departure_cities.append(i.text.strip())
             departure_cities = '\n'.join(departure_cities)
             departure_airports = ', '.join([i['city'] for i in item['departureCities']])
-            # departure_cities = item["departureCitiesContent"].replace('<br>', '\n').replace('h2', 'b').replace('<p>', '\n').replace('<\p>', '\n').replace('<hr>', '').replace('</hr>', '-----------')
             id = item['id']
             data.append({
-                # departure_cities, 
                 'ID' : id,
                 'Title': title, 
                 'Type': type, 
