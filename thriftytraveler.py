@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from config import Tickets, NewTickets, engine
 from bs4 import BeautifulSoup
-
+import requests
 
 def login() -> tls_client.Session: 
     s = tls_client.Session(client_identifier='chrome_105')
@@ -87,6 +87,8 @@ def get_data():
         for item in r.json()['items']:
             type = item['type']
             cabin = item['cabin']
+            if 'BUSINESS_AND_FIRST_CLASS' in cabin:
+                cabin = 'Business & First class'
             title = item['title']
             if 'points' in type.lower():
                 type = 'Points'
@@ -96,9 +98,13 @@ def get_data():
                 price = f"{item['pricePrefix']} {item['price']}$"
             bookURL = item['bookUrl']
             symbol = '$' if 'CASH' in type else ' Points'
-            departure_cities = '\n'.join([f"{i['destination']}: {i['price']}{symbol}" for i in item["departureCities"]])
+            if '$' in symbol:
+                departure_cities = '\n'.join([f"{i['destination']}: {symbol}{i['price']}" for i in item["departureCities"]])
+            else:
+                departure_cities = '\n'.join([f"{i['destination']}: {i['price']}{symbol}" for i in item["departureCities"]])
             soup = BeautifulSoup(item["departureCitiesContent"].replace('<br>', '\n'), 'lxml')
             departure_cities = []
+
             for i in soup.find_all('h2'):
                 if i.find('strong'):
                     strong = i.find("strong").text.strip()
@@ -109,6 +115,16 @@ def get_data():
             departure_cities = '\n'.join(departure_cities)
             departure_airports = ', '.join([i['city'] for i in item['departureCities']])
             id = item['id']
+            img_link = item['coverImage']
+            r = requests.get(img_link)
+            picture_name = img_link.split('/')[-1] if r.status_code == 200 else None
+            if picture_name:
+                with open(f'imgs/{picture_name}', 'wb') as f:
+                    f.write(r.content)
+            
+            guide = BeautifulSoup(item['bookingInstructions'], 'lxml').text.strip()
+            # guide = '<b>Booking guide will be here</b>'
+            summary = item['summaryRaw']
             data.append({
                 'ID' : id,
                 'Title': title, 
@@ -116,8 +132,11 @@ def get_data():
                 'Cabin': cabin,
                 'Price': price, 
                 'Book' : bookURL,
-                'DepartureCities' : departure_cities,
-                'DepartureAirports' : departure_airports})
+                'DepartureCities' : departure_cities.strip(),
+                'DepartureAirports' : departure_airports,
+                'BookGuide' : guide, 
+                'Summary' : summary,
+                'PictureName' : picture_name})
     return data
 
 

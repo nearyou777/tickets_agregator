@@ -11,6 +11,8 @@ from sqlalchemy.orm import sessionmaker
 from config import engine
 import os
 from dotenv import load_dotenv
+from telebot.apihelper import ApiException
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -59,7 +61,15 @@ ORDER BY: {row.Type}'''
                         markup = types.InlineKeyboardMarkup()
                         btn_cities = types.InlineKeyboardButton('Departure cities', callback_data=f'departure {row.ID}')
                         markup.row(btn_cities)
-                        bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
+                        try:
+                            bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
+                        except ApiException as e:
+                            if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
+                                print(f"User {user_id} blocked the bot.")
+                                session.query(Users).filter(Users.ID == user_id).delete()
+                                break
+                            else:
+                                sleep(50)
                         sent_message = SentMessage(user_id=user_id, message_id=f"new_{row.ID}")
                         session.add(sent_message)
                         session.commit()

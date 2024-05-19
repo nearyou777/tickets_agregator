@@ -20,6 +20,9 @@ class Tickets(Base):
     Book = Column(String(1000))
     DepartureCities = Column(String(10000))
     DepartureAirports = Column(String(10000))
+    BookGuide = Column(String(10000))
+    Summary = Column(String(10000))
+    PictureName = Column(String(100))
 
 
 class NewTickets(Base):
@@ -33,6 +36,10 @@ class NewTickets(Base):
     Book = Column(String(1000))
     DepartureCities = Column(String(10000))
     DepartureAirports = Column(String(10000))
+    BookGuide = Column(String(10000))
+    Summary = Column(String(10000))
+    PictureName = Column(String(100))
+
 
 class SentMessage(Base):
     __tablename__ = 'sent_messages'
@@ -57,7 +64,7 @@ session.commit()
 session.close()
 
 
-
+admins = ['id', 'id2']
 all_airports = [
     "Aberdeen (ABR)",
     "Abilene (ABI)",

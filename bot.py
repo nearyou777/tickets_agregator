@@ -1,8 +1,7 @@
-import pandas as pd
 import telebot
 from time import sleep
 from telebot import types
-from config import Tickets, NewTickets, Users, SentMessage
+from config import Tickets,Users, SentMessage
 from sqlalchemy.orm import sessionmaker
 import math
 from config import engine
@@ -13,14 +12,39 @@ from config import all_airports
 load_dotenv()
 
 bot = telebot.TeleBot(os.getenv('token'))
-
 airports = []
 current_position = 0
+Session = sessionmaker(bind=engine)
+
 
 def unkown_user(message):
     bot.send_message(message.chat.id, 'You\'re not registred.')
     sleep(1)
     start_message(message)
+
+def msg_markup(offer_id, position='start'):
+    session = Session()
+    
+    # cities = session.query(Tickets).filter_by(ID = call.data.split()[-1]).first()
+    row = session.query(Tickets).filter(Tickets.ID == offer_id).first()
+    markup = types.InlineKeyboardMarkup()
+    btn_cities = types.InlineKeyboardButton('Departure cities', callback_data=f'departure {offer_id}')
+    deal_summary = types.InlineKeyboardButton('Deal Summary', callback_data=f'summary {offer_id}')
+    book_guide = types.InlineKeyboardButton('Booking Guide', callback_data=f'book_guide {offer_id}')
+    book_link = types.InlineKeyboardButton('Book Now', url=row.Book)
+    if position == 'start':
+        markup.row(deal_summary, btn_cities)
+        markup.row(book_guide, book_link) 
+    elif position == 'departure':
+        markup.row(deal_summary, book_guide)
+        markup.row(book_link) 
+    elif position == 'guide':
+        markup.row(deal_summary, btn_cities)
+        markup.row(book_link) 
+    else: 
+        markup.row(btn_cities, book_guide)
+        markup.row(book_link) 
+    return markup
 
 
 def airport_buttons(prefix, choosed_airports, current_position=0, step=20, page=1,direction='forward'):
@@ -39,7 +63,6 @@ def airport_buttons(prefix, choosed_airports, current_position=0, step=20, page=
     for chunk in airports_chunk:
         buttons = [types.InlineKeyboardButton(airport, callback_data=f'{prefix}_{airport}') for airport in chunk]
         markup.row(*buttons)
-
 
     total_pages = math.ceil(len(choosed_airports) / step)
     page_buttons = f'Page {page} of {total_pages}'
@@ -109,7 +132,6 @@ def share_post(message):
                 formatted_message_parts.append(f'*{text[offset:offset+length]}*')
             elif entity_type == "italic":
                 formatted_message_parts.append(f'_{text[offset:offset+length]}_')
-        
             current_position = offset + length
         
         if current_position < len(text):
@@ -121,9 +143,8 @@ def share_post(message):
         formatted_message = message.json["text"]
     
     for user in session.query(Users).all():
-        if user is not admin:
-            bot.send_message(user.ID, formatted_message.strip(), parse_mode="Markdown")
-            sleep(1)
+        bot.send_message(user.ID, formatted_message.strip(), parse_mode="Markdown")
+        sleep(1)
     
     session.close()
 
@@ -149,6 +170,9 @@ def start_message(message):
 
 def get_name(message):
     name = message.text
+    if '/' in name:
+        unkown_user(message)
+        return
     user_id = message.chat.id
     Session = sessionmaker(bind=engine)
     session = Session()
@@ -157,7 +181,7 @@ def get_name(message):
     btn2 = types.KeyboardButton('Remove airports')
     btn3 = types.KeyboardButton('My profile')
     markup.row(btn1, btn2, btn3)
-    bot.send_message(message.chat.id, f'Hi {name}. You\'re almost done')
+    bot.send_message(message.chat.id, f'Hi {name}. You\'re almost done.\nLet\'s choose airports, that you would like to see: ', reply_markup=markup)
     sleep(1)
     if not session.query(Users).filter_by(ID = user_id).first():
         bot.send_message(message.chat.id, text='Choose airport to add', reply_markup=airport_buttons('add', all_airports))
@@ -171,10 +195,9 @@ def get_name(message):
         user_to_upd.Name = name 
         session.commit()
         session.close()
-        bot.send_message(message.chat.id, f"Hello, {name}.Your personal data updated successfully. Let's update airports, that you would like to see: ", reply_markup=markup)
+        bot.send_message(message.chat.id, f"Hello, {name}.Your personal data updated successfully. Let's update airports, that you would like to see: ")
         sleep(1)
         bot.send_message(message.chat.id, text='Choose airport to add', reply_markup=airport_buttons('add', all_airports))
-    bot.send_message(message.chat.id, f"Let's choose airports, that you would like to see: ", reply_markup=markup)
     sleep(0.5)
 
 
@@ -187,19 +210,24 @@ def search_message(message):
         user_airports = user.Airports.split('\n')
         for airport in user_airports:
                 data = session.query(Tickets).filter(Tickets.DepartureAirports.like(f'%{airport}%')).all()
+                
                 user_id = message.chat.id
                 for row in data:
                     if session.query(SentMessage).filter_by(user_id=user_id, message_id=f'old_{row.ID}').first():
                         continue
                     msg = f'''<strong>{row.Title}</strong>
-    {row.Cabin}
-    -----------------------
-    {row.Price}
-    -----------------------
-    ORDER BY: {row.Type}'''
-                    markup = types.InlineKeyboardMarkup()
-                    btn_cities = types.InlineKeyboardButton('Departure cities', callback_data=f'departure {row.ID}')
-                    markup.row(btn_cities)
+{row.Cabin}
+-----------------------
+{row.Price}
+-----------------------
+ORDER BY: {row.Type}'''
+
+                    markup = msg_markup(row.ID, 'start')
+                    base_path = os.getcwd()
+                    photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
+                    with open(photo_path, 'rb') as photo:
+                        bot.send_photo(user_id, photo=photo)
+                    sleep(1)
                     bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
                     sleep(1)
                     sent_message = SentMessage(user_id=user_id, message_id=f"old_{row.ID}")
@@ -225,17 +253,15 @@ def on_click(message:types.Message):
     else:
         airports = []
     session.close()
-    global current_position
 
     if 'Add airports' in message.text:
-        current_position = 0
         bot.send_message(message.chat.id, text='Choose airport to add', reply_markup=airport_buttons('add', all_airports))
         sleep(1)
     
     elif 'Remove airports' in message.text:
-        current_position = 0
         if not user:
             unkown_user()
+            return
         else:
             if len(airports) == 0: 
                 bot.send_message(message.chat.id, text='Your airports list is empty') 
@@ -249,21 +275,22 @@ def on_click(message:types.Message):
         session = Session()
         user = session.query(Users).filter_by(ID = message.chat.id).first()
         session.close()
-        user_airports = user.Airports.strip()
-        if len(user.Airports.split('\n')) == 222:
-            user_airports = 'All available'
-        if len(user.Airports) == 0:
-            user_airports = 'You didn\'t choosed any airport' 
         if user:
+            user_airports = user.Airports.strip()
+
+            if len(user.Airports.split('\n')) == 222:
+                user_airports = 'All available'
+            if len(user.Airports) == 0:
+                user_airports = 'You didn\'t choosed any airport' 
             bot.send_message(message.chat.id, f'<b>Your name: </b>{user.Name}\n\n<b>Your airports: </b>\n{user_airports}', parse_mode='HTML')
         else:
             unkown_user(message)
+            return
         sleep(1)
     
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
-    global current_position
     Session = sessionmaker(bind=engine)
     session = Session()
     user = session.query(Users).filter_by(ID = call.message.chat.id).first()
@@ -275,9 +302,7 @@ def callback_query(call):
             airports = airports.split('\n')
     else:
         airports = []
-        # unkown_user()
     session.close()
-
 
     if 'add' in call.data and '_scrollbtn' not in call.data :
         Session = sessionmaker(bind=engine)
@@ -348,12 +373,57 @@ def callback_query(call):
     elif 'departure' in call.data:
         Session = sessionmaker(bind=engine)
         session = Session()
-        cities = session.query(Tickets).filter_by(ID = call.data.split()[-1]).first()
-        msg = f'''<b>{call.message.text}\n\nDeparture cities: </b>\n{cities.DepartureCities}'''
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML')
-        bot.answer_callback_query(call.id, 'Fetching departure cities...')
+       
+        row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
+        msg = f'''<strong>{row.Title}</strong>
+{row.Cabin}
+-----------------------
+{row.Price}
+-----------------------
+ORDER BY: {row.Type}
+
+<b>Departure cities: </b>
+{row.DepartureCities}'''        
+        markup = msg_markup(row.ID, 'departure')
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML', reply_markup=markup)
+        bot.answer_callback_query(call.id, 'Fetching...')
         session.close()
 
+    elif 'book_guide' in call.data:
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
+        msg = f'''<strong>{row.Title}</strong>
+{row.Cabin}
+-----------------------
+{row.Price}
+-----------------------
+ORDER BY: {row.Type}
+
+<b>Booking guide:</b>
+{row.BookGuide}'''        
+        markup = msg_markup(row.ID, 'guide')
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML', reply_markup=markup)
+        bot.answer_callback_query(call.id, 'Fetching...')
+        session.close()
+
+    elif 'summary' in call.data:
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
+        msg = f'''<strong>{row.Title}</strong>
+{row.Cabin}
+-----------------------
+{row.Price}
+-----------------------
+ORDER BY: {row.Type}
+
+<b>Deal Summary:</b>
+{row.Summary}'''        
+        markup = msg_markup(row.ID, 'summary')
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML', reply_markup=markup)
+        bot.answer_callback_query(call.id, 'Fetching...')
+        session.close()
 
     elif call.data  ==  'end' :
         Session = sessionmaker(bind=engine)
@@ -385,7 +455,6 @@ def callback_query(call):
             new_markup = airport_buttons(prefix, airports, msg_pos, page=page, direction='forward')
         bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=new_markup)
         session.close()
-
 
     elif 'back' in call.data:
         Session = sessionmaker(bind=engine)
