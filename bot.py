@@ -10,7 +10,11 @@ import os
 import json
 from config import all_airports
 load_dotenv()
+    
+#TODO: 1.Create a function for inviting peoples to a group 
+    #2. Checking if user subscribed before allowing any commands 
 
+#TODO: 1. Add datetime to tickets sheet. Create autodelete function
 bot = telebot.TeleBot(os.getenv('token'))
 airports = []
 current_position = 0
@@ -162,9 +166,7 @@ def start_message(message):
         sleep(1)
         bot.register_next_step_handler(message, get_name)
     session.close()
-    
-#TODO: 1.Create a function for inviting peoples to a group 
-    #2. Checking if user subscribed before allowing any commands 
+
 
 def get_name(message):
     name = message.text
