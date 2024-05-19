@@ -1,6 +1,6 @@
 import telebot
 from flask import Flask, request
-from bot import bot
+from bot import bot, msg_markup
 from thriftytraveler import add_db
 from time import sleep
 from threading import Thread
@@ -58,11 +58,14 @@ def send_message():
 {row.Price}
 -----------------------
 ORDER BY: {row.Type}'''
-                        markup = types.InlineKeyboardMarkup()
-                        btn_cities = types.InlineKeyboardButton('Departure cities', callback_data=f'departure {row.ID}')
-                        markup.row(btn_cities)
+
                         try:
-                            bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
+                            base_path = os.getcwd()
+                            photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
+                            if row.PictureName:
+                                with open(photo_path, 'rb') as photo:
+                                    bot.send_photo(user_id, photo=photo)
+                            bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=msg_markup(row.ID))
                         except ApiException as e:
                             if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
                                 print(f"User {user_id} blocked the bot.")

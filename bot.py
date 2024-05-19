@@ -24,8 +24,6 @@ def unkown_user(message):
 
 def msg_markup(offer_id, position='start'):
     session = Session()
-    
-    # cities = session.query(Tickets).filter_by(ID = call.data.split()[-1]).first()
     row = session.query(Tickets).filter(Tickets.ID == offer_id).first()
     markup = types.InlineKeyboardMarkup()
     btn_cities = types.InlineKeyboardButton('Departure cities', callback_data=f'departure {offer_id}')
@@ -227,7 +225,6 @@ ORDER BY: {row.Type}'''
                     photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
                     with open(photo_path, 'rb') as photo:
                         bot.send_photo(user_id, photo=photo)
-                    sleep(1)
                     bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
                     sleep(1)
                     sent_message = SentMessage(user_id=user_id, message_id=f"old_{row.ID}")
@@ -383,6 +380,7 @@ def callback_query(call):
 ORDER BY: {row.Type}
 
 <b>Departure cities: </b>
+
 {row.DepartureCities}'''        
         markup = msg_markup(row.ID, 'departure')
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML', reply_markup=markup)
@@ -401,6 +399,7 @@ ORDER BY: {row.Type}
 ORDER BY: {row.Type}
 
 <b>Booking guide:</b>
+
 {row.BookGuide}'''        
         markup = msg_markup(row.ID, 'guide')
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML', reply_markup=markup)
@@ -419,6 +418,7 @@ ORDER BY: {row.Type}
 ORDER BY: {row.Type}
 
 <b>Deal Summary:</b>
+
 {row.Summary}'''        
         markup = msg_markup(row.ID, 'summary')
         bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML', reply_markup=markup)
