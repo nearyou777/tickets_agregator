@@ -1,8 +1,9 @@
 from dotenv import load_dotenv
 import os
-from sqlalchemy import create_engine, Column, Integer, ForeignKey, String
+from sqlalchemy import create_engine, Column, Integer, ForeignKey, String, DateTime, Boolean
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
+from datetime import datetime, timedelta
 load_dotenv()
 engine = create_engine(os.getenv('connection_string'), echo=True)
 
@@ -23,6 +24,7 @@ class Tickets(Base):
     BookGuide = Column(String(10000))
     Summary = Column(String(10000))
     PictureName = Column(String(100))
+    DateAdded = Column(DateTime, default=datetime.utcnow().date)
 
 
 class NewTickets(Base):
@@ -53,7 +55,16 @@ class Users(Base):
     ID = Column(Integer, primary_key=True)
     Name = Column(String(200))
     Airports = Column(String(10000))
+    LogInDate = Column(DateTime, default=datetime.utcnow().date)
+    SubscriptionDate = Column(DateTime, default=(datetime.utcnow() + timedelta(days=7)).date)
+    BuyedSubscription = Column(Boolean, default=False)
+    IsActiveUser = Column(Boolean, default=True)
     sent_messages = relationship("SentMessage", back_populates="user")
+
+# class Channel(Base):
+#     __tablename__ = 'channel'
+#     ID = Column(Integer, primary_key=True)
+#     # LastUpdate = Column(Str)
 Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
@@ -289,5 +300,3 @@ all_airports = [
     "Wausau (CWA)",
     "West Palm Beach (PBI)"
 ]
-
-print(len(all_airports))
