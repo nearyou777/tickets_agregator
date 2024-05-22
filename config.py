@@ -54,6 +54,7 @@ class Users(Base):
     __tablename__ = 'users'
     ID = Column(Integer, primary_key=True)
     Name = Column(String(200))
+    Email = Column(String(200))
     Airports = Column(String(10000))
     LogInDate = Column(DateTime, default=datetime.utcnow().date)
     SubscriptionDate = Column(DateTime, default=(datetime.utcnow() + timedelta(days=7)).date)

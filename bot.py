@@ -13,9 +13,7 @@ from datetime import datetime, timedelta
 load_dotenv()
     
 #TODO: 1.Create a function for inviting peoples to a group 
-    #2. Checking if user subscribed before allowing any commands 
-#TODO: Email form
-#TODO: 1. Add datetime to tickets sheet. Create autodelete function
+    #2. Checking if user subscribed to a group before allowing any commands 
 
 bot = telebot.TeleBot(os.getenv('token'))
 airports = []
@@ -103,7 +101,6 @@ def airport_buttons(prefix, choosed_airports, current_position=0, step=20, page=
 
 
 @bot.message_handler(commands=['start'])
-# @bot.channel_post_handler()
 def welcome_message(message):
     msg = '''✈️ Welcome to my bot! 🌟
 Let's register together! 📝
@@ -141,38 +138,44 @@ def get_name(message):
     if '/' in name:
         unkown_user(message)
         return
-    user_id = message.chat.id
-    Session = sessionmaker(bind=engine)
+    msg = f'''✈️ Hi {name}! 🎉
+You're almost done. ✅
+Right now please enter your mail: 📧'''
+    bot.send_message(message.chat.id, msg)
+    sleep(1)
+    bot.register_next_step_handler(message, get_mail, name)
+
+
+def get_mail(message, name):
+    mail = message.text.strip()
     session = Session()
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = types.KeyboardButton('Add airports 🛫') 
     btn2 = types.KeyboardButton('Remove airports 🛬')
     btn3 = types.KeyboardButton('My profile 👤')
     markup.row(btn1, btn2, btn3)
-    msg = f'''✈️ Hi {name}! 🎉
+
+    user_id = message.chat.id
+    if not session.query(Users).filter_by(ID = user_id).first():
+        msg = f'''✈️ Hi {name}! 🎉
 You're almost done. ✅
 Let's choose the airports that you would like to see: 🛫'''
-    bot.send_message(message.chat.id, msg, reply_markup=markup)
-    sleep(1)
-    if not session.query(Users).filter_by(ID = user_id).first():
-        session.add(Users(ID=user_id, Name=name, Airports='')) 
-        session.commit()
-        sleep(0.5)
-        bot.send_message(message.chat.id, text='Choose airport to add ✈️', reply_markup=airport_buttons('add', all_airports))
-        sleep(1)
-        session.add(Users(ID=user_id, Name=name, Airports=', '.join(airports)))
+        session.add(Users(ID=user_id, Name=name,Email=mail, Airports='')) 
         session.commit()
         session.close()
+        bot.send_message(message.chat.id, msg, reply_markup=markup)
+        sleep(1)
+
     else:
         user_to_upd = session.query(Users).filter_by(ID = user_id).first()
         user_to_upd.ID = user_id
         user_to_upd.Name = name 
+        user_to_upd.Mail = mail
         session.commit()
         session.close()
-        bot.send_message(message.chat.id, f"Hello, {name}! Your personal data updated successfully. ✨ Let's update airports that you would like to see: ✈️")
+        bot.send_message(message.chat.id, f"Hello, {name}! Your personal data updated successfully. ✨ Let's update airports that you would like to see: ✈️", reply_markup=markup)
         sleep(1)
-        bot.send_message(message.chat.id, text='Choose airport to add ✈️', reply_markup=airport_buttons('add', all_airports))
-    sleep(0.5)
+    bot.send_message(message.chat.id, text='Choose airport to add ✈️', reply_markup=airport_buttons('add', all_airports))
 
 
 @bot.message_handler(commands=['renew'])
@@ -238,7 +241,6 @@ def share_post(message):
     for user in session.query(Users).all():
         bot.send_message(user.ID, formatted_message.strip(), parse_mode="Markdown")
         sleep(1)
-    
     session.close()
 
 
@@ -329,7 +331,7 @@ def on_click(message:types.Message):
                 user_airports = 'All available ✈️'
             if len(user.Airports) == 0:
                 user_airports = 'You didn\'t choose any airport. 🛫' 
-            bot.send_message(message.chat.id, f'👤 <b>Your name: </b>{user.Name}\n\n<b>📅 Subscription end date: </b>{user.SubscriptionDate.date()}\n\n<b>✈️ Your airports: </b>\n{user_airports}', parse_mode='HTML')
+            bot.send_message(message.chat.id, f'👤 <b>Your name: </b>{user.Name}\n\n<b>Your contact email:</b> {user.Email}\n\n<b>📅 Subscription end date: </b>{user.SubscriptionDate.date()}\n\n<b>✈️ Your airports: </b>\n{user_airports}', parse_mode='HTML')
         else:
             unkown_user(message)
             return
@@ -377,7 +379,6 @@ def callback_query(call):
         session.commit()
         session.close()
 
-
     elif 'remove' in call.data and '_scrollbtn' not in call.data:
         Session = sessionmaker(bind=engine)
         session = Session()
@@ -415,7 +416,6 @@ def callback_query(call):
             airports = []
             unkown_user(call.message)
         session.close()
-
 
     elif 'departure' in call.data:
         Session = sessionmaker(bind=engine)
@@ -486,13 +486,11 @@ ORDER BY: {row.Type}
             bot.answer_callback_query(call.id, 'Fetching your airports...')
         session.close()
 
-
     elif 'next' in call.data:
         Session = sessionmaker(bind=engine)
         session = Session()
         prev_page = int(call.data.split('_')[-2]) 
         msg_pos = prev_page * 20
-        current_position += 20
 
         prefix = call.data.split('_')[0]
         page = int(call.data.split('_')[-2]) + 1
@@ -514,7 +512,6 @@ ORDER BY: {row.Type}
         session = Session()
         prev_page = int(call.data.split('_')[-2])  -1
         msg_pos = (prev_page * 20) - 20
-        current_position -= 20
         user = session.query(Users).filter_by(ID = call.message.chat.id).first()
         airports = user.Airports.split('\n')
         prefix = call.data.split('_')[0]

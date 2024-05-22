@@ -13,11 +13,12 @@ from dotenv import load_dotenv
 from telebot.apihelper import ApiException
 import json
 from delete_offrers import autodelete
+
 load_dotenv()
-
 app = Flask(__name__)
-
 WEBHOOK_URL_PATH = "/webhook"
+Session = sessionmaker(bind=engine)
+
 
 @app.route(WEBHOOK_URL_PATH, methods=['POST'])
 def webhook():
@@ -39,9 +40,6 @@ def get_data():
         autodelete()
     return value
 
-
-
-Session = sessionmaker(bind=engine)
 
 def send_message():
     while True:
@@ -130,9 +128,11 @@ def handle_channel_message(message):
                 sleep(50)
     session.close()
 
+
 @bot.channel_post_handler(content_types=['text', 'photo', 'audio', 'voice', 'sticker', 'animation', 'video_note'])
 def monitor_channel_posts(message):
     handle_channel_message(message)
+
 
 if __name__ == '__main__':
     set_webhook() 
