@@ -1,19 +1,19 @@
 import telebot
 from time import sleep
 from telebot import types
-from config import Tickets,Users, SentMessage
+from config import Tickets,Users, SentMessage, all_airports, engine, isadmin
 from sqlalchemy.orm import sessionmaker
 import math
-from config import engine
 from dotenv import load_dotenv
 import os
 import json
-from config import all_airports
 from datetime import datetime, timedelta
+from telebot.apihelper import ApiException
+from export_data import export_tables
 load_dotenv()
     
-#TODO: 1.Create a function for inviting peoples to a group 
-    #2. Checking if user subscribed to a group before allowing any commands 
+
+#TODO:PROMOCODES
 
 bot = telebot.TeleBot(os.getenv('token'))
 airports = []
@@ -32,6 +32,15 @@ def check_subscription(user_id):
     return user.SubscriptionDate.date() >= datetime.utcnow().date() or user.BuyedSubscription
 
 
+def check_channel_subscription(message):
+    try:
+        member = bot.get_chat_member(chat_id=os.getenv('channel_updates_id'), user_id=message.chat.id)
+        if member.status in ['member', 'administrator', 'creator']:
+            return True
+        else:
+            return False
+    except Exception as e:
+        return False
 
 def msg_markup(offer_id, position='start'):
     session = Session()
@@ -53,6 +62,15 @@ def msg_markup(offer_id, position='start'):
     else: 
         markup.row(btn_cities, book_guide)
         markup.row(book_link) 
+    return markup
+
+
+def channel_mark():
+    markup = types.InlineKeyboardMarkup()
+    btn1 = types.InlineKeyboardButton('Our Channel', url=os.getenv('channel_url'))
+    btn2 = types.InlineKeyboardButton('I\'m subscribed✅', callback_data=f'subscribed')
+    markup.add(btn1)
+    markup.add(btn2)
     return markup
 
 
@@ -107,7 +125,7 @@ Let's register together! 📝
 Please enter your name: 👤'''
     bot.send_message(message.chat.id, msg)
     sleep(1)
-    bot.register_next_step_handler(message, get_name)
+    bot.register_next_step_handler(message, get_mail)
 
 
 @bot.message_handler(commands=['register'])
@@ -123,18 +141,18 @@ Let's register together! 📝
 Please enter your name: 👤'''
         bot.send_message(message.chat.id,msg)
         sleep(1)
-        bot.register_next_step_handler(message, get_name)
+        bot.register_next_step_handler(message, get_mail)
     else:
         msg = '''Hi 😊, let's update your personal data. 📝
 Please enter your name: 👤'''
         bot.send_message(message.chat.id,msg)
         sleep(1)
-        bot.register_next_step_handler(message, get_name)
+        bot.register_next_step_handler(message, get_mail)
     session.close()
 
 
-def get_name(message):
-    name = message.text
+def get_mail(message):
+    name = message.text.strip()
     if '/' in name:
         unkown_user(message)
         return
@@ -142,50 +160,68 @@ def get_name(message):
 You're almost done. ✅
 Right now please enter your mail: 📧'''
     bot.send_message(message.chat.id, msg)
-    sleep(1)
-    bot.register_next_step_handler(message, get_mail, name)
+    sleep(0.5)
+    bot.register_next_step_handler(message, channel_subscribe, name)
 
-
-def get_mail(message, name):
+def channel_subscribe(message, name):#saving data here
+    user_id = message.chat.id
     mail = message.text.strip()
     session = Session()
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    btn1 = types.KeyboardButton('Add airports 🛫') 
-    btn2 = types.KeyboardButton('Remove airports 🛬')
-    btn3 = types.KeyboardButton('My profile 👤')
-    markup.row(btn1, btn2, btn3)
-
-    user_id = message.chat.id
-    if not session.query(Users).filter_by(ID = user_id).first():
-        msg = f'''✈️ Hi {name}! 🎉
-You're almost done. ✅
-Let's choose the airports that you would like to see: 🛫'''
+    if not session.query(Users).filter_by(ID = user_id).first():  
         session.add(Users(ID=user_id, Name=name,Email=mail, Airports='')) 
         session.commit()
         session.close()
-        bot.send_message(message.chat.id, msg, reply_markup=markup)
-        sleep(1)
-
     else:
         user_to_upd = session.query(Users).filter_by(ID = user_id).first()
         user_to_upd.ID = user_id
         user_to_upd.Name = name 
-        user_to_upd.Mail = mail
+        user_to_upd.Email = mail
+        user_to_upd.Airports = ''
         session.commit()
         session.close()
-        bot.send_message(message.chat.id, f"Hello, {name}! Your personal data updated successfully. ✨ Let's update airports that you would like to see: ✈️", reply_markup=markup)
-        sleep(1)
-    bot.send_message(message.chat.id, text='Choose airport to add ✈️', reply_markup=airport_buttons('add', all_airports))
+        
+    member = check_channel_subscription(message)
+
+    msg = '''Right now you should subscripte to our newsletter channel 😊📝\nYou could do it using the link bellow.'''
+    if not member:
+        bot.send_message(message.chat.id, msg, reply_markup=channel_mark())
+        while not member:
+            member = check_channel_subscription(message)
+    else:
+        get_airports(message)
+       
+
+def get_airports(message):
+    session = Session()
+    user = session.query(Users).filter_by(ID = message.chat.id).first()
+    msg = f'''✈️ Hi {user.Name}! 🎉
+Thank you for your registation ✅
+Let's choose the airports that you would like to see: 🛫'''
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    btn1 = types.KeyboardButton('Add airports 🛫') 
+    btn2 = types.KeyboardButton('Remove airports 🛬')
+    btn3 = types.KeyboardButton('My profile 👤')
+    markup.row(btn1,btn2,btn3)
+    bot.send_message(message.chat.id, msg, reply_markup=markup)
+    sleep(2)
+    bot.send_message(message.chat.id, 'Choose airport to add 🛫', reply_markup=airport_buttons('add', all_airports))
 
 
 @bot.message_handler(commands=['renew'])
 def get_user_id(message):
-    bot.send_message(message.chat.id, '🔄 Enter user id and number of days for which you want to renew your subscription (comma separated) 🔄')
-    bot.register_next_step_handler(message, renew_subs)
+    try:
+        user_id = int(message.text.replace('/renew', '').strip())
+    except:
+        bot.send_message(message.chat.id, 'Wrong user id')
+    if isadmin(message.chat.id):
+        bot.send_message(message.chat.id, '🔄 Enter a number of days for which you want to renew your subscription 🔄')
+        bot.register_next_step_handler(message, renew_subs, user_id)
+    else:
+        bot.send_message(message.chat.id, 'You\'re not allowed to use that command ❌')
 
-def renew_subs(message):
-    user_id = int(message.text.split(',')[0].strip())
-    days = int(message.text.split(',')[1].strip())
+
+def renew_subs(message, user_id):
+    days = int(message.text.strip())
     session = Session()
     user = session.query(Users).filter_by(ID = user_id).first()
     if user:
@@ -196,51 +232,136 @@ def renew_subs(message):
         bot.send_message(message.chat.id, '❌ Incorrect user ID. Please use the command again.')
     session.close()
 
+
 @bot.message_handler(commands=['post'])
 def get_post_msg(message):
-    #TODO: Create admin profiles
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    user = session.query(Users).filter_by(ID = message.chat.id).first()
-    if user:
-        bot.send_message(message.chat.id, f'Hi {user.Name}. Enter a post below that you would like to share')
-        bot.register_next_step_handler(message, share_post)
-def share_post(message):
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    admin = session.query(Users).filter_by(ID=message.chat.id).first()
-    
-    if "entities" in message.json:
-        text = message.json["text"]
-        entities = message.json["entities"]
-        
-        current_position = 0
-        formatted_message_parts = []
+    if isadmin(message.chat.id):
 
-        for entity in entities:
-            offset = entity["offset"]
-            length = entity["length"]
-            entity_type = entity["type"]
-
-            formatted_message_parts.append(text[current_position:offset])
-
-            if entity_type == "bold":
-                formatted_message_parts.append(f'*{text[offset:offset+length]}*')
-            elif entity_type == "italic":
-                formatted_message_parts.append(f'_{text[offset:offset+length]}_')
-            current_position = offset + length
-        
-        if current_position < len(text):
-            formatted_message_parts.append(text[current_position:])
-        
-        formatted_message = ''.join(formatted_message_parts)
-
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        user = session.query(Users).filter_by(ID = message.chat.id).first()
+        ids_to_share = message.text.replace('/post', '').strip()
+        if len(ids_to_share) == 0:
+            ids_to_share = None
+        if user:
+            bot.send_message(message.chat.id, f'Hi {user.Name}. Enter a post below that you would like to share')
+            bot.register_next_step_handler(message, share_post, ids_to_share)
+        session.close()
     else:
-        formatted_message = message.json["text"]
-    
-    for user in session.query(Users).all():
-        bot.send_message(user.ID, formatted_message.strip(), parse_mode="Markdown")
-        sleep(1)
+        bot.send_message(message.chat.id, 'You\'re now allowed to use this command ❌')
+
+
+import time
+from telebot.apihelper import ApiException
+
+def escape_markdown(text):
+    """
+    Escape characters for proper MarkdownV2 formatting in Telegram.
+    """
+    escape_chars = r'_*[]()~`>#+-=|{}.!'
+    return ''.join(['\\' + char if char in escape_chars else char for char in text])
+
+def format_entities(text, entities):
+    current_position = 0
+    formatted_message_parts = []
+
+    for entity in entities:
+        offset = entity.offset
+        length = entity.length
+        entity_type = entity.type
+        formatted_message_parts.append(escape_markdown(text[current_position:offset]))
+        if entity_type == "bold":
+            formatted_message_parts.append(f'*{escape_markdown(text[offset:offset+length])}*')
+        elif entity_type == "italic":
+            formatted_message_parts.append(f'_{escape_markdown(text[offset:offset+length])}_')
+        elif entity_type == "code":
+            formatted_message_parts.append(f'`{escape_markdown(text[offset:offset+length])}`')
+        elif entity_type == "pre":
+            formatted_message_parts.append(f'```{escape_markdown(text[offset:offset+length])}```')
+        elif entity_type == "text_link":
+            url = entity.url
+            formatted_message_parts.append(f'[{escape_markdown(text[offset:offset+length])}]({escape_markdown(url)})')
+        elif entity_type == "url":
+            url = text[offset:offset+length]
+            formatted_message_parts.append(f'[{escape_markdown(url)}]({escape_markdown(url)})')
+        current_position = offset + length
+
+    if current_position < len(text):
+        formatted_message_parts.append(escape_markdown(text[current_position:]))
+
+    return ''.join(formatted_message_parts)
+
+def share_post(message, ids_text):
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    share_ids = []
+    if ids_text:
+        for id in ids_text.split(','):
+            try:
+                share_ids.append(int(id))
+            except ValueError:
+                continue
+    if len(share_ids) == 0:
+        share_ids = [user.ID for user in session.query(Users).all()]
+    if message.content_type == 'text':
+        if message.entities:
+            formatted_message = format_entities(message.text, message.entities)
+        else:
+            formatted_message = escape_markdown(message.text)
+    else:
+        formatted_message = None
+    caption = message.caption
+    if caption and message.caption_entities:
+        formatted_caption = format_entities(caption, message.caption_entities)
+    else:
+        formatted_caption = escape_markdown(caption) if caption else None
+
+    for user_id in share_ids:
+        try:
+            if message.content_type == 'text':
+                bot.send_message(user_id, formatted_message.strip(), parse_mode="MarkdownV2")
+            elif message.content_type == 'photo':
+                photo_id = message.photo[-1].file_id
+                bot.send_photo(user_id, photo_id, caption=formatted_caption, parse_mode="MarkdownV2")
+            elif message.content_type == 'video':
+                video_id = message.video.file_id
+                bot.send_video(user_id, video_id, caption=formatted_caption, parse_mode="MarkdownV2")
+            elif message.content_type == 'document':
+                document_id = message.document.file_id
+                bot.send_document(user_id, document_id, caption=formatted_caption, parse_mode="MarkdownV2")
+            elif message.content_type == 'audio':
+                audio_id = message.audio.file_id
+                bot.send_audio(user_id, audio_id, caption=formatted_caption, parse_mode="MarkdownV2")
+            elif message.content_type == 'voice':
+                voice_id = message.voice.file_id
+                bot.send_voice(user_id, voice_id, caption=formatted_caption, parse_mode="MarkdownV2")
+            elif message.content_type == 'sticker':
+                sticker_id = message.sticker.file_id
+                bot.send_sticker(user_id, sticker_id)
+            elif message.content_type == 'animation':
+                animation_id = message.animation.file_id
+                bot.send_animation(user_id, animation_id, caption=formatted_caption, parse_mode="MarkdownV2")
+            elif message.content_type == 'video_note':
+                video_note_id = message.video_note.file_id
+                bot.send_video_note(user_id, video_note_id)
+            elif message.content_type == 'location':
+                bot.send_location(user_id, message.location.latitude, message.location.longitude)
+            elif message.content_type == 'contact':
+                bot.send_contact(user_id, message.contact.phone_number, message.contact.first_name, message.contact.last_name)
+            elif message.content_type == 'poll':
+                bot.send_poll(user_id, question=message.poll.question, options=[option.text for option in message.poll.options], is_anonymous=message.poll.is_anonymous, type=message.poll.type, allows_multiple_answers=message.poll.allows_multiple_answers)
+            else:
+                print(f"Unsupported message type: {message.content_type}")
+        except ApiException as e:
+            if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
+                print(f"User {user_id} blocked the bot.")
+                user_db = session.query(Users).filter(Users.ID == user_id).first()
+                if user_db:
+                    user_db.ActiveUser = False
+                    session.commit()
+            else:
+                print(f"Error sending message to user {user_id}: {e}")
+                time.sleep(1)
     session.close()
 
 
@@ -253,6 +374,8 @@ def search_message(message):
         if not check_subscription(message.chat.id):
             bot.send_message(message.chat.id, '⚠️ Your subscription has expired. Please contact the admin to renew it or purchase a subscription directly in the bot. 🛒')
             return
+        if not check_channel_subscription(message):
+            bot.send_message(message.chat.id, f'Hi, {user.Name}, you\'re not subscribed to our newsletter channel.\nYou can do it immediately using link bellow', reply_markup=channel_mark(name=user.Name))
         user_airports = user.Airports.split('\n')
         for airport in user_airports:
                 data = session.query(Tickets).filter(Tickets.DepartureAirports.like(f'%{airport}%')).all()
@@ -286,6 +409,20 @@ ORDER BY: {row.Type}'''
     else:
         unkown_user(message)
     session.close()
+
+
+@bot.message_handler(commands=['export'])
+def get_csv(message):
+    if isadmin(message.chat.id):
+        export_tables()
+        for table_name in ['Tickets', 'NewTickets', 'Users']:
+            try:
+                with open(f'out/{table_name}.csv', 'rb') as f:
+                    bot.send_document(message.chat.id, document=f)
+            except:
+                continue
+    else:
+        bot.send_message(message.chat.id, 'You\'re not allowed to use that command ❌')
 
 
 @bot.message_handler(content_types=['text'])
@@ -336,7 +473,7 @@ def on_click(message:types.Message):
             unkown_user(message)
             return
         sleep(1)
-    
+
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
@@ -522,6 +659,15 @@ ORDER BY: {row.Type}
             new_markup = airport_buttons(prefix, airports,msg_pos, page=page, direction='backward')
         bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=new_markup)
         session.close()
+
+    if call.data == 'subscribed':
+        member = check_channel_subscription(call.message)
+        if member:
+            bot.answer_callback_query(call.id, 'Successfully ✅')
+            bot.delete_message(call.message.chat.id, call.message.id)
+            get_airports(call.message)
+        else:
+            bot.answer_callback_query(call.id, 'You\'re not subscribed ⚠️', show_alert=True)
 
 
 if __name__ == '__main__': 

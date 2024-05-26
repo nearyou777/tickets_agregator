@@ -1,24 +1,22 @@
-import telebot
-from flask import Flask, request
-from bot import bot, msg_markup, check_subscription
+import os
+import json
 from time import sleep
 from threading import Thread
+from flask import Flask, request
+import telebot
 from telebot import types
-from thriftytraveler import get_data, add_db
-from config import Tickets, NewTickets, Users, SentMessage
-from sqlalchemy.orm import sessionmaker
-from config import engine
-import os
-from dotenv import load_dotenv
 from telebot.apihelper import ApiException
-import json
+from sqlalchemy.orm import sessionmaker
+from dotenv import load_dotenv
+from bot import bot, msg_markup, check_subscription
+from thriftytraveler import get_data, add_db
+from config import Tickets, NewTickets, Users, SentMessage, engine
 from delete_offrers import autodelete
 
 load_dotenv()
 app = Flask(__name__)
 WEBHOOK_URL_PATH = "/webhook"
 Session = sessionmaker(bind=engine)
-
 
 @app.route(WEBHOOK_URL_PATH, methods=['POST'])
 def webhook():
@@ -28,7 +26,6 @@ def webhook():
 
 def set_webhook():
     bot.remove_webhook()
-
     public_url = os.getenv('webhook_url')
     bot.set_webhook(url=public_url + WEBHOOK_URL_PATH)
     print("Webhook is set:", public_url)
@@ -39,7 +36,6 @@ def get_data():
     if not value:
         autodelete()
     return value
-
 
 def send_message():
     while True:
@@ -124,17 +120,21 @@ def handle_channel_message(message):
                 print(f"User {user.ID} blocked the bot.")
                 user_db = session.query(Users).filter(Users.ID == user.ID).first()
                 user_db.ActiveUser = False
+                session.commit()
             else:
+                print(f"Error sending message to user {user.ID}: {e}")
                 sleep(50)
     session.close()
 
 
-@bot.channel_post_handler(content_types=['text', 'photo', 'audio', 'voice', 'sticker', 'animation', 'video_note'])
+@bot.channel_post_handler(content_types=['text', 'photo', 'audio', 'voice', 'sticker', 'animation', 'video_note', 'document'])
 def monitor_channel_posts(message):
+    if str(message.chat.id) == os.getenv('channel_updates_id'):
+        return
     handle_channel_message(message)
 
 
 if __name__ == '__main__':
     set_webhook() 
     Thread(target=send_message).start()  
-    app.run(host="127.0.0.1", port=5000)  
+    app.run(host="127.0.0.1", port=5000)
