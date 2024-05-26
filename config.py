@@ -54,6 +54,7 @@ class Users(Base):
     __tablename__ = 'users'
     ID = Column(Integer, primary_key=True)
     Name = Column(String(200))
+    Email = Column(String(200))
     Airports = Column(String(10000))
     LogInDate = Column(DateTime, default=datetime.utcnow().date)
     SubscriptionDate = Column(DateTime, default=(datetime.utcnow() + timedelta(days=7)).date)
@@ -74,8 +75,12 @@ session.query(NewTickets).delete()
 session.commit()
 session.close()
 
+def isadmin(user_id:int):
+    for admin in [os.getenv('my_id'), os.getenv('vitaliy_id'), os.getenv('maks_id')]:
+        if str(user_id) == str(admin):
+            return True
+    return False
 
-admins = ['id', 'id2']
 all_airports = [
     "Aberdeen (ABR)",
     "Abilene (ABI)",
