@@ -1,3 +1,2 @@
 .env
-out/Tickets.csv
-out/Users.csv
+out/*.csv
