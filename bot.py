@@ -33,13 +33,16 @@ def check_subscription(user_id):
 
 
 def check_channel_subscription(message):
+    print(message.chat.id)
     try:
-        member = bot.get_chat_member(chat_id=os.getenv('channel_updates_id'), user_id=message.chat.id)
-        if member.status in ['member', 'administrator', 'creator']:
+        member = bot.get_chat_member(chat_id=os.getenv('channel_updates_id'), user_id=int(message.chat.id))
+        print(member)
+        if member.status in ['member', 'administrator', 'creator', 'owner']:
             return True
         else:
             return False
     except Exception as e:
+        print(e)
         return False
 
 def msg_markup(offer_id, position='start'):
