@@ -22,9 +22,9 @@ Session = sessionmaker(bind=engine)
 
 
 def unkown_user(message):
-    bot.send_message(message.chat.id, 'You\'re not registred.')
+    bot.send_message(message.chat.id, 'You\'re not registred. 📛')
     sleep(1)
-    start_message(message)
+    welcome_message(message)
 
 def check_subscription(user_id):
     session = Session()
@@ -120,35 +120,39 @@ def airport_buttons(prefix, choosed_airports, current_position=0, step=20, page=
 
 @bot.message_handler(commands=['start'])
 def welcome_message(message):
-    msg = '''✈️ Welcome to my bot! 🌟
-Let's register together! 📝
-Please enter your name: 👤'''
-    bot.send_message(message.chat.id, msg)
-    sleep(1)
+    msg = '''🎉 Welcome to [Bot Name]! 🌟 
+Thank you for joining us on this exciting journey.
+We're thrilled to have you aboard as we explore the world of travel together. Your next adventure starts here! 🌍✈️ '''
+    session = Session()
+    user = session.query(Users).filter_by(ID = message.chat.id).first()
+    if not user:
+        bot.send_message(message.chat.id, msg)
+        sleep(1)
+    bot.send_message(message.chat.id, '''First things first, what's your name? We love to keep things personal here! 📛''')
     bot.register_next_step_handler(message, get_mail)
 
 
-@bot.message_handler(commands=['register'])
-def start_message(message):
-    user_id = message.chat.id
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    user_data  = session.query(Users).filter_by(ID = user_id).first()
-    session.close()
-    if not user_data:
-        msg = '''✈️ Welcome to my bot! 🌟
-Let's register together! 📝
-Please enter your name: 👤'''
-        bot.send_message(message.chat.id,msg)
-        sleep(1)
-        bot.register_next_step_handler(message, get_mail)
-    else:
-        msg = '''Hi 😊, let's update your personal data. 📝
-Please enter your name: 👤'''
-        bot.send_message(message.chat.id,msg)
-        sleep(1)
-        bot.register_next_step_handler(message, get_mail)
-    session.close()
+# @bot.message_handler(commands=['register'])
+# def start_message(message):
+#     user_id = message.chat.id
+#     Session = sessionmaker(bind=engine)
+#     session = Session()
+#     user_data  = session.query(Users).filter_by(ID = user_id).first()
+#     session.close()
+#     if not user_data:
+#         msg = '''✈️ Welcome to my bot! 🌟
+# Let's register together! 📝
+# Please enter your name: 👤'''
+#         bot.send_message(message.chat.id,msg)
+#         sleep(1)
+#         bot.register_next_step_handler(message, get_mail)
+#     else:
+#         msg = '''Hi 😊, let's update your personal data. 📝
+# Please enter your name: 👤'''
+#         bot.send_message(message.chat.id,msg)
+#         sleep(1)
+#         bot.register_next_step_handler(message, get_mail)
+#     session.close()
 
 
 def get_mail(message):
@@ -156,9 +160,9 @@ def get_mail(message):
     if '/' in name:
         unkown_user(message)
         return
-    msg = f'''✈️ Hi {name}! 🎉
-You're almost done. ✅
-Right now please enter your mail: 📧'''
+    msg = f'''Great to meet you, {name}! 🌟 
+Now, could you please share your email address with us?
+We'll use this to keep you updated with the latest flight deals and connect you to our exclusive course on Skool.com. 📧'''
     bot.send_message(message.chat.id, msg)
     sleep(0.5)
     bot.register_next_step_handler(message, channel_subscribe, name)
@@ -182,7 +186,9 @@ def channel_subscribe(message, name):#saving data here
         
     member = check_channel_subscription(message)
 
-    msg = '''Right now you should subscripte to our newsletter channel 😊📝\nYou could do it using the link bellow.'''
+    msg = '''Awesome!😊
+Now, let’s make sure you’re in our exclusive channel
+This step is crucial to continue! 📢''' 
     if not member:
         bot.send_message(message.chat.id, msg, reply_markup=channel_mark())
         while not member:
@@ -194,9 +200,8 @@ def channel_subscribe(message, name):#saving data here
 def get_airports(message):
     session = Session()
     user = session.query(Users).filter_by(ID = message.chat.id).first()
-    msg = f'''✈️ Hi {user.Name}! 🎉
-Thank you for your registation ✅
-Let's choose the airports that you would like to see: 🛫'''
+    msg = f'''Thank you for subscribing!✅ 🎉 You’re awesome! 
+Now, let’s customize your flight alerts. 🛫'''
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = types.KeyboardButton('Add airports 🛫') 
     btn2 = types.KeyboardButton('Remove airports 🛬')
@@ -251,8 +256,6 @@ def get_post_msg(message):
         bot.send_message(message.chat.id, 'You\'re now allowed to use this command ❌')
 
 
-import time
-from telebot.apihelper import ApiException
 
 def escape_markdown(text):
     """
@@ -361,7 +364,7 @@ def share_post(message, ids_text):
                     session.commit()
             else:
                 print(f"Error sending message to user {user_id}: {e}")
-                time.sleep(1)
+                sleep(1)
     session.close()
 
 
@@ -375,15 +378,14 @@ def search_message(message):
             bot.send_message(message.chat.id, '⚠️ Your subscription has expired. Please contact the admin to renew it or purchase a subscription directly in the bot. 🛒')
             return
         if not check_channel_subscription(message):
-            bot.send_message(message.chat.id, f'Hi, {user.Name}, you\'re not subscribed to our newsletter channel.\nYou can do it immediately using link bellow', reply_markup=channel_mark(name=user.Name))
+            bot.send_message(message.chat.id, f'Hi, {user.Name}, you\'re not subscribed to our newsletter channel.\nYou can do it immediately using link bellow', reply_markup=channel_mark())
+            return 
         user_airports = user.Airports.split('\n')
         for airport in user_airports:
                 data = session.query(Tickets).filter(Tickets.DepartureAirports.like(f'%{airport}%')).all()
                 counter = 0
                 if len(data) > 0:
                     counter += 1 
-                if len(data) == 0 and counter == 0:
-                    bot.send_message(message.chat.id, 'Sorry, currently we have sent all deals for you😞')
                 user_id = message.chat.id
                 for row in data:
                     if session.query(SentMessage).filter_by(user_id=user_id, message_id=f'old_{row.ID}').first():
@@ -667,7 +669,7 @@ ORDER BY: {row.Type}
             bot.delete_message(call.message.chat.id, call.message.id)
             get_airports(call.message)
         else:
-            bot.answer_callback_query(call.id, 'You\'re not subscribed ⚠️', show_alert=True)
+            bot.answer_callback_query(call.id, '''Hmm, it looks like you haven't subscribed yet. Please subscribe to continue getting personalized flight alerts. We can't wait to get you started! 🚀''', show_alert=True)
 
 
 if __name__ == '__main__': 

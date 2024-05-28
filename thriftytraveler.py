@@ -9,7 +9,7 @@ import requests
 
 def login() -> tls_client.Session: 
     s = tls_client.Session(client_identifier='chrome_105')
-
+    #TODO: login retry
     json_data = {
         'email': 'vitaliytravels@gmail.com',
         'password': 'Test1234567890',
