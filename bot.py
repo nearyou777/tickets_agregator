@@ -123,7 +123,7 @@ def airport_buttons(prefix, choosed_airports, current_position=0, step=20, page=
 
 @bot.message_handler(commands=['start'])
 def welcome_message(message):
-    msg = '''🎉 Welcome to [Bot Name]! 🌟 
+    msg = '''🎉 Welcome to Travel Hacker Bot! 🌟 
 Thank you for joining us on this exciting journey.
 We're thrilled to have you aboard as we explore the world of travel together. Your next adventure starts here! 🌍✈️ '''
     session = Session()
@@ -174,6 +174,7 @@ def channel_subscribe(message, name):#saving data here
     user_id = message.chat.id
     mail = message.text.strip()
     session = Session()
+    flag = False
     if not session.query(Users).filter_by(ID = user_id).first():  
         session.add(Users(ID=user_id, Name=name,Email=mail, Airports='')) 
         session.commit()
@@ -186,6 +187,7 @@ def channel_subscribe(message, name):#saving data here
         user_to_upd.Airports = ''
         session.commit()
         session.close()
+        flag = True
         
     member = check_channel_subscription(message)
 
@@ -197,10 +199,10 @@ This step is crucial to continue! 📢'''
         while not member:
             member = check_channel_subscription(message)
     else:
-        get_airports(message)
+        get_airports(message, flag)
        
 
-def get_airports(message):
+def get_airports(message, flag:bool):
     session = Session()
     user = session.query(Users).filter_by(ID = message.chat.id).first()
     msg = f'''Thank you for subscribing!✅ 🎉 You’re awesome! 
@@ -210,8 +212,13 @@ Now, let’s customize your flight alerts. 🛫'''
     btn2 = types.KeyboardButton('Remove airports 🛬')
     btn3 = types.KeyboardButton('My profile 👤')
     markup.row(btn1,btn2,btn3)
-    bot.send_message(message.chat.id, msg, reply_markup=markup)
-    sleep(2)
+    if not flag:
+        bot.send_message(message.chat.id, msg, reply_markup=markup)
+        sleep(1)
+    else:
+        msg = f'''Thanks for still subscribing our group!✅ 🎉 You’re awesome! 
+Now, let’s customize your flight alerts. 🛫'''
+        bot.send_message(message.chat.id, msg, reply_markup=markup)
     bot.send_message(message.chat.id, 'Choose airport to add 🛫', reply_markup=airport_buttons('add', all_airports))
 
 
