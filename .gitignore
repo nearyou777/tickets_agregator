@@ -118,7 +118,6 @@ dmypy.json
 .pyre/
 .pytype/
 cython_debug/
-<<<<<<< HEAD
 .env
 out/*.csv
 *.json
