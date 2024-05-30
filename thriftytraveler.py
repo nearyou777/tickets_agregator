@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 from config import Tickets, NewTickets, engine
 from bs4 import BeautifulSoup
 import requests
+from time import sleep
 
 def login() -> tls_client.Session: 
     s = tls_client.Session(client_identifier='chrome_105')
@@ -15,7 +16,15 @@ def login() -> tls_client.Session:
         'password': 'Test1234567890',
         'rememberMe': True,
     }
-    s.post('https://apiv2.thriftytraveler.com/auth/login', json=json_data)
+    try:
+        s.post('https://apiv2.thriftytraveler.com/auth/login', json=json_data)
+    except:
+        sleep(60)
+        try:
+            s.post('https://apiv2.thriftytraveler.com/auth/login', json=json_data)
+        except:
+            sleep(60)
+            s.post('https://apiv2.thriftytraveler.com/auth/login', json=json_data)
     return s
 
 
@@ -78,12 +87,19 @@ def get_data():
         'status': 'PUBLISHED',
         'page': 1
     }
-
-    r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
+    try:
+        r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
+    except:
+        sleep(60)
+        r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
     page_count = r.json()['meta']['totalPages']
     for page in range(1, int(page_count) + 1):
         params['page'] = page
-        r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
+        try:
+            r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
+        except:
+            sleep(60)
+            r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
         for item in r.json()['items']:
             type = item['type']
             cabin = item['cabin']
@@ -137,6 +153,7 @@ def get_data():
                 'BookGuide' : guide, 
                 'Summary' : summary,
                 'PictureName' : picture_name})
+            print(len(data))
     return data
 
 
