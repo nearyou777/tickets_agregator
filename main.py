@@ -55,7 +55,7 @@ def send_message():
                         msg = f'''✈️<strong>{row.Title}</strong>✈️
 {row.Cabin}
 -----------------------
-{row.Price}(was {row.OriginalPrice})
+{row.Price} (was {row.OriginalPrice})
 -----------------------
 {row.Dates}
 -----------------------

@@ -403,7 +403,7 @@ def search_message(message):
                     msg = f'''✈️<strong>{row.Title}</strong>✈️
 {row.Cabin}
 -----------------------
-{row.Price}(was {row.OriginalPrice})
+{row.Price} (was {row.OriginalPrice})
 -----------------------
 {row.Dates}
 -----------------------
@@ -576,7 +576,7 @@ def callback_query(call):
         msg = f'''✈️<strong>{row.Title}</strong>✈️
 {row.Cabin}
 -----------------------
-{row.Price}(was {row.OriginalPrice})
+{row.Price} (was {row.OriginalPrice})
 -----------------------
 {row.Dates}
 -----------------------
@@ -597,7 +597,7 @@ ORDER BY: {row.Type}
         msg = f'''✈️<strong>{row.Title}</strong>✈️
 {row.Cabin}
 -----------------------
-{row.Price}(was {row.OriginalPrice})
+{row.Price} (was {row.OriginalPrice})
 -----------------------
 {row.Dates}
 -----------------------
@@ -618,7 +618,7 @@ ORDER BY: {row.Type}
         msg = f'''✈️<strong>{row.Title}</strong>✈️
 {row.Cabin}
 -----------------------
-{row.Price}(was {row.OriginalPrice})
+{row.Price} (was {row.OriginalPrice})
 -----------------------
 {row.Dates}
 -----------------------
