@@ -7,6 +7,11 @@ from config import Tickets, NewTickets, engine
 from bs4 import BeautifulSoup
 import requests
 from time import sleep
+from bot import bot
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 def login() -> tls_client.Session: 
     s = tls_client.Session(client_identifier='chrome_105')
@@ -24,7 +29,14 @@ def login() -> tls_client.Session:
             s.post('https://apiv2.thriftytraveler.com/auth/login', json=json_data)
         except:
             sleep(60)
-            s.post('https://apiv2.thriftytraveler.com/auth/login', json=json_data)
+            try:
+                s.post('https://apiv2.thriftytraveler.com/auth/login', json=json_data)
+            except:
+                sleep(120)
+                try:
+                    s.post('https://apiv2.thriftytraveler.com/auth/login', json=json_data)
+                except:
+                    bot.send_message(os.getenv('my_id'), 'There\'s an error with login')
     return s
 
 
