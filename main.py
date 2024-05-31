@@ -52,13 +52,14 @@ def send_message():
                     for row in data:
                         if session.query(SentMessage).filter_by(user_id=user_id, message_id=f"new_{row.ID}").first():
                             continue
-                        msg = f'''<strong>{row.Title}</strong>
+                        msg = f'''✈️<strong>{row.Title}</strong>✈️
 {row.Cabin}
 -----------------------
-{row.Price}
+{row.Price}(was {row.OriginalPrice})
+-----------------------
+{row.Dates}
 -----------------------
 ORDER BY: {row.Type}'''
-
                         try:
                             base_path = os.getcwd()
                             photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')

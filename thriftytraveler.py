@@ -10,7 +10,7 @@ from time import sleep
 from bot import bot
 from dotenv import load_dotenv
 import os
-
+from datetime import datetime
 load_dotenv()
 
 def login() -> tls_client.Session: 
@@ -38,6 +38,12 @@ def login() -> tls_client.Session:
                 except:
                     bot.send_message(os.getenv('my_id'), 'There\'s an error with login')
     return s
+
+
+def get_month_name(date_str):
+    date_obj = datetime.strptime(date_str, "%Y-%m-%dT%H:%M:%S.%fZ")
+
+    return date_obj.strftime("%B")
 
 
 def get_data():
@@ -153,19 +159,25 @@ def get_data():
             guide = BeautifulSoup(item['bookingInstructions'], 'lxml').text.strip()
             # guide = '<b>Booking guide will be here</b>'
             summary = item['summaryRaw']
+            original_price = f'${item["originalPrice"]}' if item["originalPriceType"] == "CASH" else f'{item["originalPrice"]}k'
+            start_date = get_month_name(item['periods'][0]["startDate"])
+            end_date = get_month_name(item['periods'][0]["endDate"])
+            dates = f'{start_date} - {end_date}'
+
             data.append({
                 'ID' : id,
                 'Title': title, 
                 'Type': type, 
                 'Cabin': cabin,
                 'Price': price, 
+                'OriginalPrice' : original_price,
+                'Dates' : dates,
                 'Book' : bookURL,
                 'DepartureCities' : departure_cities.strip(),
                 'DepartureAirports' : departure_airports,
                 'BookGuide' : guide, 
                 'Summary' : summary,
                 'PictureName' : picture_name})
-            print(len(data))
     return data
 
 
