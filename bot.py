@@ -10,17 +10,25 @@ import json
 from datetime import datetime, timedelta
 from telebot.apihelper import ApiException
 from export_data import export_tables
+from PIL import Image
+from io import BytesIO
 load_dotenv()
     
 
 #TODO:PROMOCODES
-#TODO: Fix db errors & markup error
+#TODO: Fix image size
 bot = telebot.TeleBot(os.getenv('token'))
 airports = []
 current_position = 0
 Session = sessionmaker(bind=engine)
 
-
+def resize_image(image_path, max_width, max_height):
+    with Image.open(image_path) as img:
+        img.thumbnail((max_width, max_height))
+        buffer = BytesIO()
+        img.save(buffer, format="JPEG")
+        buffer.seek(0)
+        return buffer
 def unkown_user(message):
     bot.send_message(message.chat.id, 'You\'re not registred. 📛')
     sleep(1)
@@ -50,6 +58,7 @@ def msg_markup(offer_id, position='start'):
     row = session.query(Tickets).filter(Tickets.ID == offer_id).first()
     markup = types.InlineKeyboardMarkup()
     btn_cities = types.InlineKeyboardButton('Departure cities', callback_data=f'departure {offer_id}')
+    markup.row(btn_cities)
     # deal_summary = types.InlineKeyboardButton('Deal Summary', callback_data=f'summary {offer_id}')
     # book_guide = types.InlineKeyboardButton('Booking Guide', callback_data=f'book_guide {offer_id}')
     # book_link = types.InlineKeyboardButton('Book Now', url=row.Book)
