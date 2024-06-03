@@ -121,4 +121,4 @@ cython_debug/
 .env
 out/*.csv
 *.json
-imgs/*.jpg
+imgs/*

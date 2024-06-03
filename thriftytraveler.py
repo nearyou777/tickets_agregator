@@ -12,10 +12,10 @@ from dotenv import load_dotenv
 import os
 from datetime import datetime
 load_dotenv()
+s = tls_client.Session(client_identifier='chrome_105')
 
 def login() -> tls_client.Session: 
-    s = tls_client.Session(client_identifier='chrome_105')
-    #TODO: login retry
+    
     json_data = {
         'email': 'vitaliytravels@gmail.com',
         'password': 'Test1234567890',
@@ -123,7 +123,6 @@ def get_data():
             cabin = item['cabin']
             if 'BUSINESS_AND_FIRST_CLASS' in cabin:
                 cabin = 'Business & First class'
-            title = item['title']
             if 'points' in type.lower():
                 type = 'Points'
                 price = f"{item['pricePrefix']} {item['price']}k points"
@@ -143,7 +142,7 @@ def get_data():
                 if i.find('strong'):
                     strong = i.find("strong").text.strip()
                     normal = i.text.replace(f"{strong}", "").replace("<br>", "\n").replace('\r', '').strip()
-                    msg = f'\n<b>{strong}</b>\n{normal}'
+                    msg = f'\n*{strong}*\n{normal}'
                     departure_cities.append(msg)
                 else:departure_cities.append(i.text.strip())
             departure_cities = '\n'.join(departure_cities)
@@ -163,6 +162,8 @@ def get_data():
             start_date = get_month_name(item['periods'][0]["startDate"])
             end_date = get_month_name(item['periods'][0]["endDate"])
             dates = f'{start_date} - {end_date}'
+            trip_type = item["departureCitiesSubheading"]
+            title = f"{item['title']}\n{trip_type}"
 
             data.append({
                 'ID' : id,

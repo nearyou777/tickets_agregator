@@ -14,7 +14,7 @@ load_dotenv()
     
 
 #TODO:PROMOCODES
-
+#TODO: Fix db errors & markup error
 bot = telebot.TeleBot(os.getenv('token'))
 airports = []
 current_position = 0
@@ -50,21 +50,21 @@ def msg_markup(offer_id, position='start'):
     row = session.query(Tickets).filter(Tickets.ID == offer_id).first()
     markup = types.InlineKeyboardMarkup()
     btn_cities = types.InlineKeyboardButton('Departure cities', callback_data=f'departure {offer_id}')
-    deal_summary = types.InlineKeyboardButton('Deal Summary', callback_data=f'summary {offer_id}')
-    book_guide = types.InlineKeyboardButton('Booking Guide', callback_data=f'book_guide {offer_id}')
-    book_link = types.InlineKeyboardButton('Book Now', url=row.Book)
-    if position == 'start':
-        markup.row(deal_summary, btn_cities)
-        markup.row(book_guide, book_link) 
-    elif position == 'departure':
-        markup.row(deal_summary, book_guide)
-        markup.row(book_link) 
-    elif position == 'guide':
-        markup.row(deal_summary, btn_cities)
-        markup.row(book_link) 
-    else: 
-        markup.row(btn_cities, book_guide)
-        markup.row(book_link) 
+    # deal_summary = types.InlineKeyboardButton('Deal Summary', callback_data=f'summary {offer_id}')
+    # book_guide = types.InlineKeyboardButton('Booking Guide', callback_data=f'book_guide {offer_id}')
+    # book_link = types.InlineKeyboardButton('Book Now', url=row.Book)
+    # if position == 'start':
+    #     markup.row(deal_summary, btn_cities)
+    #     markup.row(book_guide, book_link) 
+    # elif position == 'departure':
+    #     markup.row(deal_summary, book_guide)
+    #     markup.row(book_link) 
+    # elif position == 'guide':
+    #     markup.row(deal_summary, btn_cities)
+    #     markup.row(book_link) 
+    # else: 
+    #     markup.row(btn_cities, book_guide)
+    #     markup.row(book_link) 
     return markup
 
 
@@ -392,6 +392,8 @@ def search_message(message):
             return 
         user_airports = user.Airports.split('\n')
         for airport in user_airports:
+                airport = f"({airport.split('(')[-1]}"
+                print(airport)
                 data = session.query(Tickets).filter(Tickets.DepartureAirports.like(f'%{airport}%')).all()
                 counter = 0
                 if len(data) > 0:
@@ -400,7 +402,7 @@ def search_message(message):
                 for row in data:
                     if session.query(SentMessage).filter_by(user_id=user_id, message_id=f'old_{row.ID}').first():
                         continue
-                    msg = f'''✈️<strong>{row.Title}</strong>✈️
+                    msg = f'''✈️*{row.Title}*✈️
 {row.Cabin}
 -----------------------
 {row.Price} (was {row.OriginalPrice})
@@ -414,7 +416,8 @@ ORDER BY: {row.Type}'''
                     photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
                     with open(photo_path, 'rb') as photo:
                         bot.send_photo(user_id, photo=photo)
-                    bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
+                    bot.send_message(user_id, msg, parse_mode='Markdown', reply_markup=markup)
+                    # bot.send_message(user_id, msg, parse_mode='Markdown')
                     sleep(1)
                     sent_message = SentMessage(user_id=user_id, message_id=f"old_{row.ID}")
                     session.add(sent_message)
@@ -573,7 +576,7 @@ def callback_query(call):
         session = Session()
        
         row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
-        msg = f'''✈️<strong>{row.Title}</strong>✈️
+        msg = f'''✈️*{row.Title}*✈️
 {row.Cabin}
 -----------------------
 {row.Price} (was {row.OriginalPrice})
@@ -586,7 +589,7 @@ ORDER BY: {row.Type}
 
 {row.DepartureCities}'''        
         markup = msg_markup(row.ID, 'departure')
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML', reply_markup=markup)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='Markdown', reply_markup=markup)
         bot.answer_callback_query(call.id, 'Fetching...')
         session.close()
 
@@ -594,7 +597,7 @@ ORDER BY: {row.Type}
         Session = sessionmaker(bind=engine)
         session = Session()
         row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
-        msg = f'''✈️<strong>{row.Title}</strong>✈️
+        msg = f'''✈️*{row.Title}*✈️
 {row.Cabin}
 -----------------------
 {row.Price} (was {row.OriginalPrice})
@@ -603,11 +606,11 @@ ORDER BY: {row.Type}
 -----------------------
 ORDER BY: {row.Type}
 -----------------------
-<b>Booking guide:</b>
+*Booking guide:*
 
 {row.BookGuide}'''        
         markup = msg_markup(row.ID, 'guide')
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML', reply_markup=markup)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='Markdown', reply_markup=markup)
         bot.answer_callback_query(call.id, 'Fetching...')
         session.close()
 
@@ -615,7 +618,7 @@ ORDER BY: {row.Type}
         Session = sessionmaker(bind=engine)
         session = Session()
         row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
-        msg = f'''✈️<strong>{row.Title}</strong>✈️
+        msg = f'''✈️*{row.Title}*✈️
 {row.Cabin}
 -----------------------
 {row.Price} (was {row.OriginalPrice})
@@ -624,11 +627,11 @@ ORDER BY: {row.Type}
 -----------------------
 ORDER BY: {row.Type}
 -----------------------
-<b>Deal Summary:</b>
+*Deal Summary:*
 
 {row.Summary}'''        
         markup = msg_markup(row.ID, 'summary')
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML', reply_markup=markup)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='Markdown', reply_markup=markup)
         bot.answer_callback_query(call.id, 'Fetching...')
         session.close()
 

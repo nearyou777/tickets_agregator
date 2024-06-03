@@ -17,6 +17,7 @@ load_dotenv()
 app = Flask(__name__)
 WEBHOOK_URL_PATH = "/webhook"
 Session = sessionmaker(bind=engine)
+#TODO: SEGMENTATIONS 
 
 @app.route(WEBHOOK_URL_PATH, methods=['POST'])
 def webhook():
@@ -52,7 +53,7 @@ def send_message():
                     for row in data:
                         if session.query(SentMessage).filter_by(user_id=user_id, message_id=f"new_{row.ID}").first():
                             continue
-                        msg = f'''✈️<strong>{row.Title}</strong>✈️
+                        msg = f'''✈️*{row.Title}*✈️
 {row.Cabin}
 -----------------------
 {row.Price} (was {row.OriginalPrice})

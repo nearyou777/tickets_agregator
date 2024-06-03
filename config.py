@@ -20,7 +20,7 @@ class Tickets(Base):
     Price = Column(String(50))
     OriginalPrice = Column(String(50))
     Dates = Column(String(200))
-    Book = Column(String(5000))
+    Book = Column(String(5000)),
     DepartureCities = Column(String(10000))
     DepartureAirports = Column(String(10000))
     BookGuide = Column(String(10000))
