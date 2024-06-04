@@ -17,6 +17,7 @@ import os
 session = Session()
 row = session.query(Tickets).filter(Tickets.ID == "Pomelo-9556").first()
 print(row.Book)
+session.close()
 # def reduce_image_size(input_path, output_path):
 #     # Максимальный размер в байтах
 #     max_size_bytes = 1024 * 1024

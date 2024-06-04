@@ -35,7 +35,9 @@ def get_data():
     #TODO: Add all scraping scripts & scraping logic 
     value = add_db()
     if not value:
+        bot.send_message(os.getenv('my_id'), 'starting pomelo')
         value = add_pomelo()
+        bot.send_message(os.getenv('my_id'), 'end pomelo')
         if not value:
             autodelete()
     return value

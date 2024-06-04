@@ -86,6 +86,7 @@ def get_data():
         if session.query(Tickets).filter(Tickets.ID==id).first():
             continue
         session.close()
+        session.close()
         dates = item["deal_availability_duration"]
 
         try:

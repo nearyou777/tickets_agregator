@@ -1,16 +1,17 @@
 from sqlalchemy.orm import sessionmaker
 from telebot import types
-from models import Tickets,Users, SentMessage, engine
+from models import Tickets
+from config import Session
 import math
 import os
 from dotenv import load_dotenv
 load_dotenv()
-Session = sessionmaker(bind=engine)
 
 
 def msg_markup(offer_id, position='start'):
     session = Session()
     row = session.query(Tickets).filter(Tickets.ID == offer_id).first()
+    session.close()
     markup = types.InlineKeyboardMarkup()
     btn_cities = types.InlineKeyboardButton('Departure cities', callback_data=f'departure {offer_id}')
     deal_summary = types.InlineKeyboardButton('Deal Summary', callback_data=f'summary {offer_id}')

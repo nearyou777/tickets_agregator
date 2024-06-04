@@ -152,6 +152,7 @@ def get_data():
             session = Session()
             if session.query(Tickets).filter(Tickets.ID==id).first():
                 continue
+            session.close()
             img_link = item['coverImage']
             r = requests.get(img_link)
             picture_name = img_link.split('/')[-1] if r.status_code == 200 else None

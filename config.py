@@ -25,6 +25,7 @@ def isadmin(user_id:int):
 def check_subscription(user_id):
     session = Session()
     user = session.query(Users).filter(Users.ID==user_id).first()
+    session.close()
     return user.SubscriptionDate.date() >= datetime.utcnow().date() or user.BuyedSubscription
 
 all_airports = [
