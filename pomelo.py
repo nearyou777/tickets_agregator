@@ -75,7 +75,6 @@ def get_data():
     text_maker.ignore_links = True
     text_maker.ignore_images = True
     for item in r.json()['data']:
-        #FIXME: Optimise runtime
         title = item['title']
         price = item['price']
         original_price = item['normal_price']

@@ -295,6 +295,7 @@ def search_message(message):
                     if session.query(SentMessage).filter_by(user_id=user_id, message_id=f'old_{row.ID}').first():
                         continue
                     msg = f'''✈️*{row.Title}*✈️
+-----------------------
 {row.Cabin}
 -----------------------
 {row.Price} (was {row.OriginalPrice})
@@ -302,6 +303,7 @@ def search_message(message):
 {row.Dates}
 -----------------------
 ORDER BY: {row.Type}'''
+                    print(msg)
 
                     markup = msg_markup(row.ID, 'start')
                     base_path = os.getcwd()
@@ -472,7 +474,7 @@ def callback_query(call):
 -----------------------
 ORDER BY: {row.Type}
 -----------------------
-<b>Departure cities: </b>
+*Departure cities:*
 
 {row.DepartureCities}'''        
         markup = msg_markup(row.ID, 'departure')
