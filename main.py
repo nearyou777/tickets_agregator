@@ -11,13 +11,12 @@ from dotenv import load_dotenv
 from bot import bot, msg_markup, check_subscription
 from thriftytraveler import get_data, add_db
 from models import Tickets, NewTickets, Users, SentMessage
-from config import engine
+from config import engine, Session
 from delete_offrers import autodelete
 from pomelo import add_pomelo
 load_dotenv()
 app = Flask(__name__)
 WEBHOOK_URL_PATH = "/webhook"
-Session = sessionmaker(bind=engine)
 #TODO: SEGMENTATIONS 
 
 @app.route(WEBHOOK_URL_PATH, methods=['POST'])

@@ -6,7 +6,7 @@ from bot import bot
 from dotenv import load_dotenv
 import os
 from models import Tickets
-from config import engine
+from config import engine, Session
 
 load_dotenv()
 
@@ -14,7 +14,6 @@ my_id = os.getenv('my_id')
 
 from PIL import Image
 import os
-Session = sessionmaker(bind=engine)
 session = Session()
 row = session.query(Tickets).filter(Tickets.ID == "Pomelo-9556").first()
 print(row.Book)

@@ -8,6 +8,7 @@ from models import Tickets, NewTickets, engine
 from PIL import Image
 import os
 from time import sleep
+from config import Session
 # s = requests.Session()
 s = tls_client.Session(client_identifier='chrome_105')
 
@@ -81,10 +82,10 @@ def get_data():
         type = 'Cash'
         cabin = item["ticket_type"]
         id = f"Pomelo-{item['id']}"
-        Session = sessionmaker(bind=engine)
         session = Session()
         if session.query(Tickets).filter(Tickets.ID==id).first():
             continue
+        session.close()
         dates = item["deal_availability_duration"]
 
         try:

@@ -7,7 +7,7 @@ from config import engine
 from dotenv import load_dotenv
 import os
 import json
-from config import all_airports
+from config import all_airports, Session
 from datetime import datetime, timedelta
 import pandas as pd
 load_dotenv()
@@ -15,7 +15,6 @@ load_dotenv()
 
 
 def export_tables():
-    Session = sessionmaker(bind=engine)
     session = Session()
     for table_name in ['Tickets', 'NewTickets', 'Users']:
         try:

@@ -2,18 +2,16 @@ import telebot
 from time import sleep
 from telebot import types
 from models import Tickets,Users, SentMessage
-from sqlalchemy.orm import sessionmaker
 import math
 from config import engine
 from dotenv import load_dotenv
 import os
 import json
-from config import all_airports
+from config import all_airports, Session
 from datetime import datetime, timedelta
 
 load_dotenv()
 
-Session = sessionmaker(bind=engine)
 
 def autodelete():
     session = Session()

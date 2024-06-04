@@ -10,8 +10,10 @@ from models import Users, Tickets, SentMessage, engine
 from datetime import datetime, timedelta
 from telebot.apihelper import ApiException
 from export_data import export_tables, all_airports
-from config import check_subscription, isadmin
+from config import check_subscription, isadmin, Session
 from buttons import msg_markup, channel_mark, airport_buttons
+
+
 load_dotenv()
     
 
@@ -20,7 +22,6 @@ load_dotenv()
 bot = telebot.TeleBot(os.getenv('token'))
 airports = []
 current_position = 0
-Session = sessionmaker(bind=engine)
 
 def unkown_user(message):
     bot.send_message(message.chat.id, 'You\'re not registred. 📛')
