@@ -12,7 +12,7 @@ from bot import bot, msg_markup, check_subscription
 from thriftytraveler import get_data, add_db
 from config import Tickets, NewTickets, Users, SentMessage, engine
 from delete_offrers import autodelete
-
+from pomelo import add_pomelo
 load_dotenv()
 app = Flask(__name__)
 WEBHOOK_URL_PATH = "/webhook"
@@ -35,7 +35,9 @@ def get_data():
     #TODO: Add all scraping scripts & scraping logic 
     value = add_db()
     if not value:
-        autodelete()
+        value = add_pomelo()
+        if not value:
+            autodelete()
     return value
 
 def send_message():
