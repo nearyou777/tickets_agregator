@@ -4,15 +4,9 @@ from sqlalchemy import create_engine, Column, Integer, ForeignKey, String, DateT
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime, timedelta
-from models import engine, NewTickets, Users
+from models import engine, NewTickets, Users, Session
 
 
-Session = sessionmaker(bind=engine)
-session = Session()
-
-session.query(NewTickets).delete()
-session.commit()
-session.close()
 
 
 

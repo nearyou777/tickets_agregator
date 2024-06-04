@@ -1,7 +1,7 @@
 # models.py
 from sqlalchemy import create_engine, Column, Integer, ForeignKey, String, DateTime, Boolean
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, sessionmaker
 from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
@@ -70,3 +70,12 @@ class Users(Base):
     IsActiveUser = Column(Boolean, default=True)
     sent_messages = relationship("SentMessage", back_populates="user")
 Base.metadata.create_all(engine)
+
+
+
+Session = sessionmaker(bind=engine)
+session = Session()
+
+session.query(NewTickets).delete()
+session.commit()
+session.close()

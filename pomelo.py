@@ -4,11 +4,10 @@ import tls_client
 import html2text
 import pyshorteners
 from sqlalchemy.orm import sessionmaker
-from models import Tickets, NewTickets, engine
+from models import Tickets, NewTickets, engine, Session
 from PIL import Image
 import os
 from time import sleep
-from config import Session
 # s = requests.Session()
 s = tls_client.Session(client_identifier='chrome_105')
 
