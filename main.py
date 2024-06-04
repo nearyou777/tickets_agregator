@@ -10,7 +10,8 @@ from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 from bot import bot, msg_markup, check_subscription
 from thriftytraveler import get_data, add_db
-from config import Tickets, NewTickets, Users, SentMessage, engine
+from models import Tickets, NewTickets, Users, SentMessage
+from config import engine
 from delete_offrers import autodelete
 from pomelo import add_pomelo
 load_dotenv()
