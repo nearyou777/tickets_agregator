@@ -3,7 +3,7 @@ import json
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from config import Tickets, NewTickets, engine
+from models import Tickets, NewTickets, engine
 from bs4 import BeautifulSoup
 import requests
 from time import sleep
@@ -148,6 +148,10 @@ def get_data():
             departure_cities = '\n'.join(departure_cities)
             departure_airports = ', '.join([i['city'] for i in item['departureCities']])
             id = item['id']
+            Session = sessionmaker(bind=engine)
+            session = Session()
+            if session.query(Tickets).filter(Tickets.ID==id).first():
+                continue
             img_link = item['coverImage']
             r = requests.get(img_link)
             picture_name = img_link.split('/')[-1] if r.status_code == 200 else None

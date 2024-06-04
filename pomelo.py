@@ -4,7 +4,10 @@ import tls_client
 import html2text
 import pyshorteners
 from sqlalchemy.orm import sessionmaker
-from config import Tickets, NewTickets, engine
+from models import Tickets, NewTickets, engine
+from PIL import Image
+import os
+from time import sleep
 # s = requests.Session()
 s = tls_client.Session(client_identifier='chrome_105')
 
@@ -18,6 +21,43 @@ def login():
     r = s.post('https://api-v2.pomelotravel.com/api/v1/login', json=json_data)
     return r.json()['token']
 
+def reduce_image_size(input_path, output_path, max_size_mb=10):
+    # Максимальный размер в байтах
+    max_size_bytes = 1024 * 1024
+    
+    # Открываем изображение
+    with Image.open(input_path) as img:
+        # Получаем исходные размеры изображения
+        width, height = img.size
+        
+
+        # Определяем формат файла
+        output_format = output_path.split('.')[-1].upper() if output_path.split('.')[-1].upper() != 'JPG' else 'JPEG'
+        # Если формат не поддерживается для сохранения, используем JPEG
+        if output_format not in ['JPEG', 'JPG', 'PNG']:
+            output_format = 'PNG'
+            output_path = output_path.rsplit('.', 1)[0] + '.PNG'
+        
+        # Сначала сохраняем изображение с исходным разрешением и качеством
+        img.save(output_path, format=output_format, optimize=True, quality=95)
+        final_size = os.path.getsize(output_path)
+        
+        # Проверяем размер файла и уменьшаем разрешение до достижения нужного размера
+        while final_size > max_size_bytes:
+            # Уменьшаем разрешение на 10%
+            width = int(width * 0.9)
+            height = int(height * 0.9)
+            img = img.resize((width, height), Image.LANCZOS)
+            sleep(0.2)
+            # Сохраняем изображение с уменьшенным разрешением
+            img.save(output_path, format=output_format, optimize=True, quality=95)
+            final_size = os.path.getsize(output_path)
+    if input_path != output_path:
+        os.remove(input_path)
+    return output_path
+
+
+
 def get_data():
     token = login()
     data = []
@@ -28,21 +68,33 @@ def get_data():
         'https://api-v2.pomelotravel.com/api/v1/deals-pomelo?company_id=1&type=International,Domestic&page=1&airports=&per_page=1000',
         headers=headers
     )
+    with open('pomelo.json', 'w') as f:
+        json.dump(r.json(),f,indent=2)
     text_maker = html2text.HTML2Text()
     text_maker.ignore_links = True
     text_maker.ignore_images = True
     for item in r.json()['data']:
-        #TODO: Optimise runtime
+        #FIXME: Optimise runtime
         title = item['title']
         price = item['price']
         original_price = item['normal_price']
         type = 'Cash'
         cabin = item["ticket_type"]
         id = f"Pomelo-{item['id']}"
+        Session = sessionmaker(bind=engine)
+        session = Session()
+        if session.query(Tickets).filter(Tickets.ID==id).first():
+            continue
         dates = item["deal_availability_duration"]
-        bookURL = item["booking_links"][0]['link'] if item["booking_links"] else item["booking_instructions_override"][1]["booking_links"][0]['link']
-        bookURL = pyshorteners.Shortener().tinyurl.short(bookURL)
+
+        try:
+            bookURL = item["booking_links"][0]['link'] if item["booking_links"] else item["booking_instructions_override"][1]["booking_links"][0]['link']
+            bookURL = str(pyshorteners.Shortener().tinyurl.short(bookURL))
+        except:
+            bookURL = item["booking_links"][0]['link'] if item["booking_links"] else item["booking_instructions_override"][1]["booking_links"][0]['link']
+
         summary = text_maker.handle(item['message_body']).replace('*', '-').replace('--', '*')     
+        
         book_guide = item["booking_instructions_override"] 
         if not book_guide:
             book_guide = '''✅Click the button below to find your desired dates using Google Flights.
@@ -51,11 +103,10 @@ def get_data():
         else:
             intro = text_maker.handle(item["booking_instructions_override"][0]['headline']).replace('*', '-').replace('--', '*')
             option1_title = text_maker.handle(item["booking_instructions_override"][1]['headline']).replace('*', '-').replace('--', '*')
-            # short_url = pyshorteners.Shortener().tinyurl.short(url)
-            option1_links  = [f'{i["label"]} - {pyshorteners.Shortener().tinyurl.short(i["link"])}' for i in item["booking_instructions_override"][1]["booking_links"]]
+            option1_links  = '\n'.join([f'{i["label"]} - {pyshorteners.Shortener().tinyurl.short(i["link"])}' for i in item["booking_instructions_override"][1]["booking_links"]])
             try:
                 option2_title = text_maker.handle(item["booking_instructions_override"][2]['headline']).replace('*', '-').replace('--', '*')
-                option2_links =  [f'{i["label"]} - {pyshorteners.Shortener().tinyurl.short(i["link"])}' for i in item["booking_instructions_override"][2]["booking_links"]]
+                option2_links =  '\n'.join([f'{i["label"]} - {pyshorteners.Shortener().tinyurl.short(i["link"])}' for i in item["booking_instructions_override"][2]["booking_links"]])
             except:
                 option2_links = None
             if option2_links:
@@ -73,14 +124,27 @@ def get_data():
 
 {option1_links}
 '''
-        # print(item["departure_airport_deals"][0]["airport"])
-        departure_cities = '\n'.join([f'{i["airport"]["airport_name"]} - ${i["price"]}' for i in item["departure_airport_deals"]])
+                
 
+        departure_cities = '\n'.join([f'{i["airport"]["airport_name"]} - ${i["price"]}' for i in item["departure_airport_deals"]])
         departure_airports = ', '.join([f'({i["airport"]["IATA"]})' for i in item["departure_airport_deals"]])
+
+
         image_link = f'https://d3mdkiyq6mk8lq.cloudfront.net/{item["featured_image"]}'
         picture_name = item["featured_image"].split('/')[-1]
-        with open(f'out/{picture_name}', 'wb') as f:
-            f.write(requests.get(image_link).content)
+        with open(f'imgs/{picture_name}', 'wb') as f:
+            r = requests.get(image_link)
+            f.write(r.content)
+            if r.status_code == 413:
+                image_link = f'https://d3mdkiyq6mk8lq.cloudfront.net/{item["original_deal_image"]}'
+                picture_name = item["original_deal_image"].split('/')[-1]
+                with open(f'imgs/{picture_name}', 'wb') as f:
+                    r = requests.get(image_link)
+                    f.write(r.content)
+
+
+        path = reduce_image_size(f'imgs/{picture_name}', f'imgs/{picture_name}').split('/')[1]
+
         data.append({
             'ID' : id,
             'Title': title, 
@@ -94,12 +158,12 @@ def get_data():
             'DepartureAirports' : departure_airports,
             'BookGuide' : book_guide, 
             'Summary' : summary,
-            'PictureName' : picture_name})
+            'PictureName' : path})
+        
     return data
             
 def add_pomelo() -> bool:
     data = get_data()
-
     Session = sessionmaker(bind=engine)
     session = Session()
     for item in data:

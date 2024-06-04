@@ -1,7 +1,6 @@
 import telebot
 from time import sleep
 from telebot import types
-from config import Tickets,Users, SentMessage, NewTickets
 from sqlalchemy.orm import sessionmaker
 import math
 from config import engine

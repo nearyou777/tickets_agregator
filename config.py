@@ -4,73 +4,8 @@ from sqlalchemy import create_engine, Column, Integer, ForeignKey, String, DateT
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime, timedelta
-load_dotenv()
-engine = create_engine(os.getenv('connection_string'), echo=True)
+from models import engine, NewTickets, Users
 
-
-Base = declarative_base()
-
-class Tickets(Base):
-    __tablename__ = f'tickets'
-    Primary_Key  = Column(Integer, primary_key=True)
-    ID = Column(String(100))
-    Title  = Column(String(500))
-    Type = Column(String(200))
-    Cabin = Column(String(500))
-    Price = Column(String(50))
-    OriginalPrice = Column(String(50))
-    Dates = Column(String(200))
-    Book = Column(String(5000)),
-    DepartureCities = Column(String(10000))
-    DepartureAirports = Column(String(10000))
-    BookGuide = Column(String(10000))
-    Summary = Column(String(10000))
-    PictureName = Column(String(100))
-    DateAdded = Column(DateTime, default=datetime.utcnow().date)
-
-
-class NewTickets(Base):
-    __tablename__ = f'new_tickets'
-    Primary_Key  = Column(Integer, primary_key=True)
-    ID = Column(String(100))
-    Title  = Column(String(500))
-    Type = Column(String(200))
-    Cabin = Column(String(500))
-    Price = Column(String(50))
-    OriginalPrice = Column(String(50))
-    Dates = Column(String(200))
-    Book = Column(String(5000))
-    DepartureCities = Column(String(10000))
-    DepartureAirports = Column(String(10000))
-    BookGuide = Column(String(10000))
-    Summary = Column(String(10000))
-    PictureName = Column(String(100))
-
-
-class SentMessage(Base):
-    __tablename__ = 'sent_messages'
-    id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.ID'))
-    message_id = Column(String(200))
-    user = relationship("Users", back_populates="sent_messages")
-
-class Users(Base):
-    __tablename__ = 'users'
-    ID = Column(Integer, primary_key=True)
-    Name = Column(String(200))
-    Email = Column(String(200))
-    Airports = Column(String(10000))
-    LogInDate = Column(DateTime, default=datetime.utcnow().date)
-    SubscriptionDate = Column(DateTime, default=(datetime.utcnow() + timedelta(days=7)).date)
-    BuyedSubscription = Column(Boolean, default=False)
-    IsActiveUser = Column(Boolean, default=True)
-    sent_messages = relationship("SentMessage", back_populates="user")
-
-# class Channel(Base):
-#     __tablename__ = 'channel'
-#     ID = Column(Integer, primary_key=True)
-#     # LastUpdate = Column(Str)
-Base.metadata.create_all(engine)
 
 Session = sessionmaker(bind=engine)
 session = Session()
@@ -79,11 +14,18 @@ session.query(NewTickets).delete()
 session.commit()
 session.close()
 
+
+
 def isadmin(user_id:int):
     for admin in [os.getenv('my_id'), os.getenv('vitaliy_id'), os.getenv('maks_id')]:
         if str(user_id) == str(admin):
             return True
     return False
+    
+def check_subscription(user_id):
+    session = Session()
+    user = session.query(Users).filter(Users.ID==user_id).first()
+    return user.SubscriptionDate.date() >= datetime.utcnow().date() or user.BuyedSubscription
 
 all_airports = [
     "Aberdeen (ABR)",

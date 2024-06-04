@@ -1,17 +1,17 @@
 import telebot
 from time import sleep
 from telebot import types
-from config import Tickets,Users, SentMessage, all_airports, engine, isadmin
 from sqlalchemy.orm import sessionmaker
 import math
 from dotenv import load_dotenv
 import os
 import json
+from models import Users, Tickets, SentMessage, engine
 from datetime import datetime, timedelta
 from telebot.apihelper import ApiException
-from export_data import export_tables
-from PIL import Image
-from io import BytesIO
+from export_data import export_tables, all_airports
+from config import check_subscription, isadmin
+from buttons import msg_markup, channel_mark, airport_buttons
 load_dotenv()
     
 
@@ -22,29 +22,17 @@ airports = []
 current_position = 0
 Session = sessionmaker(bind=engine)
 
-def resize_image(image_path, max_width, max_height):
-    with Image.open(image_path) as img:
-        img.thumbnail((max_width, max_height))
-        buffer = BytesIO()
-        img.save(buffer, format="JPEG")
-        buffer.seek(0)
-        return buffer
 def unkown_user(message):
     bot.send_message(message.chat.id, 'You\'re not registred. 📛')
     sleep(1)
     welcome_message(message)
 
-def check_subscription(user_id):
-    session = Session()
-    user = session.query(Users).filter(Users.ID==user_id).first()
-    return user.SubscriptionDate.date() >= datetime.utcnow().date() or user.BuyedSubscription
+
 
 
 def check_channel_subscription(message):
-    print(message.chat.id)
     try:
         member = bot.get_chat_member(chat_id=os.getenv('channel_updates_id'), user_id=int(message.chat.id))
-        print(member)
         if member.status in ['member', 'administrator', 'creator', 'owner']:
             return True
         else:
@@ -52,83 +40,6 @@ def check_channel_subscription(message):
     except Exception as e:
         print(e)
         return False
-
-def msg_markup(offer_id, position='start'):
-    session = Session()
-    row = session.query(Tickets).filter(Tickets.ID == offer_id).first()
-    markup = types.InlineKeyboardMarkup()
-    btn_cities = types.InlineKeyboardButton('Departure cities', callback_data=f'departure {offer_id}')
-    markup.row(btn_cities)
-    # deal_summary = types.InlineKeyboardButton('Deal Summary', callback_data=f'summary {offer_id}')
-    # book_guide = types.InlineKeyboardButton('Booking Guide', callback_data=f'book_guide {offer_id}')
-    # book_link = types.InlineKeyboardButton('Book Now', url=row.Book)
-    # if position == 'start':
-    #     markup.row(deal_summary, btn_cities)
-    #     markup.row(book_guide, book_link) 
-    # elif position == 'departure':
-    #     markup.row(deal_summary, book_guide)
-    #     markup.row(book_link) 
-    # elif position == 'guide':
-    #     markup.row(deal_summary, btn_cities)
-    #     markup.row(book_link) 
-    # else: 
-    #     markup.row(btn_cities, book_guide)
-    #     markup.row(book_link) 
-    return markup
-
-
-def channel_mark():
-    markup = types.InlineKeyboardMarkup()
-    btn1 = types.InlineKeyboardButton('Our Channel', url=os.getenv('channel_url'))
-    btn2 = types.InlineKeyboardButton('I\'m subscribed✅', callback_data=f'subscribed')
-    markup.add(btn1)
-    markup.add(btn2)
-    return markup
-
-
-def airport_buttons(prefix, choosed_airports, current_position=0, step=20, page=1,direction='forward'):
-    markup = types.InlineKeyboardMarkup()
-    if direction == 'forward':
-        start_index = current_position
-        end_index = min(current_position + step, len(choosed_airports))
-    elif direction == 'backward':
-        end_index = current_position + step
-        start_index = max(end_index - step, 0)
-
-    start_index = current_position
-    end_index = min(current_position + step, len(choosed_airports))
-
-    airports_chunk = [choosed_airports[i:i+2] for i in range(start_index, end_index, 2)]
-    for chunk in airports_chunk:
-        buttons = [types.InlineKeyboardButton(airport, callback_data=f'{prefix}_{airport}') for airport in chunk]
-        markup.row(*buttons)
-
-    total_pages = math.ceil(len(choosed_airports) / step)
-    page_buttons = f'Page {page} of {total_pages}'
-    current_button  = types.InlineKeyboardButton(page_buttons, callback_data='empty')
-    all_btn = types.InlineKeyboardButton(f'{prefix.capitalize()} All airports', callback_data=f'{prefix}_all')
-
-    if end_index < len(choosed_airports):
-        next_button = types.InlineKeyboardButton('Next', callback_data=f'{prefix}_next_{page}_scrollbtn')
-    else:
-        next_button = None
-    if page > 1:
-        back_button = types.InlineKeyboardButton('Back', callback_data=f'{prefix}_back_{page}_scrollbtn')
-    else:
-        back_button = None
-    if next_button and not back_button:
-        markup.add(all_btn)
-        markup.row(current_button, next_button)
-    elif next_button and back_button:
-        markup.add(all_btn)
-        markup.row(back_button, current_button, next_button)
-    elif not next_button and not back_button:
-        markup.row(all_btn, current_button)
-    else:
-        markup.add(all_btn)
-        markup.row(back_button, current_button)
-    return markup
-
 
 @bot.message_handler(commands=['start'])
 def welcome_message(message):
@@ -142,29 +53,6 @@ We're thrilled to have you aboard as we explore the world of travel together. Yo
         sleep(1)
     bot.send_message(message.chat.id, '''First things first, what's your name? We love to keep things personal here! 📛''')
     bot.register_next_step_handler(message, get_mail)
-
-
-# @bot.message_handler(commands=['register'])
-# def start_message(message):
-#     user_id = message.chat.id
-#     Session = sessionmaker(bind=engine)
-#     session = Session()
-#     user_data  = session.query(Users).filter_by(ID = user_id).first()
-#     session.close()
-#     if not user_data:
-#         msg = '''✈️ Welcome to my bot! 🌟
-# Let's register together! 📝
-# Please enter your name: 👤'''
-#         bot.send_message(message.chat.id,msg)
-#         sleep(1)
-#         bot.register_next_step_handler(message, get_mail)
-#     else:
-#         msg = '''Hi 😊, let's update your personal data. 📝
-# Please enter your name: 👤'''
-#         bot.send_message(message.chat.id,msg)
-#         sleep(1)
-#         bot.register_next_step_handler(message, get_mail)
-#     session.close()
 
 
 def get_mail(message):
@@ -261,7 +149,6 @@ def renew_subs(message, user_id):
 def get_post_msg(message):
     if isadmin(message.chat.id):
 
-        Session = sessionmaker(bind=engine)
         session = Session()
         user = session.query(Users).filter_by(ID = message.chat.id).first()
         ids_to_share = message.text.replace('/post', '').strip()
@@ -314,7 +201,6 @@ def format_entities(text, entities):
     return ''.join(formatted_message_parts)
 
 def share_post(message, ids_text):
-    Session = sessionmaker(bind=engine)
     session = Session()
     share_ids = []
     if ids_text:
@@ -376,20 +262,17 @@ def share_post(message, ids_text):
                 print(f"Unsupported message type: {message.content_type}")
         except ApiException as e:
             if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
-                print(f"User {user_id} blocked the bot.")
                 user_db = session.query(Users).filter(Users.ID == user_id).first()
                 if user_db:
                     user_db.ActiveUser = False
                     session.commit()
             else:
-                print(f"Error sending message to user {user_id}: {e}")
                 sleep(1)
     session.close()
 
 
 @bot.message_handler(commands=['search'])
 def search_message(message):    
-    Session = sessionmaker(bind=engine)
     session = Session()
     user = session.query(Users).filter_by(ID = message.chat.id).first()
     if user:
@@ -402,7 +285,6 @@ def search_message(message):
         user_airports = user.Airports.split('\n')
         for airport in user_airports:
                 airport = f"({airport.split('(')[-1]}"
-                print(airport)
                 data = session.query(Tickets).filter(Tickets.DepartureAirports.like(f'%{airport}%')).all()
                 counter = 0
                 if len(data) > 0:
@@ -426,6 +308,7 @@ ORDER BY: {row.Type}'''
                     with open(photo_path, 'rb') as photo:
                         bot.send_photo(user_id, photo=photo)
                     bot.send_message(user_id, msg, parse_mode='Markdown', reply_markup=markup)
+
                     # bot.send_message(user_id, msg, parse_mode='Markdown')
                     sleep(1)
                     sent_message = SentMessage(user_id=user_id, message_id=f"old_{row.ID}")
@@ -453,7 +336,6 @@ def get_csv(message):
 
 @bot.message_handler(content_types=['text'])
 def on_click(message:types.Message):
-    Session = sessionmaker(bind=engine)
     session = Session()
     user = session.query(Users).filter_by(ID = message.chat.id).first()
     if user:
@@ -483,7 +365,6 @@ def on_click(message:types.Message):
             sleep(1) 
 
     elif 'My profile' in message.text:
-        Session = sessionmaker(bind=engine)
         session = Session()
         user = session.query(Users).filter_by(ID = message.chat.id).first()
         session.close()
@@ -503,7 +384,6 @@ def on_click(message:types.Message):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_query(call):
-    Session = sessionmaker(bind=engine)
     session = Session()
     user = session.query(Users).filter_by(ID = call.message.chat.id).first()
     if user:
@@ -517,7 +397,6 @@ def callback_query(call):
     session.close()
 
     if 'add' in call.data and '_scrollbtn' not in call.data :
-        Session = sessionmaker(bind=engine)
         session = Session()
         user = session.query(Users).filter_by(ID = call.message.chat.id).first()
         if not user:
@@ -543,7 +422,6 @@ def callback_query(call):
         session.close()
 
     elif 'remove' in call.data and '_scrollbtn' not in call.data:
-        Session = sessionmaker(bind=engine)
         session = Session()
         user = session.query(Users).filter_by(ID = call.message.chat.id).first()
         if user:
@@ -581,7 +459,6 @@ def callback_query(call):
         session.close()
 
     elif 'departure' in call.data:
-        Session = sessionmaker(bind=engine)
         session = Session()
        
         row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
@@ -603,7 +480,6 @@ ORDER BY: {row.Type}
         session.close()
 
     elif 'book_guide' in call.data:
-        Session = sessionmaker(bind=engine)
         session = Session()
         row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
         msg = f'''✈️*{row.Title}*✈️
@@ -624,7 +500,6 @@ ORDER BY: {row.Type}
         session.close()
 
     elif 'summary' in call.data:
-        Session = sessionmaker(bind=engine)
         session = Session()
         row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
         msg = f'''✈️*{row.Title}*✈️
@@ -645,7 +520,6 @@ ORDER BY: {row.Type}
         session.close()
 
     elif call.data  ==  'end' :
-        Session = sessionmaker(bind=engine)
         session = Session()
         user = session.query(Users).filter_by(ID = call.message.chat.id).first()
         if not user:
@@ -656,7 +530,6 @@ ORDER BY: {row.Type}
         session.close()
 
     elif 'next' in call.data:
-        Session = sessionmaker(bind=engine)
         session = Session()
         prev_page = int(call.data.split('_')[-2]) 
         msg_pos = prev_page * 20
@@ -677,7 +550,6 @@ ORDER BY: {row.Type}
         session.close()
 
     elif 'back' in call.data:
-        Session = sessionmaker(bind=engine)
         session = Session()
         prev_page = int(call.data.split('_')[-2])  -1
         msg_pos = (prev_page * 20) - 20

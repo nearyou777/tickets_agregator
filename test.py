@@ -1,60 +1,68 @@
 import telebot
 from time import sleep
 from telebot import types
-from config import Tickets,Users, SentMessage, all_airports, engine, isadmin
 from sqlalchemy.orm import sessionmaker
-import math
+from bot import bot
 from dotenv import load_dotenv
 import os
-import json
-from datetime import datetime, timedelta
-from telebot.apihelper import ApiException
-from export_data import export_tables
-import html2text
+from models import Tickets
+from config import engine
+
 load_dotenv()
-from bot import bot
-from bs4 import BeautifulSoup
-import pyshorteners
+
 my_id = os.getenv('my_id')
-import html2text
-import requests
 
-url = 'https://d3mdkiyq6mk8lq.cloudfront.net/images/deals/01HZ00TZEQNSK2YXFA3RNN3N7C.avif'
-with open('test.avif', 'wb') as f:
-    f.write(requests.get(url).content)
-    # bot.send_photo(my_id, f)
-# url = 'https://www.google.com/travel/flights/search?tfs=CBwQAhpGEgoyMDI0LTA5LTA0Mg1TVEFSX0FMTElBTkNFMgdTS1lURUFNMghPTkVXT1JMRGoHCAESA0xBWHINCAISCS9tLzAyMndyMxpGEgoyMDI0LTA5LTExMg1TVEFSX0FMTElBTkNFMgdTS1lURUFNMghPTkVXT1JMRGoNCAISCS9tLzAyMndyM3IHCAESA0xBWEABSAFwAYIBCwj___________8BmAEB&hl=en-US&gl=US&curr=USD'
-# short_url = pyshorteners.Shortener().tinyurl.short(url)
+from PIL import Image
+import os
+Session = sessionmaker(bind=engine)
+session = Session()
+row = session.query(Tickets).filter(Tickets.ID == "Pomelo-9556").first()
+print(row.Book)
+# def reduce_image_size(input_path, output_path):
+#     # Максимальный размер в байтах
+#     max_size_bytes = 1024 * 1024
+    
+#     # Открываем изображение
+#     with Image.open(input_path) as img:
+#         # Получаем исходные размеры изображения
+#         width, height = img.size
+        
+#         # Сначала сохраняем изображение с исходным разрешением и качеством
+#         img.save(output_path, optimize=True, quality=95)
+#         final_size = os.path.getsize(output_path)
+        
+#         # Проверяем размер файла и уменьшаем разрешение до достижения нужного размера
+#         while final_size > max_size_bytes:
+#             # Уменьшаем разрешение на 10%
+#             width = int(width * 0.9)
+#             height = int(height * 0.9)
+#             img = img.resize((width, height), Image.LANCZOS)
+            
+#             # Сохраняем изображение с уменьшенным разрешением
+#             img.save(output_path, optimize=True, quality=95)
+#             final_size = os.path.getsize(output_path)
+        
 
-# from telegram
+# # Пример использования функции
+# input_path = 'imgs/01HZFEWPDDA3T17NXD8R5QHSJG.avif'
+# output_path = 'imgs/01HZG2QH1CVREC24ASE0W7V8XP.jpg'
+# # reduce_image_size(input_path, output_path)
 
-# html_content = """
-# <p>This trip requires booking 2 round-trip flights with options from any of the departure cities listed above to Dublin and from Dublin to the Isle of Man.<br><br>Your trip will look something like this:</p>
-# <ul>
-#     <li>Departure city from above to Dublin, Ireland via multiple airline options from $394 round-trip</li>
-#     <li>Dublin, Ireland to Isle of Man via Aer Lingus from $146 nonstop</li>
-# </ul>
-# <p><strong>Total: $540-$685+</strong></p>
-# """
+# with open(output_path, 'rb') as f:
+#     bot.send_photo(my_id,f)
+# input_path = r'imgs/01HZFEZFBCRFVDQWVSJ2AKX8TJ.jpg'
+# with Image.open(input_path) as img:
+#     img.size
+# import tls_client
+# import requests
+# s = tls_client.Session(client_identifier='chrome_105')
+# headers = {
+#     'Upgrade-Insecure-Requests': '1',
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36',
+#     'sec-ch-ua': '"Google Chrome";v="125", "Chromium";v="125", "Not.A/Brand";v="24"',
+#     'sec-ch-ua-mobile': '?0',
+#     'sec-ch-ua-platform': '"Windows"',
+# }
 
-# text_maker = html2text.HTML2Text()
-# text_maker.ignore_links = True
-# text_maker.ignore_images = True
-
-# markdown_content = text_maker.handle(html_content)
-# with open('test.json') as f:
-#     item = json.load(f)['data'][0]["booking_instructions_override"][0]['headline']
-#     text_maker = html2text.HTML2Text()
-#     text_maker.ignore_links = True
-#     text_maker.ignore_images = True
-
-#     data = text_maker.handle(item).replace('*', '-').replace('--', '*')
-#     # data = text_maker.handle(item)
-#     # print(data)
-#     bot.send_message(my_id, f"{data}", parse_mode='Markdown')
-# a = 'abc'
-# print(a + 'd')
-# Session = sessionmaker(bind=engine)
-# session = Session()
-# data = session.query(Tickets).filter(Tickets.DepartureAirports.like(f'%(SFO)%')).all()
-# print(len(data))
+# r = requests.get('https://d3mdkiyq6mk8lq.cloudfront.net/images/deals/01HZFEZFBCRFVDQWVSJ2AKX8TJ.jpg', headers=headers,)
+# print(r)
