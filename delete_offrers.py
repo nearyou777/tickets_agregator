@@ -7,11 +7,11 @@ from config import engine
 from dotenv import load_dotenv
 import os
 import json
-from config import all_airports, Session
+from config import all_airports
 from datetime import datetime, timedelta
-
+from sqlalchemy.orm import sessionmaker
 load_dotenv()
-
+Session = sessionmaker(bind=engine)
 
 def autodelete():
     session = Session()
