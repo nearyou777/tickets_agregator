@@ -10,7 +10,7 @@ import os
 from time import sleep
 # s = requests.Session()
 s = tls_client.Session(client_identifier='chrome_105')
-
+Session = sessionmaker(bind=engine)
 def login():
     json_data = {
         'email': 'Vitaliytravels@gmail.com',
@@ -73,7 +73,7 @@ def get_data():
     text_maker = html2text.HTML2Text()
     text_maker.ignore_links = True
     text_maker.ignore_images = True
-    for item in r.json()['data']:
+    for item in r.json()['data'][:5]:
         title = item['title']
         price = item['price']
         original_price = item['normal_price']
@@ -164,10 +164,17 @@ def get_data():
             
 def add_pomelo() -> bool:
     data = get_data()
-    Session = sessionmaker(bind=engine)
     session = Session()
+    if len(data) == 0:
+        session = Session()
+
+        session.query(NewTickets).delete()
+        session.commit()
+        session.close()
+        return False
     for item in data:
         exist = session.query(Tickets).filter_by(ID = item['ID']).first()
+        print(exist)
         if not exist:
             session.add(Tickets(**item))
             session.add(NewTickets(**item))

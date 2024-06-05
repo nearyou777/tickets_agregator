@@ -13,6 +13,7 @@ import os
 from datetime import datetime
 load_dotenv()
 s = tls_client.Session(client_identifier='chrome_105')
+Session = sessionmaker(bind=engine)
 
 def login() -> tls_client.Session: 
     
@@ -189,9 +190,14 @@ def get_data():
 
 def add_db() -> bool:
     data = get_data()
-
-    Session = sessionmaker(bind=engine)
+        
     session = Session()
+    if len(data) == 0:
+        session = Session()
+        session.query(NewTickets).delete()
+        session.commit()
+        session.close()
+        return False
     for item in data:
         exist = session.query(Tickets).filter_by(ID = item['ID']).first()
         if not exist:
@@ -200,6 +206,8 @@ def add_db() -> bool:
     session.commit()
     count = session.query(NewTickets).count()
     session.close()
+    if not count > 0:
+        print('thrify empty')
     return count > 0
 
         

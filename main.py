@@ -15,6 +15,7 @@ from config import engine
 from delete_offrers import autodelete
 from pomelo import add_pomelo
 load_dotenv()
+
 app = Flask(__name__)
 WEBHOOK_URL_PATH = "/webhook"
 #TODO: SEGMENTATIONS 
@@ -33,12 +34,9 @@ def set_webhook():
     print("Webhook is set:", public_url)
 
 def get_data():
-    #TODO: Add all scraping scripts & scraping logic 
     value = add_db()
     if not value:
-        bot.send_message(os.getenv('my_id'), 'starting pomelo')
         value = add_pomelo()
-        bot.send_message(os.getenv('my_id'), 'end pomelo')
         if not value:
             autodelete()
     return value
@@ -54,6 +52,8 @@ def send_message():
                 if not check_subscription(user.ID):
                     continue
                 for airport in user_airports:
+
+                    airport = f"({airport.split('(')[-1]}"
                     data = session.query(NewTickets).filter(NewTickets.DepartureAirports.like(f'%{airport}%')).all()
                     for row in data:
                         if session.query(SentMessage).filter_by(user_id=user_id, message_id=f"new_{row.ID}").first():
@@ -72,7 +72,8 @@ ORDER BY: {row.Type}'''
                             if row.PictureName:
                                 with open(photo_path, 'rb') as photo:
                                     bot.send_photo(user_id, photo=photo)
-                            bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=msg_markup(row.ID))
+                            bot.send_message(user_id, msg, parse_mode='Markdown', reply_markup=msg_markup(row.ID))
+                            sleep(1)
                         except ApiException as e:
                             if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
                                 print(f"User {user_id} blocked the bot.")

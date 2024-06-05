@@ -72,7 +72,7 @@ class Users(Base):
 Base.metadata.create_all(engine)
 
 
-
+print('clear123')
 Session = sessionmaker(bind=engine)
 session = Session()
 

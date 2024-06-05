@@ -3,11 +3,11 @@ from time import sleep
 from telebot import types
 from sqlalchemy.orm import sessionmaker
 import math
-from config import engine
 from dotenv import load_dotenv
 import os
 import json
-from config import all_airports, Session
+from config import all_airports
+from models import Session
 from datetime import datetime, timedelta
 import pandas as pd
 load_dotenv()
