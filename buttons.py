@@ -54,7 +54,7 @@ def airport_buttons(prefix, choosed_airports, current_position=0, step=20, page=
 
     start_index = current_position
     end_index = min(current_position + step, len(choosed_airports))
-
+    #FIXME: REMOVE BUG
     airports_chunk = [choosed_airports[i:i+2] for i in range(start_index, end_index, 2)]
     for chunk in airports_chunk:
         buttons = [types.InlineKeyboardButton(airport, callback_data=f'{prefix}_{airport}') for airport in chunk]

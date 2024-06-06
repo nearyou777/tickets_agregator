@@ -126,7 +126,7 @@ def get_data():
 '''
                 
 
-        departure_cities = '\n'.join([f'{i["airport"]["airport_name"]} - ${i["price"]}' for i in item["departure_airport_deals"]])
+        departure_cities = '\n'.join([f'<b>{i["airport"]["airport_name"]} - ${i["price"]}</b>' for i in item["departure_airport_deals"]])
         departure_airports = ', '.join([f'({i["airport"]["IATA"]})' for i in item["departure_airport_deals"]])
 
 

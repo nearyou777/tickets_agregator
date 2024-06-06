@@ -143,10 +143,10 @@ def get_data():
                 if i.find('strong'):
                     strong = i.find("strong").text.strip()
                     normal = i.text.replace(f"{strong}", "").replace("<br>", "\n").replace('\r', '').strip()
-                    msg = f'\n*{strong}*\n{normal}'
+                    msg = f'\n<b>{strong}</b>\n{normal}'
                     departure_cities.append(msg)
                 else:departure_cities.append(i.text.strip())
-            departure_cities = '\n'.join(departure_cities).replace('* ', '')
+            departure_cities = '\n'.join(departure_cities)
             departure_airports = ', '.join([i['city'] for i in item['departureCities']])
             id = item['id']
             Session = sessionmaker(bind=engine)
@@ -169,7 +169,7 @@ def get_data():
             end_date = get_month_name(item['periods'][0]["endDate"])
             dates = f'{start_date} - {end_date}'
             trip_type = item["departureCitiesSubheading"]
-            title = f"{item['title']}\n{trip_type.replace('*', '^')}"
+            title = f"{item['title']}\n{trip_type}"
 
             data.append({
                 'ID' : id,

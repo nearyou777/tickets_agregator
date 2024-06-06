@@ -8,13 +8,14 @@ from telebot import types
 from telebot.apihelper import ApiException
 from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
-from bot import bot, msg_markup, check_subscription
+from bot import msg_markup, check_subscription, bot
 from thriftytraveler import get_data, add_db
 from models import Tickets, NewTickets, Users, SentMessage
 from config import engine
 from delete_offrers import autodelete
 from pomelo import add_pomelo
 load_dotenv()
+
 
 app = Flask(__name__)
 WEBHOOK_URL_PATH = "/webhook"
@@ -52,13 +53,12 @@ def send_message():
                 if not check_subscription(user.ID):
                     continue
                 for airport in user_airports:
-
                     airport = f"({airport.split('(')[-1]}"
                     data = session.query(NewTickets).filter(NewTickets.DepartureAirports.like(f'%{airport}%')).all()
                     for row in data:
                         if session.query(SentMessage).filter_by(user_id=user_id, message_id=f"new_{row.ID}").first():
                             continue
-                        msg = f'''✈️*{row.Title}*✈️
+                        msg = f'''✈️<b>{row.Title}</b>✈️
 {row.Cabin}
 -----------------------
 {row.Price} (was {row.OriginalPrice})
@@ -72,7 +72,7 @@ ORDER BY: {row.Type}'''
                             if row.PictureName:
                                 with open(photo_path, 'rb') as photo:
                                     bot.send_photo(user_id, photo=photo)
-                            bot.send_message(user_id, msg, parse_mode='Markdown', reply_markup=msg_markup(row.ID))
+                            bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=msg_markup(row.ID))
                             sleep(1)
                         except ApiException as e:
                             if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:

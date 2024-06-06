@@ -10,9 +10,8 @@ from models import Users, Tickets, SentMessage, engine
 from datetime import datetime, timedelta
 from telebot.apihelper import ApiException
 from export_data import export_tables, all_airports
-from config import check_subscription, isadmin, Session
+from config import check_subscription, isadmin, Session, escape_markdown, format_entities
 from buttons import msg_markup, channel_mark, airport_buttons
-
 
 load_dotenv()
     
@@ -21,13 +20,6 @@ load_dotenv()
 #TODO: Fix image size
 bot = telebot.TeleBot(os.getenv('token'))
 airports = []
-current_position = 0
-
-def unkown_user(message):
-    bot.send_message(message.chat.id, 'You\'re not registred. 📛')
-    sleep(1)
-    welcome_message(message)
-
 
 
 
@@ -41,6 +33,63 @@ def check_channel_subscription(message):
     except Exception as e:
         print(e)
         return False
+
+
+def unkown_user(message):
+    bot.send_message(message.chat.id, 'You\'re not registred. 📛')
+    sleep(1)
+    welcome_message(message)
+
+@bot.message_handler(commands=['profile'])
+def get_user_info(message):
+    session = Session()
+    user = session.query(Users).filter_by(ID = message.chat.id).first()
+    session.close()
+    if user:
+        user_airports = user.Airports.strip()
+
+        if len(user.Airports.split('\n')) == 222:
+            user_airports = 'All available ✈️'
+        if len(user.Airports) == 0:
+            user_airports = 'You didn\'t choose any airport. 🛫' 
+        bot.send_message(message.chat.id, f'👤 <b>Your name: </b>{user.Name}\n\n<b>Your contact email:</b> {user.Email}\n\n<b>📅 Subscription end date: </b>{user.SubscriptionDate.date()}\n\n<b>✈️ Your airports: </b>\n{user_airports}', parse_mode='HTML')
+        sleep(1)
+    else:
+        unkown_user(message)
+        return
+    
+
+@bot.message_handler(commands=['add_airports'])
+def add_airports(message):
+    bot.send_message(message.chat.id, text='Choose airport to add ✈️', reply_markup=airport_buttons('add', all_airports))
+    sleep(1)
+
+
+@bot.message_handler(commands=['remove_airports'])
+def remove_airports(message):
+    session = Session()
+    user = session.query(Users).filter_by(ID = message.chat.id).first()
+    if user:
+        user_airports = user.Airports.strip()
+        if len(user_airports) == 0:
+            user_airports = []
+        else:
+            user_airports = user_airports.split('\n')
+    else:
+        user_airports = []
+        session.close()
+        unkown_user(message)
+        return
+    
+    if len(user_airports) == 0: 
+        bot.send_message(message.chat.id, text='🌍 Your airports list is empty. Please add airports to continue. 🛫') 
+    else:
+        user_airports = user.Airports.strip().split('\n')
+        bot.send_message(message.chat.id, text='🛬 Choose airport to remove:', reply_markup=airport_buttons('remove', user_airports))   
+    sleep(1) 
+    session.close()
+
+
 
 @bot.message_handler(commands=['start'])
 def welcome_message(message):
@@ -101,8 +150,6 @@ This step is crucial to continue! 📢'''
        
 
 def get_airports(message, flag:bool):
-    session = Session()
-    user = session.query(Users).filter_by(ID = message.chat.id).first()
     msg = f'''Thank you for subscribing!✅ 🎉 You’re awesome! 
 Now, let’s customize your flight alerts. 🛫'''
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
@@ -117,7 +164,7 @@ Now, let’s customize your flight alerts. 🛫'''
         msg = f'''Thanks for still subscribing our group!✅ 🎉 You’re awesome! 
 Now, let’s customize your flight alerts. 🛫'''
         bot.send_message(message.chat.id, msg, reply_markup=markup)
-    bot.send_message(message.chat.id, 'Choose airport to add 🛫', reply_markup=airport_buttons('add', all_airports))
+    add_airports(message)
 
 
 @bot.message_handler(commands=['renew'])
@@ -149,7 +196,6 @@ def renew_subs(message, user_id):
 @bot.message_handler(commands=['post'])
 def get_post_msg(message):
     if isadmin(message.chat.id):
-
         session = Session()
         user = session.query(Users).filter_by(ID = message.chat.id).first()
         ids_to_share = message.text.replace('/post', '').strip()
@@ -162,44 +208,6 @@ def get_post_msg(message):
     else:
         bot.send_message(message.chat.id, 'You\'re now allowed to use this command ❌')
 
-
-
-def escape_markdown(text):
-    """
-    Escape characters for proper MarkdownV2 formatting in Telegram.
-    """
-    escape_chars = r'_*[]()~`>#+-=|{}.!'
-    return ''.join(['\\' + char if char in escape_chars else char for char in text])
-
-def format_entities(text, entities):
-    current_position = 0
-    formatted_message_parts = []
-
-    for entity in entities:
-        offset = entity.offset
-        length = entity.length
-        entity_type = entity.type
-        formatted_message_parts.append(escape_markdown(text[current_position:offset]))
-        if entity_type == "bold":
-            formatted_message_parts.append(f'*{escape_markdown(text[offset:offset+length])}*')
-        elif entity_type == "italic":
-            formatted_message_parts.append(f'_{escape_markdown(text[offset:offset+length])}_')
-        elif entity_type == "code":
-            formatted_message_parts.append(f'`{escape_markdown(text[offset:offset+length])}`')
-        elif entity_type == "pre":
-            formatted_message_parts.append(f'```{escape_markdown(text[offset:offset+length])}```')
-        elif entity_type == "text_link":
-            url = entity.url
-            formatted_message_parts.append(f'[{escape_markdown(text[offset:offset+length])}]({escape_markdown(url)})')
-        elif entity_type == "url":
-            url = text[offset:offset+length]
-            formatted_message_parts.append(f'[{escape_markdown(url)}]({escape_markdown(url)})')
-        current_position = offset + length
-
-    if current_position < len(text):
-        formatted_message_parts.append(escape_markdown(text[current_position:]))
-
-    return ''.join(formatted_message_parts)
 
 def share_post(message, ids_text):
     session = Session()
@@ -294,7 +302,7 @@ def search_message(message):
                 for row in data:
                     if session.query(SentMessage).filter_by(user_id=user_id, message_id=f'old_{row.ID}').first():
                         continue
-                    msg = f'''✈️*{row.Title}*✈️
+                    msg = f'''✈️<b>{row.Title}</b>✈️
 -----------------------
 {row.Cabin}
 -----------------------
@@ -310,7 +318,7 @@ ORDER BY: {row.Type}'''
                     photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
                     with open(photo_path, 'rb') as photo:
                         bot.send_photo(user_id, photo=photo)
-                    bot.send_message(user_id, msg, parse_mode='Markdown', reply_markup=markup)
+                    bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
 
                     # bot.send_message(user_id, msg, parse_mode='Markdown')
                     sleep(1)
@@ -339,50 +347,13 @@ def get_csv(message):
 
 @bot.message_handler(content_types=['text'])
 def on_click(message:types.Message):
-    session = Session()
-    user = session.query(Users).filter_by(ID = message.chat.id).first()
-    if user:
-        airports = user.Airports.strip()
-        if len(airports) == 0:
-            airports = []
-        else:
-            airports = airports.split('\n')
-    else:
-        airports = []
-    session.close()
 
     if 'Add airports' in message.text:
-        bot.send_message(message.chat.id, text='Choose airport to add ✈️', reply_markup=airport_buttons('add', all_airports))
-        sleep(1)
-    
+        add_airports(message)
     elif 'Remove airports' in message.text:
-        if not user:
-            unkown_user(message)
-            return
-        else:
-            if len(airports) == 0: 
-                bot.send_message(message.chat.id, text='🌍 Your airports list is empty. Please add airports to continue. 🛫') 
-            else:
-                airports = user.Airports.strip().split('\n')
-                bot.send_message(message.chat.id, text='🛬 Choose airport to remove:', reply_markup=airport_buttons('remove', airports))   
-            sleep(1) 
-
+        remove_airports(message)
     elif 'My profile' in message.text:
-        session = Session()
-        user = session.query(Users).filter_by(ID = message.chat.id).first()
-        session.close()
-        if user:
-            user_airports = user.Airports.strip()
-
-            if len(user.Airports.split('\n')) == 222:
-                user_airports = 'All available ✈️'
-            if len(user.Airports) == 0:
-                user_airports = 'You didn\'t choose any airport. 🛫' 
-            bot.send_message(message.chat.id, f'👤 <b>Your name: </b>{user.Name}\n\n<b>Your contact email:</b> {user.Email}\n\n<b>📅 Subscription end date: </b>{user.SubscriptionDate.date()}\n\n<b>✈️ Your airports: </b>\n{user_airports}', parse_mode='HTML')
-        else:
-            unkown_user(message)
-            return
-        sleep(1)
+        get_user_info(message)
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -452,7 +423,6 @@ def callback_query(call):
                                 bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='Your airports list is now empty. 🚫 No airports selected. 🛫', parse_mode='HTML')
                             else:
                                 bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=markup)
-                            current_position = 0
                             user.Airports = "\n".join(airports)
                             session.commit()
                             break
@@ -465,7 +435,7 @@ def callback_query(call):
         session = Session()
        
         row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
-        msg = f'''✈️*{row.Title}*✈️
+        msg = f'''✈️<b>{row.Title}</b>✈️
 {row.Cabin}
 -----------------------
 {row.Price} (was {row.OriginalPrice})
@@ -474,18 +444,19 @@ def callback_query(call):
 -----------------------
 ORDER BY: {row.Type}
 -----------------------
-*Departure cities:*
+<b>Departure cities:</b>
 
-{row.DepartureCities}'''        
+{row.DepartureCities}'''   
+        print(row.DepartureCities)     
         markup = msg_markup(row.ID, 'departure')
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='Markdown', reply_markup=markup)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML', reply_markup=markup)
         bot.answer_callback_query(call.id, 'Fetching...')
         session.close()
 
     elif 'book_guide' in call.data:
         session = Session()
         row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
-        msg = f'''✈️*{row.Title}*✈️
+        msg = f'''✈️<b>{row.Title}</b>✈️
 {row.Cabin}
 -----------------------
 {row.Price} (was {row.OriginalPrice})
@@ -494,18 +465,18 @@ ORDER BY: {row.Type}
 -----------------------
 ORDER BY: {row.Type}
 -----------------------
-*Booking guide:*
+<b>Booking guide:</b>
 
 {row.BookGuide}'''        
         markup = msg_markup(row.ID, 'guide')
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='Markdown', reply_markup=markup)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML', reply_markup=markup)
         bot.answer_callback_query(call.id, 'Fetching...')
         session.close()
 
     elif 'summary' in call.data:
         session = Session()
         row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
-        msg = f'''✈️*{row.Title}*✈️
+        msg = f'''✈️<b>{row.Title}</b>✈️
 {row.Cabin}
 -----------------------
 {row.Price} (was {row.OriginalPrice})
@@ -514,11 +485,11 @@ ORDER BY: {row.Type}
 -----------------------
 ORDER BY: {row.Type}
 -----------------------
-*Deal Summary:*
+<b>Deal Summary:</b>
 
 {row.Summary}'''        
         markup = msg_markup(row.ID, 'summary')
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='Markdown', reply_markup=markup)
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=msg, parse_mode='HTML', reply_markup=markup)
         bot.answer_callback_query(call.id, 'Fetching...')
         session.close()
 

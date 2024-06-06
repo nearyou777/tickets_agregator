@@ -14,10 +14,45 @@ my_id = os.getenv('my_id')
 
 from PIL import Image
 import os
-session = Session()
-row = session.query(Tickets).filter(Tickets.ID == "Pomelo-9556").first()
-print(row.Book)
-session.close()
+
+
+import re
+
+import re
+
+def fix_markdown(text):
+    # Удаление лишних звездочек в конце строк, не трогая обрамляющие текст
+    text = re.sub(r'(\S)\*(?!\w)', r'\1', text)
+    
+    # Исправление выделения текста (курсив/жирный)
+    text = re.sub(r'\*(\S.*?)\*(?!\*)', r'*\1*', text)
+    text = re.sub(r'_(\S.*?)_(?!_)', r'_\1_', text)
+
+    # Исправление списков (добавление пробела после звезды)
+    text = re.sub(r'\n\*([^\s])', r'\n* \1', text)
+    
+    return text
+
+# Ваш текст
+text = """*LAS > San Francisco, California $97 Round Trip!!*✈️
+Basic Economy
+-----------------------
+$97 (was $200+)
+-----------------------
+August  - November 2024
+-----------------------
+ORDER BY: Cash
+-----------------------
+Departure cities:
+
+Las Vegas, Nevada (LAS) — Large - $97
+
+San Francisco (SFO) - $745*"""
+
+# Исправление текста
+fixed_text = fix_markdown(text)
+
+print(fixed_text)
 # def reduce_image_size(input_path, output_path):
 #     # Максимальный размер в байтах
 #     max_size_bytes = 1024 * 1024
