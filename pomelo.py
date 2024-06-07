@@ -84,7 +84,6 @@ def get_data():
         if session.query(Tickets).filter(Tickets.ID==id).first():
             continue
         session.close()
-        session.close()
         dates = item["deal_availability_duration"]
 
         try:
@@ -166,8 +165,6 @@ def add_pomelo() -> bool:
     data = get_data()
     session = Session()
     if len(data) == 0:
-        session = Session()
-
         session.query(NewTickets).delete()
         session.commit()
         session.close()

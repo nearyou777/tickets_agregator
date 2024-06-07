@@ -190,10 +190,8 @@ def get_data():
 
 def add_db() -> bool:
     data = get_data()
-        
     session = Session()
     if len(data) == 0:
-        session = Session()
         session.query(NewTickets).delete()
         session.commit()
         session.close()

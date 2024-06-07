@@ -1,7 +1,6 @@
 import telebot
 from time import sleep
 from telebot import types
-from sqlalchemy.orm import sessionmaker
 import math
 from dotenv import load_dotenv
 import os
@@ -327,9 +326,9 @@ ORDER BY: {row.Type}'''
                     sent_message = SentMessage(user_id=user_id, message_id=f"old_{row.ID}")
                     session.add(sent_message)
                     session.commit()
-                    session.close()
                     data.remove(row)
     else:
+        session.close()
         unkown_user(message)
     session.close()
 
@@ -431,6 +430,7 @@ def callback_query(call):
                             break
         else:
             airports = []
+            session.close()
             unkown_user(call.message)
         session.close()
 

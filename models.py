@@ -7,7 +7,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-engine = create_engine(os.getenv('connection_string'), echo=True, pool_size=20, max_overflow=20, pool_timeout=30,  pool_recycle=3600)
+engine = create_engine(os.getenv('connection_string'), echo=True, pool_size=100, max_overflow=120, pool_timeout=200,  pool_recycle=3600)
 
 Base = declarative_base()
 

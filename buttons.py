@@ -1,4 +1,3 @@
-from sqlalchemy.orm import sessionmaker
 from telebot import types
 from models import Tickets
 from config import Session
