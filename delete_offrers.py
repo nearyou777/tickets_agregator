@@ -14,10 +14,9 @@ load_dotenv()
 Session = sessionmaker(bind=engine)
 
 def autodelete():
-    session = Session()
-    session.query(Tickets).filter(Tickets.DateAdded >= Tickets.DateAdded + timedelta(days=30)).delete(synchronize_session=False)
-    session.commit()
-    session.close()
+    with Session() as session:
+        session.query(Tickets).filter(Tickets.DateAdded >= Tickets.DateAdded + timedelta(days=30)).delete(synchronize_session=False)
+        session.commit()
 
 
 if __name__ == '__main__':

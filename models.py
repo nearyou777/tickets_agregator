@@ -7,7 +7,8 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-engine = create_engine(os.getenv('connection_string'), echo=True, pool_size=100, max_overflow=120, pool_timeout=200,  pool_recycle=3600)
+engine = create_engine(os.getenv('connection_string'), echo=True)
+# engine2 = create_engine(os.getenv('connection_string2'), echo=True, pool_size=100, max_overflow=120, pool_timeout=200,  pool_recycle=3600)
 
 Base = declarative_base()
 
@@ -72,10 +73,9 @@ class Users(Base):
 Base.metadata.create_all(engine)
 
 
-print('clear123')
+# Base.metadata.create_all(engine2)    
 Session = sessionmaker(bind=engine)
-session = Session()
+with Session() as session:
+    session.query(NewTickets).delete()
+    session.commit()
 
-session.query(NewTickets).delete()
-session.commit()
-session.close()

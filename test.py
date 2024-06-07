@@ -1,12 +1,9 @@
 import telebot
 from time import sleep
 from telebot import types
-from sqlalchemy.orm import sessionmaker
 from bot import bot
 from dotenv import load_dotenv
 import os
-from models import Tickets
-from config import engine, Session
 
 load_dotenv()
 

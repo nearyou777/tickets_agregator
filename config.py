@@ -17,10 +17,9 @@ def isadmin(user_id:int):
     return False
     
 def check_subscription(user_id):
-    session = Session()
-    user = session.query(Users).filter(Users.ID==user_id).first()
-    session.close()
-    return user.SubscriptionDate.date() >= datetime.utcnow().date() or user.BuyedSubscription
+    with Session() as session:
+        user = session.query(Users).filter(Users.ID==user_id).first()
+        return user.SubscriptionDate.date() >= datetime.utcnow().date() or user.BuyedSubscription
 
 def escape_markdown(text):
     """

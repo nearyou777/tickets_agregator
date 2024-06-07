@@ -8,9 +8,11 @@ from models import Tickets, NewTickets, engine, Session
 from PIL import Image
 import os
 from time import sleep
-# s = requests.Session()
+import logging
+
+# Определение логгера
 s = tls_client.Session(client_identifier='chrome_105')
-Session = sessionmaker(bind=engine)
+logger = logging.getLogger(__name__)
 def login():
     json_data = {
         'email': 'Vitaliytravels@gmail.com',
@@ -80,10 +82,15 @@ def get_data():
         type = 'Cash'
         cabin = item["ticket_type"]
         id = f"Pomelo-{item['id']}"
-        session = Session()
-        if session.query(Tickets).filter(Tickets.ID==id).first():
-            continue
-        session.close()
+        with Session() as session:
+            if session.query(Tickets).filter(Tickets.ID==id).first():
+                try:
+                    session.commit()
+                    continue
+                except Exception as e:
+                    logger.error(f"Error occurred: {e}")
+                    print(f"Error occurred: {e}")
+
         dates = item["deal_availability_duration"]
 
         try:
@@ -163,22 +170,19 @@ def get_data():
             
 def add_pomelo() -> bool:
     data = get_data()
-    session = Session()
-    if len(data) == 0:
-        session.query(NewTickets).delete()
+    with Session() as session:
+        if len(data) == 0:
+            session.query(NewTickets).delete()
+            session.commit()
+            return False
+        for item in data:
+            exist = session.query(Tickets).filter_by(ID = item['ID']).first()
+            if not exist:
+                session.add(Tickets(**item))
+                session.add(NewTickets(**item))
         session.commit()
-        session.close()
-        return False
-    for item in data:
-        exist = session.query(Tickets).filter_by(ID = item['ID']).first()
-        print(exist)
-        if not exist:
-            session.add(Tickets(**item))
-            session.add(NewTickets(**item))
-    session.commit()
-    count = session.query(NewTickets).count()
-    session.close()
-    return count > 0
+        count = session.query(NewTickets).count()
+        return count > 0
 
 
 if __name__ == '__main__':

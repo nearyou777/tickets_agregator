@@ -3,7 +3,7 @@ import json
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from models import Tickets, NewTickets, engine
+from models import Tickets, NewTickets, Session
 from bs4 import BeautifulSoup
 import requests
 from time import sleep
@@ -13,8 +13,10 @@ import os
 from datetime import datetime
 load_dotenv()
 s = tls_client.Session(client_identifier='chrome_105')
-Session = sessionmaker(bind=engine)
+import logging
 
+# Определение логгера
+logger = logging.getLogger(__name__)
 def login() -> tls_client.Session: 
     
     json_data = {
@@ -149,11 +151,17 @@ def get_data():
             departure_cities = '\n'.join(departure_cities)
             departure_airports = ', '.join([i['city'] for i in item['departureCities']])
             id = item['id']
-            Session = sessionmaker(bind=engine)
-            session = Session()
-            if session.query(Tickets).filter(Tickets.ID==id).first():
-                continue
-            session.close()
+            with Session() as session:
+                # print('\n\n\n\n\n\n\n')
+                if session.query(Tickets).filter(Tickets.ID==id).first():
+                    try:
+                        session.commit()
+                        continue
+                    except Exception as e:
+                        logger.error(f"Error occurred: {e}")
+                        print(f"Error occurred: {e}")
+
+
             img_link = item['coverImage']
             r = requests.get(img_link)
             picture_name = img_link.split('/')[-1] if r.status_code == 200 else None
@@ -188,26 +196,22 @@ def get_data():
     return data
 
 
-def add_db() -> bool:
-    data = get_data()
-    session = Session()
-    if len(data) == 0:
-        session.query(NewTickets).delete()
-        session.commit()
-        session.close()
-        return False
-    for item in data:
-        exist = session.query(Tickets).filter_by(ID = item['ID']).first()
-        if not exist:
-            session.add(Tickets(**item))
-            session.add(NewTickets(**item))
-    session.commit()
-    count = session.query(NewTickets).count()
-    session.close()
-    if not count > 0:
-        print('thrify empty')
-    return count > 0
+# def add_db() -> bool:
+#     data = get_data()
+#     with Session() as session:
+#         if len(data) == 0:
+#             session.query(NewTickets).delete()
+#             session.commit()
+#             return False
+#         for item in data:
+#             exist = session.query(Tickets).filter_by(ID = item['ID']).first()
+#             if not exist:
+#                 session.add(Tickets(**item))
+#                 session.add(NewTickets(**item))
+#         session.commit()
+#         count = session.query(NewTickets).count()
+#         return count > 0
 
         
 if __name__ == '__main__':
-    add_db()
+    get_data()

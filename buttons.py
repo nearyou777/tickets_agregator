@@ -8,29 +8,28 @@ load_dotenv()
 
 
 def msg_markup(offer_id, position='start'):
-    session = Session()
-    row = session.query(Tickets).filter(Tickets.ID == offer_id).first()
-    session.close()
-    markup = types.InlineKeyboardMarkup()
-    btn_cities = types.InlineKeyboardButton('Departure cities', callback_data=f'departure {offer_id}')
-    deal_summary = types.InlineKeyboardButton('Deal Summary', callback_data=f'summary {offer_id}')
+    with Session() as session:
+        row = session.query(Tickets).filter(Tickets.ID == offer_id).first()
+        markup = types.InlineKeyboardMarkup()
+        btn_cities = types.InlineKeyboardButton('Departure cities', callback_data=f'departure {offer_id}')
+        deal_summary = types.InlineKeyboardButton('Deal Summary', callback_data=f'summary {offer_id}')
 
-    book_guide = types.InlineKeyboardButton('Booking Guide', callback_data=f'book_guide {offer_id}')
+        book_guide = types.InlineKeyboardButton('Booking Guide', callback_data=f'book_guide {offer_id}')
 
-    book_link = types.InlineKeyboardButton('Book Now', url=row.Book)
-    if position == 'start':
-        markup.row(deal_summary, btn_cities)
-        markup.row(book_guide, book_link) 
-    elif position == 'departure':
-        markup.row(deal_summary, book_guide)
-        markup.row(book_link) 
-    elif position == 'guide':
-        markup.row(deal_summary, btn_cities)
-        markup.row(book_link) 
-    else: 
-        markup.row(btn_cities, book_guide)
-        markup.row(book_link) 
-    return markup
+        book_link = types.InlineKeyboardButton('Book Now', url=row.Book)
+        if position == 'start':
+            markup.row(deal_summary, btn_cities)
+            markup.row(book_guide, book_link) 
+        elif position == 'departure':
+            markup.row(deal_summary, book_guide)
+            markup.row(book_link) 
+        elif position == 'guide':
+            markup.row(deal_summary, btn_cities)
+            markup.row(book_link) 
+        else: 
+            markup.row(btn_cities, book_guide)
+            markup.row(book_link) 
+        return markup
 
 
 def channel_mark():
