@@ -306,17 +306,21 @@ def search_message(message):
             if not check_channel_subscription(message):
                 bot.send_message(message.chat.id, f'Hi, {user.Name}, you\'re not subscribed to our newsletter channel.\nYou can do it immediately using link bellow', reply_markup=channel_mark())
                 return 
+            found = False
             user_airports = user.Airports.split('\n')
             for airport in user_airports:
                     airport = f"({airport.split('(')[-1]}"
-                    data = session.query(Tickets).filter(Tickets.DepartureAirports.like(f'%{airport}%')).all()
-                    counter = 0
-                    if len(data) > 0:
-                        counter += 1 
+                    data = session.query(Tickets, SentMessage).outerjoin(
+                        SentMessage, (Tickets.ID == SentMessage.message_id) & (SentMessage.user_id == message.chat.id)
+                    ).filter(
+                        Tickets.DepartureAirports.like(f'%{airport}%')
+                    ).all()
+                    session.commit()
+                    # counter = 0
+                    # if len(data) > 0:
+                    #     counter += 1 
                     user_id = message.chat.id
-                    for row in data:
-                        if session.query(SentMessage).filter_by(user_id=user_id, message_id=f'old_{row.ID}').first():
-                            continue
+                    for row, old_msg in data:
                         msg = f'''✈️<b>{row.Title}</b>✈️
     -----------------------
     {row.Cabin}
@@ -326,20 +330,22 @@ def search_message(message):
     {row.Dates}
     -----------------------
     ORDER BY: {row.Type}'''
-
+                        if old_msg:
+                            continue
                         markup = msg_markup(row.ID, 'start')
                         base_path = os.getcwd()
                         photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
                         with open(photo_path, 'rb') as photo:
                             bot.send_photo(user_id, photo=photo)
                         bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
-
+                        found = True
                         # bot.send_message(user_id, msg, parse_mode='Markdown')
                         sleep(1)
-                        sent_message = SentMessage(user_id=user_id, message_id=f"old_{row.ID}")
+                        sent_message = SentMessage(user_id=user_id, message_id=row.ID)
                         session.add(sent_message)
                         session.commit()
-                        data.remove(row)
+            if not found:
+                bot.send_message(message.chat.id, '😞 Sorry. Currently no tickets found for any of your saved airports. Please try again later or update your airport preferences. ⚠️')
         else:
             unkown_user(message)
         try:
@@ -578,7 +584,7 @@ def callback_query(call):
                 session.commit()
             except Exception as e:
                 logger.error(f"Error occurred: {e}")
-                
+
     if call.data == 'subscribed':
         member = check_channel_subscription(call.message)
         if member:

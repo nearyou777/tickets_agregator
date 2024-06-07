@@ -54,9 +54,14 @@ def send_message():
                         continue
                     for airport in user_airports:
                         airport = f"({airport.split('(')[-1]}"
-                        data = session.query(NewTickets).filter(NewTickets.DepartureAirports.like(f'%{airport}%')).all()
-                        for row in data:
-                            if session.query(SentMessage).filter_by(user_id=user_id, message_id=f"new_{row.ID}").first():
+                        data = session.query(Tickets, SentMessage).outerjoin(
+                            SentMessage, (Tickets.ID == SentMessage.message_id) & (SentMessage.user_id == user_id)
+                        ).filter(
+                            Tickets.DepartureAirports.like(f'%{airport}%')
+                        ).all()
+                        session.commit()
+                        for row, old_msg in data:
+                            if old_msg:
                                 continue
                             msg = f'''✈️<b>{row.Title}</b>✈️
     {row.Cabin}
@@ -82,7 +87,7 @@ def send_message():
                                     break
                                 else:
                                     sleep(50)
-                            sent_message = SentMessage(user_id=user_id, message_id=f"new_{row.ID}")
+                            sent_message = SentMessage(user_id=user_id, message_id=row.ID)
                             session.add(sent_message)
                             session.commit()
                             data.remove(row)

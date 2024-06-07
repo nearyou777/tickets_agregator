@@ -4,9 +4,8 @@ from telebot import types
 from bot import bot
 from dotenv import load_dotenv
 import os
-
+from models import Tickets, SentMessage, Session
 load_dotenv()
-
 my_id = os.getenv('my_id')
 
 from PIL import Image
@@ -17,39 +16,39 @@ import re
 
 import re
 
-def fix_markdown(text):
-    # Удаление лишних звездочек в конце строк, не трогая обрамляющие текст
-    text = re.sub(r'(\S)\*(?!\w)', r'\1', text)
+# def fix_markdown(text):
+#     # Удаление лишних звездочек в конце строк, не трогая обрамляющие текст
+#     text = re.sub(r'(\S)\*(?!\w)', r'\1', text)
     
-    # Исправление выделения текста (курсив/жирный)
-    text = re.sub(r'\*(\S.*?)\*(?!\*)', r'*\1*', text)
-    text = re.sub(r'_(\S.*?)_(?!_)', r'_\1_', text)
+#     # Исправление выделения текста (курсив/жирный)
+#     text = re.sub(r'\*(\S.*?)\*(?!\*)', r'*\1*', text)
+#     text = re.sub(r'_(\S.*?)_(?!_)', r'_\1_', text)
 
-    # Исправление списков (добавление пробела после звезды)
-    text = re.sub(r'\n\*([^\s])', r'\n* \1', text)
+#     # Исправление списков (добавление пробела после звезды)
+#     text = re.sub(r'\n\*([^\s])', r'\n* \1', text)
     
-    return text
+#     return text
 
-# Ваш текст
-text = """*LAS > San Francisco, California $97 Round Trip!!*✈️
-Basic Economy
------------------------
-$97 (was $200+)
------------------------
-August  - November 2024
------------------------
-ORDER BY: Cash
------------------------
-Departure cities:
+# # Ваш текст
+# text = """*LAS > San Francisco, California $97 Round Trip!!*✈️
+# Basic Economy
+# -----------------------
+# $97 (was $200+)
+# -----------------------
+# August  - November 2024
+# -----------------------
+# ORDER BY: Cash
+# -----------------------
+# Departure cities:
 
-Las Vegas, Nevada (LAS) — Large - $97
+# Las Vegas, Nevada (LAS) — Large - $97
 
-San Francisco (SFO) - $745*"""
+# San Francisco (SFO) - $745*"""
 
-# Исправление текста
-fixed_text = fix_markdown(text)
+# # Исправление текста
+# fixed_text = fix_markdown(text)
 
-print(fixed_text)
+# print(fixed_text)
 # def reduce_image_size(input_path, output_path):
 #     # Максимальный размер в байтах
 #     max_size_bytes = 1024 * 1024
@@ -95,6 +94,14 @@ print(fixed_text)
 #     'sec-ch-ua-mobile': '?0',
 #     'sec-ch-ua-platform': '"Windows"',
 # }
-
+with Session() as session:
+    data = session.query(Tickets, SentMessage).join(
+        SentMessage, (Tickets.ID == SentMessage.message_id) & (SentMessage.user_id == 695238951)).all()
+    # ).filter(
+    #     Tickets.DepartureAirports.like(f'%(JFK)%')
+    # ).all()
+    print(len(data))
+    # for row in data:
+    #     print(row.ID)
 # r = requests.get('https://d3mdkiyq6mk8lq.cloudfront.net/images/deals/01HZFEZFBCRFVDQWVSJ2AKX8TJ.jpg', headers=headers,)
 # print(r)

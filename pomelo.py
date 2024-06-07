@@ -99,7 +99,7 @@ def get_data():
         except:
             bookURL = item["booking_links"][0]['link'] if item["booking_links"] else item["booking_instructions_override"][1]["booking_links"][0]['link']
 
-        summary = text_maker.handle(item['message_body']).replace('*', '-').replace('--', '*')     
+        summary = text_maker.handle(item['message_body']).replace('*', '-').replace('--', '*').replace('pomelo flight expert', '').replace('shelbi', '').replace('\-', '').strip()
         
         book_guide = item["booking_instructions_override"] 
         if not book_guide:
