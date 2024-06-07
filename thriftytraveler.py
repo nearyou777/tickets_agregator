@@ -196,22 +196,22 @@ def get_data():
     return data
 
 
-# def add_db() -> bool:
-#     data = get_data()
-#     with Session() as session:
-#         if len(data) == 0:
-#             session.query(NewTickets).delete()
-#             session.commit()
-#             return False
-#         for item in data:
-#             exist = session.query(Tickets).filter_by(ID = item['ID']).first()
-#             if not exist:
-#                 session.add(Tickets(**item))
-#                 session.add(NewTickets(**item))
-#         session.commit()
-#         count = session.query(NewTickets).count()
-#         return count > 0
+def add_db() -> bool:
+    data = get_data()
+    with Session() as session:
+        if len(data) == 0:
+            session.query(NewTickets).delete()
+            session.commit()
+            return False
+        for item in data:
+            exist = session.query(Tickets).filter_by(ID = item['ID']).first()
+            if not exist:
+                session.add(Tickets(**item))
+                session.add(NewTickets(**item))
+        session.commit()
+        count = session.query(NewTickets).count()
+        return count > 0
 
         
 if __name__ == '__main__':
-    get_data()
+    add_db()
