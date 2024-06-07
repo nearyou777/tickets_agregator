@@ -90,7 +90,6 @@ def send_message():
                             sent_message = SentMessage(user_id=user_id, message_id=row.ID)
                             session.add(sent_message)
                             session.commit()
-                            data.remove(row)
             sleep(60)
 
 
