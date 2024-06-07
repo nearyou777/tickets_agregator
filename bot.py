@@ -102,6 +102,7 @@ We're thrilled to have you aboard as we explore the world of travel together. Yo
         bot.send_message(message.chat.id, msg)
         sleep(1)
     bot.send_message(message.chat.id, '''First things first, what's your name? We love to keep things personal here! 📛''')
+    session.close()
     bot.register_next_step_handler(message, get_mail)
 
 
@@ -135,7 +136,6 @@ def channel_subscribe(message, name):#saving data here
         session.commit()
         session.close()
         flag = True
-        
     member = check_channel_subscription(message)
 
     msg = '''Awesome!😊
@@ -187,6 +187,7 @@ def renew_subs(message, user_id):
     if user:
         user.SubscriptionDate = (user.SubscriptionDate + timedelta(days=days)).date()
         session.commit()
+        session.close()
         bot.send_message(message.chat.id, f'✅ Successfully renewed subscription for {user.Name}! User can continue using the bot. 🚀')
     else:
         bot.send_message(message.chat.id, '❌ Incorrect user ID. Please use the command again.')
@@ -275,6 +276,7 @@ def share_post(message, ids_text):
                 if user_db:
                     user_db.ActiveUser = False
                     session.commit()
+                    session.close()
             else:
                 sleep(1)
     session.close()
@@ -325,6 +327,7 @@ ORDER BY: {row.Type}'''
                     sent_message = SentMessage(user_id=user_id, message_id=f"old_{row.ID}")
                     session.add(sent_message)
                     session.commit()
+                    session.close()
                     data.remove(row)
     else:
         unkown_user(message)
@@ -497,6 +500,7 @@ ORDER BY: {row.Type}
         session = Session()
         user = session.query(Users).filter_by(ID = call.message.chat.id).first()
         if not user:
+            session.close()
             unkown_user(call.message)
         else:
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=f'<b>Your airports:</b> 🛫\n{user.Airports}', parse_mode='HTML')
@@ -513,6 +517,7 @@ ORDER BY: {row.Type}
         
         user = session.query(Users).filter_by(ID = call.message.chat.id).first()
         if not user:
+            session.close()
             unkown_user(call.message)
             return
         airports = user.Airports.split('\n')
