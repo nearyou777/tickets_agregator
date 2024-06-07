@@ -27,6 +27,5 @@ def autodelete():
         session.commit()
        
 
-
 if __name__ == '__main__':
     autodelete()

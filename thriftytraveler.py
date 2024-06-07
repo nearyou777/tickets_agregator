@@ -152,7 +152,6 @@ def get_data():
             departure_airports = ', '.join([i['city'] for i in item['departureCities']])
             id = item['id']
             with Session() as session:
-                # print('\n\n\n\n\n\n\n')
                 if session.query(Tickets).filter(Tickets.ID==id).first():
                     try:
                         session.commit()
@@ -160,6 +159,8 @@ def get_data():
                     except Exception as e:
                         logger.error(f"Error occurred: {e}")
                         print(f"Error occurred: {e}")
+                        raise
+                session.commit()
 
 
             img_link = item['coverImage']
@@ -208,7 +209,7 @@ def add_db() -> bool:
             if not exist:
                 session.add(Tickets(**item))
                 session.add(NewTickets(**item))
-        session.commit()
+            session.commit()
         count = session.query(NewTickets).count()
         return count > 0
 

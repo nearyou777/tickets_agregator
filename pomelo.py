@@ -90,7 +90,7 @@ def get_data():
                 except Exception as e:
                     logger.error(f"Error occurred: {e}")
                     print(f"Error occurred: {e}")
-
+            session.commit()
         dates = item["deal_availability_duration"]
 
         try:
