@@ -17,6 +17,7 @@ import logging
 # Определение логгера
 logger = logging.getLogger(__name__)
 #TODO:PROMOCODES
+#TODO:EMAIL VALIDATION
 bot = telebot.TeleBot(os.getenv('token'))
 airports = []
 
@@ -127,6 +128,7 @@ We'll use this to keep you updated with the latest flight deals and connect you 
     bot.register_next_step_handler(message, channel_subscribe, name)
 
 def channel_subscribe(message, name):#saving data here
+    # print(f'\n\n\n\n\n USER HERE')
     user_id = message.chat.id
     mail = message.text.strip()
     with Session() as session:
@@ -597,7 +599,7 @@ def callback_query(call):
         if member:
             bot.answer_callback_query(call.id, 'Successfully ✅')
             bot.delete_message(call.message.chat.id, call.message.id)
-            get_airports(call.message)
+            get_airports(call.message, flag=True)
         else:
             bot.answer_callback_query(call.id, '''Hmm, it looks like you haven't subscribed yet. Please subscribe to continue getting personalized flight alerts. We can't wait to get you started! 🚀''', show_alert=True)
 

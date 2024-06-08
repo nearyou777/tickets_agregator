@@ -1,5 +1,5 @@
 # models.py
-from sqlalchemy import create_engine, Column, Integer, ForeignKey, String, DateTime, Boolean
+from sqlalchemy import create_engine, Column, Integer, ForeignKey, String, DateTime, Boolean, BigInteger
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from datetime import datetime, timedelta
@@ -53,14 +53,14 @@ class NewTickets(Base):
 class SentMessage(Base):
     __tablename__ = 'sent_messages'
     id = Column(Integer, primary_key=True)
-    user_id = Column(Integer, ForeignKey('users.ID'))
+    user_id = Column(BigInteger, ForeignKey('users.ID'))
     message_id = Column(String(200))
     user = relationship("Users", back_populates="sent_messages")
 
 
 class Users(Base):
     __tablename__ = 'users'
-    ID = Column(Integer, primary_key=True)
+    ID = Column(BigInteger, primary_key=True)
     Name = Column(String(200))
     Email = Column(String(200))
     Airports = Column(String(10000))

@@ -4,7 +4,7 @@ from telebot import types
 from bot import bot
 from dotenv import load_dotenv
 import os
-from models import Tickets, SentMessage, Session
+from models import Tickets, SentMessage, Session, Users
 load_dotenv()
 my_id = os.getenv('my_id')
 
@@ -95,6 +95,7 @@ import re
 #     'sec-ch-ua-platform': '"Windows"',
 # }
 # with Session() as session:
+#     session.query(Users).filter(Users.ID == )
 #     data = session.query(Tickets, SentMessage).join(
 #         SentMessage, (Tickets.ID == SentMessage.message_id) & (SentMessage.user_id == 695238951)).all()
 #     # ).filter(
@@ -105,6 +106,8 @@ import re
     #     print(row.ID)
 # r = requests.get('https://d3mdkiyq6mk8lq.cloudfront.net/images/deals/01HZFEZFBCRFVDQWVSJ2AKX8TJ.jpg', headers=headers,)
 # print(r)
-import math
-print(math.ceil(7.05))
-print(round(7.05))
+# import math
+# print(math.ceil(7.05))
+# print(round(7.05))
+
+print(123 == '123')
