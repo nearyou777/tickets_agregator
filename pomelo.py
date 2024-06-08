@@ -70,12 +70,12 @@ def get_data():
         'https://api-v2.pomelotravel.com/api/v1/deals-pomelo?company_id=1&type=International,Domestic&page=1&airports=&per_page=1000',
         headers=headers
     )
-    with open('pomelo.json', 'w') as f:
-        json.dump(r.json(),f,indent=2)
+    # with open('pomelo.json', 'w') as f:
+    #     json.dump(r.json(),f,indent=2)
     text_maker = html2text.HTML2Text()
     text_maker.ignore_links = True
     text_maker.ignore_images = True
-    for item in r.json()['data'][:5]:
+    for item in r.json()['data']:
         title = item['title']
         price = item['price']
         original_price = item['normal_price']

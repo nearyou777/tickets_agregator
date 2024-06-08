@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 engine = create_engine(os.getenv('connection_string'), echo=True)
-# engine2 = create_engine(os.getenv('connection_string2'), echo=True, pool_size=100, max_overflow=120, pool_timeout=200,  pool_recycle=3600)
 
 Base = declarative_base()
 

@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 from telebot.apihelper import ApiException
 from export_data import export_tables
 from config import check_subscription, isadmin, escape_markdown, format_entities, all_airports
-from buttons import msg_markup, channel_mark, airport_buttons
+from buttons import msg_markup, channel_mark, airport_buttons, current_pos
 load_dotenv()
 import logging
 
@@ -408,7 +408,7 @@ def callback_query(call):
                     bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='You\'ve choosed all airports', parse_mode='HTML')
                 else:
                     for airport in all_airports:
-                        if call.data == f'add_{airport}':
+                        if f'add_{airport}' in call.data:
                             user = session.query(Users).filter_by(ID = call.message.chat.id).first()
                             if airport in user.Airports:
                                 bot.answer_callback_query(call.id, f'Airport {airport} is already in your favourites list')
@@ -440,15 +440,22 @@ def callback_query(call):
                     bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='Your airports list is now empty. 🚫 No airports selected. 🛫', parse_mode='HTML')
                 else:
                     for airport in airports:
-                        if call.data == f'remove_{airport}':
+                        if  f'remove_{airport}' in call.data:
                             if airport in airports:
+                                current_page = int(call.data.split('_')[-1]) 
+
+                                current_pos  = (current_page - 1) * 20
+                                if math.ceil(float("{:.1f}".format(len(airports) / 20))) == current_page - 1:
+                                    current_pos -= 20
+                                    current_page -= 1
                                 airports.remove(airport)
                                 bot.answer_callback_query(call.id, f'Airport {airport} is removed from your favourites')
-                                markup = airport_buttons('remove', airports)
                                 
                                 if len(airports) < 1:
                                     bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='Your airports list is now empty. 🚫 No airports selected. 🛫', parse_mode='HTML')
+                                    add_airports(call.message)
                                 else:
+                                    markup = airport_buttons('remove', airports, current_position=current_pos, page=current_page)
                                     bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=markup)
                                 user.Airports = "\n".join(airports)
                                 session.commit()

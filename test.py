@@ -94,14 +94,17 @@ import re
 #     'sec-ch-ua-mobile': '?0',
 #     'sec-ch-ua-platform': '"Windows"',
 # }
-with Session() as session:
-    data = session.query(Tickets, SentMessage).join(
-        SentMessage, (Tickets.ID == SentMessage.message_id) & (SentMessage.user_id == 695238951)).all()
-    # ).filter(
-    #     Tickets.DepartureAirports.like(f'%(JFK)%')
-    # ).all()
-    print(len(data))
-    # for row in data:
+# with Session() as session:
+#     data = session.query(Tickets, SentMessage).join(
+#         SentMessage, (Tickets.ID == SentMessage.message_id) & (SentMessage.user_id == 695238951)).all()
+#     # ).filter(
+#     #     Tickets.DepartureAirports.like(f'%(JFK)%')
+#     # ).all()
+#     print(len(data))
+#     # for row in data:
     #     print(row.ID)
 # r = requests.get('https://d3mdkiyq6mk8lq.cloudfront.net/images/deals/01HZFEZFBCRFVDQWVSJ2AKX8TJ.jpg', headers=headers,)
 # print(r)
+import math
+print(math.ceil(7.05))
+print(round(7.05))
