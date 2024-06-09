@@ -67,7 +67,7 @@ def get_data():
         'authorization': f'Bearer {token}',
     }
     r = s.get(
-        'https://api-v2.pomelotravel.com/api/v1/deals-pomelo?company_id=1&type=International,Domestic&page=1&airports=&per_page=1000',
+        'https://api-v2.pomelotravel.com/api/v1/deals-pomelo?company_id=1&type=International,Domestic,Passport&page=1&airports=&per_page=1000',
         headers=headers
     )
     # with open('pomelo.json', 'w') as f:

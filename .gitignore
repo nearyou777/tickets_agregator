@@ -122,4 +122,5 @@ cython_debug/
 out/*.csv
 *.json
 imgs/*
-test.py
+/test.py
+!airports.json

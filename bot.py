@@ -46,7 +46,7 @@ def get_user_info(message):
         user = session.query(Users).filter_by(ID = message.chat.id).first()
         if user:
             user_airports = user.Airports.strip()
-            if len(user.Airports.split('\n')) == 222:
+            if len(user.Airports.split('\n')) == len(all_airports):
                 user_airports = 'All available ✈️'
             elif len(user.Airports) == 0:
                 user_airports = 'You didn\'t choose any airport. 🛫' 
@@ -447,7 +447,9 @@ def callback_query(call):
                                 current_page = int(call.data.split('_')[-1]) 
 
                                 current_pos  = (current_page - 1) * 20
-                                if math.ceil(float("{:.1f}".format(len(airports) / 20))) == current_page - 1:
+                                print(str(len(airports) / 20).split('.')[1][0])
+                                print(str(len(airports) / 20))
+                                if str(len(airports) / 20).split('.')[1][0] == '0':
                                     current_pos -= 20
                                     current_page -= 1
                                 airports.remove(airport)
