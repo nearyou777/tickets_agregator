@@ -11,10 +11,11 @@ from bot import bot
 from dotenv import load_dotenv
 import os
 from datetime import datetime
-load_dotenv()
-s = tls_client.Session(client_identifier='chrome_105')
+import pyshorteners
 import logging
 
+load_dotenv()
+s = tls_client.Session(client_identifier='chrome_105')
 # Определение логгера
 logger = logging.getLogger(__name__)
 def login() -> tls_client.Session: 
@@ -132,7 +133,11 @@ def get_data():
             else:
                 type = 'Cash'
                 price = f"{item['pricePrefix']} {item['price']}$"
-            bookURL = item['bookUrl']
+            
+            try:
+                bookURL = str(pyshorteners.Shortener().tinyurl.short(bookURL))
+            except:
+                bookURL = item['bookUrl']
             symbol = '$' if 'CASH' in type else ' Points'
             if '$' in symbol:
                 departure_cities = '\n'.join([f"{i['destination']}: {symbol}{i['price']}" for i in item["departureCities"]])
