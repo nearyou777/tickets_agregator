@@ -58,10 +58,10 @@ def send_message():
                         continue
                     for airport in user_airports:
                         airport = f"({airport.split('(')[-1]}"
-                        data = session.query(Tickets, SentMessage).outerjoin(
-                            SentMessage, (Tickets.ID == SentMessage.message_id) & (SentMessage.user_id == user_id)
+                        data = session.query(NewTickets, SentMessage).outerjoin(
+                            SentMessage, (NewTickets.ID == SentMessage.message_id) & (SentMessage.user_id == user_id)
                         ).filter(
-                            Tickets.DepartureAirports.like(f'%{airport}%')
+                            NewTickets.DepartureAirports.like(f'%{airport}%')
                         ).all()
                         session.commit()
                         for row, old_msg in data:
