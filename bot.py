@@ -302,6 +302,7 @@ def share_post(message, ids_text):
 def search_message(message):    
     with Session() as session:
         user = session.query(Users).filter_by(ID = message.chat.id).first()
+        session.commit()
         if user:
             if not check_subscription(message.chat.id):
                 bot.send_message(message.chat.id, '⚠️ Your subscription has expired. Please contact the admin to renew it or purchase a subscription directly in the bot. 🛒')
@@ -309,6 +310,7 @@ def search_message(message):
             if not check_channel_subscription(message):
                 bot.send_message(message.chat.id, f'Hi, {user.Name}, you\'re not subscribed to our newsletter channel.\nYou can do it immediately using link bellow', reply_markup=channel_mark())
                 return 
+            bot.send_message(message.chat.id, 'Working on your query...')
             found = False
             user_airports = user.Airports.split('\n')
             for airport in user_airports:
@@ -339,8 +341,14 @@ def search_message(message):
                         base_path = os.getcwd()
                         photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
                         with open(photo_path, 'rb') as photo:
-                            bot.send_photo(user_id, photo=photo)
-                        bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
+                            try:
+                                bot.send_photo(user_id, photo=photo)
+                            except:
+                                pass
+                        try:
+                            bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
+                        except:
+                            pass
                         found = True
                         # bot.send_message(user_id, msg, parse_mode='Markdown')
                         sleep(1)
@@ -351,10 +359,7 @@ def search_message(message):
                 bot.send_message(message.chat.id, '😞 Sorry. Currently no tickets found for any of your saved airports. Please try again later or update your airport preferences. ⚠️')
         else:
             unkown_user(message)
-        try:
-            session.commit()
-        except Exception as e:
-            logger.error(f"Error occurred: {e}")
+
 
 @bot.message_handler(commands=['export'])
 def get_csv(message):
