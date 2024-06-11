@@ -156,16 +156,16 @@ def get_data():
             departure_cities = '\n'.join(departure_cities)
             departure_airports = ', '.join([i['city'] for i in item['departureCities']])
             id = item['id']
-            with Session() as session:
-                if session.query(Tickets).filter(Tickets.ID==id).first():
-                    try:
-                        session.commit()
-                        continue
-                    except Exception as e:
-                        logger.error(f"Error occurred: {e}")
-                        print(f"Error occurred: {e}")
-                        raise
-                session.commit()
+            # with Session() as session:
+            #     if session.query(Tickets).filter(Tickets.ID==id).first():
+            #         try:
+            #             session.commit()
+            #             continue
+            #         except Exception as e:
+            #             logger.error(f"Error occurred: {e}")
+            #             print(f"Error occurred: {e}")
+            #             raise
+                # session.commit()
 
 
             img_link = item['coverImage']
@@ -214,8 +214,12 @@ def add_db() -> bool:
             if not exist:
                 session.add(Tickets(**item))
                 session.add(NewTickets(**item))
-            session.commit()
+        session.commit()
+            # else:
+            #     session.commit()
         count = session.query(NewTickets).count()
+        session.commit()
+        # print(count > 0)
         return count > 0
 
         

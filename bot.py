@@ -18,6 +18,7 @@ import logging
 logger = logging.getLogger(__name__)
 #TODO:PROMOCODES
 #TODO:EMAIL VALIDATION
+#TODO: short user_airport list
 bot = telebot.TeleBot(os.getenv('token'))
 airports = []
 

@@ -82,15 +82,15 @@ def get_data():
         type = 'Cash'
         cabin = item["ticket_type"]
         id = f"Pomelo-{item['id']}"
-        with Session() as session:
-            if session.query(Tickets).filter(Tickets.ID==id).first():
-                try:
-                    session.commit()
-                    continue
-                except Exception as e:
-                    logger.error(f"Error occurred: {e}")
-                    print(f"Error occurred: {e}")
-            session.commit()
+        # with Session() as session:
+        #     if session.query(Tickets).filter(Tickets.ID==id).first():
+        #         try:
+        #             session.commit()
+        #             continue
+        #         except Exception as e:
+        #             logger.error(f"Error occurred: {e}")
+        #             print(f"Error occurred: {e}")
+        #     session.commit()
         dates = item["deal_availability_duration"]
 
         try:
@@ -109,10 +109,18 @@ def get_data():
         else:
             intro = text_maker.handle(item["booking_instructions_override"][0]['headline']).replace('*', '-').replace('--', '*')
             option1_title = text_maker.handle(item["booking_instructions_override"][1]['headline']).replace('*', '-').replace('--', '*')
-            option1_links  = '\n'.join([f'{i["label"]} - {pyshorteners.Shortener().tinyurl.short(i["link"])}' for i in item["booking_instructions_override"][1]["booking_links"]])
+            try:
+                option1_links  = '\n'.join([f'{i["label"]} - {pyshorteners.Shortener().tinyurl.short(i["link"])}' for i in item["booking_instructions_override"][1]["booking_links"]])
+            except:
+                option1_links  = '\n'.join([f'{i["label"]} - {i["link"]}' for i in item["booking_instructions_override"][1]["booking_links"]])
+
             try:
                 option2_title = text_maker.handle(item["booking_instructions_override"][2]['headline']).replace('*', '-').replace('--', '*')
-                option2_links =  '\n'.join([f'{i["label"]} - {pyshorteners.Shortener().tinyurl.short(i["link"])}' for i in item["booking_instructions_override"][2]["booking_links"]])
+                try:
+                    option2_links =  '\n'.join([f'{i["label"]} - {pyshorteners.Shortener().tinyurl.short(i["link"])}' for i in item["booking_instructions_override"][2]["booking_links"]])
+                except:
+                    option2_links =  '\n'.join([f'{i["label"]} - {i["link"]}' for i in item["booking_instructions_override"][2]["booking_links"]])
+
             except:
                 option2_links = None
             if option2_links:
@@ -182,6 +190,7 @@ def add_pomelo() -> bool:
                 session.add(NewTickets(**item))
         session.commit()
         count = session.query(NewTickets).count()
+        session.commit()
         return count > 0
 
 

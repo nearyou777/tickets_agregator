@@ -35,9 +35,12 @@ def set_webhook():
     print("Webhook is set:", public_url)
 
 def get_data():
+    # print('\n\n\n\nthrifty\n\n\n\n')
     value = add_db()
     if not value:
+        # print('\n\n\n\npomelo\n\n\n\n')
         value = add_pomelo()
+
         if not value:
             autodelete()
     return value
@@ -47,6 +50,7 @@ def send_message():
         if get_data():
             with Session() as session:
                 users = session.query(Users).all()
+                session.commit()
                 for user in users:
                     user_airports = user.Airports.split('\n')
                     user_id = user.ID
@@ -76,13 +80,20 @@ def send_message():
                                 photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
                                 if row.PictureName:
                                     with open(photo_path, 'rb') as photo:
-                                        bot.send_photo(user_id, photo=photo)
-                                bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=msg_markup(row.ID))
-                                sleep(1)
+                                        try:
+                                            bot.send_photo(user_id, photo=photo)
+                                        except:
+                                            pass
+                                try:
+                                    bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=msg_markup(row.ID))
+                                    sleep(1)
+                                except:
+                                    pass
                             except ApiException as e:
                                 if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
                                     print(f"User {user_id} blocked the bot.")
                                     user = session.query(Users).filter(Users.ID == user_id).first()
+                                    session.commit()
                                     user.ActiveUser = False
                                     break
                                 else:

@@ -28,7 +28,7 @@ class Tickets(Base):
     BookGuide = Column(String(10000))
     Summary = Column(String(10000))
     PictureName = Column(String(100))
-    DateAdded = Column(DateTime, default=datetime.utcnow().date)
+    DateAdded = Column(DateTime, default=datetime.utcnow())
 
 
 class NewTickets(Base):
