@@ -36,10 +36,16 @@ def set_webhook():
 
 def get_data():
     # print('\n\n\n\nthrifty\n\n\n\n')
-    value = add_db()
+    try:
+        value = add_db()
+    except:
+        value = None
     if not value:
         # print('\n\n\n\npomelo\n\n\n\n')
-        value = add_pomelo()
+        try:
+            value = add_pomelo()
+        except:
+            value = None
 
         if not value:
             autodelete()
@@ -68,13 +74,13 @@ def send_message():
                             if old_msg:
                                 continue
                             msg = f'''✈️<b>{row.Title}</b>✈️
-    {row.Cabin}
-    -----------------------
-    {row.Price} (was {row.OriginalPrice})
-    -----------------------
-    {row.Dates}
-    -----------------------
-    ORDER BY: {row.Type}'''
+{row.Cabin}
+-----------------------
+{row.Price} (was {row.OriginalPrice})
+-----------------------
+{row.Dates}
+-----------------------
+ORDER BY: {row.Type}'''
                             try:
                                 base_path = os.getcwd()
                                 photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')

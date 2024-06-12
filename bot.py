@@ -327,14 +327,14 @@ def search_message(message):
                     user_id = message.chat.id
                     for row, old_msg in data:
                         msg = f'''✈️<b>{row.Title}</b>✈️
-    -----------------------
-    {row.Cabin}
-    -----------------------
-    {row.Price} (was {row.OriginalPrice})
-    -----------------------
-    {row.Dates}
-    -----------------------
-    ORDER BY: {row.Type}'''
+-----------------------
+{row.Cabin}
+-----------------------
+{row.Price} (was {row.OriginalPrice})
+-----------------------
+{row.Dates}
+-----------------------
+ORDER BY: {row.Type}'''
                         if old_msg:
                             continue
                         markup = msg_markup(row.ID, 'start')
