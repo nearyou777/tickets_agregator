@@ -4,6 +4,10 @@ from config import Session
 import math
 import os
 from dotenv import load_dotenv
+import logging
+
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 load_dotenv()
 
 

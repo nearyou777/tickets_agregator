@@ -13,7 +13,10 @@ import os
 from datetime import datetime
 import pyshorteners
 import logging
+import logging
 
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 load_dotenv()
 s = tls_client.Session(client_identifier='chrome_105')
 # Определение логгера
@@ -113,10 +116,18 @@ def get_data():
         r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
     except:
         sleep(60)
-        r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
+        try:
+            r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
+        except:
+            sleep(60)
+            r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
     page_count = r.json()['meta']['totalPages']
     for page in range(1, int(page_count) + 1):
         params['page'] = page
+        try:
+            r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
+        except:
+            sleep(60)
         try:
             r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
         except:

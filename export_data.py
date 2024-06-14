@@ -3,6 +3,10 @@ from time import sleep
 from dotenv import load_dotenv
 from models import Session
 import pandas as pd
+import logging
+
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 load_dotenv()
 
 

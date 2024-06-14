@@ -9,6 +9,10 @@ from PIL import Image
 import os
 from time import sleep
 import logging
+import logging
+
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 
 # Определение логгера
 s = tls_client.Session(client_identifier='chrome_105')
@@ -66,10 +70,17 @@ def get_data():
     headers = {
         'authorization': f'Bearer {token}',
     }
-    r = s.get(
-        'https://api-v2.pomelotravel.com/api/v1/deals-pomelo?company_id=1&type=International,Domestic,Passport&page=1&airports=&per_page=1000',
-        headers=headers
-    )
+    try:
+        r = s.get(
+            'https://api-v2.pomelotravel.com/api/v1/deals-pomelo?company_id=1&type=International,Domestic,Passport&page=1&airports=&per_page=1000',
+            headers=headers
+        )
+    except:
+        sleep(60)
+        r = s.get(
+            'https://api-v2.pomelotravel.com/api/v1/deals-pomelo?company_id=1&type=International,Domestic,Passport&page=1&airports=&per_page=1000',
+            headers=headers
+        )
     # with open('pomelo.json', 'w') as f:
     #     json.dump(r.json(),f,indent=2)
     text_maker = html2text.HTML2Text()
@@ -82,15 +93,15 @@ def get_data():
         type = 'Cash'
         cabin = item["ticket_type"]
         id = f"Pomelo-{item['id']}"
-        # with Session() as session:
-        #     if session.query(Tickets).filter(Tickets.ID==id).first():
-        #         try:
-        #             session.commit()
-        #             continue
-        #         except Exception as e:
-        #             logger.error(f"Error occurred: {e}")
-        #             print(f"Error occurred: {e}")
-        #     session.commit()
+        with Session() as session:
+            if session.query(Tickets).filter(Tickets.ID==id).first():
+                try:
+                    session.commit()
+                    continue
+                except Exception as e:
+                    logger.error(f"Error occurred: {e}")
+                    print(f"Error occurred: {e}")
+            session.commit()
         dates = item["deal_availability_duration"]
 
         try:

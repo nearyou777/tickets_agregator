@@ -13,7 +13,10 @@ from config import check_subscription, isadmin, escape_markdown, format_entities
 from buttons import msg_markup, channel_mark, airport_buttons, current_pos
 load_dotenv()
 import logging
+import logging
 
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 # Определение логгера
 logger = logging.getLogger(__name__)
 #TODO:PROMOCODES
@@ -340,11 +343,11 @@ ORDER BY: {row.Type}'''
                         markup = msg_markup(row.ID, 'start')
                         base_path = os.getcwd()
                         photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
-                        with open(photo_path, 'rb') as photo:
-                            try:
-                                bot.send_photo(user_id, photo=photo)
-                            except:
-                                pass
+                        try:
+                            with open(photo_path, 'rb') as photo:
+                                    bot.send_photo(user_id, photo=photo)
+                        except:
+                            pass
                         try:
                             bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
                         except:

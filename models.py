@@ -5,7 +5,10 @@ from sqlalchemy.orm import relationship, sessionmaker
 from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
+import logging
 
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 load_dotenv()
 engine = create_engine(os.getenv('connection_string'), echo=True)
 

@@ -6,7 +6,10 @@ from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime, timedelta
 from models import engine, NewTickets, Users, Session
 import json
+import logging
 
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 
 def isadmin(user_id:int):
     for admin in [os.getenv('my_id'), os.getenv('vitaliy_id'), os.getenv('maks_id')]:

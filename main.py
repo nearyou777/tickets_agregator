@@ -14,13 +14,22 @@ from models import Tickets, NewTickets, Users, SentMessage, Session
 from config import engine
 from delete_offrers import autodelete
 from pomelo import add_pomelo
-load_dotenv()
+import logging
+from flask.logging import default_handler
 
-
+# Настройка логирования Flask
 app = Flask(__name__)
+
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
+app.logger.removeHandler(default_handler)
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
+load_dotenv()
 WEBHOOK_URL_PATH = "/webhook"
 #TODO: SEGMENTATIONS 
 
+# @app.route('/', methods=['GET'])
 
 @app.route(WEBHOOK_URL_PATH, methods=['POST'])
 def webhook():
@@ -35,20 +44,23 @@ def set_webhook():
     print("Webhook is set:", public_url)
 
 def get_data():
-    # print('\n\n\n\nthrifty\n\n\n\n')
     try:
         value = add_db()
-    except:
+    except Exception as e:
+        logging.error("Error in add_db: %s", e)
         value = None
     if not value:
-        # print('\n\n\n\npomelo\n\n\n\n')
         try:
             value = add_pomelo()
-        except:
+        except Exception as e:
+            logging.error("Error in add_pomelo: %s", e)
             value = None
 
         if not value:
-            autodelete()
+            try:
+                autodelete()
+            except Exception as e:
+                logging.error("Error in autodelete: %s", e)
     return value
 
 def send_message():
@@ -85,11 +97,11 @@ ORDER BY: {row.Type}'''
                                 base_path = os.getcwd()
                                 photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
                                 if row.PictureName:
-                                    with open(photo_path, 'rb') as photo:
-                                        try:
-                                            bot.send_photo(user_id, photo=photo)
-                                        except:
-                                            pass
+                                    try:
+                                        with open(photo_path, 'rb') as photo:
+                                                bot.send_photo(user_id, photo=photo)
+                                    except:
+                                        pass
                                 try:
                                     bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=msg_markup(row.ID))
                                     sleep(1)

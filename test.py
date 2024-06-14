@@ -13,6 +13,10 @@ import os
 
 
 import re
+import logging
+
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 
 import re
 
@@ -351,6 +355,8 @@ import re
 # bot.send_message(my_id, 'Arcata\u2013Eureka')
 
 
-a = [4,56,67,893,1,2,5,6,8]
-a.sort()
+# a = [4,56,67,893,1,2,5,6,8]
+# a.sort()
+# print(a)
+a = (0.33**3) - 1.67 * (1-0.33)
 print(a)
