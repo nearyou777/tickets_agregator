@@ -10,7 +10,7 @@ import logging
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 load_dotenv()
-engine = create_engine(os.getenv('connection_string'), echo=True)
+engine = create_engine(os.getenv('connection_string'), echo=False, pool_size=20, max_overflow=20, pool_timeout=30, pool_recycle=3600)
 
 Base = declarative_base()
 
