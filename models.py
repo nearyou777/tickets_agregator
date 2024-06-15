@@ -6,7 +6,14 @@ from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
 import logging
+from dogpile.cache import make_region
+from dogpile.cache.api import NO_VALUE
 
+# Создание региона кэша с настроенным временем жизни (TTL)
+region = make_region().configure(
+    'dogpile.cache.memory',
+    expiration_time=600  # Время жизни кэша в секундах (например, 600 секунд = 10 минут)
+)
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 load_dotenv()
