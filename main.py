@@ -45,15 +45,15 @@ def set_webhook():
 
 def get_data():
     try:
-        bot.send_message(os.getenv('my_id'), 'Scrapping thrifry')
         value = add_db()
+        bot.send_message(os.getenv('my_id'), 'Scrapping thrifry')
     except Exception as e:
         logging.error("Error in add_db: %s", e)
         value = None
     if not value:
         try:
-            bot.send_message(os.getenv('my_id'), 'Scrapping pomelo')
             value = add_pomelo()
+            bot.send_message(os.getenv('my_id'), 'Scrapping pomelo')
         except Exception as e:
             logging.error("Error in add_pomelo: %s", e)
             value = None
