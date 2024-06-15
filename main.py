@@ -19,7 +19,6 @@ from flask.logging import default_handler
 from sqlalchemy.orm import aliased
 
 
-# Настройка логирования Flask
 app = Flask(__name__)
 
 log = logging.getLogger('werkzeug')
@@ -31,7 +30,6 @@ load_dotenv()
 WEBHOOK_URL_PATH = "/webhook"
 #TODO: SEGMENTATIONS 
 
-# @app.route('/', methods=['GET'])
 
 @app.route(WEBHOOK_URL_PATH, methods=['POST'])
 def webhook():
@@ -57,7 +55,6 @@ def get_data():
         except Exception as e:
             logging.error("Error in add_pomelo: %s", e)
             value = None
-
         if not value:
             try:
                 autodelete()
@@ -78,14 +75,12 @@ def send_message():
                     if not check_subscription(user.ID):
                         continue
                     
-                    # Получаем уже отправленные сообщения для данного пользователя
                     sent_msg_ids = session.query(SentMessage.message_id).filter(SentMessage.user_id == user_id).subquery()
                     session.commit()
             with Session() as session:
                 for airport in user_airports:
                     airport = f"({airport.split('(')[-1]}"
                     
-                    # Находим новые билеты, исключая уже отправленные сообщения
                     
                     new_tickets = session.query(NewTickets).filter(
                         ~NewTickets.ID.in_(sent_msg_ids),
@@ -94,8 +89,6 @@ def send_message():
                     session.commit()
                 
                     for row in new_tickets:
-                        # if old_msg:
-                        #     continue
 
                         msg = f'''✈️<b>{row.Title}</b>✈️
 {row.Cabin}
