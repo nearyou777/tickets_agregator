@@ -86,6 +86,11 @@ def get_data():
     text_maker = html2text.HTML2Text()
     text_maker.ignore_links = True
     text_maker.ignore_images = True
+    tickets = []
+    with Session() as session:
+        for row in session.query(Tickets).all():
+            tickets.append(row.ID)
+        session.commit()
     for item in r.json()['data']:
         title = item['title']
         price = item['price']
@@ -93,15 +98,8 @@ def get_data():
         type = 'Cash'
         cabin = item["ticket_type"]
         id = f"Pomelo-{item['id']}"
-        with Session() as session:
-            if session.query(Tickets).filter(Tickets.ID==id).first():
-                try:
-                    session.commit()
-                    continue
-                except Exception as e:
-                    logger.error(f"Error occurred: {e}")
-                    print(f"Error occurred: {e}")
-            session.commit()
+        if id in tickets:
+            continue
         dates = item["deal_availability_duration"]
 
         try:

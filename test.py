@@ -98,16 +98,17 @@ import re
 #     'sec-ch-ua-mobile': '?0',
 #     'sec-ch-ua-platform': '"Windows"',
 # }
-# with Session() as session:
-#     session.query(Users).filter(Users.ID == )
-#     data = session.query(Tickets, SentMessage).join(
-#         SentMessage, (Tickets.ID == SentMessage.message_id) & (SentMessage.user_id == 695238951)).all()
-#     # ).filter(
-#     #     Tickets.DepartureAirports.like(f'%(JFK)%')
-#     # ).all()
-#     print(len(data))
-#     # for row in data:
-    #     print(row.ID)
+from sqlalchemy.orm import aliased
+
+SentMsgAlias = aliased(SentMessage)
+print(SentMsgAlias)
+with Session() as session:
+    subquery = session.query(SentMsgAlias).filter(
+        (SentMsgAlias.message_id == NewTickets.ID) & 
+        (SentMsgAlias.user_id == user_id)
+    ).exists()
+    print(subquery)
+    session.commit()
 # r = requests.get('https://d3mdkiyq6mk8lq.cloudfront.net/images/deals/01HZFEZFBCRFVDQWVSJ2AKX8TJ.jpg', headers=headers,)
 # print(r)
 # import math

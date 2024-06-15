@@ -122,6 +122,11 @@ def get_data():
             sleep(60)
             r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
     page_count = r.json()['meta']['totalPages']
+    tickets = []
+    with Session() as session:
+        for row in session.query(Tickets).all():
+            tickets.append(row.ID)
+        session.commit()
     for page in range(1, int(page_count) + 1):
         params['page'] = page
         try:
@@ -167,6 +172,8 @@ def get_data():
             departure_cities = '\n'.join(departure_cities)
             departure_airports = ', '.join([i['city'] for i in item['departureCities']])
             id = item['id']
+            if id in tickets:
+                continue
             # with Session() as session:
             #     if session.query(Tickets).filter(Tickets.ID==id).first():
             #         try:

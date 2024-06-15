@@ -16,6 +16,8 @@ from delete_offrers import autodelete
 from pomelo import add_pomelo
 import logging
 from flask.logging import default_handler
+from sqlalchemy.orm import aliased
+
 
 # Настройка логирования Flask
 app = Flask(__name__)
@@ -72,20 +74,30 @@ def send_message():
                 for user in users:
                     user_airports = user.Airports.split('\n')
                     user_id = user.ID
+                    
                     if not check_subscription(user.ID):
                         continue
-                    for airport in user_airports:
-                        airport = f"({airport.split('(')[-1]}"
-                        data = session.query(NewTickets, SentMessage).outerjoin(
-                            SentMessage, (NewTickets.ID == SentMessage.message_id) & (SentMessage.user_id == user_id)
-                        ).filter(
-                            NewTickets.DepartureAirports.like(f'%{airport}%')
-                        ).all()
-                        session.commit()
-                        for row, old_msg in data:
-                            if old_msg:
-                                continue
-                            msg = f'''✈️<b>{row.Title}</b>✈️
+                    
+                    # Получаем уже отправленные сообщения для данного пользователя
+                    sent_msg_ids = session.query(SentMessage.message_id).filter(SentMessage.user_id == user_id).subquery()
+                    session.commit()
+            with Session() as session:
+                for airport in user_airports:
+                    airport = f"({airport.split('(')[-1]}"
+                    
+                    # Находим новые билеты, исключая уже отправленные сообщения
+                    
+                    new_tickets = session.query(NewTickets).filter(
+                        ~NewTickets.ID.in_(sent_msg_ids),
+                        NewTickets.DepartureAirports.like(f'%{airport}%')
+                    ).all()
+                    session.commit()
+                
+                    for row in new_tickets:
+                        # if old_msg:
+                        #     continue
+
+                        msg = f'''✈️<b>{row.Title}</b>✈️
 {row.Cabin}
 -----------------------
 {row.Price} (was {row.OriginalPrice})
@@ -93,33 +105,33 @@ def send_message():
 {row.Dates}
 -----------------------
 ORDER BY: {row.Type}'''
-                            try:
-                                base_path = os.getcwd()
-                                photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
-                                if row.PictureName:
-                                    try:
-                                        with open(photo_path, 'rb') as photo:
-                                                bot.send_photo(user_id, photo=photo)
-                                    except:
-                                        pass
+                        try:
+                            base_path = os.getcwd()
+                            photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
+                            if row.PictureName:
                                 try:
-                                    bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=msg_markup(row.ID))
-                                    sleep(1)
+                                    with open(photo_path, 'rb') as photo:
+                                            bot.send_photo(user_id, photo=photo)
                                 except:
                                     pass
-                            except ApiException as e:
-                                if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
-                                    print(f"User {user_id} blocked the bot.")
-                                    user = session.query(Users).filter(Users.ID == user_id).first()
-                                    session.commit()
-                                    user.ActiveUser = False
-                                    break
-                                else:
-                                    sleep(50)
-                            sent_message = SentMessage(user_id=user_id, message_id=row.ID)
-                            session.add(sent_message)
-                            session.commit()
-            sleep(60)
+                            try:
+                                bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=msg_markup(row.ID))
+                                sleep(1)
+                            except:
+                                pass
+                        except ApiException as e:
+                            if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
+                                print(f"User {user_id} blocked the bot.")
+                                user = session.query(Users).filter(Users.ID == user_id).first()
+                                session.commit()
+                                user.ActiveUser = False
+                                break
+                            else:
+                                sleep(50)
+                        sent_message = SentMessage(user_id=user_id, message_id=row.ID)
+                        session.add(sent_message)
+                        session.commit()
+        sleep(120)
 
 
 def handle_channel_message(message):

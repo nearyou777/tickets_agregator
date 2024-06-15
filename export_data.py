@@ -17,7 +17,7 @@ def export_tables():
             try:
                 query = f"SELECT * FROM {table_name}"
                 df = pd.read_sql(query, session.bind)
-
+                session.commit()
                 df.to_csv(f'out/{table_name}.csv', index=False)
             except Exception as e:
                 print(e)

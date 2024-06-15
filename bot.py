@@ -316,20 +316,24 @@ def search_message(message):
             bot.send_message(message.chat.id, 'Working on your query...')
             found = False
             user_airports = user.Airports.split('\n')
-            for airport in user_airports:
-                    airport = f"({airport.split('(')[-1]}"
-                    data = session.query(Tickets, SentMessage).outerjoin(
-                        SentMessage, (Tickets.ID == SentMessage.message_id) & (SentMessage.user_id == message.chat.id)
-                    ).filter(
-                        Tickets.DepartureAirports.like(f'%{airport}%')
-                    ).all()
-                    session.commit()
-                    # counter = 0
-                    # if len(data) > 0:
-                    #     counter += 1 
-                    user_id = message.chat.id
-                    for row, old_msg in data:
-                        msg = f'''✈️<b>{row.Title}</b>✈️
+        else:
+            unkown_user(message)
+    sent_airports = []
+    with Session() as session:
+        for airport in user_airports:
+                airport = f"({airport.split('(')[-1]}"
+                data = session.query(Tickets).filter(
+                    Tickets.DepartureAirports.like(f'%{airport}%')
+                ).all()
+                session.commit()
+                # counter = 0
+                # if len(data) > 0:
+                #     counter += 1 
+                user_id = message.chat.id
+                for row in data:
+                    if row.ID in user_airports:
+                        continue
+                    msg = f'''✈️<b>{row.Title}</b>✈️
 -----------------------
 {row.Cabin}
 -----------------------
@@ -338,30 +342,27 @@ def search_message(message):
 {row.Dates}
 -----------------------
 ORDER BY: {row.Type}'''
-                        if old_msg:
-                            continue
-                        markup = msg_markup(row.ID, 'start')
-                        base_path = os.getcwd()
-                        photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
-                        try:
-                            with open(photo_path, 'rb') as photo:
-                                    bot.send_photo(user_id, photo=photo)
-                        except:
-                            pass
-                        try:
-                            bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
-                        except:
-                            pass
-                        found = True
-                        # bot.send_message(user_id, msg, parse_mode='Markdown')
-                        sleep(1)
-                        sent_message = SentMessage(user_id=user_id, message_id=row.ID)
-                        session.add(sent_message)
-                        session.commit()
-            if not found:
-                bot.send_message(message.chat.id, '😞 Sorry. Currently no tickets found for any of your saved airports. Please try again later or update your airport preferences. ⚠️')
-        else:
-            unkown_user(message)
+
+                    markup = msg_markup(row.ID, 'start')
+                    base_path = os.getcwd()
+                    photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
+                    try:
+                        with open(photo_path, 'rb') as photo:
+                                bot.send_photo(user_id, photo=photo)
+                    except:
+                        pass
+                    try:
+                        bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=markup)
+                        sent_airports.append(row.ID)
+                    except:
+                        pass
+                    found = True
+                    # bot.send_message(user_id, msg, parse_mode='Markdown')
+                    sleep(1)
+
+        if not found:
+            bot.send_message(message.chat.id, '😞 Sorry. Currently no tickets found for any of your saved airports. Please try again later or update your airport preferences. ⚠️')
+
 
 
 @bot.message_handler(commands=['export'])
@@ -409,77 +410,76 @@ def callback_query(call):
     if 'add' in call.data and '_scrollbtn' not in call.data :
         with Session() as session:
             user = session.query(Users).filter_by(ID = call.message.chat.id).first()
-            if not user:
-                unkown_user(call.message)
-            else:
-                if call.data == 'add_all':
+            session.commit()
+        if not user:
+            unkown_user(call.message)
+        else:
+            if call.data == 'add_all':
+                bot.answer_callback_query(call.id, 'Fetching...')
+                with Session() as session:
                     user.Airports = "\n".join(all_airports)
                     session.commit()
-                    bot.answer_callback_query(call.id, 'Fetching...')
-                    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='You\'ve choosed all airports', parse_mode='HTML')
-                else:
-                    for airport in all_airports:
-                        if f'add_{airport}' in call.data:
+                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='You\'ve choosed all airports', parse_mode='HTML')
+            else:
+                for airport in all_airports:
+                    if f'add_{airport}' in call.data:
+                        with Session() as session:
                             user = session.query(Users).filter_by(ID = call.message.chat.id).first()
-                            if airport in user.Airports:
-                                bot.answer_callback_query(call.id, f'Airport {airport} is already in your favourites list')
-                            else:
-                                bot.answer_callback_query(call.id, f'Airport {airport} is added to your favourites')
-                                airports.append(airport)
-                        user.Airports = "\n".join(airports)
-                        session.commit()
-            try:
-                session.commit()
-            except Exception as e:
-                logger.error(f"Error occurred: {e}")
+                            airports = user.Airports.split('\n')
+                            session.commit()
+                        if airport in airports:
+                            bot.answer_callback_query(call.id, f'Airport {airport} is already in your favourites list')
+                        else:
+                            bot.answer_callback_query(call.id, f'Airport {airport} is added to your favourites')
+                            airports.append(airport)
+                with Session() as session:
+                    user.Airports = "\n".join(airports)
+                    session.commit()
+
 
     elif 'remove' in call.data and '_scrollbtn' not in call.data:
         with Session() as session:
             user = session.query(Users).filter_by(ID = call.message.chat.id).first()
-            if user:
-                airports = user.Airports.strip()
-                if len(airports) == 0:
-                    airports = []
-                else:
-                    airports = airports.split('\n')
-                if call.data == 'remove_all':
-                    user = session.query(Users).filter_by(ID = call.message.chat.id).first()
-                    user.Airports = ""
-                    session.commit()
-                    session.close()
-                    bot.answer_callback_query(call.id, f'All airports is removed from your favourites')
-                    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='Your airports list is now empty. 🚫 No airports selected. 🛫', parse_mode='HTML')
-                else:
-                    for airport in airports:
-                        if  f'remove_{airport}' in call.data:
-                            if airport in airports:
-                                current_page = int(call.data.split('_')[-1]) 
-
-                                current_pos  = (current_page - 1) * 20
-                                print(str(len(airports) / 20).split('.')[1][0])
-                                print(str(len(airports) / 20))
-                                if str(len(airports) / 20).split('.')[1][0] == '0':
-                                    current_pos -= 20
-                                    current_page -= 1
-                                airports.remove(airport)
-                                bot.answer_callback_query(call.id, f'Airport {airport} is removed from your favourites')
-                                
-                                if len(airports) < 1:
-                                    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='Your airports list is now empty. 🚫 No airports selected. 🛫', parse_mode='HTML')
-                                    add_airports(call.message)
-                                else:
-                                    markup = airport_buttons('remove', airports, current_position=current_pos, page=current_page)
-                                    bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=markup)
-                                user.Airports = "\n".join(airports)
-                                session.commit()
-                                break
-            else:
-                airports = []
-                unkown_user(call.message)
-            try:
+            if not user:
                 session.commit()
-            except Exception as e:
-                logger.error(f"Error occurred: {e}")
+                unkown_user(call.message)
+            else:
+                airports = user.Airports.strip()
+                session.commit()
+        if len(airports) == 0:
+            airports = []
+        else:
+            airports = airports.split('\n')
+        if call.data == 'remove_all':
+            with Session() as session:
+                user = session.query(Users).filter_by(ID = call.message.chat.id).first()
+                user.Airports = ""
+                session.commit()
+            bot.answer_callback_query(call.id, f'All airports is removed from your favourites')
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='Your airports list is now empty. 🚫 No airports selected. 🛫', parse_mode='HTML')
+        
+        else:
+            for airport in airports:
+                if  f'remove_{airport}' in call.data:
+                    if airport in airports:
+                        current_page = int(call.data.split('_')[-1]) 
+
+                        current_pos  = (current_page - 1) * 20
+                        if str(len(airports) / 20).split('.')[1][0] == '0':
+                            current_pos -= 20
+                            current_page -= 1
+                        airports.remove(airport)
+                        bot.answer_callback_query(call.id, f'Airport {airport} is removed from your favourites')
+                        
+                        if len(airports) < 1:
+                            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='Your airports list is now empty. 🚫 No airports selected. 🛫', parse_mode='HTML')
+                            add_airports(call.message)
+                        else:
+                            markup = airport_buttons('remove', airports, current_position=current_pos, page=current_page)
+                            bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=markup)
+            with Session() as session:
+                user.Airports = "\n".join(airports)
+                session.commit()
 
     elif 'departure' in call.data:
         with Session() as session:
@@ -552,40 +552,37 @@ def callback_query(call):
     elif call.data  ==  'end' :
         with Session() as session:
             user = session.query(Users).filter_by(ID = call.message.chat.id).first()
-            if not user:
-                session.close()
-                unkown_user(call.message)
-            else:
-                bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=f'<b>Your airports:</b> 🛫\n{user.Airports}', parse_mode='HTML')
-                bot.answer_callback_query(call.id, 'Fetching your airports...')
-            try:
-                session.commit()
-            except Exception as e:
-                logger.error(f"Error occurred: {e}")
+            session.commit()
+
+        if not user:
+            unkown_user(call.message)
+        else:
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=f'<b>Your airports:</b> 🛫\n{user.Airports}', parse_mode='HTML')
+            bot.answer_callback_query(call.id, 'Fetching your airports...')
+
 
     elif 'next' in call.data:
         with Session() as session:
-            prev_page = int(call.data.split('_')[-2]) 
-            msg_pos = prev_page * 20
-
-            prefix = call.data.split('_')[0]
-            page = int(call.data.split('_')[-2]) + 1
-            
             user = session.query(Users).filter_by(ID = call.message.chat.id).first()
-            if not user:
-                session.close()
-                unkown_user(call.message)
-                return
             airports = user.Airports.split('\n')
-            if prefix == 'add':
-                new_markup = airport_buttons(prefix, all_airports, msg_pos, page=page, direction='forward')
-            else:
-                new_markup = airport_buttons(prefix, airports, msg_pos, page=page, direction='forward')
-            bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=new_markup)
-            try:
-                session.commit()
-            except Exception as e:
-                logger.error(f"Error occurred: {e}")
+            session.commit()
+
+        if not user:
+            unkown_user(call.message)
+
+        prev_page = int(call.data.split('_')[-2]) 
+        msg_pos = prev_page * 20
+
+        prefix = call.data.split('_')[0]
+        page = int(call.data.split('_')[-2]) + 1
+        
+
+        if prefix == 'add':
+            new_markup = airport_buttons(prefix, all_airports, msg_pos, page=page, direction='forward')
+        else:
+            new_markup = airport_buttons(prefix, airports, msg_pos, page=page, direction='forward')
+        bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=new_markup)
+
 
     elif 'back' in call.data:
         with Session() as session:
