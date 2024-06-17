@@ -18,7 +18,7 @@ import logging
 from flask.logging import default_handler
 from sqlalchemy.orm import aliased
 
-
+from sqlalchemy import select
 app = Flask(__name__)
 
 log = logging.getLogger('werkzeug')
@@ -53,7 +53,7 @@ def get_data():
     if not value:
         try:
             value = add_pomelo()
-            bot.send_message(os.getenv('my_id'), 'Scrapping pomelo')
+            bot.send_message(os.getenv('my_id'), f'Scrapping pomelo,{value}')
         except Exception as e:
             logging.error("Error in add_pomelo: %s", e)
             value = None
@@ -69,69 +69,67 @@ def send_message():
         if get_data():
             with Session() as session:
                 users = session.query(Users).all()
-                session.commit()
                 for user in users:
                     user_airports = user.Airports.split('\n')
                     user_id = user.ID
-                    
-                    if not check_subscription(user.ID):
+                    if not check_subscription(user_id):
                         continue
+                    sent_airports = []
+                    for airport in user_airports:
+                        airport = f"({airport.split('(')[-1]}"
+                        sent_msg_ids = select(SentMessage.message_id).where(SentMessage.user_id == user_id)
+                        new_tickets = session.query(NewTickets).filter(
+                            ~NewTickets.ID.in_(sent_msg_ids),
+                            NewTickets.DepartureAirports.like(f'%{airport}%')
+                        ).all()
+                        session.commit()
                     
-                    sent_msg_ids = session.query(SentMessage.message_id).filter(SentMessage.user_id == user_id).subquery()
-                    session.commit()
-            with Session() as session:
-                for airport in user_airports:
-                    airport = f"({airport.split('(')[-1]}"
-                    
-                    
-                    new_tickets = session.query(NewTickets).filter(
-                        ~NewTickets.ID.in_(sent_msg_ids),
-                        NewTickets.DepartureAirports.like(f'%{airport}%')
-                    ).all()
-                    session.commit()
-                
-                    for row in new_tickets:
-
-                        msg = f'''✈️<b>{row.Title}</b>✈️
-{row.Cabin}
------------------------
-{row.Price} (was {row.OriginalPrice})
------------------------
-{row.Dates}
------------------------
-ORDER BY: {row.Type}'''
-                        try:
-                            base_path = os.getcwd()
-                            photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
-                            if row.PictureName:
+                        for row in new_tickets:
+                            if row.ID in sent_airports:
+                                continue
+                            msg = f'''✈️<b>{row.Title}</b>✈️
+    {row.Cabin}
+    -----------------------
+    {row.Price} (was {row.OriginalPrice})
+    -----------------------
+    {row.Dates}
+    -----------------------
+    ORDER BY: {row.Type}'''
+                            try:
+                                base_path = os.getcwd()
+                                photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
+                                if row.PictureName:
+                                    try:
+                                        with open(photo_path, 'rb') as photo:
+                                                bot.send_photo(user_id, photo=photo)
+                                    except:
+                                        pass
                                 try:
-                                    with open(photo_path, 'rb') as photo:
-                                            bot.send_photo(user_id, photo=photo)
+                                    bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=msg_markup(row.ID))
+                                    sleep(1)
                                 except:
                                     pass
-                            try:
-                                bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=msg_markup(row.ID))
-                                sleep(1)
-                            except:
-                                pass
-                        except ApiException as e:
-                            if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
-                                print(f"User {user_id} blocked the bot.")
-                                user = session.query(Users).filter(Users.ID == user_id).first()
-                                session.commit()
-                                user.ActiveUser = False
-                                break
-                            else:
-                                sleep(50)
-                        sent_message = SentMessage(user_id=user_id, message_id=row.ID)
-                        session.add(sent_message)
-                        session.commit()
-        sleep(120)
+                            except ApiException as e:
+                                if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
+                                    print(f"User {user_id} blocked the bot.")
+                                    user = session.query(Users).filter(Users.ID == user_id).first()
+                                    session.commit()
+                                    user.ActiveUser = False
+                                    break
+                                else:
+                                    sleep(50)
+                            sent_airports.append(row.ID)
+                            sent_message = SentMessage(user_id=user_id, message_id=row.ID)
+                            session.add(sent_message)
+                            session.commit()
+        else:
+            sleep(120)
 
 
 def handle_channel_message(message):
     with Session() as session:
         users = session.query(Users).all()
+        session.commit()
         for user in users:
             try:
                 if message.content_type == 'text':

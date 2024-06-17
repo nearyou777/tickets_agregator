@@ -72,13 +72,13 @@ def get_data():
     }
     try:
         r = s.get(
-            'https://api-v2.pomelotravel.com/api/v1/deals-pomelo?company_id=1&type=International,Domestic,Passport&page=1&airports=&per_page=1000',
+            'https://api-v2.pomelotravel.com/api/v1/deals-pomelo?company_id=1&type=International,Domestic&page=1&airports=&per_page=1000',
             headers=headers
         )
     except:
         sleep(60)
         r = s.get(
-            'https://api-v2.pomelotravel.com/api/v1/deals-pomelo?company_id=1&type=International,Domestic,Passport&page=1&airports=&per_page=1000',
+            'https://api-v2.pomelotravel.com/api/v1/deals-pomelo?company_id=1&type=International,Domestic&page=1&airports=&per_page=1000',
             headers=headers
         )
     # with open('pomelo.json', 'w') as f:
@@ -89,7 +89,7 @@ def get_data():
     tickets = []
     with Session() as session:
         for row in session.query(Tickets).all():
-            tickets.append(row.ID)
+            tickets.append(str(row.ID))
         session.commit()
     for item in r.json()['data']:
         title = item['title']
@@ -200,7 +200,7 @@ def add_pomelo() -> bool:
         session.commit()
         count = session.query(NewTickets).count()
         session.commit()
-        return count > 0
+    return count > 0
 
 
 if __name__ == '__main__':

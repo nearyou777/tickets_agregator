@@ -110,7 +110,7 @@ def get_data():
         'pointMin': 0,
         'pointMax': 200,
         'status': 'PUBLISHED',
-        'page': 1
+        'page': 3
     }
     try:
         r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
@@ -125,12 +125,22 @@ def get_data():
     tickets = []
     with Session() as session:
         for row in session.query(Tickets).all():
-            tickets.append(row.ID)
+            tickets.append(str(row.ID))
         session.commit()
+    # print()
+    # print()
+    # print()
+    # print(tickets)
+    # print()
+    # print()
+    # print()
+    with open('test.json', 'w') as f:
+        json.dump(r.json(),f,indent=2)
     for page in range(1, int(page_count) + 1):
         params['page'] = page
         try:
             r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
+
         except:
             sleep(60)
         try:
@@ -138,6 +148,7 @@ def get_data():
         except:
             sleep(60)
             r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
+        
         for item in r.json()['items']:
             type = item['type']
             cabin = item['cabin']
@@ -174,18 +185,6 @@ def get_data():
             id = item['id']
             if id in tickets:
                 continue
-            # with Session() as session:
-            #     if session.query(Tickets).filter(Tickets.ID==id).first():
-            #         try:
-            #             session.commit()
-            #             continue
-            #         except Exception as e:
-            #             logger.error(f"Error occurred: {e}")
-            #             print(f"Error occurred: {e}")
-            #             raise
-                # session.commit()
-
-
             img_link = item['coverImage']
             r = requests.get(img_link)
             picture_name = img_link.split('/')[-1] if r.status_code == 200 else None
@@ -237,8 +236,20 @@ def add_db() -> bool:
             #     session.commit()
         count = session.query(NewTickets).count()
         session.commit()
-        # print(count > 0)
-        return count > 0
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    print(count > 0)
+    print()
+    print()
+    print()
+    print()
+    print()
+    print()
+    return count > 0
 
         
 if __name__ == '__main__':

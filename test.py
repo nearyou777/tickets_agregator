@@ -17,9 +17,9 @@ import logging
 
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
-
+from datetime import datetime, timedelta
 import re
-
+one_day_ago = datetime.now() - timedelta(days=1)
 # def fix_markdown(text):
 #     # Удаление лишних звездочек в конце строк, не трогая обрамляющие текст
 #     text = re.sub(r'(\S)\*(?!\w)', r'\1', text)
@@ -100,15 +100,11 @@ import re
 # }
 from sqlalchemy.orm import aliased
 
-SentMsgAlias = aliased(SentMessage)
-print(SentMsgAlias)
 with Session() as session:
-    subquery = session.query(SentMsgAlias).filter(
-        (SentMsgAlias.message_id == NewTickets.ID) & 
-        (SentMsgAlias.user_id == user_id)
-    ).exists()
-    print(subquery)
+    session.query(Tickets).delete()
     session.commit()
+
+         #filter all Tickets.ID which starts with Pomelo, and no older than 1 day
 # r = requests.get('https://d3mdkiyq6mk8lq.cloudfront.net/images/deals/01HZFEZFBCRFVDQWVSJ2AKX8TJ.jpg', headers=headers,)
 # print(r)
 # import math

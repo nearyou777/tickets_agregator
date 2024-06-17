@@ -14,11 +14,11 @@ region = make_region().configure(
     'dogpile.cache.memory',
     expiration_time=600  # Время жизни кэша в секундах (например, 600 секунд = 10 минут)
 )
-logging.basicConfig()
-logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
+
 load_dotenv()
 engine = create_engine(os.getenv('connection_string'), echo=True, pool_size=20, max_overflow=20, pool_timeout=30, pool_recycle=3600)
-
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 Base = declarative_base()
 
 class Tickets(Base):

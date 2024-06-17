@@ -50,7 +50,6 @@ def get_user_info(message):
         if user:
 
             user_airports = user.Airports.strip()
-            print(user_airports)
             if len(user.Airports.split('\n')) == len(all_airports):
                 user_airports = 'All available ✈️'
             elif len(user.Airports) == 0:
@@ -133,7 +132,6 @@ We'll use this to keep you updated with the latest flight deals and connect you 
     bot.register_next_step_handler(message, channel_subscribe, name)
 
 def channel_subscribe(message, name):#saving data here
-    # print(f'\n\n\n\n\n USER HERE')
     user_id = message.chat.id
     mail = message.text.strip()
     with Session() as session:
@@ -413,6 +411,7 @@ def callback_query(call):
         if call.data == 'add_all':
             bot.answer_callback_query(call.id, 'Fetching...')
             with Session() as session:
+                user = session.query(Users).filter_by(ID = call.message.chat.id).first()
                 user.Airports = "\n".join(all_airports)
                 session.commit()
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='You\'ve choosed all airports', parse_mode='HTML')
