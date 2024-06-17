@@ -6,14 +6,7 @@ from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
 import logging
-from dogpile.cache import make_region
-from dogpile.cache.api import NO_VALUE
 
-# Создание региона кэша с настроенным временем жизни (TTL)
-region = make_region().configure(
-    'dogpile.cache.memory',
-    expiration_time=600  # Время жизни кэша в секундах (например, 600 секунд = 10 минут)
-)
 
 load_dotenv()
 engine = create_engine(os.getenv('connection_string'), echo=True, pool_size=20, max_overflow=20, pool_timeout=30, pool_recycle=3600)
