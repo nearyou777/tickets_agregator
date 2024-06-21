@@ -100,10 +100,19 @@ one_day_ago = datetime.now() - timedelta(days=1)
 # }
 from sqlalchemy.orm import aliased
 
-with Session() as session:
-    session.query(Tickets).delete()
-    session.commit()
-
+# date = (datetime.utcnow() - timedelta(days=10)).date()
+# print(date)
+# with Session() as session:
+#     # a = session.query(Tickets).all()
+#     #2024-06-08 < #2024-06-17
+#     #17 - today
+#     a = session.query(Tickets).filter(Tickets.DateAdded >= date).first()
+#     print(a.Title, a.DateAdded)
+#     # for row in a:
+#     #     print(row.Title)
+#     session.commit()
+a = ' 2'
+print(int(a))
          #filter all Tickets.ID which starts with Pomelo, and no older than 1 day
 # r = requests.get('https://d3mdkiyq6mk8lq.cloudfront.net/images/deals/01HZFEZFBCRFVDQWVSJ2AKX8TJ.jpg', headers=headers,)
 # print(r)

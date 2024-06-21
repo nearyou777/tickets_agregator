@@ -18,12 +18,13 @@ import logging
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
-#TODO:PROMOCODES
-#TODO:EMAIL VALIDATION
-#TODO: short user_airport list
 bot = telebot.TeleBot(os.getenv('token'))
 airports = []
 
+
+#TODO:PROMOCODES
+#TODO:EMAIL VALIDATION
+#TODO: short user_airport list
 
 
 def check_channel_subscription(message):
@@ -42,6 +43,7 @@ def unkown_user(message):
     bot.send_message(message.chat.id, 'You\'re not registred. 📛')
     sleep(1)
     welcome_message(message)
+
 
 @bot.message_handler(commands=['profile'])
 def get_user_info(message):
@@ -100,7 +102,6 @@ def remove_airports(message):
             logger.error(f"Error occurred: {e}")
 
 
-
 @bot.message_handler(commands=['start'])
 def welcome_message(message):
     msg = '''🎉 Welcome to Travel Hacker Bot! 🌟 
@@ -130,6 +131,7 @@ We'll use this to keep you updated with the latest flight deals and connect you 
     bot.send_message(message.chat.id, msg)
     sleep(0.5)
     bot.register_next_step_handler(message, channel_subscribe, name)
+
 
 def channel_subscribe(message, name):#saving data here
     user_id = message.chat.id
@@ -163,6 +165,7 @@ def channel_subscribe(message, name):#saving data here
         except Exception as e:
             logger.error(f"Error occurred: {e}")
 
+
 def get_airports(message, flag:bool):
     msg = f'''Thank you for subscribing!✅ 🎉 You’re awesome! 
 Now, let’s customize your flight alerts. 🛫'''
@@ -184,30 +187,32 @@ Now, let’s customize your flight alerts. 🛫'''
 @bot.message_handler(commands=['renew'])
 def get_user_id(message):
     try:
-        user_id = int(message.text.replace('/renew', '').strip())
+        users = [int(i.strip()) for i in message.text.replace('/renew', '').strip().split(',')]
     except:
         bot.send_message(message.chat.id, 'Wrong user id')
     if isadmin(message.chat.id):
         bot.send_message(message.chat.id, '🔄 Enter a number of days for which you want to renew your subscription 🔄')
-        bot.register_next_step_handler(message, renew_subs, user_id)
+        bot.register_next_step_handler(message, renew_subs, users)
     else:
         bot.send_message(message.chat.id, 'You\'re not allowed to use that command ❌')
 
 
-def renew_subs(message, user_id):
+def renew_subs(message, users):
     days = int(message.text.strip())
     with Session() as session:
-        user = session.query(Users).filter_by(ID = user_id).first()
-        if user:
-            user.SubscriptionDate = (user.SubscriptionDate + timedelta(days=days)).date()
-            session.commit()
-            bot.send_message(message.chat.id, f'✅ Successfully renewed subscription for {user.Name}! User can continue using the bot. 🚀')
-        else:
-            bot.send_message(message.chat.id, '❌ Incorrect user ID. Please use the command again.')
-        try:
-            session.commit()
-        except Exception as e:
-            logger.error(f"Error occurred: {e}")
+        for user_id in users:
+            user = session.query(Users).filter_by(ID = user_id).first()
+            if user:
+                user.SubscriptionDate = (user.SubscriptionDate + timedelta(days=days)).date()
+                session.commit()
+                bot.send_message(message.chat.id, f'✅ Successfully renewed subscription for {user.Name}! User can continue using the bot. 🚀')
+            else:
+                bot.send_message(message.chat.id, '❌ Incorrect user ID. Please use the command again.')
+            try:
+                session.commit()
+            except Exception as e:
+                logger.error(f"Error occurred: {e}")
+
 
 @bot.message_handler(commands=['post'])
 def get_post_msg(message):
@@ -227,6 +232,32 @@ def get_post_msg(message):
     else:
         bot.send_message(message.chat.id, 'You\'re now allowed to use this command ❌')
 
+
+@bot.message_handler(commands=['segmentation'])
+def get_users_segment(message):
+    if not isadmin(message.chat.id):
+        bot.send_message(message.chat.id, 'You\'re not allowed to use this command')
+        return
+    try: 
+        days = int(message.text.replace('/segmentation', '').strip())
+    except:
+        bot.send_message(message.chat.id, 'Unkown count of days')
+    users = []
+    date = (datetime.utcnow() - timedelta(days)).date()
+    with Session() as session:
+        # for row in session.query(Users).filter(Users.LogInDate >= date).all():
+        try:
+            [users.append(str(user.ID)) for user in session.query(Users).filter(Users.LogInDate >= date).all()]
+        except:
+            bot.send_message(message.chat.id, 'No users found')
+        session.commit()
+
+    if len(users) > 0:
+        users = ', '.join(users)
+        bot.send_message(message.chat.id, f'Here\'s all new users since {date}')
+        bot.send_message(message.chat.id, users) 
+    
+    
 def share_post(message, ids_text):
     with Session() as session:
         share_ids = []
@@ -299,6 +330,7 @@ def share_post(message, ids_text):
             session.commit()
         except Exception as e:
             logger.error(f"Error occurred: {e}")
+
 
 @bot.message_handler(commands=['search'])
 def search_message(message):    
