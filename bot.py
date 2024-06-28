@@ -10,9 +10,7 @@ from datetime import datetime, timedelta
 from telebot.apihelper import ApiException
 from export_data import export_tables
 from config import check_subscription, isadmin, escape_markdown, format_entities, all_airports
-from buttons import msg_markup, channel_mark, airport_buttons, current_pos
-load_dotenv()
-import logging
+from buttons import msg_markup, channel_mark, airport_buttons
 import logging
 
 logging.basicConfig()
@@ -20,9 +18,8 @@ logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 bot = telebot.TeleBot(os.getenv('token'))
 airports = []
+load_dotenv()
 
-
-#TODO:PROMOCODES
 #TODO:EMAIL VALIDATION
 #TODO: short user_airport list
 
@@ -50,13 +47,21 @@ def get_user_info(message):
     with Session() as session:
         user = session.query(Users).filter_by(ID = message.chat.id).first()
         if user:
-
+            markup = None
             user_airports = user.Airports.strip()
             if len(user.Airports.split('\n')) == len(all_airports):
                 user_airports = 'All available ✈️'
             elif len(user.Airports) == 0:
                 user_airports = 'You didn\'t choose any airport. 🛫' 
-            bot.send_message(message.chat.id, f'👤 <b>Your name: </b>{user.Name}\n\n<b>Your contact email:</b> {user.Email}\n\n<b>📅 Subscription end date: </b>{user.SubscriptionDate.date()}\n\n<b>✈️ Your airports: </b>\n{user_airports}', parse_mode='HTML')
+            if len(user.Airports.split('\n')) >= 20 and user_airports != 'All available ✈️':
+                markup = types.InlineKeyboardMarkup()
+                list_user_airports = '\n'.join(user.Airports.split('\n')[:20])
+                length_user_airports = len(user.Airports.split('\n')) - 20
+                btn_more = types.InlineKeyboardButton(f'See full airports list', callback_data='full_airports')
+                markup.add(btn_more)
+                user_airports = f"{list_user_airports}\n\n<b>and {length_user_airports} more</b>...✈️"
+            filter_name = user.filtered_offers if user.filtered_offers != 'Both' else 'Both(Cash & Points/Miles)'
+            bot.send_message(message.chat.id, f'👤 <b>Your name: </b>{user.Name}\n\n<b>Your contact email:</b> {user.Email}\n\n<b>Your filter of offers:</b>\n\n {filter_name}<b>📅 Subscription end date: </b>{user.SubscriptionDate.date()}\n\n<b>✈️ Your airports: </b>\n{user_airports}', parse_mode='HTML', reply_markup=markup) 
             sleep(1)
             try:
                 session.commit()
@@ -398,6 +403,15 @@ ORDER BY: {row.Type}'''
         bot.send_message(message.chat.id, '😞 Sorry. Currently no tickets found for any of your saved airports. Please try again later or update your airport preferences. ⚠️')
 
 
+@bot.message_handler(commands=['filter'])
+def choose_offer(message):
+    markup = types.InlineKeyboardMarkup()
+    btn_both = types.InlineKeyboardButton('Both(Cash & Points/Miles)', callback_data='filter_Both')
+    btn_cash = types.InlineKeyboardButton('Only Cash', callback_data='filter_Cash')
+    btn_points = types.InlineKeyboardButton('Only Points or Miles', callback_data='filter_Points')
+    markup.add(btn_both, btn_cash, btn_points)
+    bot.send_message(message.chat.id, 'Hi, right now you can filter upcoming offers and recieve only those, you\'re looking for 😊', reply_markup=markup)
+
 @bot.message_handler(commands=['export'])
 def get_csv(message):
     if isadmin(message.chat.id):
@@ -599,9 +613,14 @@ ORDER BY: {row.Type}
         bot.answer_callback_query(call.id, f'Page {page}')
 
     elif 'back' in call.data:
+        with Session() as session:
+            user = session.query(Users).filter_by(ID = call.message.chat.id).first()
+            airports = user.Airports.split('\n')
+            session.commit()
+        if not user:
+            unkown_user(call.message)
         prev_page = int(call.data.split('_')[-2])  -1
         msg_pos = (prev_page * 20) - 20
-        airports = user.Airports.split('\n')
         prefix = call.data.split('_')[0]
         page = int(call.data.split('_')[-2]) - 1
         if prefix == 'add':
@@ -620,7 +639,24 @@ ORDER BY: {row.Type}
         else:
             bot.answer_callback_query(call.id, '''Hmm, it looks like you haven't subscribed yet. Please subscribe to continue getting personalized flight alerts. We can't wait to get you started! 🚀''', show_alert=True)
 
+    elif 'filter' in call.data :
+        with Session() as session:
+            session.query(Users).filter(Users.ID == call.message.chat.id).first().filtered_offers = call.data.split('_')[-1]
+            session.commit()
+        bot.answer_callback_query(call.id, 'Succesfully added filter✅')
+        filter_name = call.data.split('_')[-1] if call.data.split('_')[-1] != 'Both' else 'Cash & Points/Miles'
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=f'Succesfully added filter. Right now you will only recieve {filter_name} offers ✅')
+    elif call.data == 'full_airports':
+        with Session() as session:
+            user = session.query(Users).filter_by(ID = call.message.chat.id).first()
+            user_airports = user.Airports
+            filter_name = user.filtered_offers if user.filtered_offers != 'Both' else 'Both(Cash & Points/Miles)'
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=f'👤 <b>Your name: </b>{user.Name}\n\n<b>Your contact email:</b> {user.Email}\n\nYour filter of offers:<b> {filter_name}\n\n📅 Subscription end date: </b>{user.SubscriptionDate.date()}\n\n<b>✈️ Your airports: </b>\n{user_airports}', parse_mode='HTML')
+            bot.answer_callback_query(call.id, 'Done✅')
+            bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=None)
+            session.commit()
 
+        
 if __name__ == '__main__': 
     bot.remove_webhook()      
     bot.infinity_polling(skip_pending=True)

@@ -98,7 +98,7 @@ one_day_ago = datetime.now() - timedelta(days=1)
 #     'sec-ch-ua-mobile': '?0',
 #     'sec-ch-ua-platform': '"Windows"',
 # }
-from sqlalchemy.orm import aliased
+# from sqlalchemy.orm import aliased
 
 # date = (datetime.utcnow() - timedelta(days=10)).date()
 # print(date)
@@ -111,9 +111,26 @@ from sqlalchemy.orm import aliased
 #     # for row in a:
 #     #     print(row.Title)
 #     session.commit()
-a = ' 2'
-print(int(a))
-         #filter all Tickets.ID which starts with Pomelo, and no older than 1 day
+# a = ' 2'
+# print(int(a))
+# models.py
+from sqlalchemy import create_engine, Column, Integer, ForeignKey, String, DateTime, Boolean, BigInteger, Table,text
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship, sessionmaker
+from datetime import datetime, timedelta
+import os
+from dotenv import load_dotenv
+import logging
+from sqlalchemy import MetaData
+from sqlalchemy import DDL
+
+
+load_dotenv()
+# engine = create_engine(os.getenv('connection_string'), echo=True, pool_size=20, max_overflow=20, pool_timeout=30, pool_recycle=3600)
+# Создание метаданных и загрузка существующей таблицы
+# Создание метаданных и загрузка существующей таблицы
+# with engine.connect() as conn:
+#     conn.execute(text('ALTER TABLE public.users ADD COLUMN filtered_offers VARCHAR(50) DEFAULT \'Both\''))
 # r = requests.get('https://d3mdkiyq6mk8lq.cloudfront.net/images/deals/01HZFEZFBCRFVDQWVSJ2AKX8TJ.jpg', headers=headers,)
 # print(r)
 # import math

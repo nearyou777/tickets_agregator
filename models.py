@@ -71,6 +71,7 @@ class Users(Base):
     SubscriptionDate = Column(DateTime, default=(datetime.utcnow() + timedelta(days=7)).date)
     BuyedSubscription = Column(Boolean, default=False)
     IsActiveUser = Column(Boolean, default=True)
+    filtered_offers = Column(String(50), default='Both')
     sent_messages = relationship("SentMessage", back_populates="user")
 Base.metadata.create_all(engine)
 
