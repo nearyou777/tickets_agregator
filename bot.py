@@ -61,7 +61,7 @@ def get_user_info(message):
                 markup.add(btn_more)
                 user_airports = f"{list_user_airports}\n\n<b>and {length_user_airports} more</b>...✈️"
             filter_name = user.filtered_offers if user.filtered_offers != 'Both' else 'Both(Cash & Points/Miles)'
-            bot.send_message(message.chat.id, f'👤 <b>Your name: </b>{user.Name}\n\n<b>Your contact email:</b> {user.Email}\n\n<b>Your filter of offers:</b>\n\n {filter_name}<b>📅 Subscription end date: </b>{user.SubscriptionDate.date()}\n\n<b>✈️ Your airports: </b>\n{user_airports}', parse_mode='HTML', reply_markup=markup) 
+            bot.send_message(message.chat.id, f'👤 <b>Your name: </b>{user.Name}\n\n<b>Your contact email:</b> {user.Email}\n\n<b>Your filter of offers:</b> {filter_name}\n\n<b>📅 Subscription end date: </b>{user.SubscriptionDate.date()}\n\n<b>✈️ Your airports: </b>\n{user_airports}', parse_mode='HTML', reply_markup=markup) 
             sleep(1)
             try:
                 session.commit()
