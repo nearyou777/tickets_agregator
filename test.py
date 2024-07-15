@@ -130,6 +130,7 @@ load_dotenv()
 # Создание метаданных и загрузка существующей таблицы
 # Создание метаданных и загрузка существующей таблицы
 # with engine.connect() as conn:
+#ALTER TABLE public.users ADD COLUMN filtered_offers VARCHAR(50) DEFAULT 'Both';
 #     conn.execute(text('ALTER TABLE public.users ADD COLUMN filtered_offers VARCHAR(50) DEFAULT \'Both\''))
 # r = requests.get('https://d3mdkiyq6mk8lq.cloudfront.net/images/deals/01HZFEZFBCRFVDQWVSJ2AKX8TJ.jpg', headers=headers,)
 # print(r)
