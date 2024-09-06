@@ -16,14 +16,17 @@ Session = sessionmaker(bind=engine)
 
 def autodelete():
     with Session() as session:
-        data = session.query(Tickets).filter(Tickets.DateAdded >= Tickets.DateAdded + timedelta(days=30)).all()
+        data = session.query(Tickets).filter(Tickets.DateAdded <= Tickets.DateAdded + timedelta(days=30)).all()
+        # data = session.query(Tickets).filter(Tickets.DateAdded < datetime.now()).all()
         for row in data:
+            print(row.DateAdded)
             if os.path.isfile(f'/imgs/{row.PictureName}'):
                 try:
                     os.remove(f'/imgs/{row.PictureName}')
                 except Exception as e:
+                    print('zalupa')
                     bot.send_message(os.getenv('my_id'), f'Error while deleting file\n{e}')
-        data = session.query(Tickets).filter(Tickets.DateAdded >= Tickets.DateAdded + timedelta(days=30)).delete(synchronize_session=False)
+        data = session.query(Tickets).filter(Tickets.DateAdded <= Tickets.DateAdded + timedelta(days=30)).delete(synchronize_session=False)
         session.commit()
        
 
