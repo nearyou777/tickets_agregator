@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 def login() -> tls_client.Session: 
     
     json_data = {
-        'email': 'vitaliytravels@gmail.com',
+        'email': 'vitravelsoft@gmail.com',
         'password': 'Test1234567890',
         'rememberMe': True,
     }

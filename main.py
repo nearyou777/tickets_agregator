@@ -29,6 +29,8 @@ logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 load_dotenv()
 WEBHOOK_URL_PATH = "/webhook"
 #TODO: SEGMENTATIONS 
+#TODO: Change filter name, re-work visuals
+#TODO: Percentage count
 
 
 @app.route(WEBHOOK_URL_PATH, methods=['POST'])
@@ -44,24 +46,25 @@ def set_webhook():
     print("Webhook is set:", public_url)
 
 def get_data():
-    try:
-        value = add_db()
-        bot.send_message(os.getenv('my_id'), 'Scrapping thrifry')
-    except Exception as e:
-        logging.error("Error in add_db: %s", e)
-        value = None
+    # try:
+    value = add_db()
+    bot.send_message(os.getenv('my_id'), 'Scrapping thrifry')
+    # except Exception as e: 
+        
+        # logging.error("Error in add_db: %s", e)
+        # value = None
     if not value:
-        try:
-            value = add_pomelo()
-            bot.send_message(os.getenv('my_id'), f'Scrapping pomelo,{value}')
-        except Exception as e:
-            logging.error("Error in add_pomelo: %s", e)
-            value = None
-        if not value:
-            try:
-                autodelete()
-            except Exception as e:
-                logging.error("Error in autodelete: %s", e)
+        # try:
+        value = add_pomelo()
+        bot.send_message(os.getenv('my_id'), f'Scrapping pomelo,{value}')
+        # except Exception as e:
+        #     logging.error("Error in add_pomelo: %s", e)
+        #     value = None
+        # if not value:
+        #     try:
+        #         autodelete()
+        #     except Exception as e:
+        #         logging.error("Error in autodelete: %s", e)
     return value
 
 def send_message():

@@ -1,25 +1,104 @@
-import telebot
-from time import sleep
-from telebot import types
-from bot import bot
-from dotenv import load_dotenv
-import os
-from models import Tickets, SentMessage, Session, Users
-load_dotenv()
-my_id = os.getenv('my_id')
+# import telebot
+# from time import sleep
+# from telebot import types
+# from bot import bot
+# from dotenv import load_dotenv
+# import os
+# from models import Tickets, SentMessage, Session, Users
+# load_dotenv()
+# my_id = os.getenv('my_id')
 
-from PIL import Image
-import os
+# from PIL import Image
+# import os
 
 
-import re
-import logging
+# import re
+# import logging
 
-logging.basicConfig()
-logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
-from datetime import datetime, timedelta
-import re
-one_day_ago = datetime.now() - timedelta(days=1)
+# logging.basicConfig()
+# logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
+# from datetime import datetime, timedelta
+# import re
+# one_day_ago = datetime.now() - timedelta(days=1)
+import requests
+
+import requests
+
+cookies = {
+    '_gcl_au': '1.1.811167909.1724939990',
+    'IR_gbd': 'going.com',
+    '_tt_enable_cookie': '1',
+    '_ttp': 'MUJ3oRGcNMfhSvb9XBLI1JsxYn8',
+    '_pin_unauth': 'dWlkPU1qZGhNVGRoTW1ZdFkyVTROeTAwTVRZekxUbGhZbU10TXpZM056WTBaalk1TVRBNA',
+    '_gid': 'GA1.2.1145420581.1725351665',
+    'did': 's%3Av0%3Aa7beb040-26e2-4eac-b0d5-3d9fbccfca9f%3A6d643fe3749c44908b8633934848477ae5fccfb7495011f66a362c7a5c649124%3A89025b908eceeaa2fd9d64bf8a98f2b9775e8fd72deeb5e6b7574861d8dccadb.at8gVGPorbpAYdgYq4y00Yu8t%2F4WCsVmN2pfaQs6H0U',
+    'did_compat': 's%3Av0%3Aa7beb040-26e2-4eac-b0d5-3d9fbccfca9f%3A6d643fe3749c44908b8633934848477ae5fccfb7495011f66a362c7a5c649124%3A89025b908eceeaa2fd9d64bf8a98f2b9775e8fd72deeb5e6b7574861d8dccadb.at8gVGPorbpAYdgYq4y00Yu8t%2F4WCsVmN2pfaQs6H0U',
+    'ab.storage.deviceId.e2ebd9b8-0bc9-4c60-9b8e-8135b29033ba': '%7B%22g%22%3A%22e29d4409-4305-041b-b21b-cd5d9e31e91a%22%2C%22c%22%3A1716757699527%2C%22l%22%3A1725453675778%7D',
+    'ab.storage.userId.e2ebd9b8-0bc9-4c60-9b8e-8135b29033ba': '%7B%22g%22%3A%2274a7bd2b-78ee-485b-b3b6-c97dbc45a9f4%22%2C%22c%22%3A1725453675776%2C%22l%22%3A1725453675778%7D',
+    'IR_PI': '1e7855a8-660f-11ef-b8c0-db5ddba76a5e%7C1725453695564',
+    '_rdt_uuid': '1724939990144.de1cf42f-cb5e-4107-8389-fbd06a97393e',
+    '_ga': 'GA1.2.529453385.1724939990',
+    '_gat_UA-72303404-1': '1',
+    'ab.storage.sessionId.e2ebd9b8-0bc9-4c60-9b8e-8135b29033ba': '%7B%22g%22%3A%2202647a20-5220-1982-2942-959d4468ccdc%22%2C%22e%22%3A1725455758504%2C%22c%22%3A1725453675777%2C%22l%22%3A1725453958504%7D',
+    'IR_10802': '1725453958472%7C0%7C1725453958472%7C%7C',
+    'auth0': 's%3Av1.gadzZXNzaW9ugqZoYW5kbGXEQCP4ymmymITV0KZGWyW0GFrEEI57FgkGh-etWpDtPs4EL7QHuzIUAkFUBrDIWstmx0r0CMTeugwvmQTv_ekhWmWmY29va2llg6dleHBpcmVz1_8C3GwAZtxLV65vcmlnaW5hbE1heEFnZc4PcxQAqHNhbWVTaXRlpG5vbmU.mIUcHJj%2FZ0iAd%2BPQc26QZXQZB2L8VVmi3n7oed1t7vc',
+    'auth0_compat': 's%3Av1.gadzZXNzaW9ugqZoYW5kbGXEQCP4ymmymITV0KZGWyW0GFrEEI57FgkGh-etWpDtPs4EL7QHuzIUAkFUBrDIWstmx0r0CMTeugwvmQTv_ekhWmWmY29va2llg6dleHBpcmVz1_8C3GwAZtxLV65vcmlnaW5hbE1heEFnZc4PcxQAqHNhbWVTaXRlpG5vbmU.mIUcHJj%2FZ0iAd%2BPQc26QZXQZB2L8VVmi3n7oed1t7vc',
+    'tatari-user-cookie': '74a7bd2b-78ee-485b-b3b6-c97dbc45a9f4',
+    't-ip': '1',
+    'tatari-session-cookie': 'a9f820a4-0dd6-5f96-8714-490c666793be',
+    '_derived_epik': 'dj0yJnU9OVNMNXJYdHNNbFRVS3pPTlM4dDNSOTFuanN6MkE3dVAmbj1sSEZnd3BJY3A2RkZUU3NPdmVRVWhRJm09MSZ0PUFBQUFBR2JZVnRjJnJtPTEmcnQ9QUFBQUFHYllWdGMmc3A9Mg',
+    'ph_phc_DJKgvRwV3jBMCRfgJEK2SsuwjPg2eLnlcJfDOu2ZiWJ_posthog': '%7B%22distinct_id%22%3A%2274a7bd2b-78ee-485b-b3b6-c97dbc45a9f4%22%2C%22%24sesid%22%3A%5B1725453959212%2C%220191bd0d-0390-70bc-8e98-756e6ebe60b1%22%2C1725453632399%5D%2C%22%24epp%22%3Atrue%7D',
+    '_ga_H86RBT0BLG': 'GS1.1.1725453633.7.1.1725453959.56.0.0',
+}
+
+headers = {
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+    'accept-language': 'ru,en-US;q=0.9,en;q=0.8',
+    'cache-control': 'max-age=0',
+    'content-type': 'application/x-www-form-urlencoded',
+    # 'cookie': '_gcl_au=1.1.811167909.1724939990; IR_gbd=going.com; _tt_enable_cookie=1; _ttp=MUJ3oRGcNMfhSvb9XBLI1JsxYn8; _pin_unauth=dWlkPU1qZGhNVGRoTW1ZdFkyVTROeTAwTVRZekxUbGhZbU10TXpZM056WTBaalk1TVRBNA; _gid=GA1.2.1145420581.1725351665; did=s%3Av0%3Aa7beb040-26e2-4eac-b0d5-3d9fbccfca9f%3A6d643fe3749c44908b8633934848477ae5fccfb7495011f66a362c7a5c649124%3A89025b908eceeaa2fd9d64bf8a98f2b9775e8fd72deeb5e6b7574861d8dccadb.at8gVGPorbpAYdgYq4y00Yu8t%2F4WCsVmN2pfaQs6H0U; did_compat=s%3Av0%3Aa7beb040-26e2-4eac-b0d5-3d9fbccfca9f%3A6d643fe3749c44908b8633934848477ae5fccfb7495011f66a362c7a5c649124%3A89025b908eceeaa2fd9d64bf8a98f2b9775e8fd72deeb5e6b7574861d8dccadb.at8gVGPorbpAYdgYq4y00Yu8t%2F4WCsVmN2pfaQs6H0U; ab.storage.deviceId.e2ebd9b8-0bc9-4c60-9b8e-8135b29033ba=%7B%22g%22%3A%22e29d4409-4305-041b-b21b-cd5d9e31e91a%22%2C%22c%22%3A1716757699527%2C%22l%22%3A1725453675778%7D; ab.storage.userId.e2ebd9b8-0bc9-4c60-9b8e-8135b29033ba=%7B%22g%22%3A%2274a7bd2b-78ee-485b-b3b6-c97dbc45a9f4%22%2C%22c%22%3A1725453675776%2C%22l%22%3A1725453675778%7D; IR_PI=1e7855a8-660f-11ef-b8c0-db5ddba76a5e%7C1725453695564; _rdt_uuid=1724939990144.de1cf42f-cb5e-4107-8389-fbd06a97393e; _ga=GA1.2.529453385.1724939990; _gat_UA-72303404-1=1; ab.storage.sessionId.e2ebd9b8-0bc9-4c60-9b8e-8135b29033ba=%7B%22g%22%3A%2202647a20-5220-1982-2942-959d4468ccdc%22%2C%22e%22%3A1725455758504%2C%22c%22%3A1725453675777%2C%22l%22%3A1725453958504%7D; IR_10802=1725453958472%7C0%7C1725453958472%7C%7C; auth0=s%3Av1.gadzZXNzaW9ugqZoYW5kbGXEQCP4ymmymITV0KZGWyW0GFrEEI57FgkGh-etWpDtPs4EL7QHuzIUAkFUBrDIWstmx0r0CMTeugwvmQTv_ekhWmWmY29va2llg6dleHBpcmVz1_8C3GwAZtxLV65vcmlnaW5hbE1heEFnZc4PcxQAqHNhbWVTaXRlpG5vbmU.mIUcHJj%2FZ0iAd%2BPQc26QZXQZB2L8VVmi3n7oed1t7vc; auth0_compat=s%3Av1.gadzZXNzaW9ugqZoYW5kbGXEQCP4ymmymITV0KZGWyW0GFrEEI57FgkGh-etWpDtPs4EL7QHuzIUAkFUBrDIWstmx0r0CMTeugwvmQTv_ekhWmWmY29va2llg6dleHBpcmVz1_8C3GwAZtxLV65vcmlnaW5hbE1heEFnZc4PcxQAqHNhbWVTaXRlpG5vbmU.mIUcHJj%2FZ0iAd%2BPQc26QZXQZB2L8VVmi3n7oed1t7vc; tatari-user-cookie=74a7bd2b-78ee-485b-b3b6-c97dbc45a9f4; t-ip=1; tatari-session-cookie=a9f820a4-0dd6-5f96-8714-490c666793be; _derived_epik=dj0yJnU9OVNMNXJYdHNNbFRVS3pPTlM4dDNSOTFuanN6MkE3dVAmbj1sSEZnd3BJY3A2RkZUU3NPdmVRVWhRJm09MSZ0PUFBQUFBR2JZVnRjJnJtPTEmcnQ9QUFBQUFHYllWdGMmc3A9Mg; ph_phc_DJKgvRwV3jBMCRfgJEK2SsuwjPg2eLnlcJfDOu2ZiWJ_posthog=%7B%22distinct_id%22%3A%2274a7bd2b-78ee-485b-b3b6-c97dbc45a9f4%22%2C%22%24sesid%22%3A%5B1725453959212%2C%220191bd0d-0390-70bc-8e98-756e6ebe60b1%22%2C1725453632399%5D%2C%22%24epp%22%3Atrue%7D; _ga_H86RBT0BLG=GS1.1.1725453633.7.1.1725453959.56.0.0',
+    'origin': 'https://auth.going.com',
+    'priority': 'u=0, i',
+    'referer': 'https://auth.going.com/u/login?state=hKFo2SBfQUpkSEZaekN3aWtadm9KclgtZjNWOHl6WkdoOUdvcKFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGpZYlA4SW52ckNCR1Y1amJ5OTZZZmVmUTFIeDFPaEpzo2NpZNkgSUhUTEE4VjkycFpScHdJWnliSnRBbWdpQng3ZUVkc1Q',
+    'sec-ch-ua': '"Chromium";v="128", "Not;A=Brand";v="24", "Google Chrome";v="128"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+    'sec-fetch-dest': 'document',
+    'sec-fetch-mode': 'navigate',
+    'sec-fetch-site': 'same-origin',
+    'sec-fetch-user': '?1',
+    'upgrade-insecure-requests': '1',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+}
+
+params = {
+    'state': 'hKFo2SBfQUpkSEZaekN3aWtadm9KclgtZjNWOHl6WkdoOUdvcKFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGpZYlA4SW52ckNCR1Y1amJ5OTZZZmVmUTFIeDFPaEpzo2NpZNkgSUhUTEE4VjkycFpScHdJWnliSnRBbWdpQng3ZUVkc1Q',
+}
+
+data = {
+    'state': 'hKFo2SBfQUpkSEZaekN3aWtadm9KclgtZjNWOHl6WkdoOUdvcKFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGpZYlA4SW52ckNCR1Y1amJ5OTZZZmVmUTFIeDFPaEpzo2NpZNkgSUhUTEE4VjkycFpScHdJWnliSnRBbWdpQng3ZUVkc1Q',
+    'username': 'vitalikf7@yahoo.com',
+    'password': 'Test1234567890!',
+    'action': 'default',
+}
+import tls_client
+from requests import Session
+s = Session()
+# s = tls_client.Session(client_identifier='chr')
+response = s.post('https://auth.going.com/u/login', params=params, cookies=cookies, headers=headers, data=data)
+print(response.text)
+json_data = {
+    'offset': 0,
+    'per_page': 100,
+    'origin_iata': [],
+    'airline_id': [],
+    'destination_tag_id': [],
+    'availabilities': [],
+    'class_of_service': [],
+}
+
+response = s.post('https://api.going.com/api/v1/deal-packs', json=json_data)
+print(response.text)
 # def fix_markdown(text):
 #     # Удаление лишних звездочек в конце строк, не трогая обрамляющие текст
 #     text = re.sub(r'(\S)\*(?!\w)', r'\1', text)
@@ -114,18 +193,18 @@ one_day_ago = datetime.now() - timedelta(days=1)
 # a = ' 2'
 # print(int(a))
 # models.py
-from sqlalchemy import create_engine, Column, Integer, ForeignKey, String, DateTime, Boolean, BigInteger, Table,text
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, sessionmaker
-from datetime import datetime, timedelta
-import os
-from dotenv import load_dotenv
-import logging
-from sqlalchemy import MetaData
-from sqlalchemy import DDL
+# from sqlalchemy import create_engine, Column, Integer, ForeignKey, String, DateTime, Boolean, BigInteger, Table,text
+# from sqlalchemy.ext.declarative import declarative_base
+# from sqlalchemy.orm import relationship, sessionmaker
+# from datetime import datetime, timedelta
+# import os
+# from dotenv import load_dotenv
+# import logging
+# from sqlalchemy import MetaData
+# from sqlalchemy import DDL
 
 
-load_dotenv()
+# load_dotenv()
 # engine = create_engine(os.getenv('connection_string'), echo=True, pool_size=20, max_overflow=20, pool_timeout=30, pool_recycle=3600)
 # Создание метаданных и загрузка существующей таблицы
 # Создание метаданных и загрузка существующей таблицы
@@ -382,5 +461,5 @@ load_dotenv()
 # a = [4,56,67,893,1,2,5,6,8]
 # a.sort()
 # print(a)
-a = (0.33**3) - 1.67 * (1-0.33)
-print(a)
+# a = (0.33**3) - 1.67 * (1-0.33)
+# print(a)

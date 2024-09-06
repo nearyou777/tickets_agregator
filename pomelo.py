@@ -9,7 +9,6 @@ from PIL import Image
 import os
 from time import sleep
 import logging
-import logging
 
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
@@ -19,7 +18,7 @@ s = tls_client.Session(client_identifier='chrome_105')
 logger = logging.getLogger(__name__)
 def login():
     json_data = {
-        'email': 'Vitaliytravels@gmail.com',
+        'email': 'vitravelsoft@gmail.com',
         'password': 'Test1234567890!',
         'company_id': '1',
     }
