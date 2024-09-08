@@ -29,9 +29,9 @@ logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 load_dotenv()
 WEBHOOK_URL_PATH = "/webhook"
+
 #TODO: SEGMENTATIONS 
 #TODO: Change filter name, re-work visuals
-#TODO: Percentage count
 
 
 @app.route(WEBHOOK_URL_PATH, methods=['POST'])

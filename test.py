@@ -4,34 +4,36 @@ from bs4 import BeautifulSoup
 import requests
 from requests import Session
 import json
-headers = {
-    'Upgrade-Insecure-Requests': '1',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
-    'sec-ch-ua': '"Chromium";v="128", "Not;A=Brand";v="24", "Google Chrome";v="128"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': '"Windows"',
-}
+# headers = {
+#     'Upgrade-Insecure-Requests': '1',
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+#     'sec-ch-ua': '"Chromium";v="128", "Not;A=Brand";v="24", "Google Chrome";v="128"',
+#     'sec-ch-ua-mobile': '?0',
+#     'sec-ch-ua-platform': '"Windows"',
+# }
 
-params = {
-    'returnTo': '/deals',
-}
-s = Session()
+# params = {
+#     'returnTo': '/deals',
+# }
+# s = Session()
 
-response = s.get('https://www.going.com/api/auth/login', params=params, headers=headers)
-print(response)
-# print(response.text)
-r = s.get(response.url, headers=headers)
-print(r.url)
-data = {
-    'username': 'vitravelsoft@gmail.com',
-    'password': 'Asd123!@#',
-    'action': 'default',
-}
-r = s.post(r.url, data=data)
-soup = BeautifulSoup(r.text, 'lxml')
-token = json.loads(soup.find('script', id="__NEXT_DATA__").text)['props']['pageProps']["accessToken"]
+# response = s.get('https://www.going.com/api/auth/login', params=params, headers=headers)
+# print(response)
+# # print(response.text)
+# r = s.get(response.url, headers=headers)
+# print(r.url)
+# data = {
+#     'username': 'vitravelsoft@gmail.com',
+#     'password': 'Asd123!@#',
+#     'action': 'default',
+# }
+# r = s.post(r.url, data=data)
+# soup = BeautifulSoup(r.text, 'lxml')
+# token = json.loads(soup.find('script', id="__NEXT_DATA__").text)['props']['pageProps']["accessToken"]
 
-
+a = 'dfadsdsf ffkjdslfjdsjkl'
+b =a.title()
+print(b)
 # headers = {
 #     'accept': '*/*',
 #     'accept-language': 'ru,en-US;q=0.9,en;q=0.8',
@@ -58,8 +60,8 @@ token = json.loads(soup.find('script', id="__NEXT_DATA__").text)['props']['pageP
 #     'availabilities': [],
 #     'class_of_service': [],
 # }
-response = s.get('https://www.going.com/api/airframe/v2/points-campaigns')
-print(response.json())
+# response = s.get('https://www.going.com/api/airframe/v2/points-campaigns')
+# print(response.json())
 # response = requests.post('https://api.going.com/api/v1/deal-packs', headers=headers, json=json_data)
 # print(response.json())
 # with open('test.json', 'w') as f:

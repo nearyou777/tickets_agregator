@@ -65,8 +65,8 @@ def cash_offers(data:list, token:str):
     for item in response.json()['data']:
         id = f"going-{item['destinationMarketId']}"
         title = item["name"]
-        type = 'cash'
-        cabin =  item['cos']
+        type = 'Cash'
+        cabin =  item['cos'].title()
         price = item['price']
         try:
             original_price = item['normalPrice']
@@ -81,7 +81,8 @@ def cash_offers(data:list, token:str):
         picture_name = image_link.split('/')[-1].split('.')[0]
         with open(f'imgs/{picture_name}', 'wb') as f:
             f.write(requests.get(image_link).content)
-        summary = f'''✈️Deal Summary: Enjoy this deal to {title}✈️\non these dates {dates}\nfor lowest price of {price}'''
+
+        summary = f'''✈️Enjoy this deal to {title}✈️\non these dates:\n {dates}\nfor lowest price of {price}'''
         data.append({
             'ID' : id,
             'Title': title, 

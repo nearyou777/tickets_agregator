@@ -21,7 +21,7 @@ airports = []
 load_dotenv()
 
 #TODO:EMAIL VALIDATION
-#TODO: short user_airport list
+
 
 
 def check_channel_subscription(message):
