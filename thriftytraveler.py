@@ -24,8 +24,8 @@ logger = logging.getLogger(__name__)
 def login() -> tls_client.Session: 
     
     json_data = {
-        'email': 'vitravelsoft@gmail.com',
-        'password': 'Test1234567890',
+        'email': os.getenv('working_mail'),
+        'password': os.getenv('thrifty_pass'),
         'rememberMe': True,
     }
     try:
@@ -110,7 +110,7 @@ def get_data():
         'pointMin': 0,
         'pointMax': 200,
         'status': 'PUBLISHED',
-        'page': 3
+        'page': 1
     }
     try:
         r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)

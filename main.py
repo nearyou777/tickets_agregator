@@ -10,6 +10,7 @@ from sqlalchemy.orm import sessionmaker
 from dotenv import load_dotenv
 from bot import msg_markup, check_subscription, bot
 from thriftytraveler import get_data, add_db
+from going import add_going
 from models import Tickets, NewTickets, Users, SentMessage, Session
 from config import engine
 from delete_offrers import autodelete
@@ -17,8 +18,8 @@ from pomelo import add_pomelo
 import logging
 from flask.logging import default_handler
 from sqlalchemy.orm import aliased
-
 from sqlalchemy import select
+from buttons import create_deal_msg
 app = Flask(__name__)
 
 log = logging.getLogger('werkzeug')
@@ -46,25 +47,29 @@ def set_webhook():
     print("Webhook is set:", public_url)
 
 def get_data():
-    # try:
-    value = add_db()
-    bot.send_message(os.getenv('my_id'), 'Scrapping thrifry')
-    # except Exception as e: 
-        
-        # logging.error("Error in add_db: %s", e)
-        # value = None
+    try:
+        value = add_db()
+        bot.send_message(os.getenv('my_id'), f'Scrapping thrify, {value}')
+    except Exception as e:
+        bot.send_message(os.getenv('my_id'), f'Error thrifty, {e}')
+        value = None
     if not value:
-        # try:
-        value = add_pomelo()
-        bot.send_message(os.getenv('my_id'), f'Scrapping pomelo,{value}')
-        # except Exception as e:
-        #     logging.error("Error in add_pomelo: %s", e)
-        #     value = None
-        # if not value:
-        #     try:
-        #         autodelete()
-        #     except Exception as e:
-        #         logging.error("Error in autodelete: %s", e)
+        try:
+            value = add_pomelo()
+            bot.send_message(os.getenv('my_id'), f'Scrapping pomelo, {value}')
+        except Exception as e:
+            bot.send_message(os.getenv('my_id'), f'Error pomelo, {e}')
+            value = None
+    if not value:
+        try:
+            value = add_going()
+            bot.send_message(os.getenv('my_id'), f'Scrapping going, {value}')   
+        except Exception as e:
+            bot.send_message(os.getenv('my_id'), f'Error going, {e}')
+            value = None
+    if not value:
+        autodelete()
+        return False
     return value
 
 def send_message():
@@ -90,14 +95,7 @@ def send_message():
                         for row in new_tickets:
                             if row.ID in sent_airports:
                                 continue
-                            msg = f'''✈️<b>{row.Title}</b>✈️
-    {row.Cabin}
-    -----------------------
-    {row.Price} (was {row.OriginalPrice})
-    -----------------------
-    {row.Dates}
-    -----------------------
-    ORDER BY: {row.Type}'''
+                            msg = create_deal_msg(row)
                             try:
                                 base_path = os.getcwd()
                                 photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')

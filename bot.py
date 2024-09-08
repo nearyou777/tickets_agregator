@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 from telebot.apihelper import ApiException
 from export_data import export_tables
 from config import check_subscription, isadmin, escape_markdown, format_entities, all_airports
-from buttons import msg_markup, channel_mark, airport_buttons
+from buttons import msg_markup, channel_mark, airport_buttons, create_deal_msg
 import logging
 
 logging.basicConfig()
@@ -293,7 +293,10 @@ def share_post(message, ids_text):
                     bot.send_message(user_id, formatted_message.strip(), parse_mode="MarkdownV2")
                 elif message.content_type == 'photo':
                     photo_id = message.photo[-1].file_id
-                    bot.send_photo(user_id, photo_id, caption=formatted_caption, parse_mode="MarkdownV2")
+                    try:
+                        bot.send_photo(user_id, photo_id, caption=formatted_caption, parse_mode="MarkdownV2")
+                    except:
+                        pass
                 elif message.content_type == 'video':
                     video_id = message.video.file_id
                     bot.send_video(user_id, video_id, caption=formatted_caption, parse_mode="MarkdownV2")
@@ -369,16 +372,7 @@ def search_message(message):
                 if row.ID in sent_airports:
                     session.commit()
                     continue
-                msg = f'''✈️<b>{row.Title}</b>✈️
------------------------
-{row.Cabin}
------------------------
-{row.Price} (was {row.OriginalPrice})
------------------------
-{row.Dates}
------------------------
-ORDER BY: {row.Type}'''
-
+                msg = create_deal_msg(row)
                 markup = msg_markup(row.ID, 'start')
                 base_path = os.getcwd()
                 photo_path = os.path.join(base_path, f'imgs/{row.PictureName}')
@@ -386,7 +380,7 @@ ORDER BY: {row.Type}'''
                 try:
                     with open(photo_path, 'rb') as photo:
                         bot.send_photo(user_id, photo=photo)
-                except FileNotFoundError:
+                except:
                     pass
                 
                 try:
@@ -512,14 +506,7 @@ def callback_query(call):
     elif 'departure' in call.data:
         with Session() as session:
             row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
-            msg = f'''✈️<b>{row.Title}</b>✈️
-{row.Cabin}
------------------------
-{row.Price} (was {row.OriginalPrice})
------------------------
-{row.Dates}
------------------------
-ORDER BY: {row.Type}
+            msg = f'''{create_deal_msg(row)}
 -----------------------
 <b>Departure cities:</b>
 
@@ -535,14 +522,7 @@ ORDER BY: {row.Type}
     elif 'book_guide' in call.data:
         with Session() as session:
             row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
-            msg = f'''✈️<b>{row.Title}</b>✈️
-{row.Cabin}
------------------------
-{row.Price} (was {row.OriginalPrice})
------------------------
-{row.Dates}
------------------------
-ORDER BY: {row.Type}
+            msg = f'''{create_deal_msg(row)}
 -----------------------
 <b>Booking guide:</b>
 
@@ -557,14 +537,7 @@ ORDER BY: {row.Type}
     elif 'summary' in call.data:
         with Session() as session:
             row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
-            msg = f'''✈️<b>{row.Title}</b>✈️
-{row.Cabin}
------------------------
-{row.Price} (was {row.OriginalPrice})
------------------------
-{row.Dates}
------------------------
-ORDER BY: {row.Type}
+            msg = f'''{create_deal_msg(row)}
 -----------------------
 <b>Deal Summary:</b>
 

@@ -1,25 +1,23 @@
 import requests
-import json
 import tls_client
 import html2text
 import pyshorteners
-from sqlalchemy.orm import sessionmaker
 from models import Tickets, NewTickets, engine, Session
 from PIL import Image
 import os
 from time import sleep
 import logging
-
+from dotenv import load_dotenv
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
-
+load_dotenv()
 # Определение логгера
 s = tls_client.Session(client_identifier='chrome_105')
 logger = logging.getLogger(__name__)
 def login():
     json_data = {
-        'email': 'vitravelsoft@gmail.com',
-        'password': 'Test1234567890!',
+        'email': os.getenv('working_mail'),
+        'password': os.getenv('pomelo_pass'),
         'company_id': '1',
     }
 
@@ -91,6 +89,7 @@ def get_data():
             tickets.append(str(row.ID))
         session.commit()
     for item in r.json()['data']:
+        print(item)
         title = item['title']
         price = item['price']
         original_price = item['normal_price']
