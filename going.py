@@ -9,25 +9,26 @@ from dotenv import load_dotenv
 load_dotenv()
 s = requests.Session()
 def login() -> str:
-    headers = {
-        'Upgrade-Insecure-Requests': '1',
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
-        'sec-ch-ua': '"Chromium";v="128", "Not;A=Brand";v="24", "Google Chrome";v="128"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"Windows"',
-    }
+    # headers = {
+    #     'Upgrade-Insecure-Requests': '1',
+    #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36',
+    #     'sec-ch-ua': '"Chromium";v="128", "Not;A=Brand";v="24", "Google Chrome";v="128"',
+    #     'sec-ch-ua-mobile': '?0',
+    #     'sec-ch-ua-platform': '"Windows"',
+    # }
 
     params = {
         'returnTo': '/deals',
     }
-    response = s.get('https://www.going.com/api/auth/login', params=params, headers=headers)
-    r = s.get(response.url, headers=headers)
+    response = s.get('https://www.going.com/api/auth/login', params=params)
+    r = s.get(response.url)
     data = {
         'username': os.getenv('working_mail'),
         'password': os.getenv('going_pass'),
         'action': 'default',
     }
     r = s.post(r.url, data=data)
+    # print(r.text)
     soup = BeautifulSoup(r.text, 'lxml')
     return json.loads(soup.find('script', id="__NEXT_DATA__").text)['props']['pageProps']["accessToken"]
 
