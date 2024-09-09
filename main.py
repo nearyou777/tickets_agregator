@@ -13,7 +13,7 @@ from thriftytraveler import get_data, add_db
 from going import add_going
 from models import Tickets, NewTickets, Users, SentMessage, Session
 from config import engine
-from delete_offrers import autodelete
+from delete_offers import autodelete
 from pomelo import add_pomelo
 import logging
 from flask.logging import default_handler
