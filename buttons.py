@@ -96,12 +96,13 @@ def airport_buttons(prefix, choosed_airports, current_position=0, step=20, page=
 def create_deal_msg(row:Tickets):
     if row.OriginalPrice != 0:
         if row.Type == 'Cash':
-            # try:
-            original_price = int(row.OriginalPrice.split('-')[0].replace('+', '').replace('$', '').replace('Under', '').replace('s', '').replace('From', '').replace('For', '').replace(',', '').strip())
-            price = int(row.Price.split('-')[0].replace('+', '').replace('$', '').replace('Under', '').replace('s', '').replace('From', '').replace('For', '').replace(',', '').strip())
-            discount = (100*(original_price - price)) // original_price
-            # except:
-            #     discount = 'Huge'
+            try:
+                original_price = int(row.OriginalPrice.split('-')[0].replace('+', '').replace('$', '').replace('Under', '').replace('s', '').replace('From', '').replace('For', '').replace(',', '').strip())
+                price = int(row.Price.split('-')[0].replace('+', '').replace('$', '').replace('Under', '').replace('s', '').replace('From', '').replace('For', '').replace(',', '').strip())
+                print(original_price, price)
+                discount = (100*(original_price - price)) // original_price
+            except:
+                discount = 'Huge'
             msg = f'''✈️<b>{row.Title}</b>✈️
 <b>{discount}% OFF🔥🔥🔥</b>
 -----------------------
