@@ -109,15 +109,15 @@ def remove_airports(message):
 
 @bot.message_handler(commands=['start'])
 def welcome_message(message):
-    msg = '''🎉 Welcome to Travel Hacker Bot! 🌟 
-Thank you for joining us on this exciting journey.
-We're thrilled to have you aboard as we explore the world of travel together. Your next adventure starts here! 🌍✈️ '''
+    msg = '''Welcome to Travel Hacker! 🚀 Your ultimate guide to hacking flight deals! 
+Your next adventure starts here! 🌍✈️ What's your name?'''
     with Session() as session:
         user = session.query(Users).filter_by(ID = message.chat.id).first()
         if not user:
             bot.send_message(message.chat.id, msg)
             sleep(1)
-        bot.send_message(message.chat.id, '''First things first, what's your name? We love to keep things personal here! 📛''')
+        bot.send_message(message.chat.id, '''Welcome to Travel Hacker! 🚀 Your ultimate guide to hacking flight deals! 
+Your next adventure starts here! 🌍✈️ What's your name?''')
         try:
             session.commit()
         except Exception as e:
@@ -130,9 +130,8 @@ def get_mail(message):
     if '/' in name:
         unkown_user(message)
         return
-    msg = f'''Great to meet you, {name}! 🌟 
-Now, could you please share your email address with us?
-We'll use this to keep you updated with the latest flight deals and connect you to our exclusive course on Skool.com. 📧'''
+    msg = f'''Hi, {name}! ✈️ Great to meet you!🌟 
+What’s the best email to send you awesome flight deals and other exclusive content?'''
     bot.send_message(message.chat.id, msg)
     sleep(0.5)
     bot.register_next_step_handler(message, channel_subscribe, name)
@@ -157,8 +156,8 @@ def channel_subscribe(message, name):#saving data here
         member = check_channel_subscription(message)
 
         msg = '''Awesome!😊
-    Now, let’s make sure you’re in our exclusive channel
-    This step is crucial to continue! 📢''' 
+To stay in the loop with the latest offers, join our exclusive channel.
+This step is crucial to continue! 📢''' 
         if not member:
             bot.send_message(message.chat.id, msg, reply_markup=channel_mark())
             while not member:
@@ -172,8 +171,7 @@ def channel_subscribe(message, name):#saving data here
 
 
 def get_airports(message, flag:bool):
-    msg = f'''Thank you for subscribing!✅ 🎉 You’re awesome! 
-Now, let’s customize your flight alerts. 🛫'''
+    msg = f'''Awesome! Now, what kind of offers are you most interested in? 🌍'''
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
     btn1 = types.KeyboardButton('Add airports 🛫') 
     btn2 = types.KeyboardButton('Remove airports 🛬')
@@ -187,6 +185,8 @@ Now, let’s customize your flight alerts. 🛫'''
 Now, let’s customize your flight alerts. 🛫'''
         bot.send_message(message.chat.id, msg, reply_markup=markup)
     add_airports(message)
+    choose_offer(message)
+
 
 
 @bot.message_handler(commands=['renew'])
