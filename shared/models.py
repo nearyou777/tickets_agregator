@@ -17,8 +17,8 @@ Base = declarative_base()
 class Tickets(Base):
     __tablename__ = 'tickets'
     #FIXME:
-    Primary_Key  = Column(Integer, primary_key=True)
-    ID = Column(String(100))
+    # Primary_Key  = Column(Integer, primary_key=True)
+    ID = Column(String(1000), primary_key=True)
     Title  = Column(String(500))
     Type = Column(String(200))
     Cabin = Column(String(500))
@@ -37,8 +37,8 @@ class Tickets(Base):
 class NewTickets(Base):
     __tablename__ = 'new_tickets'
     #FIXME:
-    Primary_Key  = Column(Integer, primary_key=True)
-    ID = Column(String(100))
+    # Primary_Key  = Column(Integer, primary_key=True)
+    ID = Column(String(1000), primary_key=True)
     Title  = Column(String(500))
     Type = Column(String(200))
     Cabin = Column(String(500))

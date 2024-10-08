@@ -7,7 +7,6 @@ from bs4 import BeautifulSoup
 import os
 from dotenv import load_dotenv
 from time import sleep
-load_dotenv()
 s = requests.Session()
 def login() -> str:
     params = {
