@@ -7,19 +7,29 @@ import os
 from dotenv import load_dotenv
 import logging
 
-
+# Load environment variables
 load_dotenv()
-engine = create_engine(os.getenv('connection_string'), echo=True, pool_size=20, max_overflow=20, pool_timeout=30, pool_recycle=3600)
+
+# Print the DB connection string to verify it's correct
+db_connection_string = os.getenv('DB_CONNECTION_STRING')
+print(db_connection_string)
+print(type(db_connection_string))
+
+# Create the engine with the connection string from the environment variable
+engine = create_engine(db_connection_string, echo=False, pool_size=20, max_overflow=20, pool_timeout=30, pool_recycle=3600)
+
+# Set logging for SQLAlchemy
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
+
+# Define the Base for declarative models
 Base = declarative_base()
 
+# Define your models here
 class Tickets(Base):
     __tablename__ = 'tickets'
-    #FIXME:
-    # Primary_Key  = Column(Integer, primary_key=True)
     ID = Column(String(1000), primary_key=True)
-    Title  = Column(String(500))
+    Title = Column(String(500))
     Type = Column(String(200))
     Cabin = Column(String(500))
     Price = Column(String(50))
@@ -31,15 +41,12 @@ class Tickets(Base):
     BookGuide = Column(String(10000))
     Summary = Column(String(10000))
     PictureName = Column(String(100))
-    DateAdded = Column(DateTime, default=datetime.utcnow())
-
+    DateAdded = Column(DateTime, default=datetime.utcnow)
 
 class NewTickets(Base):
     __tablename__ = 'new_tickets'
-    #FIXME:
-    # Primary_Key  = Column(Integer, primary_key=True)
     ID = Column(String(1000), primary_key=True)
-    Title  = Column(String(500))
+    Title = Column(String(500))
     Type = Column(String(200))
     Cabin = Column(String(500))
     Price = Column(String(50))
@@ -51,7 +58,6 @@ class NewTickets(Base):
     BookGuide = Column(String(10000))
     Summary = Column(String(10000))
     PictureName = Column(String(100))
-
 
 class SentMessage(Base):
     __tablename__ = 'sent_messages'
@@ -60,25 +66,24 @@ class SentMessage(Base):
     message_id = Column(String(200))
     user = relationship("Users", back_populates="sent_messages")
 
-
 class Users(Base):
     __tablename__ = 'users'
     ID = Column(BigInteger, primary_key=True)
     Name = Column(String(200))
     Email = Column(String(200))
     Airports = Column(String(10000))
-    LogInDate = Column(DateTime, default=datetime.utcnow().date)
-    SubscriptionDate = Column(DateTime, default=(datetime.utcnow() + timedelta(days=7)).date)
+    LogInDate = Column(DateTime, default=datetime.utcnow)
+    SubscriptionDate = Column(DateTime, default=(datetime.utcnow() + timedelta(days=7)))
     BuyedSubscription = Column(Boolean, default=False)
     IsActiveUser = Column(Boolean, default=True)
     filtered_offers = Column(String(50), default='Both')
     sent_messages = relationship("SentMessage", back_populates="user")
+
+# Create all tables in the database
 Base.metadata.create_all(engine)
 
-
-# Base.metadata.create_all(engine2)    
+# Set up the session
 Session = sessionmaker(bind=engine)
 with Session() as session:
     session.query(NewTickets).delete()
     session.commit()
-

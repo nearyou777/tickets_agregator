@@ -5,18 +5,18 @@ import math
 from dotenv import load_dotenv
 import os
 import json
-from models import Users, Tickets, SentMessage, Session
+from shared.models import Users, Tickets, Session
 from datetime import datetime, timedelta
 from telebot.apihelper import ApiException
 from export_data import export_tables
-from config import check_subscription, isadmin, escape_markdown, format_entities, all_airports
+from shared.config import check_subscription, isadmin, escape_markdown, format_entities, all_airports
 from buttons import msg_markup, channel_mark, airport_buttons, create_deal_msg
 import logging
 
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
-bot = telebot.TeleBot(os.getenv('token'))
+bot = telebot.TeleBot(os.getenv('TELEGRAM_API_KEY'))
 airports = []
 load_dotenv()
 
@@ -26,7 +26,7 @@ load_dotenv()
 
 def check_channel_subscription(message):
     try:
-        member = bot.get_chat_member(chat_id=os.getenv('channel_updates_id'), user_id=int(message.chat.id))
+        member = bot.get_chat_member(chat_id=os.getenv('CHANNEL_ID'), user_id=int(message.chat.id))
         if member.status in ['member', 'administrator', 'creator', 'owner']:
             return True
         else:
@@ -109,6 +109,7 @@ def remove_airports(message):
 
 @bot.message_handler(commands=['start'])
 def welcome_message(message):
+    print(all_airports)
     msg = '''Welcome to Travel Hacker! 🚀 Your ultimate guide to hacking flight deals! 
 Your next adventure starts here! 🌍✈️ What's your name?'''
     with Session() as session:

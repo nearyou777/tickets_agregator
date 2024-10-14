@@ -2,10 +2,10 @@ import requests
 import json
 import html2text
 import datetime
-from models import Tickets, NewTickets, engine, Session
+import sys
+from shared.models import Tickets, NewTickets, engine, Session
 from bs4 import BeautifulSoup
 import os
-from dotenv import load_dotenv
 from time import sleep
 s = requests.Session()
 def login() -> str:
@@ -15,8 +15,8 @@ def login() -> str:
     response = s.get('https://www.going.com/api/auth/login', params=params)
     r = s.get(response.url)
     data = {
-        'username': os.getenv('working_mail'),
-        'password': os.getenv('going_pass'),
+        'username': os.getenv('WORKING_MAIL'),
+        'password': os.getenv('WORKING_PASS'),
         'action': 'default',
     }
     r = s.post(r.url, data=data)
@@ -32,8 +32,8 @@ def login() -> str:
         response = s.get('https://www.going.com/api/auth/login', params=params)
         r = s.get(response.url)
         data = {
-            'username': os.getenv('working_mail'),
-            'password': os.getenv('going_pass'),
+            'username': os.getenv('WORKING_MAIL'),
+            'password': os.getenv('GOING_PASS'),
             'action': 'default',
         }
         r = s.post(r.url, data=data)

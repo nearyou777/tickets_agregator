@@ -3,17 +3,19 @@ import json
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from models import Tickets, NewTickets, Session
+from shared.models import Tickets, NewTickets, Session
 from bs4 import BeautifulSoup
 import requests
 from time import sleep
-from bot import bot
+# from telegram_bot.bot import bot
 from dotenv import load_dotenv
 import os
 from datetime import datetime
 import pyshorteners
 import logging
 import logging
+import redis
+redis_client = redis.StrictRedis(host='redis', port=6379, decode_responses=True)
 
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
@@ -24,8 +26,8 @@ logger = logging.getLogger(__name__)
 def login() -> tls_client.Session: 
     
     json_data = {
-        'email': os.getenv('working_mail'),
-        'password': os.getenv('thrifty_pass'),
+        'email': os.getenv('WORKING_EMAIL'),
+        'password': os.getenv('THRIFTY_PASS'),
         'rememberMe': True,
     }
     try:
@@ -43,7 +45,7 @@ def login() -> tls_client.Session:
                 try:
                     s.post('https://apiv2.thriftytraveler.com/auth/login', json=json_data)
                 except:
-                    bot.send_message(os.getenv('my_id'), 'There\'s an error with login')
+                    return None
     return s
 
 
@@ -134,8 +136,7 @@ def get_data():
     # print()
     # print()
     # print()
-    with open('test.json', 'w') as f:
-        json.dump(r.json(),f,indent=2)
+
     for page in range(1, int(page_count) + 1):
         params['page'] = page
         try:
@@ -189,7 +190,7 @@ def get_data():
             r = requests.get(img_link)
             picture_name = img_link.split('/')[-1] if r.status_code == 200 else None
             if picture_name:
-                with open(f'imgs/{picture_name}', 'wb') as f:
+                with open(f'tickets\imgs\{picture_name}', 'wb') as f:
                     f.write(r.content)
             
             guide = BeautifulSoup(item['bookingInstructions'], 'lxml').text.strip()
@@ -219,7 +220,8 @@ def get_data():
     return data
 
 
-def add_db() -> bool:
+def add_thrifty() -> bool:
+    print('abvs')
     data = get_data()
     with Session() as session:
         if len(data) == 0:
@@ -231,6 +233,22 @@ def add_db() -> bool:
             if not exist:
                 session.add(Tickets(**item))
                 session.add(NewTickets(**item))
+                message = {
+                    'ID': item['ID'],
+                    'Title': item['Title'],
+                    'Type': item['Type'],
+                    'Price': item['Price'],
+                    'Price': item['OriginalPrice'],
+                    'Dates': item['Dates'],
+                    'Book': item['Book'],
+                    'DepartureCities': item['DepartureCities'],
+                    'DepartureAirports': item['DepartureAirports'],
+                    'BookGuide': item['BookGuide'],
+                    'Summary': item['Summary'],
+                    'PictureName': item['PictureName'],
+                }
+                redis_client.publish('new_tickets', json.dumps(message))
+
         session.commit()
             # else:
             #     session.commit()
@@ -253,4 +271,4 @@ def add_db() -> bool:
 
         
 if __name__ == '__main__':
-    add_db()
+    add_thrifty()

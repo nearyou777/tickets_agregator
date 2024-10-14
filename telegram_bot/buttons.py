@@ -1,6 +1,6 @@
 from telebot import types
-from models import Tickets
-from config import Session
+from shared.models import Tickets
+from shared.config import Session
 import math
 import os
 from dotenv import load_dotenv
@@ -45,7 +45,7 @@ def msg_markup(offer_id, position='start'):
 
 def channel_mark():
     markup = types.InlineKeyboardMarkup()
-    btn1 = types.InlineKeyboardButton('Our Channel', url=os.getenv('channel_url'))
+    btn1 = types.InlineKeyboardButton('Our Channel', url=os.getenv('CHANNEL_URL'))
     btn2 = types.InlineKeyboardButton('I\'m subscribed✅', callback_data=f'subscribed')
     markup.add(btn1)
     markup.add(btn2)

@@ -1,7 +1,7 @@
 import telebot
 from time import sleep
 from dotenv import load_dotenv
-from models import Session
+from shared.models import Session
 import pandas as pd
 import logging
 

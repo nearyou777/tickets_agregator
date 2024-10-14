@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  scraper:
+    build:
+      context: ./scraper
+      dockerfile: Dockerfile
+    volumes:
+      - ./shared:/tickets/shared
+    environment:
+      - PYTHONPATH=/tickets
+      - RABBITMQ_URL=${RABBITMQ_URL}
+      - DB_CONNECTION_STRING=${DB_CONNECTION_STRING}
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+
+  bot:
+    build:
+      context: ./telegram_bot
+      dockerfile: Dockerfile
+    volumes:
+      - ./shared:/tickets/shared
+    environment:
+      - RABBITMQ_URL=${RABBITMQ_URL}
+      - DB_CONNECTION_STRING=${DB_CONNECTION_STRING}
+      - TELEGRAM_API_KEY=${TELEGRAM_API_KEY}
+    env_file:
+      - .env
+    depends_on:
+      - rabbitmq
+    ports:
+      - "8000:8000"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"  # RabbitMQ для обмена сообщениями
+      - "15672:15672"  # RabbitMQ Management UI
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+networks:
+  my_network:
+    driver: bridge

@@ -4,7 +4,7 @@ from sqlalchemy import create_engine, Column, Integer, ForeignKey, String, DateT
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 from datetime import datetime, timedelta
-from models import engine, NewTickets, Users, Session
+from shared.models import engine, NewTickets, Users, Session
 import json
 import logging
 
@@ -60,7 +60,7 @@ def format_entities(text, entities):
     return ''.join(formatted_message_parts)
 
 
-with open('airports.json', 'r') as f:
+with open('/tickets/shared/airports.json', 'r') as f:
     all_airports = json.load(f)
 # all_airports = [
 #     "Aberdeen (ABR)",

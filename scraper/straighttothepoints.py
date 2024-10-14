@@ -43,20 +43,20 @@ def get_data(s:requests.Session, links:list):
         with open(f'imgs/{picture_name}', 'wb') as f:
             f.write(s.get(img_link).content)
 
-        data.append({
-            'ID' : id,
-            'Title': title, 
-            'Type': type, 
-            'Cabin': cabin,
-            'Price': price, 
-            'OriginalPrice' : original_price,
-            'Dates' : dates,
-            'Book' : bookURL,
-            'DepartureCities' : departure_cities.strip(),
-            'DepartureAirports' : departure_airports,
-            'BookGuide' : guide, 
-            'Summary' : summary,
-            'PictureName' : picture_name})
+        # data.append({
+        #     'ID' : id,
+        #     'Title': title, 
+        #     'Type': type, 
+        #     'Cabin': cabin,
+        #     'Price': price, 
+        #     'OriginalPrice' : original_price,
+        #     'Dates' : dates,
+        #     'Book' : bookURL,
+        #     'DepartureCities' : departure_cities.strip(),
+        #     'DepartureAirports' : departure_airports,
+        #     'BookGuide' : guide, 
+        #     'Summary' : summary,
+        #     'PictureName' : picture_name})
 def main():
     s = login()
     get_data(s, get_links(s))

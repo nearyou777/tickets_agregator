@@ -2,7 +2,7 @@ import requests
 import tls_client
 import html2text
 import pyshorteners
-from models import Tickets, NewTickets, engine, Session
+from shared.models import Tickets, NewTickets, engine, Session
 from PIL import Image
 import os
 from time import sleep
@@ -16,8 +16,8 @@ s = tls_client.Session(client_identifier='chrome_105')
 logger = logging.getLogger(__name__)
 def login():
     json_data = {
-        'email': os.getenv('working_mail'),
-        'password': os.getenv('pomelo_pass'),
+        'email': os.getenv('WORKING_MAIL'),
+        'password': os.getenv('POMELO_PASS'),
         'company_id': '1',
     }
 
