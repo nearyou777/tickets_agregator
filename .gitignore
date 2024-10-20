@@ -124,3 +124,4 @@ out/*.csv
 imgs/*
 /test.py
 !airports.json
+*.html

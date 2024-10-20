@@ -2,8 +2,7 @@ import requests
 import json
 import html2text
 import datetime
-import sys
-from shared.models import Tickets, NewTickets, engine, Session
+from shared.models import Tickets, Session
 from bs4 import BeautifulSoup
 import os
 from time import sleep
@@ -15,7 +14,7 @@ def login() -> str:
     response = s.get('https://www.going.com/api/auth/login', params=params)
     r = s.get(response.url)
     data = {
-        'username': os.getenv('WORKING_MAIL'),
+        'username': os.getenv('WORKING_EMAIL'),
         'password': os.getenv('WORKING_PASS'),
         'action': 'default',
     }
@@ -32,7 +31,7 @@ def login() -> str:
         response = s.get('https://www.going.com/api/auth/login', params=params)
         r = s.get(response.url)
         data = {
-            'username': os.getenv('WORKING_MAIL'),
+            'username': os.getenv('WORKING_EMAIL'),
             'password': os.getenv('GOING_PASS'),
             'action': 'default',
         }
@@ -59,6 +58,13 @@ def cash_offers(data:list, token:str):
 
     for item in response.json()['data']:
         id = f"going-{item['destinationMarketId']}"
+        tickets = []
+        with Session() as session:
+            for row in session.query(Tickets).filter(Tickets.ID.like("%going%")).all():
+                tickets.append(str(row.ID))
+            session.commit()
+        if id in tickets:
+            continue
         title = item["name"]
         type = 'Cash'
         cabin =  item['cos'].title()
@@ -97,13 +103,17 @@ def cash_offers(data:list, token:str):
 
 
 def scrape_points_deals(data:list, token:str) -> list:
-
     response = s.get('https://www.going.com/api/airframe/v2/points-campaigns')
     for item in response.json()['data']:
-        #TODO: dates
-        print(item)
         title = item["campaign_name"]
         id = f'going-{item["id"]}'
+        tickets = []
+        with Session() as session:
+            for row in session.query(Tickets).filter(Tickets.ID.like("%going%")).all():
+                tickets.append(str(row.ID))
+            session.commit()
+        if id in tickets:
+            continue
         cabin = item["class_of_service"]
         type = 'Points/Miles'
         image_link = item["main_image"]["lg_url"]
@@ -143,20 +153,7 @@ def scrape_points_deals(data:list, token:str) -> list:
 def add_going():
     token = login()
     data = scrape_points_deals(cash_offers([], token), token)
-    with Session() as session:
-        if len(data) == 0:
-            session.query(NewTickets).delete()
-            session.commit()
-            return False
-        for item in data:
-            exist = session.query(Tickets).filter_by(ID = item['ID']).first()
-            if not exist:
-                session.add(Tickets(**item))
-                session.add(NewTickets(**item))
-        session.commit()
-        count = session.query(NewTickets).count()
-        session.commit()
-    return count > 0
+    return data if len(data) > 0 else None
 
 
 if __name__ == '__main__':

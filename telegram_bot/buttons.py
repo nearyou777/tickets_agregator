@@ -93,49 +93,103 @@ def airport_buttons(prefix, choosed_airports, current_position=0, step=20, page=
         markup.row(back_button, current_button)
     return markup
 
-def create_deal_msg(row:Tickets):
-    if row.OriginalPrice != 0:
-        if row.Type == 'Cash':
+# def create_deal_msg(row:Tickets):
+#     if row.OriginalPrice != 0:
+#         if row.Type == 'Cash':
+#             try:
+#                 original_price = int(row.OriginalPrice.split('-')[0].replace('+', '').replace('$', '').replace('Under', '').replace('s', '').replace('From', '').replace('For', '').replace(',', '').strip())
+#                 price = int(row.Price.split('-')[0].replace('+', '').replace('$', '').replace('Under', '').replace('s', '').replace('From', '').replace('For', '').replace(',', '').strip())
+#                 print(original_price, price)
+#                 discount = (100*(original_price - price)) // original_price
+#             except:
+#                 discount = 'Huge'
+#             msg = f'''✈️<b>{row.Title}</b>✈️
+# <b>{discount}% OFF🔥🔥🔥</b>
+# -----------------------
+# {row.Cabin}
+# -----------------------
+# {row.Price} (was {row.OriginalPrice})
+# -----------------------
+# {row.Dates}
+# -----------------------
+# ORDER BY: {row.Type}'''
+#         else:
+#             discount = None
+#             msg = f'''✈️<b>{row.Title}</b>✈️
+# -----------------------
+# {row.Cabin}
+# -----------------------
+# {row.Price} (was {row.OriginalPrice})
+# -----------------------
+# {row.Dates}
+# -----------------------
+# ORDER BY: {row.Type}'''
+#     else:
+#         msg = f'''✈️<b>{row.Title}</b>✈️
+# -----------------------
+# {row.Cabin}
+# -----------------------
+# {row.Price}
+# -----------------------
+# {row.Dates}
+# -----------------------
+# ORDER BY: {row.Type}'''
+#     return msg
+def create_deal_msg(row):
+    if isinstance(row, dict):
+        title = row.get('Title')
+        cabin = row.get('Cabin')
+        price = row.get('Price')
+        original_price = row.get('OriginalPrice')
+        dates = row.get('Dates')
+        ticket_type = row.get('Type')
+    else:
+        title = getattr(row, 'Title', None)
+        cabin = getattr(row, 'Cabin', None)
+        price = getattr(row, 'Price', None)
+        original_price = getattr(row, 'OriginalPrice', None)
+        dates = getattr(row, 'Dates', None)
+        ticket_type = getattr(row, 'Type', None)
+
+    if original_price != 0:
+        if ticket_type == 'Cash':
             try:
-                original_price = int(row.OriginalPrice.split('-')[0].replace('+', '').replace('$', '').replace('Under', '').replace('s', '').replace('From', '').replace('For', '').replace(',', '').strip())
-                price = int(row.Price.split('-')[0].replace('+', '').replace('$', '').replace('Under', '').replace('s', '').replace('From', '').replace('For', '').replace(',', '').strip())
-                print(original_price, price)
-                discount = (100*(original_price - price)) // original_price
+                original_price_value = int(original_price.split('-')[0].replace('+', '').replace('$', '').replace('Under', '').replace('s', '').replace('From', '').replace('For', '').replace(',', '').strip())
+                price_value = int(price.split('-')[0].replace('+', '').replace('$', '').replace('Under', '').replace('s', '').replace('From', '').replace('For', '').replace(',', '').strip())
+                discount = (100 * (original_price_value - price_value)) // original_price_value
             except:
                 discount = 'Huge'
-            msg = f'''✈️<b>{row.Title}</b>✈️
+            msg = f'''✈️<b>{title}</b>✈️
 <b>{discount}% OFF🔥🔥🔥</b>
 -----------------------
-{row.Cabin}
+{cabin}
 -----------------------
-{row.Price} (was {row.OriginalPrice})
+{price} (was {original_price})
 -----------------------
-{row.Dates}
+{dates}
 -----------------------
-ORDER BY: {row.Type}'''
+ORDER BY: {ticket_type}'''
         else:
-            discount = None
-            msg = f'''✈️<b>{row.Title}</b>✈️
+            msg = f'''✈️<b>{title}</b>✈️
 -----------------------
-{row.Cabin}
+{cabin}
 -----------------------
-{row.Price} (was {row.OriginalPrice})
+{price} (was {original_price})
 -----------------------
-{row.Dates}
+{dates}
 -----------------------
-ORDER BY: {row.Type}'''
+ORDER BY: {ticket_type}'''
     else:
-        msg = f'''✈️<b>{row.Title}</b>✈️
+        msg = f'''✈️<b>{title}</b>✈️
 -----------------------
-{row.Cabin}
+{cabin}
 -----------------------
-{row.Price}
+{price}
 -----------------------
-{row.Dates}
+{dates}
 -----------------------
-ORDER BY: {row.Type}'''
+ORDER BY: {ticket_type}'''
     return msg
-
 
 def main():
     pass

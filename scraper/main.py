@@ -1,51 +1,58 @@
-import json
-from typing import TYPE_CHECKING
-import pika.channel
 from time import sleep
 from shared.rabit_config import get_connection,RMQ_ROUTING_KEY
-if TYPE_CHECKING:
-    from pika.adapters.blocking_connection import BlockingChannel
+from pomelo import add_pomelo
+from thriftytraveler import add_thrifty
+from going import add_going
+from delete_offers import autodelete
+from send_messages import produce_message, send_to_db
 
 
-def produce_message(ch:"BlockingChannel", routing_key:str, data:dict):
-    queue = ch.queue_declare(queue=routing_key)
-    msg = json.dumps(data)
-    ch.basic_publish(
-        exchange="",
-        routing_key=routing_key,
-        body=msg
-    )
+def process_data(data):
+    for item in data:
+        send_to_db(item)
+        with get_connection() as connection:
+            with connection.channel() as channel:
+                produce_message(channel, RMQ_ROUTING_KEY, data=item)
+
+
+def scrape_data():
+    while True:
+        try:
+            data = add_thrifty()
+        except Exception as e:
+            print(f"Error in add_thrifty: {e}")
+            data = None
+
+        if not data:
+            try:
+                data = add_pomelo()
+            except Exception as e:
+                print(f"Error in add_pomelo: {e}")
+                data = None
+
+            if not data:
+                try:
+                    data = add_going()
+                except Exception as e:
+                    print(f"Error in add_going: {e}")
+                    data = None
+
+            if not data:
+                autodelete()
+                sleep(180)
+
+        if data:
+            process_data(data)
 
 
 def main():
-    # while True:
-    #     pass
     sleep(15)
-    # print('connected')
-    # conn = get_connection()
-    data = {
-        'ID': 123,
-        'Title': 'Special Offer',
-        'Type': 'Flight',
-        'Cabin': 'Economy',
-        'Price': 250.0,
-        'OriginalPrice': 300.0,
-        'Dates': '2024-12-10',
-        'Book': 'https://booking.example.com',
-        'DepartureCities': 'New York',
-        'DepartureAirports': 'JFK',
-        'BookGuide': 'Direct booking available',
-        'Summary': 'This is a special offer for economy flights.',
-        'PictureName': 'special_offer.png'
-    }
     with get_connection() as connection:
         with connection.channel() as channel:
-            produce_message(channel,RMQ_ROUTING_KEY, data)
-    # with get_connection() as conn:
-    #     with conn.channel() as channel:
-    #         produce_message(channel)
-    # print('connected')
-    while True:
-        pass
+            produce_message(channel, RMQ_ROUTING_KEY, data={'Type': 'technical message'})
+    scrape_data()
+
+
+
 if __name__ == '__main__':
-    main()
+    main()      

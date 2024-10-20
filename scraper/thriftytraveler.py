@@ -1,13 +1,8 @@
 import tls_client
-import json
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-from shared.models import Tickets, NewTickets, Session
+from shared.models import Tickets, Session
 from bs4 import BeautifulSoup
 import requests
 from time import sleep
-# from telegram_bot.bot import bot
 from dotenv import load_dotenv
 import os
 from datetime import datetime
@@ -15,13 +10,13 @@ import pyshorteners
 import logging
 import logging
 import redis
+from shared.rabit_config import RMQ_ROUTING_KEY, get_connection
 redis_client = redis.StrictRedis(host='redis', port=6379, decode_responses=True)
 
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 load_dotenv()
 s = tls_client.Session(client_identifier='chrome_105')
-# Определение логгера
 logger = logging.getLogger(__name__)
 def login() -> tls_client.Session: 
     
@@ -124,18 +119,12 @@ def get_data():
             sleep(60)
             r = s.get('https://apiv2.thriftytraveler.com/deals', params=params)
     page_count = r.json()['meta']['totalPages']
+
     tickets = []
     with Session() as session:
-        for row in session.query(Tickets).all():
+        for row in session.query(Tickets).filter(Tickets.ID.like('%thrifty%')).all():
             tickets.append(str(row.ID))
         session.commit()
-    # print()
-    # print()
-    # print()
-    # print(tickets)
-    # print()
-    # print()
-    # print()
 
     for page in range(1, int(page_count) + 1):
         params['page'] = page
@@ -183,18 +172,17 @@ def get_data():
                 else:departure_cities.append(i.text.strip())
             departure_cities = '\n'.join(departure_cities)
             departure_airports = ', '.join([i['city'] for i in item['departureCities']])
-            id = item['id']
+            id = f"thrifty-{item['id']}"
             if id in tickets:
                 continue
             img_link = item['coverImage']
             r = requests.get(img_link)
             picture_name = img_link.split('/')[-1] if r.status_code == 200 else None
             if picture_name:
-                with open(f'tickets\imgs\{picture_name}', 'wb') as f:
+                with open(f'imgs/{picture_name}', 'wb') as f:
                     f.write(r.content)
             
             guide = BeautifulSoup(item['bookingInstructions'], 'lxml').text.strip()
-            # guide = '<b>Booking guide will be here</b>'
             summary = item['summaryRaw']
             original_price = f'${item["originalPrice"]}' if item["originalPriceType"] == "CASH" else f'{item["originalPrice"]}k'
             start_date = get_month_name(item['periods'][0]["startDate"])
@@ -221,53 +209,8 @@ def get_data():
 
 
 def add_thrifty() -> bool:
-    print('abvs')
     data = get_data()
-    with Session() as session:
-        if len(data) == 0:
-            session.query(NewTickets).delete()
-            session.commit()
-            return False
-        for item in data:
-            exist = session.query(Tickets).filter_by(ID = item['ID']).first()
-            if not exist:
-                session.add(Tickets(**item))
-                session.add(NewTickets(**item))
-                message = {
-                    'ID': item['ID'],
-                    'Title': item['Title'],
-                    'Type': item['Type'],
-                    'Price': item['Price'],
-                    'Price': item['OriginalPrice'],
-                    'Dates': item['Dates'],
-                    'Book': item['Book'],
-                    'DepartureCities': item['DepartureCities'],
-                    'DepartureAirports': item['DepartureAirports'],
-                    'BookGuide': item['BookGuide'],
-                    'Summary': item['Summary'],
-                    'PictureName': item['PictureName'],
-                }
-                redis_client.publish('new_tickets', json.dumps(message))
-
-        session.commit()
-            # else:
-            #     session.commit()
-        count = session.query(NewTickets).count()
-        session.commit()
-    print()
-    print()
-    print()
-    print()
-    print()
-    print()
-    print(count > 0)
-    print()
-    print()
-    print()
-    print()
-    print()
-    print()
-    return count > 0
+    return data if len(data) > 0 else None
 
         
 if __name__ == '__main__':
