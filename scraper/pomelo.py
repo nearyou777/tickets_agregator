@@ -76,9 +76,10 @@ def get_data():
     text_maker.ignore_images = True
     tickets = []
     with Session() as session:
-        for row in session.query(Tickets).filter(Tickets.ID.like('%pomelo%')).all():
+        for row in session.query(Tickets).filter(Tickets.ID.like("%Pomelo%")).all():
             tickets.append(str(row.ID))
         session.commit()
+    print(tickets)
     for item in r.json()['data'][:10]:
         title = item['title']
         price = item['price']
@@ -179,8 +180,9 @@ def get_data():
     return data
             
 def add_pomelo() -> bool:
-    data = get_data()
-    return data if len(data) > 0 else None
+    # data = get_data()
+    get_data()
+    # return data if len(data) > 0 else None
 
 
 if __name__ == '__main__':

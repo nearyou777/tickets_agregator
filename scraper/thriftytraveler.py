@@ -125,7 +125,7 @@ def get_data():
         for row in session.query(Tickets).filter(Tickets.ID.like('%thrifty%')).all():
             tickets.append(str(row.ID))
         session.commit()
-
+    
     for page in range(1, int(page_count) + 1):
         params['page'] = page
         try:

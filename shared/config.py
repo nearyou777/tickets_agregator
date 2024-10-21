@@ -12,7 +12,7 @@ logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 
 def isadmin(user_id:int):
-    for admin in [os.getenv('my_id'), os.getenv('vitaliy_id'), os.getenv('maks_id')]:
+    for admin in [os.getenv('MY_ID'), os.getenv('VITALIY_ID'), os.getenv('MAKS_ID')]:
         if str(user_id) == str(admin):
             return True
     return False

@@ -1,4 +1,3 @@
-# models.py
 from sqlalchemy import create_engine, Column, Integer, ForeignKey, String, DateTime, Boolean, BigInteger
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
@@ -7,25 +6,18 @@ import os
 from dotenv import load_dotenv
 import logging
 
-# Load environment variables
 load_dotenv()
 
-# Print the DB connection string to verify it's correct
 db_connection_string = os.getenv('DB_CONNECTION_STRING')
-print(db_connection_string)
-print(type(db_connection_string))
 
-# Create the engine with the connection string from the environment variable
+
 engine = create_engine(db_connection_string, echo=False, pool_size=20, max_overflow=20, pool_timeout=30, pool_recycle=3600)
 
-# Set logging for SQLAlchemy
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 
-# Define the Base for declarative models
 Base = declarative_base()
 
-# Define your models here
 class Tickets(Base):
     __tablename__ = 'tickets'
     ID = Column(String(1000), primary_key=True)

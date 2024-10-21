@@ -12,6 +12,7 @@ from shared.config import check_subscription
 from shared.models import Users, SentMessage, Session
 import logging
 from flask.logging import default_handler
+from sqlalchemy import select
 from buttons import create_deal_msg
 from shared.rabit_config import get_connection, RMQ_ROUTING_KEY
 if TYPE_CHECKING:
@@ -37,6 +38,9 @@ def set_webhook():
     bot.set_webhook(url=public_url + WEBHOOK_URL_PATH)
     print("Webhook is set:", public_url)
 
+
+
+
 def send_message(row:dict):
     with Session() as session:
         users = session.query(Users).all()
@@ -45,7 +49,10 @@ def send_message(row:dict):
             user_id = user.ID
             if not check_subscription(user_id):
                 continue
-            sent_airports = []
+            # sent_airports = []
+            # sent_msg_ids_query = select(SentMessage.message_id).where(SentMessage.user_id == user_id)
+            # sent_msg_ids = session.execute(sent_msg_ids_query).scalars().all()
+            session.commit()
             for airport in user_airports:
                 airport = f"({airport.split('(')[-1]}"
                 # sent_msg_ids = select(SentMessage.message_id).where(SentMessage.user_id == user_id)
@@ -54,13 +61,20 @@ def send_message(row:dict):
                 #     NewTickets.DepartureAirports.like(f'%{airport}%')
                 # ).all()
             
-                # sent_msg_ids_query = select(SentMessage.message_id).where(SentMessage.user_id == user_id)
-                # sent_msg_ids = session.execute(sent_msg_ids_query).scalars().all()
-                # session.commit()
+                # Query to select message_id
+                sent_msg_ids_query = select(SentMessage.message_id).where(SentMessage.user_id == user_id)
 
-                # if row['ID'] in sent_msg_ids or row['ID'] in sent_airports:
-                #     continue
-                if row['ID'] in sent_airports:
+                # Execute the query and retrieve the message IDs
+                sent_msg_ids = session.execute(sent_msg_ids_query).scalars().all()
+
+                # Convert the list of message IDs to a set for faster lookups
+                sent_msg_ids_set = set(sent_msg_ids)
+
+                session.commit()
+
+                # Your other logic here...
+                # Check if row['ID'] is in sent_msg_ids_set instead of sent_msg_ids
+                if row['ID'] in sent_msg_ids_set:
                     continue
                 msg = create_deal_msg(row)
                 try:
@@ -86,7 +100,8 @@ def send_message(row:dict):
                         break
                     else:
                         sleep(50)
-                sent_airports.append(row['ID'])
+                # sent_airports.append(row['ID'])
+                # bot.send_message(user_id, str(sent_airports))
                 sent_message = SentMessage(user_id=user_id, message_id=row['ID'])
                 session.add(sent_message)
                 session.commit()
@@ -147,7 +162,6 @@ def process_new_message(ch:"BlockingChannel",
     msg = json.loads(body.decode('utf-8'))
     if not msg['Type'] == 'technical message':
         send_message(msg)
-    
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 

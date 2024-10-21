@@ -25,20 +25,7 @@ def login() -> str:
         return json.loads(soup.find('script', id="__NEXT_DATA__").text)['props']['pageProps']["accessToken"]
     except:
         sleep(120)
-        params = {
-            'returnTo': '/deals',
-        }
-        response = s.get('https://www.going.com/api/auth/login', params=params)
-        r = s.get(response.url)
-        data = {
-            'username': os.getenv('WORKING_EMAIL'),
-            'password': os.getenv('GOING_PASS'),
-            'action': 'default',
-        }
-        r = s.post(r.url, data=data)
-        soup = BeautifulSoup(r.text, 'lxml')
-        return json.loads(soup.find('script', id="__NEXT_DATA__").text)['props']['pageProps']["accessToken"]
-
+        login()
 
 def cash_offers(data:list, token:str):
     headers = {
@@ -63,6 +50,7 @@ def cash_offers(data:list, token:str):
             for row in session.query(Tickets).filter(Tickets.ID.like("%going%")).all():
                 tickets.append(str(row.ID))
             session.commit()
+        # print(tickets)
         if id in tickets:
             continue
         title = item["name"]
