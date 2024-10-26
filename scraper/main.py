@@ -46,7 +46,7 @@ def scrape_data():
 
 
 def main():
-    sleep(15)
+    sleep(35)
     with get_connection() as connection:
         with connection.channel() as channel:
             produce_message(channel, RMQ_ROUTING_KEY, data={'Type': 'technical message'})
