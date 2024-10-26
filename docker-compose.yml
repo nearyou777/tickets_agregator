@@ -17,7 +17,6 @@ services:
       - .env
     depends_on:
       - rabbitmq
-    restart: always
 
   bot:
     build:
@@ -37,7 +36,6 @@ services:
       - rabbitmq
     ports:
       - "8000:8000"
-    restart: always
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -47,7 +45,6 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
-    restart: always
 
 networks:
   my_network:
