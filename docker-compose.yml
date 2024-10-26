@@ -17,6 +17,7 @@ services:
       - .env
     depends_on:
       - rabbitmq
+    restart: always
 
   bot:
     build:
@@ -26,7 +27,6 @@ services:
       - ./shared:/tickets/shared
       - ./imgs:/tickets/imgs
       - ./out:/tickets/out
-
     environment:
       - RABBITMQ_URL=${RABBITMQ_URL}
       - DB_CONNECTION_STRING=${DB_CONNECTION_STRING}
@@ -37,6 +37,7 @@ services:
       - rabbitmq
     ports:
       - "8000:8000"
+    restart: always
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -46,6 +47,7 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
+    restart: always
 
 networks:
   my_network:
