@@ -186,8 +186,8 @@ def monitor_channel_posts(message):
 
 def main():
     set_webhook() 
-    # sleep(55)
-    # Thread(target=run_consumer).start()  
+    sleep(35)
+    Thread(target=run_consumer).start()  
     app.run(host="0.0.0.0", port=8000)
 
 
