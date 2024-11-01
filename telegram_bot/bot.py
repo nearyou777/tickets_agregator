@@ -32,7 +32,6 @@ def check_channel_subscription(message):
         else:
             return False
     except Exception as e:
-        print(e)
         return False
 
 
@@ -109,7 +108,6 @@ def remove_airports(message):
 
 @bot.message_handler(commands=['start'])
 def welcome_message(message):
-    print(all_airports)
     msg = '''Welcome to Travel Hacker! 🚀 Your ultimate guide to hacking flight deals! 
 Your next adventure starts here! 🌍✈️ What's your name?'''
     with Session() as session:
@@ -185,7 +183,7 @@ def get_airports(message, flag:bool):
         msg = f'''Thanks for still subscribing our group!✅ 🎉 You’re awesome! 
 Now, let’s customize your flight alerts. 🛫'''
         bot.send_message(message.chat.id, msg, reply_markup=markup)
-    add_airports(message)
+    # add_airports(message)
     choose_offer(message)
 
 
@@ -399,13 +397,18 @@ def search_message(message):
 
 
 @bot.message_handler(commands=['filter'])
-def choose_offer(message):
-    markup = types.InlineKeyboardMarkup()
-    btn_both = types.InlineKeyboardButton('Both(Cash & Points/Miles)', callback_data='filter_Both')
-    btn_cash = types.InlineKeyboardButton('Only Cash', callback_data='filter_Cash')
-    btn_points = types.InlineKeyboardButton('Only Points or Miles', callback_data='filter_Points')
-    markup.add(btn_both, btn_cash, btn_points)
+def choose_offer(message:types.Message):
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    btn_both = types.KeyboardButton('Both(Cash & Points/Miles)')
+    btn_cash = types.KeyboardButton('Only Cash')
+    btn_points = types.KeyboardButton('Only Points or Miles')
+    markup.row(btn_both, btn_cash, btn_points)
     bot.send_message(message.chat.id, 'Hi, right now you can filter upcoming offers and recieve only those, you\'re looking for 😊', reply_markup=markup)
+    with Session() as session:
+        if len(session.query(Users).filter(Users.ID == message.chat.id).first().Airports) == 0:
+            bot.send_message(message.chat.id, 'Let\'s choose a favourite airports that you\'re looking for 😊')
+            bot.register_next_step_handler(message, add_airports)
+        session.commit()
 
 @bot.message_handler(commands=['export'])
 def get_csv(message):
@@ -429,6 +432,12 @@ def on_click(message:types.Message):
         remove_airports(message)
     elif 'My profile' in message.text:
         get_user_info(message)
+    elif message.text in ['Both(Cash & Points/Miles)', 'Only Cash', 'Only Points or Miles']:
+        with Session() as session:
+            session.query(Users).filter(Users.ID == message.chat.id).first().filtered_offers = message.text.split('_')[-1]
+            session.commit()
+        filter_name = message.text.split('_')[-1] if message.text.split('_')[-1] != 'Both' else 'Cash & Points/Miles'
+        bot.send_message(message.chat.id, f'Succesfully added filter. Right now you will only recieve {filter_name} offers ✅\nYou can also change a list of your full airports using command: /add_airports or you can use /help if you want some help')
 
 
 @bot.callback_query_handler(func=lambda call: True)
@@ -455,7 +464,7 @@ def callback_query(call):
                 user = session.query(Users).filter_by(ID = call.message.chat.id).first()
                 user.Airports = "\n".join(all_airports)
                 session.commit()
-            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='You\'ve choosed all airports', parse_mode='HTML')
+            bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text='You\'ve choosed all airports 🥳', parse_mode='HTML')
         else:
             for airport in all_airports:
                 if f'add_{airport}' in call.data:
@@ -613,13 +622,14 @@ def callback_query(call):
         else:
             bot.answer_callback_query(call.id, '''Hmm, it looks like you haven't subscribed yet. Please subscribe to continue getting personalized flight alerts. We can't wait to get you started! 🚀''', show_alert=True)
 
-    elif 'filter' in call.data :
-        with Session() as session:
-            session.query(Users).filter(Users.ID == call.message.chat.id).first().filtered_offers = call.data.split('_')[-1]
-            session.commit()
-        bot.answer_callback_query(call.id, 'Succesfully added filter✅')
-        filter_name = call.data.split('_')[-1] if call.data.split('_')[-1] != 'Both' else 'Cash & Points/Miles'
-        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=f'Succesfully added filter. Right now you will only recieve {filter_name} offers ✅')
+    # elif 'filter' in call.data :
+    #     with Session() as session:
+    #         session.query(Users).filter(Users.ID == call.message.chat.id).first().filtered_offers = call.data.split('_')[-1]
+    #         session.commit()
+    #     bot.answer_callback_query(call.id, 'Succesfully added filter✅')
+    #     filter_name = call.data.split('_')[-1] if call.data.split('_')[-1] != 'Both' else 'Cash & Points/Miles'
+    #     bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=f'Succesfully added filter. Right now you will only recieve {filter_name} offers ✅')
+    
     elif call.data == 'full_airports':
         with Session() as session:
             user = session.query(Users).filter_by(ID = call.message.chat.id).first()
