@@ -39,6 +39,9 @@ def scrape_data():
 
             if not data:
                 autodelete()
+                with get_connection() as connection:
+                    with connection.channel() as channel:
+                        produce_message(channel, RMQ_ROUTING_KEY, data={'Type': 'technical message'})
                 sleep(180)
 
         if data:

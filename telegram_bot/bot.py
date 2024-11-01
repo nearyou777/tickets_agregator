@@ -23,7 +23,6 @@ load_dotenv()
 #TODO:EMAIL VALIDATION
 
 
-
 def check_channel_subscription(message):
     try:
         member = bot.get_chat_member(chat_id=os.getenv('CHANNEL_ID'), user_id=int(message.chat.id))
@@ -153,7 +152,6 @@ def channel_subscribe(message, name):#saving data here
             session.commit()
             flag = True
         member = check_channel_subscription(message)
-
         msg = '''Awesome!😊
 To stay in the loop with the latest offers, join our exclusive channel.
 This step is crucial to continue! 📢''' 
@@ -183,9 +181,7 @@ def get_airports(message, flag:bool):
         msg = f'''Thanks for still subscribing our group!✅ 🎉 You’re awesome! 
 Now, let’s customize your flight alerts. 🛫'''
         bot.send_message(message.chat.id, msg, reply_markup=markup)
-    # add_airports(message)
     choose_offer(message)
-
 
 
 @bot.message_handler(commands=['renew'])
@@ -512,7 +508,6 @@ def callback_query(call):
                             markup = airport_buttons('remove', airports, current_position=current_pos, page=current_page)
                             bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=markup)
 
-
     elif 'departure' in call.data:
         with Session() as session:
             row = session.query(Tickets).filter(Tickets.ID == call.data.split()[-1]).first()
@@ -564,13 +559,11 @@ def callback_query(call):
         with Session() as session:
             user = session.query(Users).filter_by(ID = call.message.chat.id).first()
             session.commit()
-
         if not user:
             unkown_user(call.message)
         else:
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=f'<b>Your airports:</b> 🛫\n{user.Airports}', parse_mode='HTML')
             bot.answer_callback_query(call.id, 'Fetching your airports...')
-
 
     elif 'next' in call.data:
         with Session() as session:
@@ -580,14 +573,11 @@ def callback_query(call):
 
         if not user:
             unkown_user(call.message)
-
         prev_page = int(call.data.split('_')[-2]) 
         msg_pos = prev_page * 20
-
         prefix = call.data.split('_')[0]
         page = int(call.data.split('_')[-2]) + 1
         
-
         if prefix == 'add':
             new_markup = airport_buttons(prefix, all_airports, msg_pos, page=page, direction='forward')
         else:
@@ -622,14 +612,6 @@ def callback_query(call):
         else:
             bot.answer_callback_query(call.id, '''Hmm, it looks like you haven't subscribed yet. Please subscribe to continue getting personalized flight alerts. We can't wait to get you started! 🚀''', show_alert=True)
 
-    # elif 'filter' in call.data :
-    #     with Session() as session:
-    #         session.query(Users).filter(Users.ID == call.message.chat.id).first().filtered_offers = call.data.split('_')[-1]
-    #         session.commit()
-    #     bot.answer_callback_query(call.id, 'Succesfully added filter✅')
-    #     filter_name = call.data.split('_')[-1] if call.data.split('_')[-1] != 'Both' else 'Cash & Points/Miles'
-    #     bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=f'Succesfully added filter. Right now you will only recieve {filter_name} offers ✅')
-    
     elif call.data == 'full_airports':
         with Session() as session:
             user = session.query(Users).filter_by(ID = call.message.chat.id).first()
@@ -640,7 +622,7 @@ def callback_query(call):
             bot.edit_message_reply_markup(call.message.chat.id, call.message.message_id, reply_markup=None)
             session.commit()
 
-        
+    
 if __name__ == '__main__': 
     bot.remove_webhook()      
     bot.infinity_polling(skip_pending=True)

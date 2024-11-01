@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     from pika.adapters.blocking_connection import BlockingChannel
     from pika.spec import BasicProperties, Basic
 
+
 app = Flask(__name__)
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
@@ -32,13 +33,12 @@ def webhook():
     bot.process_new_updates([update])
     return '', 200
 
+
 def set_webhook():
     bot.remove_webhook()
     public_url = os.getenv('WEBHOOK_URL')
     bot.set_webhook(url=public_url + WEBHOOK_URL_PATH)
     print("Webhook is set:", public_url)
-
-
 
 
 def send_message(row:dict):
@@ -49,31 +49,18 @@ def send_message(row:dict):
             user_id = user.ID
             if not check_subscription(user_id):
                 continue
-            # sent_airports = []
-            # sent_msg_ids_query = select(SentMessage.message_id).where(SentMessage.user_id == user_id)
-            # sent_msg_ids = session.execute(sent_msg_ids_query).scalars().all()
             session.commit()
             for airport in user_airports:
                 airport = f"({airport.split('(')[-1]}"
-                # sent_msg_ids = select(SentMessage.message_id).where(SentMessage.user_id == user_id)
-                # new_tickets = session.query(NewTickets).filter(
-                #     ~NewTickets.ID.in_(sent_msg_ids),
-                #     NewTickets.DepartureAirports.like(f'%{airport}%')
-                # ).all()
-            
-                # Query to select message_id
+
                 sent_msg_ids_query = select(SentMessage.message_id).where(SentMessage.user_id == user_id)
 
-                # Execute the query and retrieve the message IDs
                 sent_msg_ids = session.execute(sent_msg_ids_query).scalars().all()
 
-                # Convert the list of message IDs to a set for faster lookups
                 sent_msg_ids_set = set(sent_msg_ids)
 
                 session.commit()
 
-                # Your other logic here...
-                # Check if row['ID'] is in sent_msg_ids_set instead of sent_msg_ids
                 if row['ID'] in sent_msg_ids_set:
                     continue
                 msg = create_deal_msg(row)
@@ -100,8 +87,6 @@ def send_message(row:dict):
                         break
                     else:
                         sleep(50)
-                # sent_airports.append(row['ID'])
-                # bot.send_message(user_id, str(sent_airports))
                 sent_message = SentMessage(user_id=user_id, message_id=row['ID'])
                 session.add(sent_message)
                 session.commit()
@@ -141,10 +126,9 @@ def handle_channel_message(message):
                     video_note_id = message.video_note.file_id
                     bot.send_video_note(user.ID, video_note_id)
                 else:
-                    print(f"Unsupported message type: {message.content_type}")
+                    pass
             except ApiException as e:
                 if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
-                    print(f"User {user.ID} blocked the bot.")
                     user_db = session.query(Users).filter(Users.ID == user.ID).first()
                     user_db.ActiveUser = False
                     session.commit()
