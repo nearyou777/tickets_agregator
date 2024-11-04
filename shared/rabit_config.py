@@ -9,7 +9,6 @@ connection_params = pika.ConnectionParameters(
     host=os.getenv('RMQ_HOST'),
     port=int(os.getenv('RMQ_PORT')),
     credentials=pika.PlainCredentials(username=os.getenv('RMQ_USER'), password=os.getenv('RMQ_PASSWORD')),
-    heartbeat=360
 )
 
 

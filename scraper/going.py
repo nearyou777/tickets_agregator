@@ -7,25 +7,36 @@ from bs4 import BeautifulSoup
 import os
 from time import sleep
 s = requests.Session()
+
 def login() -> str:
     params = {
         'returnTo': '/deals',
     }
-    response = s.get('https://www.going.com/api/auth/login', params=params)
-    r = s.get(response.url)
-    data = {
-        'username': os.getenv('WORKING_EMAIL'),
-        'password': os.getenv('WORKING_PASS'),
-        'action': 'default',
-    }
-    r = s.post(r.url, data=data)
-    # print(r.text)
-    soup = BeautifulSoup(r.text, 'lxml')
-    try:
-        return json.loads(soup.find('script', id="__NEXT_DATA__").text)['props']['pageProps']["accessToken"]
-    except:
-        sleep(120)
-        login()
+    
+    # Retry logic with a maximum retry limit
+    max_retries = 5
+    retry_count = 0
+
+    while retry_count < max_retries:
+        response = s.get('https://www.going.com/api/auth/login', params=params)
+        r = s.get(response.url)
+        data = {
+            'username': os.getenv('WORKING_EMAIL'),
+            'password': os.getenv('WORKING_PASS'),
+            'action': 'default',
+        }
+        
+        r = s.post(r.url, data=data)
+        soup = BeautifulSoup(r.text, 'lxml')
+        
+        try:
+            return json.loads(soup.find('script', id="__NEXT_DATA__").text)['props']['pageProps']["accessToken"]
+        except:
+            print("Failed to retrieve token, retrying...")
+            retry_count += 1
+            sleep(120)  # Wait before retrying
+
+    raise Exception("Failed to retrieve token after multiple attempts.")
 
 def cash_offers(data:list, token:str):
     headers = {
