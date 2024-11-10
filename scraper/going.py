@@ -16,19 +16,16 @@ def login() -> str:
         'returnTo': '/deals',
     }
     
-    # Retry logic with a maximum retry limit
-    max_retries = 10
+    max_retries = 15
     retry_count = 0
 
     while retry_count < max_retries:
-        response = s.get('https://www.going.com/api/auth/login', params=params)
-        r = s.get(response.url)
+        r = s.get('https://www.going.com/api/auth/login', params=params)
         data = {
             'username': os.getenv('WORKING_EMAIL'),
             'password': os.getenv('GOING_PASS'),
             'action': 'default',
         }
-        
         r = s.post(r.url, data=data)
         soup = BeautifulSoup(r.text, 'lxml')
         

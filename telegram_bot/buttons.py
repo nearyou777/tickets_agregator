@@ -6,10 +6,7 @@ import os
 from dotenv import load_dotenv
 import logging
 
-logging.basicConfig()
-logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 load_dotenv()
-
 
 def current_pos(position):
     for i in range(position,0,-1):
