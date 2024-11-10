@@ -1,7 +1,6 @@
 import tls_client
 from shared.models import Tickets, Session
 from bs4 import BeautifulSoup
-import requests
 from time import sleep
 from dotenv import load_dotenv
 import os
@@ -10,7 +9,7 @@ import pyshorteners
 import logging
 import logging
 import redis
-from shared.rabit_config import RMQ_ROUTING_KEY, get_connection
+from images_scrapper import save_image
 redis_client = redis.StrictRedis(host='redis', port=6379, decode_responses=True)
 
 logging.basicConfig()
@@ -176,11 +175,10 @@ def get_data():
             if id in tickets:
                 continue
             img_link = item['coverImage']
-            r = requests.get(img_link)
+            
             picture_name = img_link.split('/')[-1] if r.status_code == 200 else None
             if picture_name:
-                with open(f'imgs/{picture_name}', 'wb') as f:
-                    f.write(r.content)
+                save_image(picture_name, img_link)
             
             guide = BeautifulSoup(item['bookingInstructions'], 'lxml').text.strip()
             summary = item['summaryRaw']

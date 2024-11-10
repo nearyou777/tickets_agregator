@@ -92,7 +92,6 @@ def send_message(row:dict):
                 session.commit()
 
 
-
 def handle_channel_message(message):
     with Session() as session:
         users = session.query(Users).all()

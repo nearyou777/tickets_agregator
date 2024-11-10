@@ -6,6 +6,9 @@ from shared.models import Tickets, Session
 from bs4 import BeautifulSoup
 import os
 from time import sleep
+from images_scrapper import save_image
+
+
 s = requests.Session()
 
 def login() -> str:
@@ -14,7 +17,7 @@ def login() -> str:
     }
     
     # Retry logic with a maximum retry limit
-    max_retries = 5
+    max_retries = 10
     retry_count = 0
 
     while retry_count < max_retries:
@@ -22,7 +25,7 @@ def login() -> str:
         r = s.get(response.url)
         data = {
             'username': os.getenv('WORKING_EMAIL'),
-            'password': os.getenv('WORKING_PASS'),
+            'password': os.getenv('GOING_PASS'),
             'action': 'default',
         }
         
@@ -79,8 +82,7 @@ def cash_offers(data:list, token:str):
         book_guide = '''You can book this flight using google flights!\n or by clicking the button  BOOK NOW bellow'''
         image_link = item["featureImage"]
         picture_name = image_link.split('/')[-1].split('.')[0]
-        with open(f'imgs/{picture_name}', 'wb') as f:
-            f.write(requests.get(image_link).content)
+        save_image(picture_name, image_link)
 
         summary = f'''✈️Enjoy this deal to {title}✈️\non these dates:\n {dates}\nfor lowest price of {price}'''
         data.append({
@@ -117,8 +119,7 @@ def scrape_points_deals(data:list, token:str) -> list:
         type = 'Points/Miles'
         image_link = item["main_image"]["lg_url"]
         picture_name = image_link.split('/')[-1].split('.')[0]
-        with open(f'imgs/{picture_name}', 'wb') as f:
-            f.write(requests.get(image_link).content)
+        save_image(picture_name, image_link)
         price = item["cost_ranges"]["points"]['min']
         text_maker = html2text.HTML2Text()
         text_maker.ignore_links = True

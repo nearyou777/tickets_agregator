@@ -8,7 +8,7 @@ import os
 from time import sleep
 import logging
 from dotenv import load_dotenv
-
+from images_scrapper import save_image
 
 logging.basicConfig()
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
@@ -24,6 +24,7 @@ def login():
 
     r = s.post('https://api-v2.pomelotravel.com/api/v1/login', json=json_data)
     return r.json()['token']
+
 
 def reduce_image_size(input_path, output_path, max_size_mb=10):
     max_size_bytes = 1024 * 1024
@@ -79,7 +80,6 @@ def get_data():
         for row in session.query(Tickets).filter(Tickets.ID.like("%Pomelo%")).all():
             tickets.append(str(row.ID))
         session.commit()
-    print(tickets)
     for item in r.json()['data'][:10]:
         title = item['title']
         price = item['price']
@@ -155,9 +155,7 @@ def get_data():
                 except:
                     picture_name = None
                 if picture_name != None:
-                    with open(f'imgs/{picture_name}', 'wb') as f:
-                        r = requests.get(image_link)
-                        f.write(r.content)
+                    save_image(picture_name, image_link)
 
         if picture_name:
             path = reduce_image_size(f'imgs/{picture_name}', f'imgs/{picture_name}').split('/')[1]
@@ -180,9 +178,8 @@ def get_data():
     return data
             
 def add_pomelo() -> bool:
-    # data = get_data()
-    get_data()
-    # return data if len(data) > 0 else None
+    data = get_data()
+    return data if len(data) > 0 else None
 
 
 if __name__ == '__main__':
