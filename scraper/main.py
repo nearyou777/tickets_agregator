@@ -9,7 +9,7 @@ from send_messages import produce_message, send_to_db
 from email_scrapper import add_email
 
 # Configure logging for both file and console
-logging.basicConfig(level=logging.DEBUG)  # Ensure root logger is set to DEBUG
+logging.basicConfig(level=logging.INFO)  # Ensure root logger is set to DEBUG
 logger = logging.getLogger("scrape_data")
 
 # Handlers

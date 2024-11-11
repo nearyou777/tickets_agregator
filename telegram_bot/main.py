@@ -38,59 +38,71 @@ def set_webhook():
     bot.remove_webhook()
     public_url = os.getenv('WEBHOOK_URL')
     bot.set_webhook(url=public_url + WEBHOOK_URL_PATH)
-    print("Webhook is set:", public_url)
+    log.debug('Webhook is set')
 
 
-def send_message(row:dict):
+def send_message(row: dict):
     with Session() as session:
+        # Предзагрузка всех отправленных сообщений из базы данных за один запрос
+        # sent_msgs_query = session.query(SentMessage.user_id, SentMessage.message_id).all()
+
+        # Создаем словарь {user_id: set({message_id1, message_id2, ...})}
+        sent_msgs_dict = {}
+        # for user_id, message_id in sent_msgs_query:
+        #     if user_id not in sent_msgs_dict:
+        #         sent_msgs_dict[user_id] = set()
+        #     sent_msgs_dict[user_id].add(message_id)
+
+        # Загружаем всех пользователей одним запросом
         users = session.query(Users).all()
         for user in users:
             user_airports = user.Airports.split('\n')
             user_id = user.ID
+
+            # Проверка подписки
             if not check_subscription(user_id):
                 continue
-            session.commit()
-            for airport in user_airports:
-                airport = f"({airport.split('(')[-1]}"
 
-                sent_msg_ids_query = select(SentMessage.message_id).where(SentMessage.user_id == user_id)
+            # Инициализируем множество отправленных сообщений для пользователя, если его нет
+            if user_id not in sent_msgs_dict:
+                sent_msgs_dict[user_id] = set()
 
-                sent_msg_ids = session.execute(sent_msg_ids_query).scalars().all()
+            # Проверка, был ли оффер уже отправлен
+            if row['ID'] in sent_msgs_dict[user_id]:
+                continue
 
-                sent_msg_ids_set = set(sent_msg_ids)
-
-                session.commit()
-
-                if row['ID'] in sent_msg_ids_set:
-                    continue
-                msg = create_deal_msg(row)
-                try:
-                    base_path = os.getcwd()
-                    photo_path = os.path.join(base_path, f'imgs/{row["PictureName"]}')
-                    if row['PictureName']:
-                        try:
-                            with open(photo_path, 'rb') as photo:
-                                    bot.send_photo(user_id, photo=photo)
-                        except:
-                            pass
+            # Создаем и отправляем сообщение
+            msg = create_deal_msg(row)
+            try:
+                base_path = os.getcwd()
+                photo_path = os.path.join(base_path, f'imgs/{row["PictureName"]}')
+                
+                if row['PictureName']:
                     try:
-                        bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=msg_markup(row['ID']))
-                        sleep(1)
-                    except:
-                        pass
-                except ApiException as e:
-                    if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
-                        print(f"User {user_id} blocked the bot.")
-                        user = session.query(Users).filter(Users.ID == user_id).first()
-                        session.commit()
-                        user.ActiveUser = False
-                        break
-                    else:
-                        sleep(50)
-                sent_message = SentMessage(user_id=user_id, message_id=row['ID'])
-                session.add(sent_message)
-                session.commit()
+                        with open(photo_path, 'rb') as photo:
+                            bot.send_photo(user_id, photo=photo)
+                    except Exception as e:
+                        print(f"Ошибка отправки фото: {e}")
 
+                try:
+                    bot.send_message(user_id, msg, parse_mode='HTML', reply_markup=msg_markup(row['ID']))
+                    sleep(1)
+                except Exception as e:
+                    print(f"Ошибка отправки сообщения: {e}")
+
+            except ApiException as e:
+                if e.error_code == 403 and "bot was blocked by the user" in e.result_json["description"]:
+                    print(f"Пользователь {user_id} заблокировал бота.")
+                    user.ActiveUser = False
+                    session.commit()
+                    continue
+                else:
+                    pass
+            sent_msgs_dict[user_id].add(row['ID'])
+            # Добавляем запись об отправленном сообщении в базу данных
+            # sent_message = SentMessage(user_id=user_id, message_id=row['ID'])
+            # session.add(sent_message)
+            # session.commit()
 
 def handle_channel_message(message):
     with Session() as session:
@@ -169,8 +181,8 @@ def monitor_channel_posts(message):
 
 def main():
     set_webhook() 
-    sleep(35)
-    Thread(target=run_consumer).start()  
+    sleep(45)
+    Thread(target=run_consumer).start()
     app.run(host="0.0.0.0", port=8000)
 
 

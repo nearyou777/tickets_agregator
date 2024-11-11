@@ -1,10 +1,8 @@
 import telebot
 from time import sleep
 from telebot import types
-import math
 from dotenv import load_dotenv
 import os
-import json
 from shared.models import Users, Tickets, Session
 from datetime import datetime, timedelta
 from telebot.apihelper import ApiException

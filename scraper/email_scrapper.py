@@ -92,8 +92,8 @@ Fields:
 - Title: Title of the trip (e.g., 'Whitefish, Montana\n(All fares round-trip, * nonstop)').
 - Type: Type of deal, 'Cash' or 'Point'.
 - Cabin: Cabin type (e.g., 'Economy').
-- Price: Trip price; if not found, set to 0.
-- OriginalPrice: Original price; if missing, set to the same as Price.
+- Price: Trip price (with $ symbol); if not found, set to 0.
+- OriginalPrice: Original price (with $ symbol); if missing, set to the same as Price.
 - Dates: Travel dates (e.g., 'Nov 2024 - Aug 2025').
 - Book: Link to book the trip; if none, set to `null`.
 - DepartureCities: List of possible departure cities; if unavailable, provide airport codes instead.
@@ -152,6 +152,8 @@ def extract_and_process_emails(service, model, tickets: List[str]):
                         if len(picture_name) > 100:
                             image_format = picture_name.split('.')[-1]
                             picture_name = f"{str(uuid.uuid4())}.{image_format}"
+                        if not ticket_data['Cabin']: 
+                            ticket_data['Cabin'] = 'Currently Unkown'
                         ticket_data['PictureName'] = save_image(picture_name, ticket_data['PictureName'])
                         if not ticket_data['Book']: ticket_data['Book']= 'https://www.google.com/travel/flights'
                         data.append(ticket_data)

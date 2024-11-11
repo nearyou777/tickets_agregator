@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from images_scrapper import save_image
 
 logging.basicConfig()
-logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
+logging.getLogger('sqlalchemy.engine').setLevel(logging.DEBUG)
 load_dotenv()
 s = tls_client.Session(client_identifier='chrome_105')
 logger = logging.getLogger(__name__)
