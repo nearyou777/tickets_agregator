@@ -1,0 +1,89 @@
+{%extends 'admin/base.html' %}
+    {%block additional_styles%}
+    <style>
+        /* Минимальная высота для ячеек заголовка */
+        th {
+            min-height: 50px;
+            vertical-align: middle;
+        }
+    </style>
+    {%endblock%}
+
+{%block content%}
+    <div class="container mt-4">
+        <form method="GET" action="{{ url_for('admin.tickets') }}">
+            <!-- Date filter form -->
+            <div class="mb-3">
+                <label for="start_date" class="form-label">Start Date</label>
+                <input type="date" id="start_date" name="start_date" value="{{ start_date }}" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="end_date" class="form-label">End Date</label>
+                <input type="date" id="end_date" name="end_date" value="{{ end_date }}" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Filter by Date</button>
+        </form>
+
+        <table class="table table-bordered mt-4">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th>
+                        <a href="{{ url_for('admin.tickets', page=page, sort_by='date_added', order='asc' if order == 'desc' else 'desc', start_date=start_date, end_date=end_date) }}" class="text-decoration-none d-flex align-items-center">
+                            Date Added
+                            {% if sort_by == 'date_added' %}
+                                {% if order == 'asc' %}
+                                    <i class="bi bi-arrow-up ms-2"></i>  <!-- Ascending arrow -->
+                                {% else %}
+                                    <i class="bi bi-arrow-down ms-2"></i>  <!-- Descending arrow -->
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.ID }}</td>
+                        <td>{{ ticket.Title }}</td>
+                        <td>{{ ticket.Type }}</td>
+                        <td>{{ ticket.Price }}</td>
+                        <td>{{ ticket.DateAdded | date('%d.%m.%Y') }}</td>
+                        <td>
+                            <div class="d-flex justify-content-start">
+                                <a href="{{ url_for('admin.edit_ticket', ticket_id=ticket.ID) }}" class="btn btn-primary btn-sm me-2">Edit</a>
+                                <form action="{{ url_for('admin.delete_ticket', ticket_id=ticket.ID) }}" method="POST" style="display:inline-block;">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                {% if page > 1 %}
+                    <a href="{{ url_for('admin.tickets', page=page-1, sort_by=sort_by, order=order, start_date=start_date, end_date=end_date) }}" class="btn btn-secondary me-2">Previous</a>
+                {% else %}
+                    <button class="btn btn-secondary" disabled>Previous</button>
+                {% endif %}
+            </div>
+            <span>Page {{ page }} of {{ total_pages }}</span>
+            <div>
+                {% if page < total_pages %}
+                    <a href="{{ url_for('admin.tickets', page=page+1, sort_by=sort_by, order=order, start_date=start_date, end_date=end_date) }}" class="btn btn-secondary ms-2">Next</a>
+                {% else %}
+                    <button class="btn btn-secondary" disabled>Next</button>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{%endblock%}

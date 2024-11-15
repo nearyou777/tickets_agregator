@@ -1,5 +1,5 @@
 
-from flask import Flask, request
+from flask import Flask, request,  render_template, redirect, url_for, flash
 import telebot
 from telebot.apihelper import ApiException
 from time import sleep
@@ -9,23 +9,67 @@ from threading import Thread
 import json
 from bot import msg_markup, bot
 from shared.config import check_subscription
-from shared.models import Users, SentMessage, Session
+from shared.models import Users,  Session, AdminUser
 import logging
 from flask.logging import default_handler
-from sqlalchemy import select
 from buttons import create_deal_msg
 from shared.rabit_config import get_connection, RMQ_ROUTING_KEY
+from flask_login import login_user, LoginManager, login_required, logout_user, current_user
+from admin import admin_bp  
+import datetime
 if TYPE_CHECKING:
     from pika.adapters.blocking_connection import BlockingChannel
     from pika.spec import BasicProperties, Basic
 
 
 app = Flask(__name__)
+app.register_blueprint(admin_bp)
+app.config['SECRET_KEY'] = os.getenv('FLASK_SECRET_KEY')
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.ERROR)
 app.logger.removeHandler(default_handler)
 WEBHOOK_URL_PATH = "/webhook"
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
+
+
+@app.template_filter('date')
+def format_date(value, format='%d/%m/%Y'):
+    if isinstance(value, datetime.datetime):
+        return value.strftime(format)
+    return value
+
+@login_manager.user_loader
+def load_user(user_id):
+    with Session() as session:
+        return session.query(AdminUser).get(int(user_id))
+
+
+@login_manager.user_loader
+def load_user(user_id):    
+    with Session() as session:
+        return session.query(AdminUser).get(int(user_id))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        
+        with Session() as session:
+            user = session.query(AdminUser).filter_by(username=username).first()
+            if user and user.check_password(password):
+                login_user(user)
+                flash('Успешный вход!', 'success')
+                return redirect(url_for('admin.index'))  
+            else:
+                flash('Неверное имя пользователя или пароль', 'danger')
+    
+    return render_template('login.html')
+
+    
 
 @app.route(WEBHOOK_URL_PATH, methods=['POST'])
 def webhook():
@@ -180,10 +224,10 @@ def monitor_channel_posts(message):
     handle_channel_message(message)
 
 def main():
-    set_webhook() 
-    sleep(45)
-    Thread(target=run_consumer).start()
-    app.run(host="0.0.0.0", port=8000)
+    # set_webhook() 
+    # sleep(45)
+    # Thread(target=run_consumer).start()
+    app.run(host="0.0.0.0", port=5000)
 
 
 if __name__ == '__main__':

@@ -1,0 +1,57 @@
+{%extends 'admin/base.html' %}
+{%block content%}
+        <h2>Edit Ticket</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" value="{{ ticket.Title }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="type" class="form-label">Type</label>
+                <input type="text" class="form-control" id="type" name="type" value="{{ ticket.Type }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="cabin" class="form-label">Cabin</label>
+                <input type="text" class="form-control" id="cabin" name="cabin" value="{{ ticket.Cabin }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="text" class="form-control" id="price" name="price" value="{{ ticket.Price }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="original_price" class="form-label">Original Price</label>
+                <input type="text" class="form-control" id="original_price" name="original_price" value="{{ ticket.OriginalPrice }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="dates" class="form-label">Dates</label>
+                <input type="text" class="form-control" id="dates" name="dates" value="{{ ticket.Dates }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="book" class="form-label">Book</label>
+                <input type="text" class="form-control" id="book" name="book" value="{{ ticket.Book }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="departure_cities" class="form-label">Departure Cities</label>
+                <input type="text" class="form-control" id="departure_cities" name="departure_cities" value="{{ ticket.DepartureCities }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="departure_airports" class="form-label">Departure Airports</label>
+                <input type="text" class="form-control" id="departure_airports" name="departure_airports" value="{{ ticket.DepartureAirports }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="book_guide" class="form-label">Book Guide</label>
+                <input type="text" class="form-control" id="book_guide" name="book_guide" value="{{ ticket.BookGuide }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="summary" class="form-label">Summary</label>
+                <input type="text" class="form-control" id="summary" name="summary" value="{{ ticket.Summary }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="picture_name" class="form-label">Picture Name</label>
+                <input type="text" class="form-control" id="picture_name" name="picture_name" value="{{ ticket.PictureName }}">
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+        </form>
+    </div>
+    
+{%endblock%}

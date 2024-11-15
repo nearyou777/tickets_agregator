@@ -1,0 +1,28 @@
+{%extends 'admin/base.html' %}
+{%block content%}
+        <h2 class="mb-4">Users</h2>
+        <a href="{{ url_for('admin.add_user') }}" class="btn btn-primary mb-3">Add New User</a>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Subscription Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.Name }}</td>
+                    <td>{{ user.Email }}</td>
+                    <td>{{ user.SubscriptionDate | date('%d.%m.%Y') }}</td>
+                    <td>
+                        <a href="{{ url_for('admin.edit_user', user_id=user.ID) }}" class="btn btn-warning">Edit</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{%endblock%}

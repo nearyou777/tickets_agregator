@@ -49,6 +49,8 @@ def channel_mark():
     return markup
 
 
+
+
 def airport_buttons(prefix, choosed_airports, current_position=0, step=20, page=1,direction='forward'):
     markup = types.InlineKeyboardMarkup()
     if direction == 'forward':
@@ -90,48 +92,6 @@ def airport_buttons(prefix, choosed_airports, current_position=0, step=20, page=
         markup.row(back_button, current_button)
     return markup
 
-# def create_deal_msg(row:Tickets):
-#     if row.OriginalPrice != 0:
-#         if row.Type == 'Cash':
-#             try:
-#                 original_price = int(row.OriginalPrice.split('-')[0].replace('+', '').replace('$', '').replace('Under', '').replace('s', '').replace('From', '').replace('For', '').replace(',', '').strip())
-#                 price = int(row.Price.split('-')[0].replace('+', '').replace('$', '').replace('Under', '').replace('s', '').replace('From', '').replace('For', '').replace(',', '').strip())
-#                 print(original_price, price)
-#                 discount = (100*(original_price - price)) // original_price
-#             except:
-#                 discount = 'Huge'
-#             msg = f'''✈️<b>{row.Title}</b>✈️
-# <b>{discount}% OFF🔥🔥🔥</b>
-# -----------------------
-# {row.Cabin}
-# -----------------------
-# {row.Price} (was {row.OriginalPrice})
-# -----------------------
-# {row.Dates}
-# -----------------------
-# ORDER BY: {row.Type}'''
-#         else:
-#             discount = None
-#             msg = f'''✈️<b>{row.Title}</b>✈️
-# -----------------------
-# {row.Cabin}
-# -----------------------
-# {row.Price} (was {row.OriginalPrice})
-# -----------------------
-# {row.Dates}
-# -----------------------
-# ORDER BY: {row.Type}'''
-#     else:
-#         msg = f'''✈️<b>{row.Title}</b>✈️
-# -----------------------
-# {row.Cabin}
-# -----------------------
-# {row.Price}
-# -----------------------
-# {row.Dates}
-# -----------------------
-# ORDER BY: {row.Type}'''
-#     return msg
 def create_deal_msg(row):
     if isinstance(row, dict):
         title = row.get('Title')

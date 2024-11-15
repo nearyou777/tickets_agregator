@@ -1,0 +1,58 @@
+{%extends 'admin/base.html' %}
+{%block content%}
+        <h2>Create New Ticket</h2>
+        <form method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="type" class="form-label">Type</label>
+                <input type="text" class="form-control" id="type" name="type" required>
+            </div>
+            <div class="mb-3">
+                <label for="cabin" class="form-label">Cabin</label>
+                <input type="text" class="form-control" id="cabin" name="cabin" required>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="text" class="form-control" id="price" name="price" required>
+            </div>
+            <div class="mb-3">
+                <label for="original_price" class="form-label">Original Price</label>
+                <input type="text" class="form-control" id="original_price" name="original_price" required>
+            </div>
+            <div class="mb-3">
+                <label for="dates" class="form-label">Dates</label>
+                <input type="text" class="form-control" id="dates" name="dates" required>
+            </div>
+            <div class="mb-3">
+                <label for="book" class="form-label">Book</label>
+                <input type="text" class="form-control" id="book" name="book" required>
+            </div>
+            <div class="mb-3">
+                <label for="departure_cities" class="form-label">Departure Cities</label>
+                <input type="text" class="form-control" id="departure_cities" name="departure_cities" required>
+            </div>
+            <div class="mb-3">
+                <label for="departure_airports" class="form-label">Departure Airports</label>
+                <input type="text" class="form-control" id="departure_airports" name="departure_airports" required>
+            </div>
+            <div class="mb-3">
+                <label for="book_guide" class="form-label">Book Guide</label>
+                <input type="text" class="form-control" id="book_guide" name="book_guide" required>
+            </div>
+            <div class="mb-3">
+                <label for="summary" class="form-label">Summary</label>
+                <input type="text" class="form-control" id="summary" name="summary" required>
+            </div>
+            <div class="mb-3">
+                <label for="picture_name" class="form-label">Picture Name</label>
+                <input type="text" class="form-control" id="picture_name" name="picture_name">
+            </div>
+            <button type="submit" class="btn btn-primary">Create Ticket</button>
+        </form>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+{%endblock%}

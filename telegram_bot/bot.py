@@ -3,10 +3,11 @@ from time import sleep
 from telebot import types
 from dotenv import load_dotenv
 import os
-from shared.models import Users, Tickets, Session
+from shared.models import Users, Tickets, Session, Wishlist
 from datetime import datetime, timedelta
 from telebot.apihelper import ApiException
 from export_data import export_tables
+from wishlist import add_wishlist, show_user_alerts
 from shared.config import check_subscription, isadmin, escape_markdown, format_entities, all_airports
 from buttons import msg_markup, channel_mark, airport_buttons, create_deal_msg
 import logging
@@ -418,6 +419,71 @@ def get_csv(message):
         bot.send_message(message.chat.id, 'You\'re not allowed to use that command ❌')
 
 
+@bot.message_handler(commands=['create_alert'])
+def ask_for_airport(message: types.Message):
+    chat_id = message.chat.id
+    user_id = message.from_user.id
+    user_text = message.text
+
+    # Отправка первого сообщения для сбора данных
+    bot.send_message(message.chat.id, "Type a country, where would you like to go:")
+    bot.register_next_step_handler(message, create_alert)
+    # @bot.message_handler(func=lambda msg: True)
+def create_alert(message: types.Message):
+    destination_country = message.text
+    # Wishlist()
+    with Session() as session:
+        add_wishlist(session=session, user_id=message.chat.id, destination_country=destination_country)
+
+
+@bot.message_handler(commands=['my_alerts'])
+def show_alerts(message:types.Message):
+    msg = '''Here's all your alerts:(You can type number of your alert to remove it:⚠️'''
+    # for alert in 
+    with Session() as session:
+        alerts = show_user_alerts(session, message.chat.id)
+    if not alerts:
+        bot.send_message(message.chat.id, "⚠️ У вас нет активных алертов.")
+        return
+    for idx, i in enumerate(alerts):
+        alert = f'''\n<b>{idx}. - Departure country: {i.destination_country}</b>'''
+        msg += alert
+    bot.send_message(message.chat.id, msg, parse_mode="HTML")
+
+
+# @bot.message_handler(commands=['remove_alerts'])
+# def remove_alerts(message:types.Message):
+#     # for alert in 
+#     with Session() as session:
+#         for idx, i in enumerate(show_user_alerts(session, message.chat.id)):
+#             alert = f'''\n<b>{idx}. - Departure country: {i.destination_country}</b>'''
+#             msg += alert
+#     bot.send_message(message.chat.id, msg, parse_mode="HTML")
+    # bot.register_next_step_handler(message, delete_alert_by_index)
+
+
+
+@bot.message_handler(func=lambda message: message.text.isdigit())  # Обрабатываем только цифры
+def delete_alert_by_index(message):
+    user_id = message.chat.id
+    selected_index = int(message.text)
+
+    with Session() as session:
+        alerts = session.query(Wishlist).filter(Wishlist.user_id == user_id).all()
+
+        # Проверяем корректность индекса
+        if selected_index < 0 or selected_index >= len(alerts):
+            bot.send_message(user_id, "❌ Wrong alert number try again")
+            return
+
+        # Получаем и удаляем алерт
+        alert_to_delete = alerts[selected_index]
+        session.delete(alert_to_delete)
+        session.commit()
+
+        bot.send_message(user_id, f"✅ Alert for '{alert_to_delete.destination_country}' successfuly removed.")
+        show_alerts(message)
+
 @bot.message_handler(content_types=['text'])
 def on_click(message:types.Message):
     if 'Add airports' in message.text:
@@ -613,7 +679,7 @@ def callback_query(call):
     elif call.data == 'full_airports':
         with Session() as session:
             user = session.query(Users).filter_by(ID = call.message.chat.id).first()
-            user_airports = user.Airports
+            user_airports = user.Airports.split('\n')
             filter_name = user.filtered_offers if user.filtered_offers != 'Both' else 'Both(Cash & Points/Miles)'
             bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text=f'👤 <b>Your name: </b>{user.Name}\n\n<b>Your contact email:</b> {user.Email}\n\nYour filter of offers:<b> {filter_name}\n\n📅 Subscription end date: </b>{user.SubscriptionDate.date()}\n\n<b>✈️ Your airports: </b>\n{user_airports}', parse_mode='HTML')
             bot.answer_callback_query(call.id, 'Done✅')
