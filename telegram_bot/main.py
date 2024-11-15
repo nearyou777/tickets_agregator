@@ -87,35 +87,27 @@ def set_webhook():
 
 def send_message(row: dict):
     with Session() as session:
-        # Предзагрузка всех отправленных сообщений из базы данных за один запрос
-        # sent_msgs_query = session.query(SentMessage.user_id, SentMessage.message_id).all()
 
-        # Создаем словарь {user_id: set({message_id1, message_id2, ...})}
         sent_msgs_dict = {}
-        # for user_id, message_id in sent_msgs_query:
-        #     if user_id not in sent_msgs_dict:
-        #         sent_msgs_dict[user_id] = set()
-        #     sent_msgs_dict[user_id].add(message_id)
 
-        # Загружаем всех пользователей одним запросом
         users = session.query(Users).all()
         for user in users:
             user_airports = user.Airports.split('\n')
             user_id = user.ID
 
-            # Проверка подписки
+
             if not check_subscription(user_id):
                 continue
 
-            # Инициализируем множество отправленных сообщений для пользователя, если его нет
-            if user_id not in sent_msgs_dict:
-                sent_msgs_dict[user_id] = set()
-
-            # Проверка, был ли оффер уже отправлен
-            if row['ID'] in sent_msgs_dict[user_id]:
+            elif user_id not in sent_msgs_dict:
+                sent_msgs_dict[user_id] = set() 
+            
+            elif row['ID'] in sent_msgs_dict[user_id]:
                 continue
 
-            # Создаем и отправляем сообщение
+            elif not bool(set(user_airports) & set( row['DepartureAirports'].split(','))):
+                continue
+
             msg = create_deal_msg(row)
             try:
                 base_path = os.getcwd()
@@ -143,10 +135,7 @@ def send_message(row: dict):
                 else:
                     pass
             sent_msgs_dict[user_id].add(row['ID'])
-            # Добавляем запись об отправленном сообщении в базу данных
-            # sent_message = SentMessage(user_id=user_id, message_id=row['ID'])
-            # session.add(sent_message)
-            # session.commit()
+
 
 def handle_channel_message(message):
     with Session() as session:
@@ -224,9 +213,9 @@ def monitor_channel_posts(message):
     handle_channel_message(message)
 
 def main():
-    # set_webhook() 
-    # sleep(45)
-    # Thread(target=run_consumer).start()
+    set_webhook() 
+    sleep(45)
+    Thread(target=run_consumer).start()
     app.run(host="0.0.0.0", port=5000)
 
 
