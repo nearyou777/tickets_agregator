@@ -31,7 +31,7 @@ def check_channel_subscription(message):
             return False
     except Exception as e:
         return False
-
+    
 
 def unkown_user(message):
     bot.send_message(message.chat.id, 'You\'re not registred. 📛')
