@@ -134,7 +134,7 @@ What’s the best email to send you awesome flight deals and other exclusive con
     bot.register_next_step_handler(message, channel_subscribe, name)
 
 
-def channel_subscribe(message, name):#saving data here
+def channel_subscribe(message, name):
     user_id = message.chat.id
     mail = message.text.strip()
     with Session() as session:
@@ -244,7 +244,6 @@ def get_users_segment(message):
     users = []
     date = (datetime.utcnow() - timedelta(days)).date()
     with Session() as session:
-        # for row in session.query(Users).filter(Users.LogInDate >= date).all():
         try:
             [users.append(str(user.ID)) for user in session.query(Users).filter(Users.LogInDate >= date).all()]
         except:
@@ -425,13 +424,10 @@ def ask_for_airport(message: types.Message):
     user_id = message.from_user.id
     user_text = message.text
 
-    # Отправка первого сообщения для сбора данных
     bot.send_message(message.chat.id, "Type a country, where would you like to go:")
     bot.register_next_step_handler(message, create_alert)
-    # @bot.message_handler(func=lambda msg: True)
 def create_alert(message: types.Message):
     destination_country = message.text
-    # Wishlist()
     with Session() as session:
         add_wishlist(session=session, user_id=message.chat.id, destination_country=destination_country)
 
@@ -451,19 +447,7 @@ def show_alerts(message:types.Message):
     bot.send_message(message.chat.id, msg, parse_mode="HTML")
 
 
-# @bot.message_handler(commands=['remove_alerts'])
-# def remove_alerts(message:types.Message):
-#     # for alert in 
-#     with Session() as session:
-#         for idx, i in enumerate(show_user_alerts(session, message.chat.id)):
-#             alert = f'''\n<b>{idx}. - Departure country: {i.destination_country}</b>'''
-#             msg += alert
-#     bot.send_message(message.chat.id, msg, parse_mode="HTML")
-    # bot.register_next_step_handler(message, delete_alert_by_index)
-
-
-
-@bot.message_handler(func=lambda message: message.text.isdigit())  # Обрабатываем только цифры
+@bot.message_handler(func=lambda message: message.text.isdigit())  
 def delete_alert_by_index(message):
     user_id = message.chat.id
     selected_index = int(message.text)
@@ -471,12 +455,10 @@ def delete_alert_by_index(message):
     with Session() as session:
         alerts = session.query(Wishlist).filter(Wishlist.user_id == user_id).all()
 
-        # Проверяем корректность индекса
         if selected_index < 0 or selected_index >= len(alerts):
             bot.send_message(user_id, "❌ Wrong alert number try again")
             return
 
-        # Получаем и удаляем алерт
         alert_to_delete = alerts[selected_index]
         session.delete(alert_to_delete)
         session.commit()

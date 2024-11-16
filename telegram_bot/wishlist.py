@@ -21,9 +21,3 @@ def find_offers_for_wishlist(session:"Session", wishlist_id):
 def show_user_alerts(session:"Session", user_id):
     print(type(session.query(Wishlist).filter(Wishlist.user_id == user_id).all()))
     return session.query(Wishlist).filter(Wishlist.user_id == user_id).all()
-    # Пример фильтрации предложений (по аэропорту назначения и диапазону цен)
-    # offers = session.query(Tickets).filter(
-    #     Tickets.DepartureAirports.like(f"%{wishlist. destination_country}%"),
-    #     Tickets.Price.between(wishlist.min_price, wishlist.max_price)
-    # ).all()
-    

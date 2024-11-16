@@ -14,7 +14,7 @@ import logging
 from flask.logging import default_handler
 from buttons import create_deal_msg
 from shared.rabit_config import get_connection, RMQ_ROUTING_KEY
-from flask_login import login_user, LoginManager, login_required, logout_user, current_user
+from flask_login import login_user, LoginManager
 from admin import admin_bp  
 import datetime
 if TYPE_CHECKING:
@@ -216,7 +216,7 @@ def main():
     set_webhook() 
     sleep(45)
     Thread(target=run_consumer).start()
-    app.run(host="0.0.0.0", port=5000)
+    app.run(host="0.0.0.0", port=8081)
 
 
 if __name__ == '__main__':

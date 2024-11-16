@@ -23,6 +23,5 @@ def export_tables():
                 print(e)
 
 
-# Пример использования функции
 if __name__ == '__main__':
     export_tables()
