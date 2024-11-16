@@ -63,7 +63,6 @@ class Wishlist(Base):
     __tablename__ = 'wishlists'
     id = Column(Integer, primary_key=True)
     user_id = Column(BigInteger, ForeignKey('users.ID'))
-    #Airports (User.Airports)
     destination_country = Column(String(1000)) 
 
     # min_price = Column(String(50))  # Минимальная цена
@@ -71,7 +70,6 @@ class Wishlist(Base):
     # date_from = Column(DateTime)  # Дата начала поиска
     # date_to = Column(DateTime)  # Дата окончания поиска
     
-    # Связь с пользователем и найденными предложениями
     user = relationship("Users", back_populates="wishlists")
     wishlist_offers = relationship("WishlistOffers", back_populates="wishlist")
 
