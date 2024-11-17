@@ -20,3 +20,7 @@ def produce_message(ch:"BlockingChannel", routing_key:str, data:dict):
         routing_key=routing_key,
         body=msg
     )
+
+
+if __name__ == '__main__':
+    pass
