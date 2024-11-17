@@ -51,13 +51,13 @@ def scrape_data():
             logger.error("Error in add_thrifty: %s", e)
             data = None
 
-        if not data:
-            try:
-                data = add_pomelo()
-                logger.info("Successfully scraped data from Pomelo")
-            except Exception as e:
-                logger.error("Error in add_pomelo: %s", e)
-                data = None
+        # if not data:
+        #     try:
+        #         data = add_pomelo()
+        #         logger.info("Successfully scraped data from Pomelo")
+        #     except Exception as e:
+        #         logger.error("Error in add_pomelo: %s", e)
+        #         data = None
 
             if not data:
                 try:
@@ -74,14 +74,14 @@ def scrape_data():
             #         logger.error("Error in email processing: %s", e)
             #         data = None
 
-            if not data:
-                logger.info("No data found, triggering autodelete")
-                autodelete()
-                with get_connection() as connection:
-                    with connection.channel() as channel:
-                        produce_message(channel, RMQ_ROUTING_KEY, data={'Type': 'technical message'})
-                        logger.info("Sent technical message to RabbitMQ")
-                sleep(180)
+            # if not data:
+            #     logger.error("No data found, triggering autodelete")
+            #     autodelete()
+            #     with get_connection() as connection:
+            #         with connection.channel() as channel:
+            #             produce_message(channel, RMQ_ROUTING_KEY, data={'Type': 'technical message'})
+            #             logger.info("Sent technical message to RabbitMQ")
+            #     sleep(180)
 
         if data:
             logger.info("Data retrieved successfully, processing data")
