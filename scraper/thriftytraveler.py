@@ -10,7 +10,7 @@ import logging
 import logging
 import redis
 from images_scrapper import save_image
-from .send_messages import send_to_db
+from send_messages import send_to_db
 redis_client = redis.StrictRedis(host='redis', port=6379, decode_responses=True)
 
 logging.basicConfig()
@@ -209,9 +209,9 @@ def get_data():
 
 def add_thrifty() -> bool:
     data = get_data()
-    # return data if len(data) > 0 else None
-    for item in data:
-        send_to_db(item)
+    return data if len(data) > 0 else None
+    # for item in data:
+        # send_to_db(item)
 
         
 if __name__ == '__main__':

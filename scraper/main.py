@@ -34,16 +34,16 @@ def process_data(data):
     for item in data:
         logger.error('Finded')
         send_to_db(item)
-        # with get_connection() as connection:
-        #     with connection.channel() as channel:
-        #         produce_message(channel, RMQ_ROUTING_KEY, data=item)
-        #         logger.info("Message sent to RabbitMQ with data: %s", item)
+        with get_connection() as connection:
+            with connection.channel() as channel:
+                produce_message(channel, RMQ_ROUTING_KEY, data=item)
+                logger.info("Message sent to RabbitMQ with data: %s", item)
 
 def scrape_data():
     """
     Main function to scrape data from various sources and process it.
     """
-    logger.info("Scrape data function started")  # Test logging
+    logger.info("Scrape data function started") 
     while True:
         try:
             data = add_thrifty()
@@ -67,38 +67,38 @@ def scrape_data():
                     logger.error("Error in add_going: %s", e)
                     data = None
 
-            # if not data:
-            #     try:
-            #         data = add_email()
-            #         logger.info("Successfully processed emails")
-            #     except Exception as e:
-            #         logger.error("Error in email processing: %s", e)
-            #         data = None
+            if not data:
+                try:
+                    data = add_email()
+                    logger.info("Successfully processed emails")
+                except Exception as e:
+                    logger.error("Error in email processing: %s", e)
+                    data = None
 
-            # if not data:
-            #     logger.error("No data found, triggering autodelete")
-            #     autodelete()
-            #     with get_connection() as connection:
-            #         with connection.channel() as channel:
-            #             produce_message(channel, RMQ_ROUTING_KEY, data={'Type': 'technical message'})
-            #             logger.info("Sent technical message to RabbitMQ")
-            #     sleep(180)
+            if not data:
+                logger.error("No data found, triggering autodelete")
+                autodelete()
+                with get_connection() as connection:
+                    with connection.channel() as channel:
+                        produce_message(channel, RMQ_ROUTING_KEY, data={'Type': 'technical message'})
+                        logger.info("Sent technical message to RabbitMQ")
+                sleep(180)
 
-        # if data:
-        #     logger.info("Data retrieved successfully, processing data")
-        #     process_data(data)
+        if data:
+            logger.info("Data retrieved successfully, processing data")
+            process_data(data)
 
 def main():
     """
     Main entry point of the application.
     """
     # logger.info("Service started, waiting for 25 seconds")
-    # sleep(25)
+    sleep(25)
     
-    # with get_connection() as connection:
-    #     with connection.channel() as channel:
-    #         produce_message(channel, RMQ_ROUTING_KEY, data={'Type': 'technical message'})
-    #         logger.info("Sent initial technical message to RabbitMQ")
+    with get_connection() as connection:
+        with connection.channel() as channel:
+            produce_message(channel, RMQ_ROUTING_KEY, data={'Type': 'technical message'})
+            logger.info("Sent initial technical message to RabbitMQ")
 
     scrape_data()
 
