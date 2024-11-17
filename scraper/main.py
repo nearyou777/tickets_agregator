@@ -32,11 +32,12 @@ def process_data(data):
     Process and send data to the database and RabbitMQ.
     """
     for item in data:
+        logger.error('Finded')
         send_to_db(item)
-        with get_connection() as connection:
-            with connection.channel() as channel:
-                produce_message(channel, RMQ_ROUTING_KEY, data=item)
-                logger.info("Message sent to RabbitMQ with data: %s", item)
+        # with get_connection() as connection:
+        #     with connection.channel() as channel:
+        #         produce_message(channel, RMQ_ROUTING_KEY, data=item)
+        #         logger.info("Message sent to RabbitMQ with data: %s", item)
 
 def scrape_data():
     """
@@ -51,13 +52,13 @@ def scrape_data():
             logger.error("Error in add_thrifty: %s", e)
             data = None
 
-        # if not data:
-        #     try:
-        #         data = add_pomelo()
-        #         logger.info("Successfully scraped data from Pomelo")
-        #     except Exception as e:
-        #         logger.error("Error in add_pomelo: %s", e)
-        #         data = None
+        if not data:
+            try:
+                data = add_pomelo()
+                logger.info("Successfully scraped data from Pomelo")
+            except Exception as e:
+                logger.error("Error in add_pomelo: %s", e)
+                data = None
 
             if not data:
                 try:
@@ -83,21 +84,21 @@ def scrape_data():
             #             logger.info("Sent technical message to RabbitMQ")
             #     sleep(180)
 
-        if data:
-            logger.info("Data retrieved successfully, processing data")
-            process_data(data)
+        # if data:
+        #     logger.info("Data retrieved successfully, processing data")
+        #     process_data(data)
 
 def main():
     """
     Main entry point of the application.
     """
-    logger.info("Service started, waiting for 25 seconds")
-    sleep(25)
+    # logger.info("Service started, waiting for 25 seconds")
+    # sleep(25)
     
-    with get_connection() as connection:
-        with connection.channel() as channel:
-            produce_message(channel, RMQ_ROUTING_KEY, data={'Type': 'technical message'})
-            logger.info("Sent initial technical message to RabbitMQ")
+    # with get_connection() as connection:
+    #     with connection.channel() as channel:
+    #         produce_message(channel, RMQ_ROUTING_KEY, data={'Type': 'technical message'})
+    #         logger.info("Sent initial technical message to RabbitMQ")
 
     scrape_data()
 
