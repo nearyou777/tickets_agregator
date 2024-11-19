@@ -39,7 +39,7 @@ services:
     depends_on:
       - rabbitmq
     ports:
-      - "8000:8000"
+      - "8081:8081"
     restart: always
 
   rabbitmq:
