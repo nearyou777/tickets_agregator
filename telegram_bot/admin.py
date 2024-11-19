@@ -19,12 +19,36 @@ def index():
 @admin_bp.route('/users')
 @login_required
 def users():
+    
     if not current_user.is_superuser:
         return "Access Denied", 403 
+    per_page = 10
+    page = request.args.get('page', 1, type=int)
 
+    sort_by = request.args.get('sort_by', 'date_added')  # Default to sorting by Date Added
+    order = request.args.get('order', 'asc')  # Default to ascending order
+    start_date = request.args.get('start_date')  # Get the start date from query parameters
+    end_date = request.args.get('end_date')  # Get the end date from query parameters
+    if order not in ['asc', 'desc']:
+        order = 'asc'
     with Session() as session:
-        users = session.query(Users).all()
-    return render_template('admin/users.html', users=users)
+        users_query = session.query(Users)
+        if start_date and end_date:
+            start_date = datetime.strptime(start_date, '%Y-%m-%d')
+            end_date = datetime.strptime(end_date, '%Y-%m-%d')
+            users_query = users_query.filter(Users.LogInDate.between(start_date, end_date))
+
+        if sort_by == 'date_added':
+            if order == 'asc':
+                users_query = users_query.order_by(Users.LogInDate.asc())
+            else:
+                users_query = users_query.order_by(Users.LogInDate.desc())
+
+        total_users = users_query.count()
+
+        users = users_query.offset((page - 1) * per_page).limit(per_page).all()    
+        total_pages = ceil(total_users / per_page)
+    return render_template('admin/users.html', users=users, page=page, total_pages=total_pages, sort_by=sort_by, order=order, start_date=start_date, end_date=end_date)
 
 
 @admin_bp.route('/users/edit_user/<int:user_id>', methods=['GET', 'POST'])

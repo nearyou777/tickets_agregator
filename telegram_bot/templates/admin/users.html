@@ -1,28 +1,88 @@
 {%extends 'admin/base.html' %}
+    {%block additional_styles%}
+    <style>
+        /* Минимальная высота для ячеек заголовка */
+        th {
+            min-height: 50px;
+            vertical-align: middle;
+        }
+    </style>
+    {%endblock%}
+
 {%block content%}
-        <h2 class="mb-4">Users</h2>
-        <a href="{{ url_for('admin.add_user') }}" class="btn btn-primary mb-3">Add New User</a>
-        <table class="table">
+    <div class="container mt-4">
+        <form method="GET" action="{{ url_for('admin.users') }}">
+            <!-- Date filter form -->
+            <div class="mb-3">
+                <label for="start_date" class="form-label">Start Date</label>
+                <input type="date" id="start_date" name="start_date" value="{{ start_date }}" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="end_date" class="form-label">End Date</label>
+                <input type="date" id="end_date" name="end_date" value="{{ end_date }}" class="form-control">
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Filter by Date</button>
+                <a href="{{ url_for('admin.add_user') }}" class="btn btn-primary mb-3">Add New User</a>
+            </div>
+        </form>
+        
+
+        <table class="table table-bordered mt-4">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Email</th>
-                    <th>Subscription Date</th>
+                    <th>
+                        <a href="{{ url_for('admin.users', page=page, sort_by='date_added', order='asc' if order == 'desc' else 'desc', start_date=start_date, end_date=end_date) }}" class="text-decoration-none d-flex align-items-center">
+                            LogInDate
+                            {% if sort_by == 'date_added' %}
+                                {% if order == 'asc' %}
+                                    <i class="bi bi-arrow-up ms-2"></i>  <!-- Ascending arrow -->
+                                {% else %}
+                                    <i class="bi bi-arrow-down ms-2"></i>  <!-- Descending arrow -->
+                                {% endif %}
+                            {% endif %}
+                        </a>
+                    </th>
+                    <th>SubscriptionDate </th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for user in users %}
-                <tr>
-                    <td>{{ user.Name }}</td>
-                    <td>{{ user.Email }}</td>
-                    <td>{{ user.SubscriptionDate | date('%d.%m.%Y') }}</td>
-                    <td>
-                        <a href="{{ url_for('admin.edit_user', user_id=user.ID) }}" class="btn btn-warning">Edit</a>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ user.Name }}</td>
+                        <td>{{ user.Email }}</td>
+                        <td>{{ user.LogInDate  | date('%d.%m.%Y')}}</td>
+                        <td>{{ user.SubscriptionDate | date('%d.%m.%Y') }}</td>
+                        <td>
+                            <div class="d-flex justify-content-start">
+                                <a href="{{ url_for('admin.edit_user', user_id=user.ID) }}" class="btn btn-primary btn-sm me-2">Edit</a>
+                            </div>
+                        </td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
+
+        <!-- Pagination -->
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                {% if page > 1 %}
+                    <a href="{{ url_for('admin.users', page=page-1, sort_by=sort_by, order=order, start_date=start_date, end_date=end_date) }}" class="btn btn-secondary me-2">Previous</a>
+                {% else %}
+                    <button class="btn btn-secondary" disabled>Previous</button>
+                {% endif %}
+            </div>
+            <span>Page {{ page }} of {{ total_pages }}</span>
+            <div>
+                {% if page < total_pages %}
+                    <a href="{{ url_for('admin.users', page=page+1, sort_by=sort_by, order=order, start_date=start_date, end_date=end_date) }}" class="btn btn-secondary ms-2">Next</a>
+                {% else %}
+                    <button class="btn btn-secondary" disabled>Next</button>
+                {% endif %}
+            </div>
+        </div>
     </div>
 {%endblock%}

@@ -67,14 +67,13 @@ def scrape_data():
                     logger.error("Error in add_going: %s", e)
                     data = None
 
-            if not data:
-                try:
-                    data = add_email()
-                    logger.info("Successfully processed emails")
-                except Exception as e:
-                    logger.error("Error in email processing: %s", e)
-                    data = None
-
+            # if not data:
+            #     try:
+            #         data = add_email()
+            #         logger.info("Successfully processed emails")
+            #     except Exception as e:
+            #         logger.error("Error in email processing: %s", e)
+            #         data = None
             if not data:
                 logger.error("No data found, triggering autodelete")
                 autodelete()

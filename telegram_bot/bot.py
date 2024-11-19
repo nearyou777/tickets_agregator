@@ -430,16 +430,17 @@ def create_alert(message: types.Message):
     destination_country = message.text
     with Session() as session:
         add_wishlist(session=session, user_id=message.chat.id, destination_country=destination_country)
+    bot.send_message(message.chat.id, f'Successfully added a new alert for: <b>{destination_country}</b>')
 
 
 @bot.message_handler(commands=['my_alerts'])
 def show_alerts(message:types.Message):
-    msg = '''Here's all your alerts:(You can type number of your alert to remove it:⚠️'''
+    msg = '''Here's all your alerts:(You can type number of your alert to remove it):⚠️'''
     # for alert in 
     with Session() as session:
         alerts = show_user_alerts(session, message.chat.id)
     if not alerts:
-        bot.send_message(message.chat.id, "⚠️ У вас нет активных алертов.")
+        bot.send_message(message.chat.id, "⚠️ You don't have any active alerts right now.")
         return
     for idx, i in enumerate(alerts):
         alert = f'''\n<b>{idx}. - Departure country: {i.destination_country}</b>'''
